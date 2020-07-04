@@ -1,13 +1,29 @@
 #pragma once
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "MyGLKeys.h"
+
 class MyGlWindow
 {
 private:
-
+	GLFWwindow* glWindow;
 public:
-	MyGlWindow();
+	MyGlWindow(int width, int height, const char* title);
+	~MyGlWindow();
+
+	void processEvents();
+
+	bool getShouldClose();
+	bool getKeyPressed(GLKeys key);
+
+	void setWindowShouldClose(bool value);
+
 protected:
-	void initalizeGL();
+	void createWindow(int width, int height, const char* title);
+
 	void paintGL();
 };
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

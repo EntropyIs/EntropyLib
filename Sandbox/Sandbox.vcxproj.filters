@@ -29,5 +29,8 @@
     <ClInclude Include="MyGlWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyGLKeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

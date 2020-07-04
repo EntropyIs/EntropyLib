@@ -1,16 +1,16 @@
-#include <Qt/qapplication.h>
-#include <QtGui/qwidget.h>
-
 #include "MyGlWindow.h"
 
 int main(int argc, char** argv)
 {
-	// Define Qt applicaion
-	QApplication application(argc, argv);
-
 	// Open Qt Window
-	MyGlWindow myGlWindow;
-	myGlWindow.show();
+	MyGlWindow myWindow(800, 600, "LearnOpenGL");
 
-	return application.exec();
+	while (!myWindow.getShouldClose())
+	{
+		if (myWindow.getKeyPressed(GLKeys::KEY_ESCAPE))
+			myWindow.setWindowShouldClose(true);
+		myWindow.processEvents();
+	}
+
+	return 0;
 }

@@ -148,6 +148,7 @@
     <ClCompile Include="Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyGLKeys.h" />
     <ClInclude Include="MyGlWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
