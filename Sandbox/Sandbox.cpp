@@ -113,6 +113,8 @@ int main(int argc, char** argv)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
+
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
