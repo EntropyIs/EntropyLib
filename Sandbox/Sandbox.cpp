@@ -75,28 +75,43 @@ int main(int argc, char** argv)
 	// Initialize Triangle
 	float verts[] =
 	{
-		// first triangle
-		-0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+		-0.5f, -0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f,
 	};
+
+	unsigned int indices[] =
+	{
+		0, 1, 3,
+		1, 2, 3
+	};
+
+	// Initalize Element Buffer
+	
+	
 
 	// Initalize Vertex Buffer and Array
 	unsigned int VAO;
 	unsigned int VBO;
+	unsigned int EBO;
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
 	
 	// Bind buffer and copy in our vertex data
 	glBindVertexArray(VAO);
+
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// Define how OpenGL shoudl interperate the vertex data
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
 
 	// Gameloop
 	while (!myWindow.getShouldClose())
@@ -111,11 +126,17 @@ int main(int argc, char** argv)
 		// Use our shader program
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// Update
 		myWindow.processEvents();
 	}
+
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glDeleteProgram(shaderProgram);
 
 	return 0;
 }
