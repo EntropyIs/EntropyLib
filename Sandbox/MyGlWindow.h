@@ -1,9 +1,13 @@
 #pragma once
-#include <QtOpenGL/qglwidget>
 
-class MyGlWindow : public QGLWidget
+class MyGlWindow
 {
+private:
+
+public:
+	MyGlWindow();
 protected:
 	void initalizeGL();
+	void paintGL();
 };
 
