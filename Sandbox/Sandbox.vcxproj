@@ -145,11 +145,17 @@
   <ItemGroup>
     <ClCompile Include="..\Middleware\GLAD\src\glad.c" />
     <ClCompile Include="MyGlWindow.cpp" />
+    <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyGLKeys.h" />
     <ClInclude Include="MyGlWindow.h" />
+    <ClInclude Include="MyShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.fs" />
+    <None Include="shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
