@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qsvgicon", "G:/Middleware/Qt-4.8.7/src/plugins/iconengines/svgiconengine\qsvgicon.vcproj", "{911166F3-2A2B-315F-B0D8-3C4180B8192E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{911166F3-2A2B-315F-B0D8-3C4180B8192E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{911166F3-2A2B-315F-B0D8-3C4180B8192E}.Debug|Win32.Build.0 = Debug|Win32
+		{911166F3-2A2B-315F-B0D8-3C4180B8192E}.Release|Win32.ActiveCfg = Release|Win32
+		{911166F3-2A2B-315F-B0D8-3C4180B8192E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

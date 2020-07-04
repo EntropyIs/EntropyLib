@@ -1,0 +1,57 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qjpeg", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/jpeg\qjpeg.vcproj", "{F03A1EF8-1485-3D40-A131-EE38431FB735}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qgif", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/gif\qgif.vcproj", "{B14ED186-3F3D-3D98-BB7C-91937BBC43F6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmng", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/mng\qmng.vcproj", "{6213F116-7E71-3B6F-9976-64F4EB2A54AE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qsvg", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/svg\qsvg.vcproj", "{9C0AF890-24ED-3E37-A138-38667E87F443}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtiff", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/tiff\qtiff.vcproj", "{36D61947-BAD8-39B0-A0CB-9A858567EE62}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qico", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/ico\qico.vcproj", "{548FE86E-99DD-3B26-83F7-EA6AB9133854}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtga", "G:/Middleware/Qt-4.8.7/src/plugins/imageformats/tga\qtga.vcproj", "{92092C7A-967E-3FAC-9489-0C5C28C0505B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F03A1EF8-1485-3D40-A131-EE38431FB735}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F03A1EF8-1485-3D40-A131-EE38431FB735}.Debug|Win32.Build.0 = Debug|Win32
+		{F03A1EF8-1485-3D40-A131-EE38431FB735}.Release|Win32.ActiveCfg = Release|Win32
+		{F03A1EF8-1485-3D40-A131-EE38431FB735}.Release|Win32.Build.0 = Release|Win32
+		{B14ED186-3F3D-3D98-BB7C-91937BBC43F6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B14ED186-3F3D-3D98-BB7C-91937BBC43F6}.Debug|Win32.Build.0 = Debug|Win32
+		{B14ED186-3F3D-3D98-BB7C-91937BBC43F6}.Release|Win32.ActiveCfg = Release|Win32
+		{B14ED186-3F3D-3D98-BB7C-91937BBC43F6}.Release|Win32.Build.0 = Release|Win32
+		{6213F116-7E71-3B6F-9976-64F4EB2A54AE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6213F116-7E71-3B6F-9976-64F4EB2A54AE}.Debug|Win32.Build.0 = Debug|Win32
+		{6213F116-7E71-3B6F-9976-64F4EB2A54AE}.Release|Win32.ActiveCfg = Release|Win32
+		{6213F116-7E71-3B6F-9976-64F4EB2A54AE}.Release|Win32.Build.0 = Release|Win32
+		{9C0AF890-24ED-3E37-A138-38667E87F443}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C0AF890-24ED-3E37-A138-38667E87F443}.Debug|Win32.Build.0 = Debug|Win32
+		{9C0AF890-24ED-3E37-A138-38667E87F443}.Release|Win32.ActiveCfg = Release|Win32
+		{9C0AF890-24ED-3E37-A138-38667E87F443}.Release|Win32.Build.0 = Release|Win32
+		{36D61947-BAD8-39B0-A0CB-9A858567EE62}.Debug|Win32.ActiveCfg = Debug|Win32
+		{36D61947-BAD8-39B0-A0CB-9A858567EE62}.Debug|Win32.Build.0 = Debug|Win32
+		{36D61947-BAD8-39B0-A0CB-9A858567EE62}.Release|Win32.ActiveCfg = Release|Win32
+		{36D61947-BAD8-39B0-A0CB-9A858567EE62}.Release|Win32.Build.0 = Release|Win32
+		{548FE86E-99DD-3B26-83F7-EA6AB9133854}.Debug|Win32.ActiveCfg = Debug|Win32
+		{548FE86E-99DD-3B26-83F7-EA6AB9133854}.Debug|Win32.Build.0 = Debug|Win32
+		{548FE86E-99DD-3B26-83F7-EA6AB9133854}.Release|Win32.ActiveCfg = Release|Win32
+		{548FE86E-99DD-3B26-83F7-EA6AB9133854}.Release|Win32.Build.0 = Release|Win32
+		{92092C7A-967E-3FAC-9489-0C5C28C0505B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{92092C7A-967E-3FAC-9489-0C5C28C0505B}.Debug|Win32.Build.0 = Debug|Win32
+		{92092C7A-967E-3FAC-9489-0C5C28C0505B}.Release|Win32.ActiveCfg = Release|Win32
+		{92092C7A-967E-3FAC-9489-0C5C28C0505B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

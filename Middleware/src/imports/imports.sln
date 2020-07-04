@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmlfolderlistmodelplugin", "G:/Middleware/Qt-4.8.7/src/imports/folderlistmodel\qmlfolderlistmodelplugin.vcproj", "{17F36C62-2ADC-3A3E-B891-CB294D99BDC8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmlparticlesplugin", "G:/Middleware/Qt-4.8.7/src/imports/particles\qmlparticlesplugin.vcproj", "{9B6C51DA-259C-399E-97F4-2C08BBAD0281}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmlgesturesplugin", "G:/Middleware/Qt-4.8.7/src/imports/gestures\qmlgesturesplugin.vcproj", "{76739B96-1E40-3013-88A2-50ADEBE4744B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmlshadersplugin", "G:/Middleware/Qt-4.8.7/src/imports/shaders\qmlshadersplugin.vcproj", "{70F5CA50-3177-302F-8B18-0840383D85B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17F36C62-2ADC-3A3E-B891-CB294D99BDC8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17F36C62-2ADC-3A3E-B891-CB294D99BDC8}.Debug|Win32.Build.0 = Debug|Win32
+		{17F36C62-2ADC-3A3E-B891-CB294D99BDC8}.Release|Win32.ActiveCfg = Release|Win32
+		{17F36C62-2ADC-3A3E-B891-CB294D99BDC8}.Release|Win32.Build.0 = Release|Win32
+		{9B6C51DA-259C-399E-97F4-2C08BBAD0281}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B6C51DA-259C-399E-97F4-2C08BBAD0281}.Debug|Win32.Build.0 = Debug|Win32
+		{9B6C51DA-259C-399E-97F4-2C08BBAD0281}.Release|Win32.ActiveCfg = Release|Win32
+		{9B6C51DA-259C-399E-97F4-2C08BBAD0281}.Release|Win32.Build.0 = Release|Win32
+		{76739B96-1E40-3013-88A2-50ADEBE4744B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76739B96-1E40-3013-88A2-50ADEBE4744B}.Debug|Win32.Build.0 = Debug|Win32
+		{76739B96-1E40-3013-88A2-50ADEBE4744B}.Release|Win32.ActiveCfg = Release|Win32
+		{76739B96-1E40-3013-88A2-50ADEBE4744B}.Release|Win32.Build.0 = Release|Win32
+		{70F5CA50-3177-302F-8B18-0840383D85B8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{70F5CA50-3177-302F-8B18-0840383D85B8}.Debug|Win32.Build.0 = Debug|Win32
+		{70F5CA50-3177-302F-8B18-0840383D85B8}.Release|Win32.ActiveCfg = Release|Win32
+		{70F5CA50-3177-302F-8B18-0840383D85B8}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

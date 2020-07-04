@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtaccessiblewidgets", "G:/Middleware/Qt-4.8.7/src/plugins/accessible/widgets\qtaccessiblewidgets.vcproj", "{93293D64-CBBA-32E3-A725-B3F07A5D7528}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtaccessiblecompatwidgets", "G:/Middleware/Qt-4.8.7/src/plugins/accessible/compat\qtaccessiblecompatwidgets.vcproj", "{F5C6EAF0-3DB7-31D5-BF66-C6A132E0EBB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93293D64-CBBA-32E3-A725-B3F07A5D7528}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93293D64-CBBA-32E3-A725-B3F07A5D7528}.Debug|Win32.Build.0 = Debug|Win32
+		{93293D64-CBBA-32E3-A725-B3F07A5D7528}.Release|Win32.ActiveCfg = Release|Win32
+		{93293D64-CBBA-32E3-A725-B3F07A5D7528}.Release|Win32.Build.0 = Release|Win32
+		{F5C6EAF0-3DB7-31D5-BF66-C6A132E0EBB7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5C6EAF0-3DB7-31D5-BF66-C6A132E0EBB7}.Debug|Win32.Build.0 = Debug|Win32
+		{F5C6EAF0-3DB7-31D5-BF66-C6A132E0EBB7}.Release|Win32.ActiveCfg = Release|Win32
+		{F5C6EAF0-3DB7-31D5-BF66-C6A132E0EBB7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
