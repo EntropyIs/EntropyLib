@@ -50,6 +50,16 @@ void MyGlWindow::setWindowShouldClose(bool value)
 	glfwSetWindowShouldClose(glWindow, value);
 }
 
+void MyGlWindow::setWindowClearColor(GLfloat red, GLfloat blue, GLfloat green, GLfloat alpha)
+{
+	glClearColor(red, green, blue, alpha);
+}
+
+void MyGlWindow::render()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void MyGlWindow::createWindow(int width, int height, const char* title)
 {
 	glWindow = glfwCreateWindow(width, height, title, NULL, NULL);
@@ -61,10 +71,6 @@ void MyGlWindow::createWindow(int width, int height, const char* title)
 	}
 	glfwSetFramebufferSizeCallback(glWindow, framebuffer_size_callback);
 	glfwMakeContextCurrent(glWindow);
-}
-
-void MyGlWindow::paintGL()
-{
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

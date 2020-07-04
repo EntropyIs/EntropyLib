@@ -18,11 +18,12 @@ public:
 	bool getKeyPressed(GLKeys key);
 
 	void setWindowShouldClose(bool value);
+	void setWindowClearColor(GLfloat red, GLfloat blue, GLfloat green, GLfloat alpha);
+
+	void render();
 
 protected:
 	void createWindow(int width, int height, const char* title);
-
-	void paintGL();
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
