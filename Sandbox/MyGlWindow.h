@@ -3,5 +3,7 @@
 
 class MyGlWindow : public QGLWidget
 {
+protected:
+	void initalizeGL();
 };
 
