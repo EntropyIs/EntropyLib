@@ -43,10 +43,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.vs">
+    <None Include="..\x64\Debug\fShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shader.fs">
+    <None Include="..\x64\Debug\vShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

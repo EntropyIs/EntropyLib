@@ -117,3 +117,18 @@ void MyShader::setFloat(const GLchar* name, float value) const
 	glUniform1f(glGetUniformLocation(ID, name), value);
 }
 
+void MyShader::setFloat2(const GLchar* name, float v0, float v1)
+{
+	glUniform2f(glGetUniformLocation(ID, name), v0, v1);
+}
+
+void MyShader::setFloat3(const GLchar* name, float v0, float v1, float v2)
+{
+	glUniform3f(glGetUniformLocation(ID, name), v0, v1, v2);
+}
+
+void MyShader::setFloat4(const GLchar* name, float v0, float v1, float v2, float v3)
+{
+	glUniform4f(glGetUniformLocation(ID, name), v0, v1, v2, v3);
+}
+
