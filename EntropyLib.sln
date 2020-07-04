@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EntropyLib", "EntropyLib\EntropyLib.vcxproj", "{6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{9272894D-D13A-4B7A-92DB-129F1B7B0879}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A} = {6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
