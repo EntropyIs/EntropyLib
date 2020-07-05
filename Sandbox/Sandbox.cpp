@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 	myWindow.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate Shader Program
-	Entropy::GLShader shader("vShader.glsl", "fShader.glsl");
+	Entropy::GLShader shader("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/vShader.glsl", "E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/fShader.glsl");
 	
 	// Initialize Triangle
 	float verts[] =
@@ -26,9 +26,9 @@ int main(int argc, char** argv)
 	 *	posistions			//colors
 	 *	x    , y    , z    ,	r    , g    , b    , a    ,
 	 */
-		 0.0f,  0.5f,  0.0f,	 1.0f,  1.0f,  0.0f,  1.0f,
-		-0.5f, -0.5f,  0.0f,	 0.0f,  1.0f,  1.0f,  1.0f,
-		 0.5f, -0.5f,  0.0f,	 1.0f,  0.0f,  1.0f,  1.0f,
+		 0.0f,  0.1f,  0.0f,	 1.0f,  1.0f,  0.0f,  1.0f,
+		-0.1f, -0.1f,  0.0f,	 0.0f,  1.0f,  1.0f,  1.0f,
+		 0.1f, -0.1f,  0.0f,	 1.0f,  0.0f,  1.0f,  1.0f,
 	};
 	
 	unsigned int indices[] =

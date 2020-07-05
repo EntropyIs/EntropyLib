@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.
 		{6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A} = {6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EntropyTester", "EntropyTester\EntropyTester.vcxproj", "{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A} = {6C1C407B-2A8B-468B-8C8C-1D1E4F7CFD0A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +39,14 @@ Global
 		{9272894D-D13A-4B7A-92DB-129F1B7B0879}.Release|x64.Build.0 = Release|x64
 		{9272894D-D13A-4B7A-92DB-129F1B7B0879}.Release|x86.ActiveCfg = Release|Win32
 		{9272894D-D13A-4B7A-92DB-129F1B7B0879}.Release|x86.Build.0 = Release|Win32
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Debug|x64.ActiveCfg = Debug|x64
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Debug|x64.Build.0 = Debug|x64
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Debug|x86.Build.0 = Debug|Win32
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Release|x64.ActiveCfg = Release|x64
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Release|x64.Build.0 = Release|x64
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Release|x86.ActiveCfg = Release|Win32
+		{D1BFC3EF-97A5-4D2D-ABC0-3CE146DB6997}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
