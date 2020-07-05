@@ -12,6 +12,7 @@ namespace Entropy
 		};
 
 		Vector3 __declspec(dllexport) operator+ (const Vector3& left, const Vector3& right);
+		Vector3 __declspec(dllexport) operator- (const Vector3& left, const Vector3& right);
 		Vector3 __declspec(dllexport) operator* (float left, const Vector3& right);
 		Vector3 __declspec(dllexport) operator* (const Vector3& left, float right);
 	}
