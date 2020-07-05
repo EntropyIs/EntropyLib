@@ -1,3 +1,5 @@
+#include <GL/glew.h>
+
 #include <GLApplication.h>
 #include <GLWindow.h>
 #include <GLShader.h>
@@ -9,20 +11,23 @@ int main(int argc, char** argv)
 	Entropy::GLApplication myApplication;
 	myApplication.initializeGLFW();
 	Entropy::GLWindow myWindow(600, 520, "LearnOpenGL");
-	myApplication.initializeGLAD();
+	myApplication.initializeGLEW();
 
 	myWindow.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
-	/*/
+	
 	// Initialize Triangle
 	float verts[] =
 	{
-		// posistions			//colors
-		  0.0f,  0.5f, 0.0f,		1.0f, 1.0f, 0.0f, 1.0f,
-		 -0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 1.0f, 1.0f,
-		  0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 1.0f, 1.0f,
+	/**
+	 *	posistions			//colors
+	 *	x    , y    , z    ,	r    , g    , b    , a    ,
+	 */
+		 0.0f,  0.5f,  0.0f,	 1.0f,  1.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.0f,	 0.0f,  1.0f,  1.0f,  1.0f,
+		 0.5f, -0.5f,  0.0f,	 1.0f,  0.0f,  1.0f,  1.0f,
 	};
 
+	
 	unsigned int indices[] =
 	{
 		0, 1, 2,
@@ -58,7 +63,6 @@ int main(int argc, char** argv)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	//Entropy::Shader shader("vShader.glsl", "fShader.glsl");
-	*/
 
 	// Gameloop
 	while (!myWindow.getShouldClose())
@@ -70,11 +74,11 @@ int main(int argc, char** argv)
 		// Render
 		myWindow.render();
 
+
 		// Use our shader program
 		//shader.use();
-		//glBindVertexArray(VAO);
-
-		//glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 
 		// Update
 		myWindow.processEvents();

@@ -1,6 +1,6 @@
 #include "GLApplication.h"
 
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -18,7 +18,7 @@ namespace Entropy
 
 	void GLApplication::initializeGLFW()
 	{
-		// Initalize and Configure GLFW
+		// Initialize and Configure GLFW
 		if (!glfwInit())
 		{
 			std::cout << "Failed to initalize GLFW." << std::endl;
@@ -31,18 +31,16 @@ namespace Entropy
 #ifdef __APPLE__
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-		std::cout << "initialized GLFW." << std::endl;
 	}
 
-	void GLApplication::initializeGLAD()
+	void GLApplication::initializeGLEW()
 	{
-		// Initalize GLAD
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		// Initialize GLEW
+		GLenum error = glewInit();
+		if (error != GLEW_OK)
 		{
-			std::cout << "Failed to initialize GLAD." << std::endl;
-			glfwTerminate();
-			throw std::exception("Failed to initialize GLAD.");
+			std::cout << "Failed to initialize GLEW.\n" << glewGetErrorString(error);
+			throw std::exception("Failed to initialize GLEW.");
 		}
-		std::cout << "initialized GLAD." << std::endl;
 	}
 }

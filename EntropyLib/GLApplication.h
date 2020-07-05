@@ -12,7 +12,7 @@ namespace Entropy
 		~GLApplication();
 
 		void initializeGLFW();
-		void initializeGLAD();
+		void initializeGLEW();
 	};
 }
 
