@@ -1,17 +1,19 @@
-#include "MyGlWindow.h"
-#include "MyShader.h"
+#include <GLApplication.h>
+#include <GLWindow.h>
+#include <GLShader.h>
 
 #include <iostream>
 
 int main(int argc, char** argv)
 {
-	// Open Qt Window
-	MyGlWindow myWindow(600, 520, "LearnOpenGL");
+	Entropy::GLApplication myApplication;
+	myApplication.initializeGLFW();
+	Entropy::GLWindow myWindow(600, 520, "LearnOpenGL");
+	myApplication.initializeGLAD();
 
 	myWindow.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-	MyShader shader("vShader.glsl", "fShader.glsl");
-
+	/*/
 	// Initialize Triangle
 	float verts[] =
 	{
@@ -55,29 +57,32 @@ int main(int argc, char** argv)
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
+	//Entropy::Shader shader("vShader.glsl", "fShader.glsl");
+	*/
+
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
 		// Input
-		if (myWindow.getKeyPressed(GLKeys::KEY_ESCAPE))
-			myWindow.setWindowShouldClose(true);
+		if (myWindow.getKeyPressed(Entropy::GLKeys::KEY_ESCAPE))
+			myWindow.setShouldClose(true);
 
 		// Render
 		myWindow.render();
 
 		// Use our shader program
-		shader.use();
-		glBindVertexArray(VAO);
+		//shader.use();
+		//glBindVertexArray(VAO);
 
-		glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
+		//glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 
 		// Update
 		myWindow.processEvents();
 	}
 
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	//glDeleteVertexArrays(1, &VAO);
+	//glDeleteBuffers(1, &VBO);
+	//glDeleteBuffers(1, &EBO);
 
 	return 0;
 }

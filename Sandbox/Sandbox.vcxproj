@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLAD\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdri)..\Middleware\GLFW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLAD\include;$(projectdir)..\EntropyLib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdir)..\Middleware\GLFW\lib;$(projectdir)..\$(intdir);$(LibraryPath)</LibraryPath>
     <SourcePath>$(projectdir)..\Middleware\GLAD\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,7 +123,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;EntropyLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,14 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Middleware\GLAD\src\glad.c" />
-    <ClCompile Include="MyGlWindow.cpp" />
-    <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="Sandbox.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MyGLKeys.h" />
-    <ClInclude Include="MyGlWindow.h" />
-    <ClInclude Include="MyShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\x64\Debug\fShader.glsl" />

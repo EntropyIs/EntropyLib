@@ -20,10 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Middleware\GLAD\src\glad.c" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="GLApplication.cpp" />
+    <ClCompile Include="GLWindow.cpp" />
+    <ClCompile Include="GLShader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="GLApplication.h" />
+    <ClInclude Include="GLKeys.h" />
+    <ClInclude Include="GLWindow.h" />
+    <ClInclude Include="GLShader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

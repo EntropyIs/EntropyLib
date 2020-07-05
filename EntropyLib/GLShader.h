@@ -2,13 +2,15 @@
 
 namespace Entropy
 {
-	class __declspec(dllexport) Shader
+	class __declspec(dllexport) GLShader
 	{
 	public:
 		unsigned int ID;
 
-		Shader(const char* vertexPath, const char* fragmentPath);
-		~Shader();
+		GLShader(const char* vertexPath, const char* fragmentPath);
+		~GLShader();
+
+		void use();
 
 	private:
 		unsigned int compile(const char* path, unsigned int type);
