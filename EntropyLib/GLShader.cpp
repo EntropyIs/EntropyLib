@@ -28,7 +28,7 @@ Entropy::GLShader::GLShader(const char* vertexPath, const char* fragmentPath)
 	{
 		char infolog[1024];
 		glGetProgramInfoLog(ID, 1024, NULL, infolog);
-		std::cout << "ERROR::SHADER::COMPILATION_FAILED\n" << infolog << std::endl;
+		std::cout << "ERROR::PROGRAM::LINK_FAILED\n" << infolog << std::endl;
 	}
 	// Cleanup Memory
 	glDeleteShader(vertexShader);

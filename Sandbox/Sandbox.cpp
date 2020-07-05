@@ -8,12 +8,16 @@
 
 int main(int argc, char** argv)
 {
+	// Initalize Applicaiton & Window
 	Entropy::GLApplication myApplication;
 	myApplication.initializeGLFW();
-	Entropy::GLWindow myWindow(600, 520, "LearnOpenGL");
+	Entropy::GLWindow myWindow(800, 600, "LearnOpenGL");
 	myApplication.initializeGLEW();
 
-	myWindow.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	myWindow.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	// Generate Shader Program
+	Entropy::GLShader shader("vShader.glsl", "fShader.glsl");
 	
 	// Initialize Triangle
 	float verts[] =
@@ -26,7 +30,6 @@ int main(int argc, char** argv)
 		-0.5f, -0.5f,  0.0f,	 0.0f,  1.0f,  1.0f,  1.0f,
 		 0.5f, -0.5f,  0.0f,	 1.0f,  0.0f,  1.0f,  1.0f,
 	};
-
 	
 	unsigned int indices[] =
 	{
@@ -58,11 +61,8 @@ int main(int argc, char** argv)
 	// Vertex Color
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
-
-	//Entropy::Shader shader("vShader.glsl", "fShader.glsl");
 
 	// Gameloop
 	while (!myWindow.getShouldClose())
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 
 
 		// Use our shader program
-		//shader.use();
+		shader.use();
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 
@@ -84,9 +84,9 @@ int main(int argc, char** argv)
 		myWindow.processEvents();
 	}
 
-	//glDeleteVertexArrays(1, &VAO);
-	//glDeleteBuffers(1, &VBO);
-	//glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 
 	return 0;
 }
