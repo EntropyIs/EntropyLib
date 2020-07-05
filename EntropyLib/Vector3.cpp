@@ -10,12 +10,12 @@ Entropy::Math::Vector3 Entropy::Math::operator-(const Vector3& left, const Vecto
 	return Vector3(left.i - right.i, left.j - right.j, left.k - right.k);
 }
 
-Entropy::Math::Vector3 Entropy::Math::operator*(float left, const Vector3& right)
+Entropy::Math::Vector3 Entropy::Math::operator*(float scalar, const Vector3& vector)
 {
-	return Vector3(left * right.i, left * right.j, left * right.k);
+	return Vector3(scalar * vector.i, scalar * vector.j, scalar * vector.k);
 }
 
-Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& left, float right)
+Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& vector, float scalar)
 {
-	return Vector3(left.i * right, left.j * right, left.k * right);
+	return scalar * vector;
 }
