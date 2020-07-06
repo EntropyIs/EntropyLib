@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{7997e5b9-0175-476b-a0f5-9d8a01ea0fcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Timing">
+      <UniqueIdentifier>{08262339-9265-4016-9fe9-f443dc3fae18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Timing">
+      <UniqueIdentifier>{2def33e6-03c2-4177-bd61-145584dae27d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLShader.cpp">
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files\Timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="Vector4.h">
       <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

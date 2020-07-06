@@ -5,13 +5,17 @@
 #include <GLShader.h>
 
 #include <Vector4.h>
+#include <Clock.h>
 
 #include <iostream>
 
 using namespace Entropy::Math;
+using namespace Entropy::Timing;
 
 int main(int argc, char** argv)
 {
+	Clock myClock;
+
 	// Initalize Applicaiton & Window
 	Entropy::GLApplication myApplication;
 	myApplication.initializeGLFW();
@@ -83,16 +87,12 @@ int main(int argc, char** argv)
 
 		const unsigned int numVerts = sizeof(verts) / sizeof(*verts);
 
-
-		
-
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
 		{
 			translatedVerts[i - 1] = verts[i - 1] + offset;
 			translatedVerts[i] = verts[i];
 		}
-
 
 		// Use our shader program
 		shader.use();

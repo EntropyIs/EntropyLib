@@ -8,6 +8,9 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{3a7999d3-acb2-4aee-a36d-cdaec1a9b3e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Timing">
+      <UniqueIdentifier>{79ad9731-7bf9-4a9d-bb3a-b5669a7b2826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -24,6 +27,9 @@
     </ClCompile>
     <ClCompile Include="Vector4Tests.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerTests.cpp">
+      <Filter>Source Files\Timing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

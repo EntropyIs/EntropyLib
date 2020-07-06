@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="..\Middleware\GTest\src\gtest-all.cc" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TimerTests.cpp" />
     <ClCompile Include="Vector2Tests.cpp" />
     <ClCompile Include="Vector3Tests.cpp" />
     <ClCompile Include="Vector4Tests.cpp" />
