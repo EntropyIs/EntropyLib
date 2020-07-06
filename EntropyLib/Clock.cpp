@@ -6,14 +6,22 @@ void Entropy::Timing::Clock::poll()
 {
     timeLast = timeCurrent;
     QueryPerformanceCounter(&timeCurrent);
+
+    LARGE_INTEGER delta;
+    delta.QuadPart = timeCurrent.QuadPart - timeLast.QuadPart;
+
+    deltaTime = ((float)delta.QuadPart) / frequency.QuadPart;
 }
 
 bool Entropy::Timing::Clock::initialize()
 {
-    QueryPerformanceFrequency(&frequency);
-    QueryPerformanceCounter(&timeCurrent);
-    timeLast = timeCurrent;
-    return true;
+    bool b = QueryPerformanceFrequency(&frequency);
+    if (!b)
+        return false;
+    b = QueryPerformanceCounter(&timeLast);
+    timeCurrent = timeLast;
+    deltaTime = 0.0f;
+    return b;
 }
 
 bool Entropy::Timing::Clock::shutdown()
@@ -23,8 +31,5 @@ bool Entropy::Timing::Clock::shutdown()
 
 float Entropy::Timing::Clock::timeElapsed() const
 {
-    LARGE_INTEGER delta;
-    delta.QuadPart = timeCurrent.QuadPart - timeLast.QuadPart;
-    float deltaTime = ((float)delta.QuadPart) / frequency.QuadPart;
     return deltaTime;
 }

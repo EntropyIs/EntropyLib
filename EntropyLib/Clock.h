@@ -13,6 +13,8 @@ namespace Entropy
 			LARGE_INTEGER timeLast;
 			LARGE_INTEGER timeCurrent;
 
+			float deltaTime;
+
 		public:
 			void poll();
 

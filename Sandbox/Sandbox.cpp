@@ -7,10 +7,13 @@
 #include <Vector4.h>
 #include <Clock.h>
 
+#include <thread>
 #include <iostream>
 
 using namespace Entropy::Math;
 using namespace Entropy::Timing;
+
+void sleep(unsigned int millis);
 
 int main(int argc, char** argv)
 {
@@ -73,7 +76,12 @@ int main(int argc, char** argv)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	Vector4 offset(-0.5f, -0.5f);
-	Vector4 velosity(0.001f, 0.001f);
+	Vector4 velosity(0.3f, 0.3f); // px/s
+
+	// Init Clock
+	myClock.initialize();
+
+	unsigned int lagGen = 0;
 
 	// Gameloop
 	while (!myWindow.getShouldClose())
@@ -103,13 +111,21 @@ int main(int argc, char** argv)
 
 		// Update
 		myWindow.processEvents();
+		offset = offset + (velosity * myClock.timeElapsed());
 
-		offset = offset + velosity;
+		myClock.poll();
 	}
 
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 
+	myClock.shutdown();
+
 	return 0;
+}
+
+void sleep(unsigned int millis)
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 }
