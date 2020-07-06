@@ -7,6 +7,7 @@ namespace Entropy
 		{
 			float i;
 			float j;
+
 			Vector2(float i = 0.0f, float j = 0.0f) : i(i), j(j) {}
 		};
 

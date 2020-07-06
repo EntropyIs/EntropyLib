@@ -68,6 +68,9 @@ int main(int argc, char** argv)
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
+	Vector4 offset(-0.5f, -0.5f);
+	Vector4 velosity(0.001f, 0.001f);
+
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
@@ -81,7 +84,7 @@ int main(int argc, char** argv)
 		const unsigned int numVerts = sizeof(verts) / sizeof(*verts);
 
 
-		Vector4 offset(0.5f, 0.5f);
+		
 
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
@@ -100,6 +103,8 @@ int main(int argc, char** argv)
 
 		// Update
 		myWindow.processEvents();
+
+		offset = offset + velosity;
 	}
 
 	glDeleteVertexArrays(1, &VAO);

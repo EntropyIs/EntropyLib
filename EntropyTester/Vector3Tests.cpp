@@ -72,3 +72,43 @@ TEST(Vector3, ScalarMultiplycation)
 	EXPECT_FLOAT_EQ(result1.j, result2.j);
 	EXPECT_FLOAT_EQ(result1.k, result2.k);
 }
+
+TEST(Vector3, DotProduct)
+{
+	Vector3 a(-1, 7, 4);
+	Vector3 b(-5, 8, 4);
+
+	float dotProduct = a.dot(b);
+	
+	EXPECT_FLOAT_EQ(77, dotProduct);
+}
+
+TEST(Vector3, CrossProduct)
+{
+	Vector3 a(-1, 7, 4);
+	Vector3 b(-5, 8, 4);
+
+	Vector3 crossProduct = a.cross(b);
+
+	EXPECT_FLOAT_EQ(-4, crossProduct.i);
+	EXPECT_FLOAT_EQ(-16, crossProduct.j);
+	EXPECT_FLOAT_EQ(27, crossProduct.k);
+}
+
+TEST(Vector3, Magnitude)
+{
+	Vector3 a(-1, 7, 4);
+
+	float magnitude = a.magnitude();
+
+	EXPECT_FLOAT_EQ(8.12404f, magnitude);
+}
+
+TEST(Vector3, UnitVector)
+{
+	Vector3 a(-1, 7, 4);
+
+	Vector3 unit = a.unit();
+
+	EXPECT_FLOAT_EQ(1, unit.magnitude());
+}
