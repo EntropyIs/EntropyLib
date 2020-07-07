@@ -1,4 +1,7 @@
 #pragma once
+#include "Vector3.h"
+#include "Vector4.h"
+
 namespace Entropy
 {
 	namespace Math
@@ -16,6 +19,9 @@ namespace Entropy
 
 			const bool operator==(const Vector2& right) const;
 			const bool operator!=(const Vector2& right) const;
+
+			operator Vector3() const;
+			operator Vector4() const;
 		};
 
 		Vector2 __declspec(dllexport) operator+ (const Vector2& left, const Vector2& right);

@@ -76,3 +76,13 @@ float Entropy::Math::Vector3::magnitude()
 {
 	return std::sqrt(i * i + j * j + k * k);
 }
+
+Entropy::Math::Vector3::operator Vector2() const
+{
+	return Vector2(i, j);
+}
+
+Entropy::Math::Vector3::operator Vector4() const
+{
+	return Vector4(i, j, k, 0.0f);
+}

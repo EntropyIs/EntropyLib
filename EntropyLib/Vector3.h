@@ -1,4 +1,7 @@
 #pragma once
+#include "Vector2.h"
+#include "Vector4.h"
+
 namespace Entropy
 {
 	namespace Math
@@ -25,6 +28,8 @@ namespace Entropy
 
 			float magnitude();
 
+			operator Vector2() const;
+			operator Vector4() const;
 		};
 
 		Vector3 __declspec(dllexport) operator+ (const Vector3& left, const Vector3& right);
