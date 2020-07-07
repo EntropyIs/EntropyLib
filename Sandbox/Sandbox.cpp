@@ -76,8 +76,9 @@ int main(int argc, char** argv)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	Vector4 offset(0.0f, 0.0f);
-	float velocity = 0.8f;
-
+	Vector4 velocity(0.0f, 0.0f);
+	float accel = 0.5f;
+	float maxVelocity = 1.0f;
 	// Init Clock
 	myClock.initialize();
 	// Gameloop
@@ -125,13 +126,47 @@ int main(int argc, char** argv)
 		myWindow.processEvents();
 
 		if (up)
-			offset = offset + (Vector4(0.0f, velocity) * myClock.timeElapsed());
+		{
+			if(velocity.j < maxVelocity)
+				velocity.j += accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if(velocity.j > 0)
+				velocity.j -= accel * myClock.timeElapsed();
+		}
 		if (down)
-			offset = offset + (Vector4(0.0f, -velocity) * myClock.timeElapsed());
+		{
+			if (velocity.j > -maxVelocity)
+				velocity.j -= accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.j < 0)
+				velocity.j += accel * myClock.timeElapsed();
+		}
 		if(right)
-			offset = offset + (Vector4(velocity, 0.0f) * myClock.timeElapsed());
+		{
+			if (velocity.i < maxVelocity)
+				velocity.i += accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i > 0)
+				velocity.i -= accel * myClock.timeElapsed();
+		}
 		if (left)
-			offset = offset + (Vector4(-velocity, 0.0f) * myClock.timeElapsed());
+		{
+			if (velocity.i > -maxVelocity)
+				velocity.i -= accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i < 0)
+				velocity.i += accel * myClock.timeElapsed();
+		}
+
+		offset = offset + velocity * myClock.timeElapsed();
 
 		myClock.poll();
 	}
