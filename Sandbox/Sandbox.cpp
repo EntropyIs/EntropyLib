@@ -5,10 +5,8 @@
 #include <GLShader.h>
 
 #include <Vector4.h>
-#include <Matrix4.h>
 #include <Clock.h>
 
-#include <cmath>
 #include <thread>
 #include <iostream>
 
@@ -24,7 +22,7 @@ int main(int argc, char** argv)
 	// Initalize Applicaiton & Window
 	Entropy::GLApplication myApplication;
 	myApplication.initializeGLFW();
-	Entropy::GLWindow myWindow(800, 800, "LearnOpenGL");
+	Entropy::GLWindow myWindow(800, 600, "LearnOpenGL");
 	myApplication.initializeGLEW();
 
 	myWindow.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -77,17 +75,10 @@ int main(int argc, char** argv)
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
-	// Translate & Rotate Object
 	Vector4 offset(0.0f, 0.0f);
 	Vector4 velocity(0.0f, 0.0f);
-
-	float PI = 2 * acos(0);
-
-	float rZ = 0.0f;
-
-	float accel = 1.0f;
+	float accel = 0.5f;
 	float maxVelocity = 1.0f;
-
 	// Init Clock
 	myClock.initialize();
 	// Gameloop
@@ -120,7 +111,7 @@ int main(int argc, char** argv)
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
 		{
-			translatedVerts[i - 1] = rotationMatrix(0,0,rZ) * (verts[i - 1] + offset);
+			translatedVerts[i - 1] = verts[i - 1] + offset;
 			translatedVerts[i] = verts[i];
 		}
 
@@ -156,16 +147,26 @@ int main(int argc, char** argv)
 		}
 		if(right)
 		{
-			rZ += 0.1f;
+			if (velocity.i < maxVelocity)
+				velocity.i += accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i > 0)
+				velocity.i -= accel * myClock.timeElapsed();
 		}
 		if (left)
 		{
-			rZ -= 0.1f;
+			if (velocity.i > -maxVelocity)
+				velocity.i -= accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i < 0)
+				velocity.i += accel * myClock.timeElapsed();
 		}
 
 		offset = offset + velocity * myClock.timeElapsed();
-
-		
 
 		myClock.poll();
 	}

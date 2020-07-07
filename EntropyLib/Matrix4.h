@@ -22,9 +22,6 @@ namespace Entropy
 				r3c0(r3c0), r3c1(r3c1), r3c2(r3c2), r3c3(r3c3) {}
 		};
 		Vector4 __declspec(dllexport) operator* (const Matrix4& left, const Vector4& right);
-
-		Matrix4 __declspec(dllexport) TransformationMatrix(const Vector4& movementVector, const Vector4& rotationVector);
-		Matrix4 __declspec(dllexport) TransformationMatrix(float dX, float dY, float dZ, float rX, float rY, float rZ);
 	}
 }
 
