@@ -23,8 +23,8 @@ namespace Entropy
 		};
 		Vector4 __declspec(dllexport) operator* (const Matrix4& left, const Vector4& right);
 
-		Matrix4 __declspec(dllexport) TransformationMatrix(const Vector4& movementVector, const Vector4& rotationVector);
-		Matrix4 __declspec(dllexport) TransformationMatrix(float dX, float dY, float dZ, float rX, float rY, float rZ);
+		Matrix4 __declspec(dllexport) RotationMatrix(const Vector4& rotationVector);
+		Matrix4 __declspec(dllexport) RotationMatrix(float rX, float rY, float rZ);
 	}
 }
 

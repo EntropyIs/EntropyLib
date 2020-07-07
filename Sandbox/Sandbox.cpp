@@ -78,12 +78,9 @@ int main(int argc, char** argv)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	// Translate & Rotate Object
-	Vector4 offset(0.0f, 0.0f);
-	Vector4 velocity(0.0f, 0.0f);
+	Vector4 translation, velocity, rotation;
 
 	float PI = 2 * acos(0);
-
-	float rZ = 0.0f;
 
 	float accel = 1.0f;
 	float maxVelocity = 1.0f;
@@ -120,7 +117,7 @@ int main(int argc, char** argv)
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
 		{
-			translatedVerts[i - 1] = rotationMatrix(0,0,rZ) * (verts[i - 1] + offset);
+			translatedVerts[i - 1] = RotationMatrix(rotation) * verts[i - 1] + translation;
 			translatedVerts[i] = verts[i];
 		}
 
@@ -156,16 +153,14 @@ int main(int argc, char** argv)
 		}
 		if(right)
 		{
-			rZ += 0.1f;
+			rotation.k += 0.1f;
 		}
 		if (left)
 		{
-			rZ -= 0.1f;
+			rotation.k -= 0.1f;
 		}
 
-		offset = offset + velocity * myClock.timeElapsed();
-
-		
+		translation += velocity * myClock.timeElapsed();		
 
 		myClock.poll();
 	}

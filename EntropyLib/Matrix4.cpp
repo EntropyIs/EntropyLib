@@ -12,17 +12,17 @@ Entropy::Math::Vector4 Entropy::Math::operator*(const Matrix4& left, const Vecto
     );
 }
 
-Entropy::Math::Matrix4 Entropy::Math::TransformationMatrix(const Vector4& movementVector, const Vector4& rotationVector)
+Entropy::Math::Matrix4 Entropy::Math::RotationMatrix(const Vector4& rotationVector)
 {
-    return TransformationMatrix(movementVector.i, movementVector.j, movementVector.k, rotationVector.i, rotationVector.j, rotationVector.k);
+    return RotationMatrix(rotationVector.i, rotationVector.j, rotationVector.k);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::TransformationMatrix(float dX, float dY, float dZ, float rX, float rY, float rZ)
+Entropy::Math::Matrix4 Entropy::Math::RotationMatrix(float rX, float rY, float rZ)
 {
     return Matrix4(
-        cos(rY) * cos(rZ), -cos(rX) * sin(rZ) + sin(rX) * sin(rY) * cos(rZ), sin(rX) * sin(rY) + cos(rX) * sin(rY) * cos(rZ), dX,
-        cos(rY) * sin(rZ), cos(rY) * cos(rZ) + sin(rX) * sin(rY) * sin(rZ), -sin(rX) * cos(rY) + cos(rX) * sin(rY) * sin(rZ), dY,
-        -sin(rY), -sin(rX) * cos(rY), cos(rX) * cos(rY), dZ,
+        cos(rY) * cos(rZ), -cos(rX) * sin(rZ) + sin(rX) * sin(rY) * cos(rZ), sin(rX) * sin(rY) + cos(rX) * sin(rY) * cos(rZ), 0.0f,
+        cos(rY) * sin(rZ), cos(rY) * cos(rZ) + sin(rX) * sin(rY) * sin(rZ), -sin(rX) * cos(rY) + cos(rX) * sin(rY) * sin(rZ), 0.0f,
+        -sin(rY), -sin(rX) * cos(rY), cos(rX) * cos(rY), 0.0f,
         0.0f, 0.0f, 0.0f, 1.0f
     );
 }
