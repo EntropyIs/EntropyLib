@@ -112,3 +112,44 @@ TEST(Vector3, UnitVector)
 
 	EXPECT_FLOAT_EQ(1, unit.magnitude());
 }
+
+TEST(Vector3, AssignmentOperator)
+{
+	Vector3 source(-1, 7, 4);
+	Vector3 copy(source);
+	EXPECT_FLOAT_EQ(source.i, copy.i);
+	EXPECT_FLOAT_EQ(source.j, copy.j);
+	EXPECT_FLOAT_EQ(source.k, copy.k);
+}
+
+TEST(Vector3, PlusAssignmentOperator)
+{
+	Vector3 a(-1, 7, 4);
+	Vector3 b(-5, 8, 4);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+	EXPECT_FLOAT_EQ(4, a.k);
+
+	a += b;
+
+	EXPECT_FLOAT_EQ(-6, a.i);
+	EXPECT_FLOAT_EQ(15, a.j);
+	EXPECT_FLOAT_EQ(8, a.k);
+}
+
+TEST(Vector3, MinusAssignmentOperator)
+{
+	Vector3 a(-1, 7, 4);
+	Vector3 b(-5, 8, 4);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+	EXPECT_FLOAT_EQ(4, a.k);
+
+	a -= b;
+
+	EXPECT_FLOAT_EQ(4, a.i);
+	EXPECT_FLOAT_EQ(-1, a.j);
+	EXPECT_FLOAT_EQ(0, a.k);
+}

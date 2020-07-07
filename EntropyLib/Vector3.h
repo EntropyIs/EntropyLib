@@ -11,6 +11,13 @@ namespace Entropy
 
 			Vector3(float i = 0.0f, float j = 0.0f, float k = 0.0f) : i(i), j(j), k(k) {}
 
+			Vector3& operator= (const Vector3& right);
+			Vector3& operator+= (const Vector3& right);
+			Vector3& operator-= (const Vector3& right);
+
+			const bool operator==(const Vector3& right) const;
+			const bool operator!=(const Vector3& right) const;
+
 			float dot(const Vector3& other);
 			Vector3 cross(const Vector3& other);
 

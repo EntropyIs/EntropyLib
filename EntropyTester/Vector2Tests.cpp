@@ -63,3 +63,39 @@ TEST(Vector2, ScalarMultiplycation)
 	EXPECT_FLOAT_EQ(result1.i, result2.i);
 	EXPECT_FLOAT_EQ(result1.j, result2.j);
 }
+
+TEST(Vector2, AssignmentOperator)
+{
+	Vector2 source(-1, 7);
+	Vector2 copy(source);
+	EXPECT_FLOAT_EQ(source.i, copy.i);
+	EXPECT_FLOAT_EQ(source.j, copy.j);
+}
+
+TEST(Vector2, PlusAssignmentOperator)
+{
+	Vector2 a(-1, 7);
+	Vector2 b(-5, 8);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+
+	a += b;
+
+	EXPECT_FLOAT_EQ(-6, a.i);
+	EXPECT_FLOAT_EQ(15, a.j);
+}
+
+TEST(Vector2, MinusAssignmentOperator)
+{
+	Vector2 a(-1, 7);
+	Vector2 b(-5, 8);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+
+	a -= b;
+
+	EXPECT_FLOAT_EQ(4, a.i);
+	EXPECT_FLOAT_EQ(-1, a.j);
+}

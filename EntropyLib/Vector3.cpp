@@ -22,6 +22,40 @@ Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& vector, float sca
 	return scalar * vector;
 }
 
+Entropy::Math::Vector3& Entropy::Math::Vector3::operator=(const Vector3& right)
+{
+	i = right.i;
+	j = right.j;
+	k = right.k;
+	return *this;
+}
+
+Entropy::Math::Vector3& Entropy::Math::Vector3::operator+=(const Vector3& right)
+{
+	i += right.i;
+	j += right.j;
+	k += right.k;
+	return *this;
+}
+
+Entropy::Math::Vector3& Entropy::Math::Vector3::operator-=(const Vector3& right)
+{
+	i -= right.i;
+	j -= right.j;
+	k -= right.k;
+	return *this;
+}
+
+const bool Entropy::Math::Vector3::operator==(const Vector3& right) const
+{
+	return i == right.i && j == right.j && k == right.k;
+}
+
+const bool Entropy::Math::Vector3::operator!=(const Vector3& right) const
+{
+	return !(*this == right);
+}
+
 float Entropy::Math::Vector3::dot(const Vector3& other)
 {
 	return i * other.i + j * other.j + k * other.k;

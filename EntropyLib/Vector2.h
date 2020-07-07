@@ -9,6 +9,13 @@ namespace Entropy
 			float j;
 
 			Vector2(float i = 0.0f, float j = 0.0f) : i(i), j(j) {}
+
+			Vector2& operator= (const Vector2& right);
+			Vector2& operator+= (const Vector2& right);
+			Vector2& operator-= (const Vector2& right);
+
+			const bool operator==(const Vector2& right) const;
+			const bool operator!=(const Vector2& right) const;
 		};
 
 		Vector2 __declspec(dllexport) operator+ (const Vector2& left, const Vector2& right);

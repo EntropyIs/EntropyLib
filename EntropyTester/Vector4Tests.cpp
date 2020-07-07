@@ -81,3 +81,49 @@ TEST(Vector4, ScalarMultiplycation)
 	EXPECT_FLOAT_EQ(result1.k, result2.k);
 	EXPECT_FLOAT_EQ(result1.l, result2.l);
 }
+
+TEST(Vector4, AssignmentOperator)
+{
+	Vector4 source(-1, 7, 4, 3);
+	Vector4 copy(source);
+	EXPECT_FLOAT_EQ(source.i, copy.i);
+	EXPECT_FLOAT_EQ(source.j, copy.j);
+	EXPECT_FLOAT_EQ(source.k, copy.k);
+	EXPECT_FLOAT_EQ(source.l, copy.l);
+}
+
+TEST(Vector4, PlusAssignmentOperator)
+{
+	Vector4 a(-1, 7, 4, 3);
+	Vector4 b(-5, 8, 4, -1);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+	EXPECT_FLOAT_EQ(4, a.k);
+	EXPECT_FLOAT_EQ(3, a.l);
+
+	a += b;
+
+	EXPECT_FLOAT_EQ(-6, a.i);
+	EXPECT_FLOAT_EQ(15, a.j);
+	EXPECT_FLOAT_EQ(8, a.k);
+	EXPECT_FLOAT_EQ(2, a.l);
+}
+
+TEST(Vector4, MinusAssignmentOperator)
+{
+	Vector4 a(-1, 7, 4, 3);
+	Vector4 b(-5, 8, 4, -1);
+
+	EXPECT_FLOAT_EQ(-1, a.i);
+	EXPECT_FLOAT_EQ(7, a.j);
+	EXPECT_FLOAT_EQ(4, a.k);
+	EXPECT_FLOAT_EQ(4, a.k);
+
+	a -= b;
+
+	EXPECT_FLOAT_EQ(4, a.i);
+	EXPECT_FLOAT_EQ(-1, a.j);
+	EXPECT_FLOAT_EQ(0, a.k);
+	EXPECT_FLOAT_EQ(4, a.l);
+}

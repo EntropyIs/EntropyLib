@@ -36,38 +36,38 @@ TEST(TimerClock, TimeMeasureing)
 	EXPECT_TRUE(0.4f < timeElapsed);
 	EXPECT_TRUE(timeElapsed < 0.6f);
 
-	if (!QUICK_TEST)
+#ifdef OVERNIGHT_TEST
+	const int numTests = 10 + rand() % 100;
+	const float threshold = 0.01f;
+
+	float delta;
+	float deltaLow = std::numeric_limits<float>::infinity();
+	float deltaHigh = 0;
+	float deltaSum = 0;
+
+	for (int i = 0; i < numTests; i++)
 	{
-		const int numTests = 10 + rand() % 100;
-		const float threshold = 0.01f;
+		int testTimeMillis = 1000 + rand() % 1000;
+		float testTimeSeconds = testTimeMillis / 1000.0f;
 
-		float delta;
-		float deltaLow = std::numeric_limits<float>::infinity();
-		float deltaHigh = 0;
-		float deltaSum = 0;
-
-		for (int i = 0; i < numTests; i++)
-		{
-			int testTimeMillis = 1000 + rand() % 1000;
-			float testTimeSeconds = testTimeMillis / 1000.0f;
-
-			clock.poll();
-			std::this_thread::sleep_for(std::chrono::milliseconds(testTimeMillis));
-			clock.poll();
-			float timeElapsed = clock.timeElapsed();
-			delta = std::abs(testTimeSeconds - timeElapsed);
-			deltaSum += delta;
-			if (delta < deltaLow)
-				deltaLow = delta;
-			if (delta > deltaHigh)
-				deltaHigh = delta;
-			std::cout << "TEST " << i << ": Expected " << testTimeSeconds << ", Actual " << timeElapsed << ", Delta " << delta << std::endl;
-			EXPECT_TRUE((testTimeSeconds - threshold) < timeElapsed);
-			EXPECT_TRUE(timeElapsed < (testTimeSeconds + threshold));
-		}
-		std::cout << "Average Delta: " << deltaSum / numTests << std::endl;
-		std::cout << "Delta Limits: Low " << deltaLow << ", High " << deltaHigh << std::endl;
+		clock.poll();
+		std::this_thread::sleep_for(std::chrono::milliseconds(testTimeMillis));
+		clock.poll();
+		float timeElapsed = clock.timeElapsed();
+		delta = std::abs(testTimeSeconds - timeElapsed);
+		deltaSum += delta;
+		if (delta < deltaLow)
+			deltaLow = delta;
+		if (delta > deltaHigh)
+			deltaHigh = delta;
+		std::cout << "TEST " << i << ": Expected " << testTimeSeconds << ", Actual " << timeElapsed << ", Delta " << delta << std::endl;
+		EXPECT_TRUE((testTimeSeconds - threshold) < timeElapsed);
+		EXPECT_TRUE(timeElapsed < (testTimeSeconds + threshold));
 	}
+	std::cout << "Average Delta: " << deltaSum / numTests << std::endl;
+	std::cout << "Delta Limits: Low " << deltaLow << ", High " << deltaHigh << std::endl;
+#endif // OVERNIGHT_TEST
+	
 	EXPECT_TRUE(clock.shutdown());
 }
 
