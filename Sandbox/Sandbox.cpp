@@ -75,20 +75,32 @@ int main(int argc, char** argv)
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
-	Vector4 offset(-0.5f, -0.5f);
-	Vector4 velosity(0.3f, 0.3f); // px/s
+	Vector4 offset(0.0f, 0.0f);
+	float velocity = 0.8f;
 
 	// Init Clock
 	myClock.initialize();
-
-	unsigned int lagGen = 0;
-
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
+		bool up = false;
+		bool down = false;
+		bool left = false;
+		bool right = false;
+
 		// Input
-		if (myWindow.getKeyPressed(Entropy::GLKeys::KEY_ESCAPE))
+		if (myWindow.getKeyPressed(Entropy::KEY_ESCAPE))
 			myWindow.setShouldClose(true);
+
+		if (myWindow.getKeyPressed(Entropy::KEY_UP))
+			up = true;
+		if(myWindow.getKeyPressed(Entropy::KEY_DOWN))
+			down = true;
+
+		if (myWindow.getKeyPressed(Entropy::KEY_LEFT))
+			left = true;
+		if (myWindow.getKeyPressed(Entropy::KEY_RIGHT))
+			right = true;
 
 		// Render
 		myWindow.render();
@@ -111,7 +123,15 @@ int main(int argc, char** argv)
 
 		// Update
 		myWindow.processEvents();
-		offset = offset + (velosity * myClock.timeElapsed());
+
+		if (up)
+			offset = offset + (Vector4(0.0f, velocity) * myClock.timeElapsed());
+		if (down)
+			offset = offset + (Vector4(0.0f, -velocity) * myClock.timeElapsed());
+		if(right)
+			offset = offset + (Vector4(velocity, 0.0f) * myClock.timeElapsed());
+		if (left)
+			offset = offset + (Vector4(-velocity, 0.0f) * myClock.timeElapsed());
 
 		myClock.poll();
 	}
