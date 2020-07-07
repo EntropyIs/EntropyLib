@@ -37,16 +37,6 @@ const bool Entropy::Math::Vector4::operator!=(const Vector4& right) const
 	return !(*this == right);
 }
 
-Entropy::Math::Vector4::operator Vector2() const
-{
-	return Vector2(i, j);
-}
-
-Entropy::Math::Vector4::operator Vector3() const
-{
-	return Vector3(i, j, k);
-}
-
 Entropy::Math::Vector4 Entropy::Math::operator+(const Vector4& left, const Vector4& right)
 {
 	return Vector4(left.i + right.i, left.j + right.j, left.k + right.k, left.l + right.l);
