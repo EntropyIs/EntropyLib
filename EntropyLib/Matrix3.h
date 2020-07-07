@@ -1,6 +1,5 @@
 #pragma once
 #include "Vector3.h"
-
 namespace Entropy
 {
 	namespace Math
@@ -19,7 +18,7 @@ namespace Entropy
 				r1c0(r1c0), r1c1(r1c1), r1c2(r1c2), 
 				r2c0(r2c0), r2c1(r2c1), r2c2(r2c2){}
 		};
-		Vector3 operator* (const Matrix3& left, const Vector3& right);
+		Vector3 __declspec(dllexport) operator* (const Matrix3& left, const Vector3& right);
 	}
 }
 
