@@ -23,6 +23,9 @@
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Matrix2.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
@@ -33,6 +36,9 @@
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="Matrix2.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />

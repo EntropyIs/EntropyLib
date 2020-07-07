@@ -31,5 +31,8 @@
     <ClCompile Include="TimerTests.cpp">
       <Filter>Source Files\Timing</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix2Tests.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
