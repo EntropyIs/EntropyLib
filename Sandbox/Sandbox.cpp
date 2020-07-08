@@ -17,7 +17,7 @@ using namespace Entropy::Timing;
 
 void sleep(unsigned int millis);
 
-int main(int argc, char** argv)
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd)
 {
 	Clock myClock;
 
@@ -36,12 +36,12 @@ int main(int argc, char** argv)
 	Vector4 verts[] =
 	{
 	/**
-	 *	posistions			//colors
-	 *	x    , y    , z    ,	r    , g    , b    , a    ,
+	 *	posistions		colors
+	 *	x, y, z, 1		r, g, b, a
 	 */
-		Vector4( 0.0f,  0.1f), Vector4(1.0f,  1.0f,  0.0f,  1.0f),
-		Vector4(-0.1f, -0.1f), Vector4(0.0f,  1.0f,  1.0f,  1.0f),
-		Vector4( 0.1f, -0.1f), Vector4(1.0f,  0.0f,  1.0f,  1.0f)
+		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f),
+		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f),
+		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f)
 	};
 	
 	unsigned int indices[] =
@@ -94,20 +94,31 @@ int main(int argc, char** argv)
 		bool down = false;
 		bool left = false;
 		bool right = false;
+		bool clockwise = false;
+		bool anticlockwise = false;
+		bool reset = false;
 
 		// Input
 		if (myWindow.getKeyPressed(Entropy::KEY_ESCAPE))
 			myWindow.setShouldClose(true);
 
-		if (myWindow.getKeyPressed(Entropy::KEY_UP))
+		if (myWindow.getKeyPressed(Entropy::KEY_W))
 			up = true;
-		if(myWindow.getKeyPressed(Entropy::KEY_DOWN))
+		if(myWindow.getKeyPressed(Entropy::KEY_S))
 			down = true;
 
-		if (myWindow.getKeyPressed(Entropy::KEY_LEFT))
+		if (myWindow.getKeyPressed(Entropy::KEY_A))
 			left = true;
-		if (myWindow.getKeyPressed(Entropy::KEY_RIGHT))
+		if (myWindow.getKeyPressed(Entropy::KEY_D))
 			right = true;
+
+		if (myWindow.getKeyPressed(Entropy::KEY_Q))
+			anticlockwise = true;
+		if (myWindow.getKeyPressed(Entropy::KEY_E))
+			clockwise = true;
+
+		if (myWindow.getKeyPressed(Entropy::KEY_SPACE))
+			reset = true;
 
 		// Render
 		myWindow.render();
@@ -117,7 +128,7 @@ int main(int argc, char** argv)
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
 		{
-			translatedVerts[i - 1] = RotationMatrix(rotation) * verts[i - 1] + translation;
+			translatedVerts[i - 1] = RotationMatrix(rotation) * (verts[i - 1] + translation);
 			translatedVerts[i] = verts[i];
 		}
 
@@ -133,12 +144,12 @@ int main(int argc, char** argv)
 
 		if (up)
 		{
-			if(velocity.j < maxVelocity)
+			if (velocity.j < maxVelocity)
 				velocity.j += accel * myClock.timeElapsed();
 		}
 		else
 		{
-			if(velocity.j > 0)
+			if (velocity.j > 0)
 				velocity.j -= accel * myClock.timeElapsed();
 		}
 		if (down)
@@ -151,16 +162,47 @@ int main(int argc, char** argv)
 			if (velocity.j < 0)
 				velocity.j += accel * myClock.timeElapsed();
 		}
-		if(right)
+		if (right)
 		{
-			rotation.k += 0.1f;
+			if (velocity.i < maxVelocity)
+				velocity.i += accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i > 0)
+				velocity.i -= accel * myClock.timeElapsed();
 		}
 		if (left)
 		{
+			if (velocity.i > -maxVelocity)
+				velocity.i -= accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.i < 0)
+				velocity.i += accel * myClock.timeElapsed();
+		}
+		if(clockwise)
+			rotation.k += 0.1f;
+		if (anticlockwise)
 			rotation.k -= 0.1f;
+		if (reset)
+		{
+			translation = Vector4();
+			velocity = Vector4();
+			rotation = Vector4();
 		}
 
-		translation += velocity * myClock.timeElapsed();		
+		translation += velocity * myClock.timeElapsed();
+
+		if (translation.i > 1.2f)
+			translation.i = -1.2f;
+		else if (translation.i < -1.2f)
+			translation.i = 1.2f;
+		if (translation.j > 1.2f)
+			translation.j = -1.2f;
+		else if (translation.j < -1.2f)
+			translation.j = 1.2f;
 
 		myClock.poll();
 	}
