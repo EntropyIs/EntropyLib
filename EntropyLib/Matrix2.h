@@ -17,6 +17,10 @@ namespace Entropy
 		};
 
 		Vector2 __declspec(dllexport) operator* (const Matrix2& left, const Vector2& right);
+
+		Matrix2 __declspec(dllexport) operator* (const Matrix2& left, const Matrix2& right);
+		Matrix2 __declspec(dllexport) operator+ (const Matrix2& left, const Matrix2& right);
+		Matrix2 __declspec(dllexport) operator- (const Matrix2& left, const Matrix2& right);
 	}
 }
 

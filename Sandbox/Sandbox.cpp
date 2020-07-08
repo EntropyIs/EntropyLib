@@ -128,7 +128,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd)
 		Vector4 translatedVerts[numVerts];
 		for (unsigned int i = 1; i < numVerts; i = i + 2)
 		{
-			translatedVerts[i - 1] = RotationMatrix(rotation) * (verts[i - 1] + translation);
+			translatedVerts[i - 1] = RotationAboutXYZMatrix(rotation) * (verts[i - 1] + translation);
 			translatedVerts[i] = verts[i];
 		}
 
