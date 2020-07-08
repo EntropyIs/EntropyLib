@@ -6,17 +6,28 @@ using namespace Entropy::Math;
 TEST(Vector2, Constructor)
 {
 	Vector2 empty;
-	Vector2 unit(1, 1);
-	Vector2 value(2, 3);
+	Vector2 a(2.5f, -7.0f);
 
-	EXPECT_EQ(0, empty.i);
-	EXPECT_EQ(0, empty.j);
+	EXPECT_FLOAT_EQ(0.0f, empty.i);
+	EXPECT_FLOAT_EQ(0.0f, empty.j);
 
-	EXPECT_EQ(1, unit.i);
-	EXPECT_EQ(1, unit.j);
+	EXPECT_FLOAT_EQ(2.5f, a.i);
+	EXPECT_FLOAT_EQ(-7.0f, a.j);
+}
 
-	EXPECT_EQ(2, value.i);
-	EXPECT_EQ(3, value.j);
+TEST(Vector2, ElementSubtypes)
+{
+	Vector2 a(2.5f, -7.0f);
+
+	EXPECT_FLOAT_EQ(a.i, a.x);
+	EXPECT_FLOAT_EQ(a.j, a.y);
+	EXPECT_FLOAT_EQ(a.i, a.data[0]);
+	EXPECT_FLOAT_EQ(a.j, a.data[1]);
+
+	a.i = 3.0f;
+	EXPECT_FLOAT_EQ(a.i, a.x);
+	EXPECT_FLOAT_EQ(a.j, a.y);
+
 }
 
 TEST(Vector2, VectorAddition)
