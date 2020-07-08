@@ -3,11 +3,15 @@ namespace Entropy
 {
 	namespace Math
 	{
-		struct __declspec(dllexport) Vector3
+		class __declspec(dllexport) Vector3
 		{
-			float i;
-			float j;
-			float k;
+		public:
+			union {
+				struct { float i, j, k; };
+				struct { float x, y, z; };
+				struct { float r, g, b; };
+				float data[3];
+			};
 
 			Vector3(float i = 0.0f, float j = 0.0f, float k = 0.0f) : i(i), j(j), k(k) {}
 
