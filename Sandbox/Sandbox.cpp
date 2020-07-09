@@ -82,7 +82,8 @@ int main(int argc, char* argv[])
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	// Load Textures
-	Entropy::Texture texture("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/wall.bmp");
+	Entropy::Texture tex0("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/wall.bmp");
+	Entropy::Texture tex1("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/spiral.bmp");
 
 	// Translate & Rotate Object
 	Vector4 translation, velocity, rotation;
@@ -94,6 +95,12 @@ int main(int argc, char* argv[])
 
 	// Init Clock
 	myClock.initialize();
+
+	// Setup Shader Definitions
+	shader.use();
+	shader.set1Int("tex0", 0);
+	shader.set1Int("tex1", 1);
+
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
@@ -142,9 +149,17 @@ int main(int argc, char* argv[])
 
 		// Use our shader program
 		shader.use();
+
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(translatedVerts), translatedVerts);
-		glBindTexture(GL_TEXTURE_2D, texture.ID);
+
+		// Bind Textures
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, tex0.ID);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, tex1.ID);
+
+		// Render Objects
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 
