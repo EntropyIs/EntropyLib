@@ -1,16 +1,26 @@
 #pragma once
 
+#include <vector>
+
 namespace Entropy
 {
-	struct Image
+	class __declspec(dllexport) Texture
 	{
-		unsigned long width;
-		unsigned long height;
-		char* data;
+	private:
+		struct __declspec(dllexport) Image
+		{
+			int width;
+			int height;
+			std::vector<char> data;
+		};
+
+		Image loadBitmap(const char* path);
+
+	public:
+		unsigned int ID;
+		Texture(const char* path);
 	};
+	
 
-	Image* __declspec(dllexport) loadImage(const char* filename);
-	bool __declspec(dllexport) loadBitmap(const char* filename, Image* image);
-
-	unsigned int __declspec(dllexport) generateTexture(const char* filename);
+	
 }

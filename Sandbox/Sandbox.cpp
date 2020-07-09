@@ -3,6 +3,7 @@
 #include <GLApplication.h>
 #include <GLWindow.h>
 #include <GLShader.h>
+#include <GLTexture.h>
 
 #include <Vector4.h>
 #include <Matrix4.h>
@@ -39,9 +40,9 @@ int main(int argc, char* argv[])
 	 *	posistions		colors			texture coordinates
 	 *	x, y, z, w		r, g, b, a		x, y, z, w
 	 */
-		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(1.0f, 1.0f),
-		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
-		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f)
+		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(0.5f, 1.0f),
+		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f)
 	};
 	
 	unsigned int indices[] =
@@ -79,6 +80,9 @@ int main(int argc, char* argv[])
 	glEnableVertexAttribArray(2);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
+
+	// Load Textures
+	Entropy::Texture texture("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/wall.bmp");
 
 	// Translate & Rotate Object
 	Vector4 translation, velocity, rotation;
@@ -129,9 +133,10 @@ int main(int argc, char* argv[])
 		const unsigned int numVerts = sizeof(verts) / sizeof(*verts);
 
 		Vector4 translatedVerts[numVerts];
-		for (unsigned int i = 1; i < numVerts; i = i + 2)
+		for (unsigned int i = 2; i < numVerts; i = i + 3)
 		{
-			translatedVerts[i - 1] = RotationAboutXYZMatrix(rotation) * (verts[i - 1] + translation);
+			translatedVerts[i - 2] = RotationAboutXYZMatrix(rotation) * (verts[i - 2] + translation);
+			translatedVerts[i - 1] = verts[i - 1];
 			translatedVerts[i] = verts[i];
 		}
 
@@ -139,6 +144,7 @@ int main(int argc, char* argv[])
 		shader.use();
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(translatedVerts), translatedVerts);
+		glBindTexture(GL_TEXTURE_2D, texture.ID);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 

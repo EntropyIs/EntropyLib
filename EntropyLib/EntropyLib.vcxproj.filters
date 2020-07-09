@@ -64,7 +64,7 @@
       <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="GLTexture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

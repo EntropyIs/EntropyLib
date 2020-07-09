@@ -1,123 +1,60 @@
 #include "GLTexture.h"
 
-#include <stdlib.h>
 #include <iostream>
-#include <exception>
+#include <conio.h>
+#include <fstream>
+#include <vector>
+#include <iterator>
 
 #include <GLFW/glfw3.h>
 
-Entropy::Image* Entropy::loadImage(const char* filename)
+Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 {
-    Image* image;
+	Image image;
 
-    image = (Image*)malloc(sizeof(Image));
-    if(image == NULL)
-        throw std::exception("Error allocating space for image");
-    if (!loadBitmap(filename, image));
-        throw std::exception("Error loading image.");
-    return image;
+	// load file into buffer
+	std::ifstream file;
+	file.open(path, std::ios::binary);
+	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
+	file.close();
+
+	std::vector<char> headerinfo;
+	{
+		auto it = std::next(buffer.begin(), 54);
+		std::move(buffer.begin(), it, std::back_inserter(headerinfo));
+		buffer.erase(buffer.begin(), it);
+	}
+
+	image.width = *reinterpret_cast<int*>((char*)headerinfo.data() + 18);
+	image.height = *reinterpret_cast<int*>((char*)headerinfo.data() + 22);
+
+	int size = 3 * image.width * image.height;
+
+	std::vector<char> imagesdata;
+	{
+		auto it = std::next(buffer.begin(), size);
+		std::move(buffer.begin(), it, std::back_inserter(image.data));
+		buffer.erase(buffer.begin(), it);
+	}
+
+	// display image height and width from header
+	std::cout << " width:" << image.width << std::endl;
+	std::cout << " height:" << image.height << std::endl;
+
+	return image;
 }
 
-bool Entropy::loadBitmap(const char* filename, Image* image)
+Entropy::Texture::Texture(const char* path)
 {
-    FILE* file;
-
-    unsigned long size;
-    unsigned long i;
-    unsigned short int planes;
-    unsigned short int bpp;
-    char temp;
-
-    // Open file
-    if ((file = fopen(filename, "rb")) == NULL)
-    {
-        std::cout << "File not found: " << filename << std::endl;
-        return false;
-    }
-
-    // Seek through header to width/height
-    fseek(file, 18, SEEK_CUR);
-
-    // Get Width
-    if ((i = fread(&image->width, 4, 1, file)) != 1)
-    {
-        std::cout << "Error reading width from " << filename << std::endl;
-        return false;
-    }
-    std::cout << "Width of " << filename << ": " << image->width << std::endl;
-
-    // Get Height
-    if ((i = fread(&image->height, 4, 1, file)) != 1)
-    {
-        std::cout << "Error reading height from " << filename << std::endl;
-        return false;
-    }
-    std::cout << "Hight of " << filename << ": " << image->width << std::endl;
-
-    // Calulate size of image (assuming 24bit pixel)
-    size = image->width * image->height * 3;
-
-    // Read Planes
-    if ((fread(&planes, 2, 1, file)) != 1)
-    {
-        std::cout << "Error reading planes from " << filename << std::endl;
-        return false;
-    }
-
-    if (planes != 1)
-    {
-        std::cout << "Planes from " << filename << " is not 1: " << planes << std::endl;
-        return false;
-    }
-
-    // Read bits-per-pixel
-    if ((i = fread(&bpp, 2, 1, file)) != 1)
-    {
-        std::cout << "Error reading bpp form " << filename << std::endl;
-        return false;
-    }
-
-    if (bpp != 24) {
-        std::cout << "Bpp from " << filename << " is not 24: " << bpp << std::endl;
-        return false;
-    }
-
-    // Seek past end of bitmap header.
-    fseek(file, 24, SEEK_CUR);
-
-    // Read image data
-    image->data = (char*)malloc(size);
-
-    if (image->data == NULL)
-    {
-        std::cout << "Error allocating memory fro color-corrected image data" << std::endl;
-        return false;
-    }
-
-    if ((i = fread(image->data, size, 1, file)) != 1)
-    {
-        std::cout << "Error reading image data from " << filename << std::endl;
-        return false;
-    }
-
-    // Correct colors (bgr -> rgb)
-    for (i = 0; i < size; i += 3)
-    {
-        temp = image->data[i];
-        image->data[i] = image->data[i + 2];
-        image->data[i + 2] = temp;
-    }
-
-    return true;
-}
-
-unsigned int Entropy::generateTexture(const char* filename)
-{
-    Image* image = loadImage(filename);
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->data);
-    (GL_TEXTURE_2D);
-    return 0;
+	// Load Image.
+	Image image = loadBitmap(path);
+	// Create Texture.
+	glGenTextures(1, &ID);
+	glBindTexture(GL_TEXTURE_2D, ID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Load Image into Texture.
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.width, image.height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (char*)&image.data[0]);
 }
