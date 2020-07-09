@@ -36,3 +36,42 @@ TEST(Matrix4, MatrixVectorMultiply)
 	ASSERT_FLOAT_EQ(result.k, 31);
 	ASSERT_FLOAT_EQ(result.l, 50);
 }
+
+TEST(Matrix4, MatrixMatrixMultiply)
+{
+	Matrix4 a(
+		1, 0, 0, 1,
+		0, 1, 0, 2,
+		0, 0, 1, 3,
+		0, 0, 0, 1
+	);
+
+	Matrix4 b(
+		2, 0, 0, 0,
+		0, 2, 0, 0,
+		0, 0, 2, 0,
+		0, 0, 0, 1
+	);
+
+	Matrix4 result = a * b;
+
+	ASSERT_FLOAT_EQ(2, result.r0c0);
+	ASSERT_FLOAT_EQ(0, result.r0c1);
+	ASSERT_FLOAT_EQ(0, result.r0c2);
+	ASSERT_FLOAT_EQ(1, result.r0c3);
+
+	ASSERT_FLOAT_EQ(0, result.r1c0);
+	ASSERT_FLOAT_EQ(2, result.r1c1);
+	ASSERT_FLOAT_EQ(0, result.r1c2);
+	ASSERT_FLOAT_EQ(2, result.r1c3);
+
+	ASSERT_FLOAT_EQ(0, result.r2c0);
+	ASSERT_FLOAT_EQ(0, result.r2c1);
+	ASSERT_FLOAT_EQ(2, result.r2c2);
+	ASSERT_FLOAT_EQ(3, result.r2c3);
+
+	ASSERT_FLOAT_EQ(0, result.r3c0);
+	ASSERT_FLOAT_EQ(0, result.r3c1);
+	ASSERT_FLOAT_EQ(0, result.r3c2);
+	ASSERT_FLOAT_EQ(1, result.r3c3);
+}

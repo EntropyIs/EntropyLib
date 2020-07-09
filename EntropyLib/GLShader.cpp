@@ -110,6 +110,11 @@ namespace Entropy
 		glUniform4f(glGetUniformLocation(ID, name), v0, v1, v2, v3);
 	}
 
+	void GLShader::setMat4(const char* name, const Math::Matrix4& v0)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	}
+
 	/**
 	 * Compiles a given shader unit.
 	 * @param path, path to shader source code.

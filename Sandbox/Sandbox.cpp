@@ -88,8 +88,6 @@ int main(int argc, char* argv[])
 	// Translate & Rotate Object
 	Vector4 translation, velocity, rotation;
 
-	float PI = 2 * acos(0);
-
 	float accel = 1.0f;
 	float maxVelocity = 1.0f;
 
@@ -100,6 +98,7 @@ int main(int argc, char* argv[])
 	shader.use();
 	shader.set1Int("tex0", 0);
 	shader.set1Int("tex1", 1);
+	shader.setMat4("transform", Matrix4());
 
 	// Gameloop
 	while (!myWindow.getShouldClose())
@@ -137,21 +136,11 @@ int main(int argc, char* argv[])
 		// Render
 		myWindow.render();
 
-		const unsigned int numVerts = sizeof(verts) / sizeof(*verts);
-
-		Vector4 translatedVerts[numVerts];
-		for (unsigned int i = 2; i < numVerts; i = i + 3)
-		{
-			translatedVerts[i - 2] = RotationAboutXYZMatrix(rotation) * (verts[i - 2] + translation);
-			translatedVerts[i - 1] = verts[i - 1];
-			translatedVerts[i] = verts[i];
-		}
-
 		// Use our shader program
 		shader.use();
 
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(translatedVerts), translatedVerts);
+		// Set transformations
+		shader.setMat4("transform", RotationAboutXYZMatrix(rotation));
 
 		// Bind Textures
 		glActiveTexture(GL_TEXTURE0);
@@ -218,15 +207,6 @@ int main(int argc, char* argv[])
 		}
 
 		translation += velocity * myClock.timeElapsed();
-
-		if (translation.i > 1.2f)
-			translation.i = -1.2f;
-		else if (translation.i < -1.2f)
-			translation.i = 1.2f;
-		if (translation.j > 1.2f)
-			translation.j = -1.2f;
-		else if (translation.j < -1.2f)
-			translation.j = 1.2f;
 
 		myClock.poll();
 	}

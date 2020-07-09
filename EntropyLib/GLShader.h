@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Matrix4.h"
+
 namespace Entropy
 {
 	class __declspec(dllexport) GLShader
@@ -26,6 +28,8 @@ namespace Entropy
 		void set2Float(const char* name, float v0, float v1) const;
 		void set3Float(const char* name, float v0, float v1, float v2) const;
 		void set4Float(const char* name, float v0, float v1, float v2, float v3) const;
+
+		void setMat4(const char* name, const Math::Matrix4& v0);
 
 	private:
 		unsigned int compile(const char* path, unsigned int type);
