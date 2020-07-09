@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLApplication.cpp" />
+    <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Matrix2.h" />
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />

@@ -17,7 +17,7 @@ using namespace Entropy::Timing;
 
 void sleep(unsigned int millis);
 
-int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd)
+int main(int argc, char* argv[])
 {
 	Clock myClock;
 
@@ -36,12 +36,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd)
 	Vector4 verts[] =
 	{
 	/**
-	 *	posistions		colors
-	 *	x, y, z, 1		r, g, b, a
+	 *	posistions		colors			texture coordinates
+	 *	x, y, z, w		r, g, b, a		x, y, z, w
 	 */
-		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f),
-		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f),
-		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f)
+		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f)
 	};
 	
 	unsigned int indices[] =
@@ -69,11 +69,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd)
 
 	// Define how OpenGL shoudl interperate the vertex data
 	// Vertex Position
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	// Vertex Color
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(4 * sizeof(float)));
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(4 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	// Tex Coords
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(8 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 

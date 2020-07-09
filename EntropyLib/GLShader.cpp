@@ -136,7 +136,7 @@ namespace Entropy
 			if (!success)
 			{
 				glGetShaderInfoLog(compileID, 1024, NULL, infoLog);
-				std::cout << "ERROR::SHADER_COMPILATION_ERROR:\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+				std::cout << "ERROR::SHADER_COMPILATION_ERROR:\n" << infoLog << std::endl;
 			}
 
 			return compileID;
