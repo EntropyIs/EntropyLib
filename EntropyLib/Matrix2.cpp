@@ -36,29 +36,46 @@ Entropy::Math::Matrix2 Entropy::Math::operator-(const Matrix2& left, const Matri
     );
 }
 
+/**
+ * Scale Matrix
+ * @param   
+ */
 Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(const Vector2& scaleVector)
 {
-    return Matrix2();
+    return Matrix2(
+        scaleVector.i, 0.0f,
+        0.0f, scaleVector.j
+    );
 }
 
+/**
+ * Scale Matrix
+ * @param   sX, scale x component.
+ * @param   sY, scale y component.
+ */
 Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(float sX, float sY)
 {
-    return Matrix2();
+    return Matrix2(
+        sX, 0.0f,
+        0.0f, sY
+    );
 }
 
-Entropy::Math::Matrix2 Entropy::Math::TranslationMatrix(const Vector2& translationVevtor)
+/**
+ * Uniform Scale Matrix
+ * @param   scale, scale to apply.
+ */
+Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(float scale)
 {
-    return Matrix2();
-}
-
-Entropy::Math::Matrix2 Entropy::Math::TranslationMatrix(float dX, float dY)
-{
-    return Matrix2();
+    return Matrix2(
+        scale, 0.0f,
+        0.0f, scale
+    );
 }
 
 /**
  * 2D Roation Matrix;
- * @param angle, Angle of rotation in Radians.
+ * @param   angle, angle of rotation in radians.
  */
 Entropy::Math::Matrix2 Entropy::Math::RotationMatrix(float angle)
 {

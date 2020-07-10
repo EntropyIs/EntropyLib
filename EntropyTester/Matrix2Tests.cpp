@@ -93,3 +93,31 @@ TEST(Matrix2, RoatationMatrixNegitivePIOverThree)
 	EXPECT_TRUE(FLOAT_EQ(op.r1c0, -SQRT3OVER2));
 	EXPECT_TRUE(FLOAT_EQ(op.r1c1, 0.5f));
 }
+
+TEST(Matrix2, ScaleMatrixByVector)
+{
+	Vector2 scale(2.0f, 2.0f);
+	Matrix2 op = ScaleMatrix(scale);
+	EXPECT_TRUE(FLOAT_EQ(op.r0c0, 2.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r0c1, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c0, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c1, 2.0f));
+}
+
+TEST(Matrix2, ScaleMatrixByValues)
+{
+	Matrix2 op = ScaleMatrix(2.0f, 1.5f);
+	EXPECT_TRUE(FLOAT_EQ(op.r0c0, 2.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r0c1, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c0, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c1, 1.5f));
+}
+
+TEST(Matrix2, UniformScaleMatrix)
+{
+	Matrix2 op = ScaleMatrix(2.0f);
+	EXPECT_TRUE(FLOAT_EQ(op.r0c0, 2.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r0c1, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c0, 0.0f));
+	EXPECT_TRUE(FLOAT_EQ(op.r1c1, 2.0f));
+}
