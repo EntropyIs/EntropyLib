@@ -1,14 +1,5 @@
 #include "Vector4.h"
 
-Entropy::Math::Vector4& Entropy::Math::Vector4::operator=(const Vector4& right)
-{
-	i = right.i;
-	j = right.j;
-	k = right.k;
-	l = right.l;
-	return *this;
-}
-
 Entropy::Math::Vector4& Entropy::Math::Vector4::operator+=(const Vector4& right)
 {
 	i += right.i;

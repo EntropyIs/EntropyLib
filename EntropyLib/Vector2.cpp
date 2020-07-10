@@ -1,12 +1,5 @@
 #include "Vector2.h"
 
-Entropy::Math::Vector2& Entropy::Math::Vector2::operator=(const Vector2& right)
-{
-	i = right.i;
-	j = right.j;
-	return *this;
-}
-
 Entropy::Math::Vector2& Entropy::Math::Vector2::operator+=(const Vector2& right)
 {
 	i += right.i;

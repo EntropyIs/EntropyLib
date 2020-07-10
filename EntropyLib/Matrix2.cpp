@@ -56,6 +56,10 @@ Entropy::Math::Matrix2 Entropy::Math::TranslationMatrix(float dX, float dY)
     return Matrix2();
 }
 
+/**
+ * 2D Roation Matrix;
+ * @param angle, Angle of rotation in Radians.
+ */
 Entropy::Math::Matrix2 Entropy::Math::RotationMatrix(float angle)
 {
     return Matrix2(

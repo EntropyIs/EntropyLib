@@ -14,7 +14,6 @@ namespace Entropy
 
 			Vector2(float i = 0.0f, float j = 0.0f) : i(i), j(j) {}
 
-			Vector2& operator= (const Vector2& right);
 			Vector2& operator+= (const Vector2& right);
 			Vector2& operator-= (const Vector2& right);
 

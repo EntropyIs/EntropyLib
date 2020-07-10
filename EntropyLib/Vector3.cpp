@@ -22,14 +22,6 @@ Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& vector, float sca
 	return scalar * vector;
 }
 
-Entropy::Math::Vector3& Entropy::Math::Vector3::operator=(const Vector3& right)
-{
-	i = right.i;
-	j = right.j;
-	k = right.k;
-	return *this;
-}
-
 Entropy::Math::Vector3& Entropy::Math::Vector3::operator+=(const Vector3& right)
 {
 	i += right.i;
