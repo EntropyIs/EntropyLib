@@ -105,10 +105,6 @@ int main(int argc, char* argv[])
 	// Gameloop
 	while (!myWindow.getShouldClose())
 	{
-		bool up = false;
-		bool down = false;
-		bool left = false;
-		bool right = false;
 		bool clockwise = false;
 		bool anticlockwise = false;
 		bool reset = false;
@@ -117,23 +113,32 @@ int main(int argc, char* argv[])
 		if (myWindow.getKeyPressed(Entropy::KEY_ESCAPE))
 			myWindow.setShouldClose(true);
 
-		if (myWindow.getKeyPressed(Entropy::KEY_W))
-			up = true;
-		if(myWindow.getKeyPressed(Entropy::KEY_S))
-			down = true;
+		if (myWindow.getKeyPressed(Entropy::KEY_W) || myWindow.getKeyPressed(Entropy::KEY_UP))
+		{
+			if (velocity.j < maxVelocity)
+				velocity.j += accel * myClock.timeElapsed();
+		}
+		else
+		{
+			if (velocity.j > 0)
+				velocity.j -= accel * myClock.timeElapsed();
+		}
 
-		if (myWindow.getKeyPressed(Entropy::KEY_A))
-			left = true;
-		if (myWindow.getKeyPressed(Entropy::KEY_D))
-			right = true;
-
-		if (myWindow.getKeyPressed(Entropy::KEY_Q))
-			anticlockwise = true;
-		if (myWindow.getKeyPressed(Entropy::KEY_E))
-			clockwise = true;
+		if (myWindow.getKeyPressed(Entropy::KEY_A) || myWindow.getKeyPressed(Entropy::KEY_LEFT))
+		{
+			rotation.k += 0.1f;
+		}
+		if (myWindow.getKeyPressed(Entropy::KEY_D) || myWindow.getKeyPressed(Entropy::KEY_RIGHT))
+		{
+			rotation.k -= 0.1f;
+		}
 
 		if (myWindow.getKeyPressed(Entropy::KEY_SPACE))
-			reset = true;
+		{
+			translation = Vector4();
+			velocity = Vector4();
+			rotation = Vector4();
+		}
 
 		// Render
 		myWindow.render();
@@ -157,58 +162,7 @@ int main(int argc, char* argv[])
 		// Update
 		myWindow.processEvents();
 
-		if (up)
-		{
-			if (velocity.j < maxVelocity)
-				velocity.j += accel * myClock.timeElapsed();
-		}
-		else
-		{
-			if (velocity.j > 0)
-				velocity.j -= accel * myClock.timeElapsed();
-		}
-		if (down)
-		{
-			if (velocity.j > -maxVelocity)
-				velocity.j -= accel * myClock.timeElapsed();
-		}
-		else
-		{
-			if (velocity.j < 0)
-				velocity.j += accel * myClock.timeElapsed();
-		}
-		if (right)
-		{
-			if (velocity.i < maxVelocity)
-				velocity.i += accel * myClock.timeElapsed();
-		}
-		else
-		{
-			if (velocity.i > 0)
-				velocity.i -= accel * myClock.timeElapsed();
-		}
-		if (left)
-		{
-			if (velocity.i > -maxVelocity)
-				velocity.i -= accel * myClock.timeElapsed();
-		}
-		else
-		{
-			if (velocity.i < 0)
-				velocity.i += accel * myClock.timeElapsed();
-		}
-		if(clockwise)
-			rotation.k += 0.1f;
-		if (anticlockwise)
-			rotation.k -= 0.1f;
-		if (reset)
-		{
-			translation = Vector4();
-			velocity = Vector4();
-			rotation = Vector4();
-		}
-
-		translation += velocity * myClock.timeElapsed();
+		translation += RotationAboutXYZMatrix(rotation)*(velocity * myClock.timeElapsed());
 		time += myClock.timeElapsed();
 
 		scaleValue = sin(time) / 2.0f + 1.0f;
