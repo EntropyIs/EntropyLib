@@ -20,7 +20,4 @@ namespace Entropy
 		unsigned int ID;
 		Texture(const char* path);
 	};
-	
-
-	
 }

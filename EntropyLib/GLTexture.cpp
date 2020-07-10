@@ -1,5 +1,6 @@
 #include "GLTexture.h"
 
+#include <exception>
 #include <iostream>
 #include <conio.h>
 #include <fstream>
@@ -10,14 +11,25 @@
 
 Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 {
-	Image image;
+#ifdef _DEBUG
+	std::cout << "Loading Image: " << path << std::endl;
+#endif // _DEBUG
 
 	// load file into buffer
 	std::ifstream file;
 	file.open(path, std::ios::binary);
+	if (!file.is_open())
+	{
+#ifdef _DEBUG
+		std::cout << "Error: Unable to open file" << std::endl;
+#endif //_DEBUG
+		throw std::exception("Unable to open file");
+	}
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
 	file.close();
 
+	// generate image from loaded data
+	Image result;
 	std::vector<char> headerinfo;
 	{
 		auto it = std::next(buffer.begin(), 54);
@@ -25,23 +37,23 @@ Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 		buffer.erase(buffer.begin(), it);
 	}
 
-	image.width = *reinterpret_cast<int*>((char*)headerinfo.data() + 18);
-	image.height = *reinterpret_cast<int*>((char*)headerinfo.data() + 22);
+	result.width = *reinterpret_cast<int*>((char*)headerinfo.data() + 18);
+	result.height = *reinterpret_cast<int*>((char*)headerinfo.data() + 22);
 
-	int size = 3 * image.width * image.height;
+	int size = 3 * result.width * result.height;
 
 	std::vector<char> imagesdata;
 	{
 		auto it = std::next(buffer.begin(), size);
-		std::move(buffer.begin(), it, std::back_inserter(image.data));
+		std::move(buffer.begin(), it, std::back_inserter(result.data));
 		buffer.erase(buffer.begin(), it);
 	}
 
-	// display image height and width from header
-	std::cout << " width:" << image.width << std::endl;
-	std::cout << " height:" << image.height << std::endl;
+#ifdef _DEBUG
+	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px"<< std::endl;
+#endif // _DEBUG	
 
-	return image;
+	return result;
 }
 
 Entropy::Texture::Texture(const char* path)
