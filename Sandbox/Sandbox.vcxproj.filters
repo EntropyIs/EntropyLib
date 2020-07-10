@@ -23,10 +23,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\x64\Debug\fShader.glsl">
+    <None Include="fShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="..\x64\Debug\vShader.glsl">
+    <None Include="vShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	myWindow.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate Shader Program
-	Entropy::GLShader shader("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/vShader.glsl", "E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/fShader.glsl");
+	Entropy::GLShader shader("vShader.glsl", "fShader.glsl");
 	
 	// Initialize Triangle
 	Vector4 verts[] =
@@ -82,8 +82,8 @@ int main(int argc, char* argv[])
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enter Wireframe Mode
 
 	// Load Textures
-	Entropy::Texture tex0("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/wall.bmp");
-	Entropy::Texture tex1("E:/Onedrive/Scratch/CPPScratch/EntropyLib/x64/Debug/assets/spiral.bmp");
+	Entropy::Texture tex0("assets/wall.bmp");
+	Entropy::Texture tex1("assets/spiral.bmp");
 
 	// Translate & Rotate Object
 	Vector4 translation, velocity, rotation;

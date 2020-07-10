@@ -148,8 +148,8 @@
     <ClCompile Include="Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\x64\Debug\fShader.glsl" />
-    <None Include="..\x64\Debug\vShader.glsl" />
+    <None Include="fShader.glsl" />
+    <None Include="vShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
