@@ -87,12 +87,14 @@ int main(int argc, char* argv[])
 
 	// Translate & Rotate Object
 	Vector4 translation, velocity, rotation;
+	float scaleValue = 1;
 
 	float accel = 1.0f;
 	float maxVelocity = 1.0f;
 
 	// Init Clock
 	myClock.initialize();
+	float time = 0;
 
 	// Setup Shader Definitions
 	shader.use();
@@ -140,7 +142,7 @@ int main(int argc, char* argv[])
 		shader.use();
 
 		// Set transformations
-		shader.setMat4("transform", RotationAboutXYZMatrix(rotation));
+		shader.setMat4("transform", TranslationMatrix(translation) * ScaleMatrix(scaleValue, scaleValue, scaleValue) * RotationAboutXYZMatrix(rotation));
 
 		// Bind Textures
 		glActiveTexture(GL_TEXTURE0);
@@ -207,6 +209,9 @@ int main(int argc, char* argv[])
 		}
 
 		translation += velocity * myClock.timeElapsed();
+		time += myClock.timeElapsed();
+
+		scaleValue = sin(time) / 2.0f + 1.0f;
 
 		myClock.poll();
 	}
