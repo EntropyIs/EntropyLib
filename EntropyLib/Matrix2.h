@@ -11,12 +11,11 @@ namespace Entropy
 			{
 				struct
 				{
-					float r0c0; float r0c1;
-					float r1c0; float r1c1;
+					float r0c0; float r1c0;
+					float r0c1; float r1c1;
 				};
 				float data[4];
 			};
-			
 
 			Matrix2(
 				float r0c0 = 1, float r0c1 = 0,

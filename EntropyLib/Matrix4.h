@@ -18,7 +18,6 @@ namespace Entropy
 				};
 				float data[16];
 			};
-			
 
 			Matrix4(
 				float r0c0 = 1, float r0c1 = 0, float r0c2 = 0, float r0c3 = 0,
