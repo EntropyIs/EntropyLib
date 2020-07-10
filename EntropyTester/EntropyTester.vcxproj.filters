@@ -11,6 +11,9 @@
     <Filter Include="Source Files\Timing">
       <UniqueIdentifier>{79ad9731-7bf9-4a9d-bb3a-b5669a7b2826}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{333190b6-f4c9-4fc1-8c49-6a922cc377ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -40,5 +43,13 @@
     <ClCompile Include="Matrix4Tests.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="HelperFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HelperFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

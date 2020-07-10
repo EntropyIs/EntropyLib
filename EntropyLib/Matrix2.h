@@ -29,6 +29,12 @@ namespace Entropy
 		Matrix2 __declspec(dllexport) operator* (const Matrix2& left, const Matrix2& right);
 		Matrix2 __declspec(dllexport) operator+ (const Matrix2& left, const Matrix2& right);
 		Matrix2 __declspec(dllexport) operator- (const Matrix2& left, const Matrix2& right);
+
+		Matrix2 __declspec(dllexport) ScaleMatrix(const Vector2& scaleVector);
+		Matrix2 __declspec(dllexport) ScaleMatrix(float sX, float sY);
+		Matrix2 __declspec(dllexport) TranslationMatrix(const Vector2& translationVevtor);
+		Matrix2 __declspec(dllexport) TranslationMatrix(float dX, float dY);
+		Matrix2 __declspec(dllexport) RotationMatrix(float angle);
 	}
 }
 
