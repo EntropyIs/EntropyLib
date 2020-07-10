@@ -4,12 +4,19 @@ namespace Entropy
 {
 	namespace Math
 	{
-		struct __declspec(dllexport) Matrix3
+		class __declspec(dllexport) Matrix3
 		{
-			float r0c0; float r0c1; float r0c2;
-			float r1c0; float r1c1; float r1c2;
-			float r2c0; float r2c1; float r2c2;
-
+		public:
+			union
+			{
+				struct
+				{
+					float r0c0; float r0c1; float r0c2;
+					float r1c0; float r1c1; float r1c2;
+					float r2c0; float r2c1; float r2c2;
+				};
+				float data[9];
+			};
 			Matrix3(
 				float r0c0 = 1, float r0c1 = 0, float r0c2 = 0,
 				float r1c0 = 0, float r1c1 = 1, float r1c2 = 0,
@@ -18,6 +25,7 @@ namespace Entropy
 				r1c0(r1c0), r1c1(r1c1), r1c2(r1c2),
 				r2c0(r2c0), r2c1(r2c1), r2c2(r2c2) {}
 		};
+
 		Vector3 __declspec(dllexport) operator* (const Matrix3& left, const Vector3& right);
 
 		Matrix3 __declspec(dllexport) operator* (const Matrix3& left, const Matrix3& right);
