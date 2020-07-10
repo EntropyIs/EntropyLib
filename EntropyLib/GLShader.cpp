@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 namespace Entropy
 {
@@ -134,16 +135,30 @@ namespace Entropy
 			const char* sourceCode = source.c_str();
 			unsigned int compileID = glCreateShader(type);
 			glShaderSource(compileID, 1, &sourceCode, NULL);
+			glCompileShader(compileID);
 
-			int success;
-			char infoLog[1024];
-			glGetShaderiv(compileID, GL_COMPILE_STATUS, &success);
-			if (!success)
+			int is_compiled;
+#ifdef _DEBUG
+			glGetShaderiv(compileID, GL_COMPILE_STATUS, &is_compiled);
+			if (!is_compiled)
 			{
-				glGetShaderInfoLog(compileID, 1024, NULL, infoLog);
-				std::cout << "ERROR::SHADER_COMPILATION_ERROR:\n" << infoLog << std::endl;
-			}
+				int maxLength;
+				glGetShaderiv(compileID, GL_INFO_LOG_LENGTH, &maxLength);
+				char* errorLog = new char[maxLength];
+				glGetShaderInfoLog(compileID, maxLength, &maxLength, errorLog);
+				glDeleteShader(compileID);
+				
+				std::string shaderType = "SHADER";
+				if (type == GL_VERTEX_SHADER)
+					shaderType = "VERTEX_SHADER";
+				else if (type == GL_FRAGMENT_SHADER)
+					shaderType = "FRAGMENT_SHADER";
 
+				std::cout << "ERROR::" << shaderType << "_COMPILATION_ERROR:" << std::endl;
+				std::cout << errorLog << std::endl;
+				std::cout << "-- --------------------------------------------------- --" << std::endl;
+			}
+#endif
 			return compileID;
 		}
 		catch (std::ifstream::failure e)
