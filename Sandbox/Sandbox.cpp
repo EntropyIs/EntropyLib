@@ -162,10 +162,23 @@ int main(int argc, char* argv[])
 		// Update
 		myWindow.processEvents();
 
-		translation += RotationAboutXYZMatrix(rotation)*(velocity * myClock.timeElapsed());
-		time += myClock.timeElapsed();
+		// Update Ship Position
+		{
+			translation += RotationAboutXYZMatrix(rotation) * (velocity * myClock.timeElapsed());
+			// Screen Looping
+			if (translation.x < -1.2)
+				translation.x += 2.4;
+			if (translation.x > 1.2)
+				translation.x -= 2.4;
+			if (translation.y < -1.2)
+				translation.y += 2.4;
+			if (translation.y > 1.2)
+				translation.y -= 2.4;
+		}
 
-		scaleValue = sin(time) / 2.0f + 1.0f;
+		// Scaling Fun
+		time += myClock.timeElapsed();
+		scaleValue = sin(time) / 4.0f + 1.0f;
 
 		myClock.poll();
 	}
