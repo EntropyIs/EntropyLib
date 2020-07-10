@@ -40,9 +40,9 @@ int main(int argc, char* argv[])
 	 *	posistions		colors			texture coordinates
 	 *	x, y, z, w		r, g, b, a		x, y, z, w
 	 */
-		Vector4( 0.0f,  0.1f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(0.5f, 1.0f),
-		Vector4(-0.1f, -0.1f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
-		Vector4( 0.1f, -0.1f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f)
+		Vector4( 0.0f, 0.133f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(0.5f, 1.0f),
+		Vector4(-0.1, -0.067f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(0.1, -0.067f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f)
 	};
 	
 	unsigned int indices[] =
