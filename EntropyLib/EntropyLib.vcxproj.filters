@@ -84,6 +84,9 @@
     <ClCompile Include="Matrix2Ext.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix3Ext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLShader.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2Ext.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3Ext.h">
       <Filter>Header Files\Math\Matrix</Filter>
     </ClInclude>
   </ItemGroup>

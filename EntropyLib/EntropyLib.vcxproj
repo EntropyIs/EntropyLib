@@ -27,6 +27,7 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Matrix2.cpp" />
     <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix3Ext.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Matrix2Ext.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Matrix2.h" />
     <ClInclude Include="Matrix2Ext.h" />
     <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix3Ext.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />

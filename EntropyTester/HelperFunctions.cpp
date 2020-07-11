@@ -1,7 +1,8 @@
 #include "HelperFunctions.h"
+#include <gtest/gtest.h>
 #include <cmath>
 
-bool FLOAT_EQ(float left, float right, float threshold)
+void FLOAT_EQ(float left, float right, float threshold)
 {
-    return abs(left - right) < threshold;
+    EXPECT_NEAR(left, right, threshold);
 }
