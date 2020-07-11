@@ -22,6 +22,12 @@ Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& vector, float sca
 	return scalar * vector;
 }
 
+Entropy::Math::Vector3 Entropy::Math::normalize(const Vector3& vector)
+{
+	float magnitude = vector.magnitude();
+	return Vector3(vector.i / magnitude, vector.j / magnitude, vector.k / magnitude);
+}
+
 Entropy::Math::Vector3& Entropy::Math::Vector3::operator+=(const Vector3& right)
 {
 	i += right.i;
@@ -64,7 +70,7 @@ Entropy::Math::Vector3 Entropy::Math::Vector3::unit()
 	return Vector3(i / r, j / r, k / r);
 }
 
-float Entropy::Math::Vector3::magnitude()
+const float Entropy::Math::Vector3::magnitude() const
 {
 	return std::sqrt(i * i + j * j + k * k);
 }

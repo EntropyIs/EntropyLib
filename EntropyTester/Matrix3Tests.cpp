@@ -37,7 +37,7 @@ TEST(Matrix3, MatrixVectorMultiply)
 
 TEST(Matrix3, TranslationMatrix)
 {
-	Matrix3 translator = TranslationMatrix(4.0, 8.0);
+	Matrix3 translator = TranslationMatrix3(4.0, 8.0);
 	FLOAT_EQ(translator.r0c0, 1.0f);
 	FLOAT_EQ(translator.r0c1, 0.0f);
 	FLOAT_EQ(translator.r0c2, 4.0f);
@@ -57,7 +57,7 @@ TEST(Matrix3, TranslationMatrix)
 
 TEST(Matrix3, RoatationMatrixZero)
 {
-	Matrix3 op = ZRotationMatrix(0.0f);
+	Matrix3 op = ZRotationMatrix3(0.0f);
 	FLOAT_EQ(op.r0c0, 1.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -71,7 +71,7 @@ TEST(Matrix3, RoatationMatrixZero)
 
 TEST(Matrix3, RoatationMatrixPI)
 {
-	Matrix3 op = ZRotationMatrix(PI);
+	Matrix3 op = ZRotationMatrix3(PI);
 	FLOAT_EQ(op.r0c0, -1.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -85,7 +85,7 @@ TEST(Matrix3, RoatationMatrixPI)
 
 TEST(Matrix3, RoatationMatrixPIOverTwo)
 {
-	Matrix3 op = ZRotationMatrix(PI / 2.0f);
+	Matrix3 op = ZRotationMatrix3(PI / 2.0f);
 	FLOAT_EQ(op.r0c0, 0.0f);
 	FLOAT_EQ(op.r0c1, -1.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -99,7 +99,7 @@ TEST(Matrix3, RoatationMatrixPIOverTwo)
 
 TEST(Matrix3, RoatationMatrixPIOverFour)
 {
-	Matrix3 op = ZRotationMatrix(PI / 4.0f);
+	Matrix3 op = ZRotationMatrix3(PI / 4.0f);
 	FLOAT_EQ(op.r0c0, SQRT2OVER2);
 	FLOAT_EQ(op.r0c1, -SQRT2OVER2);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -113,7 +113,7 @@ TEST(Matrix3, RoatationMatrixPIOverFour)
 
 TEST(Matrix3, RoatationMatrixNegitivePIOverFour)
 {
-	Matrix3 op = ZRotationMatrix(-PI / 4.0f);
+	Matrix3 op = ZRotationMatrix3(-PI / 4.0f);
 	FLOAT_EQ(op.r0c0, SQRT2OVER2);
 	FLOAT_EQ(op.r0c1, SQRT2OVER2);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -127,7 +127,7 @@ TEST(Matrix3, RoatationMatrixNegitivePIOverFour)
 
 TEST(Matrix3, RoatationMatrixPIOverThree)
 {
-	Matrix3 op = ZRotationMatrix(PI / 3.0f);
+	Matrix3 op = ZRotationMatrix3(PI / 3.0f);
 	FLOAT_EQ(op.r0c0, 0.5f);
 	FLOAT_EQ(op.r0c1, -SQRT3OVER2);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -141,7 +141,7 @@ TEST(Matrix3, RoatationMatrixPIOverThree)
 
 TEST(Matrix3, RoatationMatrixNegitivePIOverThree)
 {
-	Matrix3 op = ZRotationMatrix(-PI / 3.0f);
+	Matrix3 op = ZRotationMatrix3(-PI / 3.0f);
 	FLOAT_EQ(op.r0c0, 0.5f);
 	FLOAT_EQ(op.r0c1, SQRT3OVER2);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -156,7 +156,7 @@ TEST(Matrix3, RoatationMatrixNegitivePIOverThree)
 TEST(Matrix3, ScaleMatrixByVector)
 {
 	Vector3 scale(2.0f, 3.0f, 1.0);
-	Matrix3 op = ScaleMatrix(scale);
+	Matrix3 op = ScaleMatrix3(scale);
 	FLOAT_EQ(op.r0c0, 2.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -170,7 +170,7 @@ TEST(Matrix3, ScaleMatrixByVector)
 
 TEST(Matrix3, ScaleMatrixByValues)
 {
-	Matrix3 op = ScaleMatrix(7.0f, 5.5f);
+	Matrix3 op = ScaleMatrix3(7.0f, 5.5f);
 	FLOAT_EQ(op.r0c0, 7.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);
@@ -184,7 +184,7 @@ TEST(Matrix3, ScaleMatrixByValues)
 
 TEST(Matrix3, UniformScaleMatrix)
 {
-	Matrix3 op = ScaleMatrix(2.0f);
+	Matrix3 op = ScaleMatrix3(2.0f);
 	FLOAT_EQ(op.r0c0, 2.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r0c2, 0.0f);

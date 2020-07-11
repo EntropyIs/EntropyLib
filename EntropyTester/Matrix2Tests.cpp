@@ -32,7 +32,7 @@ TEST(Matrix2, MatrixVectorMultiply)
 
 TEST(Matrix2, RoatationMatrixZero)
 {
-	Matrix2 op = RotationMatrix(0.0f);
+	Matrix2 op = RotationMatrix2(0.0f);
 	FLOAT_EQ(op.r0c0, 1.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r1c0, 0.0f);
@@ -41,7 +41,7 @@ TEST(Matrix2, RoatationMatrixZero)
 
 TEST(Matrix2, RoatationMatrixPI)
 {
-	Matrix2 op = RotationMatrix(PI);
+	Matrix2 op = RotationMatrix2(PI);
 	FLOAT_EQ(op.r0c0, -1.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r1c0, 0.0f);
@@ -50,7 +50,7 @@ TEST(Matrix2, RoatationMatrixPI)
 
 TEST(Matrix2, RoatationMatrixPIOverTwo)
 {
-	Matrix2 op = RotationMatrix(PI / 2.0f);
+	Matrix2 op = RotationMatrix2(PI / 2.0f);
 	FLOAT_EQ(op.r0c0, 0.0f);
 	FLOAT_EQ(op.r0c1, -1.0f);
 	FLOAT_EQ(op.r1c0, 1.0f);
@@ -59,7 +59,7 @@ TEST(Matrix2, RoatationMatrixPIOverTwo)
 
 TEST(Matrix2, RoatationMatrixPIOverFour)
 {
-	Matrix2 op = RotationMatrix(PI / 4.0f);
+	Matrix2 op = RotationMatrix2(PI / 4.0f);
 	FLOAT_EQ(op.r0c0, SQRT2OVER2);
 	FLOAT_EQ(op.r0c1, -SQRT2OVER2);
 	FLOAT_EQ(op.r1c0, SQRT2OVER2);
@@ -68,7 +68,7 @@ TEST(Matrix2, RoatationMatrixPIOverFour)
 
 TEST(Matrix2, RoatationMatrixNegitivePIOverFour)
 {
-	Matrix2 op = RotationMatrix(-PI / 4.0f);
+	Matrix2 op = RotationMatrix2(-PI / 4.0f);
 	FLOAT_EQ(op.r0c0, SQRT2OVER2);
 	FLOAT_EQ(op.r0c1, SQRT2OVER2);
 	FLOAT_EQ(op.r1c0, -SQRT2OVER2);
@@ -77,7 +77,7 @@ TEST(Matrix2, RoatationMatrixNegitivePIOverFour)
 
 TEST(Matrix2, RoatationMatrixPIOverThree)
 {
-	Matrix2 op = RotationMatrix(PI / 3.0f);
+	Matrix2 op = RotationMatrix2(PI / 3.0f);
 	FLOAT_EQ(op.r0c0, 0.5f);
 	FLOAT_EQ(op.r0c1, -SQRT3OVER2);
 	FLOAT_EQ(op.r1c0, SQRT3OVER2);
@@ -86,7 +86,7 @@ TEST(Matrix2, RoatationMatrixPIOverThree)
 
 TEST(Matrix2, RoatationMatrixNegitivePIOverThree)
 {
-	Matrix2 op = RotationMatrix(-PI / 3.0f);
+	Matrix2 op = RotationMatrix2(-PI / 3.0f);
 	FLOAT_EQ(op.r0c0, 0.5f);
 	FLOAT_EQ(op.r0c1, SQRT3OVER2);
 	FLOAT_EQ(op.r1c0, -SQRT3OVER2);
@@ -96,7 +96,7 @@ TEST(Matrix2, RoatationMatrixNegitivePIOverThree)
 TEST(Matrix2, ScaleMatrixByVector)
 {
 	Vector2 scale(2.0f, 2.0f);
-	Matrix2 op = ScaleMatrix(scale);
+	Matrix2 op = ScaleMatrix2(scale);
 	FLOAT_EQ(op.r0c0, 2.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r1c0, 0.0f);
@@ -105,7 +105,7 @@ TEST(Matrix2, ScaleMatrixByVector)
 
 TEST(Matrix2, ScaleMatrixByValues)
 {
-	Matrix2 op = ScaleMatrix(2.0f, 1.5f);
+	Matrix2 op = ScaleMatrix2(2.0f, 1.5f);
 	FLOAT_EQ(op.r0c0, 2.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r1c0, 0.0f);
@@ -114,7 +114,7 @@ TEST(Matrix2, ScaleMatrixByValues)
 
 TEST(Matrix2, UniformScaleMatrix)
 {
-	Matrix2 op = ScaleMatrix(2.0f);
+	Matrix2 op = ScaleMatrix2(2.0f);
 	FLOAT_EQ(op.r0c0, 2.0f);
 	FLOAT_EQ(op.r0c1, 0.0f);
 	FLOAT_EQ(op.r1c0, 0.0f);

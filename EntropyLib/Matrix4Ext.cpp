@@ -12,17 +12,17 @@ Entropy::Math::Vector4 Entropy::Math::operator*(const Matrix4& left, const Vecto
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix(const Vector4& scaleVector)
+Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix4(const Vector4& scaleVector)
 {
-	return ScaleMatrix(scaleVector.i, scaleVector.j, scaleVector.k);
+	return ScaleMatrix4(scaleVector.i, scaleVector.j, scaleVector.k);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix(float sX, float sY)
+Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix4(float sX, float sY)
 {
-	return ScaleMatrix(sX, sY, 1.0f);
+	return ScaleMatrix4(sX, sY, 1.0f);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix(float sX, float sY, float sZ)
+Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix4(float sX, float sY, float sZ)
 {
 	return Matrix4(
 		sX, 0.0f, 0.0f, 0.0f,
@@ -32,12 +32,12 @@ Entropy::Math::Matrix4 Entropy::Math::ScaleMatrix(float sX, float sY, float sZ)
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::TranslationMatrix(const Vector4& translationVevtor)
+Entropy::Math::Matrix4 Entropy::Math::TranslationMatrix4(const Vector4& translationVevtor)
 {
-	return TranslationMatrix(translationVevtor.i, translationVevtor.j, translationVevtor.k);
+	return TranslationMatrix4(translationVevtor.i, translationVevtor.j, translationVevtor.k);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::TranslationMatrix(float dX, float dY, float dZ)
+Entropy::Math::Matrix4 Entropy::Math::TranslationMatrix4(float dX, float dY, float dZ)
 {
 	return Matrix4(
 		1.0f, 0.0f, 0.0f, dX,
@@ -47,12 +47,12 @@ Entropy::Math::Matrix4 Entropy::Math::TranslationMatrix(float dX, float dY, floa
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutXYZMatrix(const Vector4& rotationVector)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutXYZMatrix4(const Vector4& rotationVector)
 {
-	return RotationAboutXYZMatrix(rotationVector.i, rotationVector.j, rotationVector.k);
+	return RotationAboutXYZMatrix4(rotationVector.i, rotationVector.j, rotationVector.k);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutXYZMatrix(float rX, float rY, float rZ)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutXYZMatrix4(float rX, float rY, float rZ)
 {
 	return Matrix4(
 		cos(rY) * cos(rZ), -cos(rX) * sin(rZ) + sin(rX) * sin(rY) * cos(rZ), sin(rX) * sin(rY) + cos(rX) * sin(rY) * cos(rZ), 0.0f,
@@ -62,7 +62,7 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutXYZMatrix(float rX, float rY,
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutXMatrix(float rX)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutXMatrix4(float rX)
 {
 	return Matrix4(
 		1.0f, 0.0f, 0.0f, 0.0f,
@@ -72,7 +72,7 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutXMatrix(float rX)
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutYMatrix(float rY)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutYMatrix4(float rY)
 {
 	return Matrix4(
 		cos(rY), 0.0f, sin(rY), 0.0f,
@@ -82,7 +82,7 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutYMatrix(float rY)
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutZMatrix(float rZ)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutZMatrix4(float rZ)
 {
 	return Matrix4(
 		cos(rZ), -sin(rZ), 0.0f, 0.0f,
@@ -92,7 +92,7 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutZMatrix(float rZ)
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutAxisMatrix(const Vector4& axis, const float angle)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutAxisMatrix4(const Vector4& axis, const float angle)
 {
 	const float k = 1.0f - cos(angle);
 	const float s = sin(angle);

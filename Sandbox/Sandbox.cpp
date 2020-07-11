@@ -3,6 +3,7 @@
 #include <GLTexture.h>
 #include <Clock.h>
 #include <Matrix4Ext.h>
+#include <Matrix3Ext.h>
 #include <Converters.h>
 
 using namespace Entropy;
@@ -85,10 +86,14 @@ int main(int argc, char* argv[])
 	shader.set1Int("tex0", 0);
 	shader.set1Int("tex1", 1);
 
-	//Setup Transformations
-	Matrix4 model = RotationAboutXMatrix(radians(-55.0f));
-	Matrix4 view = TranslationMatrix(0.0f, 0.0f, -3.0f);
+	//Setup Transformations & Camera
+	Matrix4 model = RotationAboutXMatrix4(radians(-55.0f));
+	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+	Vector3 cameraPos(0.0f, 0.0f, 3.0f);
+	Vector3 cameraTarget(0.0f, 0.0f, 0.0f);
+	Vector3 cameraDirection = normalize(cameraPos - cameraTarget);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	Clock clock;
@@ -117,9 +122,9 @@ int main(int argc, char* argv[])
 		{
 			float offset = 20.0f * i;
 			if (i % 3 == 0)
-				model = TranslationMatrix(cubePos[i]) * RotationAboutAxisMatrix(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), angle + offset);
+				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), angle + offset);
 			else
-				model = TranslationMatrix(cubePos[i]) * RotationAboutAxisMatrix(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), offset);
+				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), offset);
 			
 			shader.setMat4("model", model);
 			window.drawElements();

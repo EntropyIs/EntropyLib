@@ -11,7 +11,7 @@ Entropy::Math::Vector3 Entropy::Math::operator*(const Matrix3& left, const Vecto
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(const Vector3& scaleVector)
+Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(const Vector3& scaleVector)
 {
     return Matrix3(
 		scaleVector.i, 0.0f, 0.0f,
@@ -20,7 +20,7 @@ Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(const Vector3& scaleVector)
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(float sX, float sY)
+Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float sX, float sY)
 {
     return Matrix3(
         sX, 0.0f, 0.0f,
@@ -29,7 +29,7 @@ Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(float sX, float sY)
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(float scale)
+Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float scale)
 {
     return Matrix3(
         scale, 0.0f, 0.0f,
@@ -38,7 +38,7 @@ Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix(float scale)
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix(const Vector3& translationVector)
+Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(const Vector3& translationVector)
 {
     return Matrix3(
         1.0f, 0.0f, translationVector.i,
@@ -47,7 +47,7 @@ Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix(const Vector3& translati
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix(float dX, float dY)
+Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(float dX, float dY)
 {
     return Matrix3(
         1.0f, 0.0f, dX,
@@ -56,7 +56,7 @@ Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix(float dX, float dY)
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ZRotationMatrix(float angle)
+Entropy::Math::Matrix3 Entropy::Math::ZRotationMatrix3(float angle)
 {
     return Matrix3(
         cos(angle), -sin(angle), 0.0f,
