@@ -149,7 +149,9 @@
     <ClCompile Include="SandboxOLD.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="f2Shader.glsl" />
     <None Include="fShader.glsl" />
+    <None Include="v2Shader.glsl" />
     <None Include="vShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

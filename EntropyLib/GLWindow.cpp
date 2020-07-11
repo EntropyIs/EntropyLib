@@ -34,6 +34,7 @@ namespace Entropy
 
 	GLWindow::GLWindow(int width, int height, const char* title)
 	{
+		// Initalize OpenGL Window
 		initGLFW();
 		window = glfwCreateWindow(width, height, title, NULL, NULL);
 		if (window == NULL)
@@ -45,6 +46,13 @@ namespace Entropy
 		glfwMakeContextCurrent(window);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		initGLEW();
+
+		// Generate Object Buffers
+		glGenVertexArrays(1, &VAO);
+		glGenBuffers(1, &VBO);
+		glGenBuffers(1, &EBO);
+
+		glBindVertexArray(VAO);
 	}
 
 	GLWindow::~GLWindow()
@@ -61,7 +69,12 @@ namespace Entropy
 
 	void GLWindow::render()
 	{
+		//Clear Window
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		//Render Objects
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glDrawElements(GL_TRIANGLES, EBO_SIZE, GL_UNSIGNED_INT, 0);
 	}
 
 	bool GLWindow::getShouldClose()
@@ -84,9 +97,23 @@ namespace Entropy
 		glClearColor(red, green, blue, alpha);
 	}
 
-	void GLWindow::setVertexData(float* data)
+	void GLWindow::setVertexBufferData(unsigned int size, float* data)
 	{
-		
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+	}
+
+	void GLWindow::setElementBufferData(unsigned int size, unsigned int* data)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		EBO_SIZE = size / sizeof(unsigned int);
+	}
+
+	void GLWindow::setVertexAttributes(unsigned int index, int size, unsigned int type, unsigned int normalised, int stride, void* pointer)
+	{
+		glVertexAttribPointer(index, size, type, normalised, stride, pointer);
+		glEnableVertexAttribArray(index);
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)

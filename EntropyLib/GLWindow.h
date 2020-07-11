@@ -10,7 +10,7 @@ namespace Entropy
 	class __declspec(dllexport) GLWindow
 	{
 	private:
-		unsigned int VAO, VBO, EBO; //Graphics Buffers
+		unsigned int VAO, VBO, EBO, EBO_SIZE; //Graphics Buffers
 
 		void initGLFW();
 		void initGLEW();
@@ -30,7 +30,9 @@ namespace Entropy
 		void setShouldClose(bool value);
 		void setWindowClearColor(float red, float green, float blue, float alpha);
 
-		void setVertexData(float* data);
+		void setVertexBufferData(unsigned int size, float* data);
+		void setElementBufferData(unsigned int size, unsigned int* data);
+		void setVertexAttributes(unsigned int index, int size, unsigned int type, unsigned int normalised, int stride, void* pointer);
 	};
 
 	__declspec(dllexport) void framebuffer_size_callback(GLFWwindow* window, int width, int height);

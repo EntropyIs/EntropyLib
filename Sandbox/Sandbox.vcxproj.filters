@@ -24,6 +24,12 @@
     <None Include="vShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="v2Shader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="f2Shader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SandboxOLD.cpp">
