@@ -32,9 +32,13 @@ namespace Entropy
 		glGetProgramiv(ID, GL_LINK_STATUS, &success);
 		if (!success)
 		{
+#ifdef _DEBUG
 			glGetProgramInfoLog(ID, 1024, NULL, infoLog);
 			std::cout << "ERROR::PROGRAM_LINKING_ERROR:\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+#endif
+			throw std::exception("ERROR::SHADER_PROGRAM_LINKING_ERROR", -10003);
 		}
+
 
 		// Cleanup Memory
 		glDeleteShader(vertexShader);
@@ -138,7 +142,7 @@ namespace Entropy
 			glCompileShader(compileID);
 
 			int is_compiled;
-#ifdef _DEBUG
+
 			glGetShaderiv(compileID, GL_COMPILE_STATUS, &is_compiled);
 			if (!is_compiled)
 			{
@@ -147,23 +151,30 @@ namespace Entropy
 				char* errorLog = new char[maxLength];
 				glGetShaderInfoLog(compileID, maxLength, &maxLength, errorLog);
 				glDeleteShader(compileID);
-				
+
 				std::string shaderType = "SHADER";
 				if (type == GL_VERTEX_SHADER)
 					shaderType = "VERTEX_SHADER";
 				else if (type == GL_FRAGMENT_SHADER)
 					shaderType = "FRAGMENT_SHADER";
-
+#ifdef _DEBUG
 				std::cout << "ERROR::" << shaderType << "_COMPILATION_ERROR:" << std::endl;
 				std::cout << errorLog << std::endl;
 				std::cout << "-- --------------------------------------------------- --" << std::endl;
-			}
 #endif
+				std::string errString = "ERROR::";
+				errString.append(shaderType);
+				errString.append("_COMPILATION_ERROR");
+				throw std::exception(errString.c_str(), -10002);
+			}
 			return compileID;
 		}
 		catch (std::ifstream::failure e)
 		{
+#ifdef _DEBUG
 			std::cout << "ERROR::SHADER_FILE_NOT_SUCCESFULLY_READ" << std::endl;
+#endif
+			throw std::exception("ERROR::SHADER_FILE_NOT_SUCCESFULLY_READ", -10001);
 		}
 	}
 }
