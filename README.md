@@ -7,23 +7,23 @@ This project is more about the components of the engine itself rather than the g
 The plan for the project will take place in several stages, roughly as follows:
 
 1. Graphics Engine Components:
-  a. Basic Graphics Window Components
-    i. OpenGL windows functions
-    ii. GLSL Shader Technology
-    iii. Image Texture/Sprite Processing
-  b. Object Space Seperation
-    i. Render
-2. Game Object Handling
-  a. Object Transformations
-    i. Scaling
-    ii. Translation
-    iii. Rotation
-  b. Object Containers
-    TODO: expand.
-  c. ???
-3. Documentation
-  a. Engine Wiki
-    i. Overview of components
-    ii. Explination of how components operate
+   1. Basic Graphics Window Components
+      1. OpenGL windows functions
+      1. GLSL Shader Technology
+      1. Image Texture/Sprite Processing
+   1. Object Space Seperation
+      1. Render
+1. Game Object Handling
+   1. Object Transformations
+      1. Scaling
+      1. Translation
+      1. Rotation
+   1. Object Containers
+      1. TODO: expand.
+   1. ???
+1. Documentation
+   1. Engine Wiki
+      1. Overview of components
+      1. Explination of how components operate
 
 TODO: expand and refine project plan.
