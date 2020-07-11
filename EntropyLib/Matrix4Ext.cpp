@@ -1,5 +1,7 @@
 #include "Matrix4Ext.h"
 
+#include "Matrix4.h"
+
 #include <cmath>
 
 Entropy::Math::Vector4 Entropy::Math::operator*(const Matrix4& left, const Vector4& right)
@@ -124,5 +126,22 @@ Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, 
 		0.0f, 1.0f / tanHalfFOV, 0.0f, 0.0f,
 		0.0f, 0.0f, zFar / (zNear - zFar), -(zFar * zNear) / (zFar - zNear),
 		0.0f, 0.0f, -1.0f, 0.0f
+	);
+}
+
+Entropy::Math::Matrix4 Entropy::Math::LookAt(Vector3 right, Vector3 up, Vector3 direction, Vector3 position)
+{
+	return Matrix4
+	(
+		right.i, right.j, right.k, 0.0f,
+		up.i, up.j, up.k, 0.0f,
+		direction.i, direction.j, direction.k, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	) * Matrix4
+	(
+		1.0f, 0.0f, 0.0f, -position.i,
+		0.0f, 1.0f, 0.0f, -position.j,
+		0.0f, 0.0f, 1.0f, -position.k,
+		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }

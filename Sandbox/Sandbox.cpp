@@ -3,8 +3,8 @@
 #include <GLTexture.h>
 #include <Clock.h>
 #include <Matrix4Ext.h>
-#include <Matrix3Ext.h>
 #include <Converters.h>
+#include <cmath>
 
 using namespace Entropy;
 using namespace Entropy::Math;
@@ -86,19 +86,29 @@ int main(int argc, char* argv[])
 	shader.set1Int("tex0", 0);
 	shader.set1Int("tex1", 1);
 
+	//Setup Clock
+	Clock clock;
+	clock.initialize();
+	clock.poll();
+
 	//Setup Transformations & Camera
 	Matrix4 model = RotationAboutXMatrix4(radians(-55.0f));
 	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	Vector3 up(0.0f, 1.0f, 0.0f);
+
 	Vector3 cameraPos(0.0f, 0.0f, 3.0f);
 	Vector3 cameraTarget(0.0f, 0.0f, 0.0f);
 	Vector3 cameraDirection = normalize(cameraPos - cameraTarget);
+	Vector3 cameraRight = normalize(up.cross(cameraDirection));
+	Vector3 cameraUp = cameraDirection.cross(cameraRight);
+
+	const float radius = 10.0f;
+	float camX = sin(clock.currentTime()) * radius;
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	Clock clock;
-	clock.initialize();
-	clock.poll();
+	
 	float angle = 0;
 
 	//Graphics Loop
