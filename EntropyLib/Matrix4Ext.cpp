@@ -101,3 +101,13 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutAxisMatrix(const Vector4& axi
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }
+
+Entropy::Math::Matrix4 Entropy::Math::Ortho(float left, float right, float top, float bottom, float zNear, float zFar)
+{
+	return Matrix4(
+		2.0f / (right - left), 0.0f, 0.0f, (right + left) / (right - left),
+		0.0f, 2.0f / (top - bottom), 0.0f, (top + bottom) / (top - bottom),
+		0.0f, 0.0f, 2.0 / (zFar - zNear), (zFar + zNear) / (zFar - zNear),
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
