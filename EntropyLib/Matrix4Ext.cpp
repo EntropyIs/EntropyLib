@@ -107,7 +107,18 @@ Entropy::Math::Matrix4 Entropy::Math::Ortho(float left, float right, float top, 
 	return Matrix4(
 		2.0f / (right - left), 0.0f, 0.0f, (right + left) / (right - left),
 		0.0f, 2.0f / (top - bottom), 0.0f, (top + bottom) / (top - bottom),
-		0.0f, 0.0f, 2.0 / (zFar - zNear), (zFar + zNear) / (zFar - zNear),
+		0.0f, 0.0f, 2.0f / (zFar - zNear), (zFar + zNear) / (zFar - zNear),
 		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, float zNear, float zFar)
+{
+	const float tanHalfFOV = tan(fov / 2.0f);
+	return Matrix4(
+		1.0f / (aspectRatio * tanHalfFOV), 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f / tanHalfFOV, 0.0f, 0.0f,
+		0.0f, 0.0f, -((zFar + zNear) / (zFar - zNear)), -2 * (zFar * zNear) / (zFar - zNear),
+		0.0f, 0.0f, -1.0f, 1.0f
 	);
 }

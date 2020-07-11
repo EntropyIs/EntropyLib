@@ -9,6 +9,7 @@ namespace Entropy
 	{
 		Vector4 __declspec(dllexport) operator* (const Matrix4& left, const Vector4& right);
 
+		//Transformations
 		Matrix4 __declspec(dllexport) ScaleMatrix(const Vector4& scaleVector);
 		Matrix4 __declspec(dllexport) ScaleMatrix(float sX, float sY);
 		Matrix4 __declspec(dllexport) ScaleMatrix(float sX, float sY, float sZ);
@@ -26,6 +27,9 @@ namespace Entropy
 
 		Matrix4 __declspec(dllexport) RotationAboutAxisMatrix(const Vector4& axis, float angle);
 
+		//Projections
 		Matrix4 __declspec(dllexport) Ortho(float left, float right, float top, float bottom, float zNear, float zFar);
+
+		Matrix4 __declspec(dllexport) Perspective(float fov, float aspectRatio, float zNear, float zFar);
 	}
 }
