@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GLApplication.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GLShader.cpp" />
@@ -36,7 +35,6 @@
     <ClCompile Include="Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLApplication.h" />
     <ClInclude Include="GLKeys.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GLShader.h" />

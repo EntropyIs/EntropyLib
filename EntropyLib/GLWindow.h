@@ -2,12 +2,19 @@
 
 #include "GLKeys.h"
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace Entropy
 {
 	class __declspec(dllexport) GLWindow
 	{
+	private:
+		unsigned int VAO, VBO, EBO; //Graphics Buffers
+
+		void initGLFW();
+		void initGLEW();
+
 	public:
 		GLFWwindow* window;
 
@@ -22,6 +29,8 @@ namespace Entropy
 
 		void setShouldClose(bool value);
 		void setWindowClearColor(float red, float green, float blue, float alpha);
+
+		void setVertexData(float* data);
 	};
 
 	__declspec(dllexport) void framebuffer_size_callback(GLFWwindow* window, int width, int height);
