@@ -146,7 +146,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Sandbox.cpp" />
-    <ClCompile Include="SandboxOLD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fShader.glsl" />

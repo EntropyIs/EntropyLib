@@ -10,7 +10,7 @@ namespace Entropy
 	class __declspec(dllexport) GLWindow
 	{
 	private:
-		unsigned int VAO, VBO, EBO, EBO_SIZE; //Graphics Buffers
+		unsigned int VAO, VBO, EBO, EBO_SIZE, VBO_SIZE; //Graphics Buffers
 
 		void initGLFW();
 		void initGLEW();
@@ -22,7 +22,10 @@ namespace Entropy
 		~GLWindow();
 
 		void processEvents();
-		void render();
+
+		void clear();
+		void drawArrays();
+		void drawElements();
 		
 		bool getShouldClose();
 		bool getKeyPressed(GLKeys key);

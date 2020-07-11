@@ -73,14 +73,23 @@ namespace Entropy
 		glfwPollEvents();
 	}
 
-	void GLWindow::render()
+	void GLWindow::clear()
 	{
 		//Clear Window
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
 
+	void GLWindow::drawElements()
+	{
 		//Render Objects
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glDrawElements(GL_TRIANGLES, EBO_SIZE, GL_UNSIGNED_INT, 0);
+	}
+
+	void GLWindow::drawArrays()
+	{
+		//Render Vertices
+		glDrawArrays(GL_TRIANGLES, 0, VBO_SIZE);
 	}
 
 	bool GLWindow::getShouldClose()
@@ -107,6 +116,7 @@ namespace Entropy
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		VBO_SIZE = size / sizeof(float);
 	}
 
 	void GLWindow::setElementBufferData(unsigned int size, unsigned int* data)

@@ -26,9 +26,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SandboxOLD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sandbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
