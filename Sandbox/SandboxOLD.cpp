@@ -43,7 +43,7 @@ int mainold(int argc, char* argv[])
 		Vector4( 0.0f, 0.133f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(0.5f, 1.0f),
 		Vector4(-0.1f, -0.067f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
 		Vector4(0.1f, -0.067f, 0.0f, 1.0f), Vector4(1.0f,  0.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
-		Vector4(0.5f, 0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f), //top-right
+		Vector4(0.5f, 0.5f, 0.0f, 1.0f),  Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f), //top-right
 		Vector4(0.5f, -0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f), //bottom-right
 		Vector4(0.5f, -0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f), //bottom-left
 		Vector4(0.5f, -0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f)  //top-left

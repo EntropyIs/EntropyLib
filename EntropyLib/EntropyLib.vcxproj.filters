@@ -87,6 +87,9 @@
     <ClCompile Include="Matrix4Ext.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
+    <ClCompile Include="Converters.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLShader.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Matrix4Ext.h">
       <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Converters.h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
