@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
-#include <Matrix4.h>
+#include <Matrix4Ext.h>
+
+#include "HelperFunctions.h"
 
 using namespace Entropy::Math;
 

@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <Matrix3.h>
 #include <Matrix3Ext.h>
 
 #include "HelperFunctions.h"

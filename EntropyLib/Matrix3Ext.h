@@ -8,6 +8,8 @@ namespace Entropy
 {
 	namespace Math
 	{
+		Vector3 __declspec(dllexport) operator* (const Matrix3& left, const Vector3& right);
+		
 		Matrix3 __declspec(dllexport) ScaleMatrix(const Vector3& scaleVector);
 		Matrix3 __declspec(dllexport) ScaleMatrix(float sX, float sY);
 		Matrix3 __declspec(dllexport) ScaleMatrix(float scale);

@@ -7,6 +7,7 @@
 
 #include <Vector4.h>
 #include <Matrix4.h>
+#include <Matrix4Ext.h>
 #include <Clock.h>
 
 #include <cmath>
