@@ -31,6 +31,18 @@
     <Filter Include="Header Files\Timing">
       <UniqueIdentifier>{2def33e6-03c2-4177-bd61-145584dae27d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math\Matrix">
+      <UniqueIdentifier>{8b7572ba-1d0b-42e9-8163-69cd419d60fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Matrix">
+      <UniqueIdentifier>{a9ed4983-6b37-4fa0-bb2b-0470e8986ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Vector">
+      <UniqueIdentifier>{e3446126-4eef-4c0b-b735-ac54f2ddcb5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Vector">
+      <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLShader.cpp">
@@ -42,32 +54,35 @@
     <ClCompile Include="GLWindow.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector4.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>Source Files\Timing</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix2.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4.cpp">
-      <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="GLTexture.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix2.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
     <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2Ext.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,32 +98,35 @@
     <ClInclude Include="GLWindow.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Timing</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix2.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4.h">
-      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="GLTexture.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix2.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix2Ext.h">
+      <Filter>Header Files\Math\Matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

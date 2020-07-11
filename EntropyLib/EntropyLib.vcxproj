@@ -28,6 +28,7 @@
     <ClCompile Include="Matrix2.cpp" />
     <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="Matrix2Ext.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Matrix2.h" />
+    <ClInclude Include="Matrix2Ext.h" />
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Vector2.h" />
