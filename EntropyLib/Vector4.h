@@ -20,11 +20,16 @@ namespace Entropy
 
 			const bool operator==(const Vector4& right) const;
 			const bool operator!=(const Vector4& right) const;
+
+			const float magnitude() const;
+			Vector4 unit();
 		};
 
 		Vector4 __declspec(dllexport) operator+ (const Vector4& left, const Vector4& right);
 		Vector4 __declspec(dllexport) operator- (const Vector4& left, const Vector4& right);
 		Vector4 __declspec(dllexport) operator* (float left, const Vector4& right);
 		Vector4 __declspec(dllexport) operator* (const Vector4& left, float right);
+
+		Vector4 __declspec(dllexport) normalize(const Vector4& vector);
 	}
 }

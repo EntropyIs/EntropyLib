@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 	//Setup Transformations
 	Matrix4 model = RotationAboutXMatrix(radians(-55.0f));
 	Matrix4 view = TranslationMatrix(0.0f, 0.0f, -3.0f);
-	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+	Matrix4 projection = Perspective(45.0f, 800.0f / 600.0f, 0.1f, 10.0f);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	Clock clock;
@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 
 		//Update
 		angle += 0.5 * clock.timeElapsed();
-		model = RotationAboutAxisMatrix(Vector4(0.5f, 1.0f), angle);
+		model = RotationAboutAxisMatrix(Vector4(1.0f, 1.0f), angle);
 		window.processEvents();
 		clock.poll();
 	}

@@ -92,12 +92,16 @@ Entropy::Math::Matrix4 Entropy::Math::RotationAboutZMatrix(float rZ)
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::RotationAboutAxisMatrix(const Vector4& axis, float angle)
+Entropy::Math::Matrix4 Entropy::Math::RotationAboutAxisMatrix(const Vector4& axis, const float angle)
 {
+	const float k = 1.0f - cos(angle);
+	const float s = sin(angle);
+	const float c = cos(angle);
+	Vector4 na = normalize(axis);
 	return Matrix4(
-		cos(angle) + (axis.i * axis.i) * (1 - cos(angle)), axis.i * axis.j * (1 - cos(angle)) - axis.k * sin(angle), axis.i * axis.k * (1 - cos(angle)) + axis.j * sin(angle), 0.0f,
-		axis.j * axis.i * (1 - cos(angle)) + axis.k * sin(angle), cos(angle) + (axis.j * axis.j) * (1 - cos(angle)), axis.j * axis.k * (1 - cos(angle)) - axis.i * sin(angle), 0.0f,
-		axis.k * axis.i * (1 - cos(angle)) - axis.j * sin(angle), axis.k * axis.j * (1 - cos(angle)) + axis.i * sin(angle), cos(angle) + (axis.k * axis.k) * (1 - cos(angle)), 0.0f,
+		na.i * na.i * k + c, na.i * na.j * k - na.k * s, na.i * na.k * k + na.j * s, 0.0f,
+		na.i * na.j * k + na.k * s, na.j * na.j * k + c, na.j * na.k * k - na.i * s, 0.0f,
+		na.i * na.k * k - na.j * s, na.j * na.k * k + na.i * s, na.k * na.k * k + c, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }
@@ -107,7 +111,7 @@ Entropy::Math::Matrix4 Entropy::Math::Ortho(float left, float right, float top, 
 	return Matrix4(
 		2.0f / (right - left), 0.0f, 0.0f, (right + left) / (right - left),
 		0.0f, 2.0f / (top - bottom), 0.0f, (top + bottom) / (top - bottom),
-		0.0f, 0.0f, 2.0f / (zFar - zNear), (zFar + zNear) / (zFar - zNear),
+		0.0f, 0.0f, 1.0f / (zFar - zNear), zNear / (zFar - zNear),
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }
@@ -118,7 +122,7 @@ Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, 
 	return Matrix4(
 		1.0f / (aspectRatio * tanHalfFOV), 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f / tanHalfFOV, 0.0f, 0.0f,
-		0.0f, 0.0f, -((zFar + zNear) / (zFar - zNear)), -2 * (zFar * zNear) / (zFar - zNear),
-		0.0f, 0.0f, -1.0f, 1.0f
+		0.0f, 0.0f, zFar / (zNear - zFar), -(zFar * zNear) / (zFar - zNear),
+		0.0f, 0.0f, -1.0f, 0.0f
 	);
 }
