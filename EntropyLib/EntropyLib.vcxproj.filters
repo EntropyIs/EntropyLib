@@ -85,7 +85,10 @@
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
     <ClCompile Include="Matrix3Ext.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4Ext.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +135,9 @@
       <Filter>Header Files\Math\Matrix</Filter>
     </ClInclude>
     <ClInclude Include="Matrix3Ext.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4Ext.h">
       <Filter>Header Files\Math\Matrix</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(const Vector2 & scaleVector)
+Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(const Vector2 & scaleVector)
 {
     return Matrix2(
         scaleVector.i, 0.0f,
@@ -10,7 +10,7 @@ Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(const Vector2 & scaleVector)
     );
 }
 
-Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(float sX, float sY)
+Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(float sX, float sY)
 {
     return Matrix2(
         sX, 0.0f,
@@ -18,7 +18,7 @@ Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(float sX, float sY)
     );
 }
 
-Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(float scale)
+Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix(float scale)
 {
     return Matrix2(
         scale, 0.0f,
@@ -26,7 +26,7 @@ Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(float scale)
     );
 }
 
-Entropy::Math::Matrix2 Entropy::Math::RotationMatrix2(float angle)
+Entropy::Math::Matrix2 Entropy::Math::RotationMatrix(float angle)
 {
     return Matrix2(
         cos(angle), -sin(angle),
