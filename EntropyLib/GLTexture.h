@@ -7,7 +7,7 @@ namespace Entropy
 	class __declspec(dllexport) Texture
 	{
 	private:
-		struct __declspec(dllexport) Image
+		struct Image
 		{
 			int width;
 			int height;
