@@ -1,11 +1,13 @@
 #include <GLWindow.h>
 #include <GLShader.h>
 #include <GLTexture.h>
+#include <Clock.h>
 #include <Matrix4Ext.h>
 #include <Converters.h>
 
 using namespace Entropy;
 using namespace Entropy::Math;
+using namespace Entropy::Timing;
 
 int main(int argc, char* argv[])
 {
@@ -15,15 +17,58 @@ int main(int argc, char* argv[])
 
 	//Define Object Verticies
 	Vector4 vertices[] = {
-		Vector4(0.5f, 0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f), //top-right
-		Vector4(0.5f, -0.5f, 0.0f, 1.0f), Vector4(0.0f,  1.0f,  0.0f,  1.0f), Vector4(1.0f, 0.0f), //bottom-right
-		Vector4(-0.5f, -0.5f, 0.0f, 1.0f), Vector4(0.0f,  0.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f), //bottom-left
-		Vector4(-0.5f, 0.5f, 0.0f, 1.0f), Vector4(1.0f,  1.0f,  0.0f,  1.0f), Vector4(0.0f, 1.0f)  //top-left
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4( 0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4(-0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(-0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4( 0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4(-0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4(-0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(-0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4(-0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4(-0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(-0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4( 0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4( 0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4( 0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4(-0.5f, -0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(-0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4(-0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
+		Vector4( 0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 1.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4( 0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(1.0f, 0.0f),
+		Vector4(-0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 0.0f),
+		Vector4(-0.5f,  0.5f, -0.5f, 1.0f), Vector4(1.0f,  1.0f,  1.0f,  1.0f), Vector4(0.0f, 1.0f),
 	};
+
 	//Define Object Tris
 	unsigned int indices[] = {
-		0, 1, 3,
-		1, 2, 3
+		0,1,2,
+		3,4,5,
+		6,7,8,
+		9,10,11,
+		12,13,14,
+		15,16,17,
+		18,19,20,
+		21,22,23,
+		24,25,26,
+		27,28,29,
+		30,31,32,
+		33,34,35
 	};
 
 	//Load Object Data into Window
@@ -49,6 +94,12 @@ int main(int argc, char* argv[])
 	Matrix4 view = TranslationMatrix(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	Clock clock;
+	clock.initialize();
+	clock.poll();
+	float angle = 0;
+
 	//Graphics Loop
 	while (!window.getShouldClose())
 	{
@@ -68,7 +119,10 @@ int main(int argc, char* argv[])
 		window.render();
 
 		//Update
-
+		angle += 0.5 * clock.timeElapsed();
+		model = RotationAboutAxisMatrix(Vector4(0.5f, 1.0f), angle);
 		window.processEvents();
+		clock.poll();
 	}
+	clock.shutdown();
 }

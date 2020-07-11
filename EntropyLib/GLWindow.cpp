@@ -53,6 +53,9 @@ namespace Entropy
 		glGenBuffers(1, &EBO);
 
 		glBindVertexArray(VAO);
+
+		// Set GlDepthTest
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	GLWindow::~GLWindow()
@@ -73,7 +76,7 @@ namespace Entropy
 	void GLWindow::render()
 	{
 		//Clear Window
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
 		//Render Objects
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
