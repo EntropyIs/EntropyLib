@@ -10,6 +10,12 @@ using namespace Entropy;
 using namespace Entropy::Math;
 using namespace Entropy::Timing;
 
+void processInput(GLWindow& window, Clock& clock);
+
+Vector3 cameraPos;
+Vector3 cameraFront;
+Vector3 cameraUp;
+
 int main(int argc, char* argv[])
 {
 	//Initalize OpenGL Window
@@ -35,9 +41,6 @@ int main(int argc, char* argv[])
 		Vector4( 0.5f, -0.5f, -0.5f, 1.0f), Vector4(1.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 1.0f),
 		Vector4(-0.5f,  0.5f,  0.5f, 1.0f), Vector4(1.0f, 0.0f, 1.0f, 1.0f), Vector4(0.0f, 0.0f),
 	};
-
-	
-
 
 	//Define Object Tris
 	unsigned int indices[] = {
@@ -99,9 +102,9 @@ int main(int argc, char* argv[])
 	const float radius = 10.0f;
 	float camAngle = 0;
 
-	Vector4 cameraPos(sin(camAngle) * radius, 0.0f, cos(camAngle) * radius);
-	Vector4 cameraTarget(0.0f, 0.0f, 0.0f);
-	Vector4 cameraUp(0.0f, 1.0f, 0.0f);
+	cameraPos = Vector3(sin(camAngle) * radius, 0.0f, cos(camAngle) * radius);
+	cameraFront = Vector3(0.0f, 0.0f, -1.0f);
+	cameraUp = Vector3(0.0f, 1.0f, 0.0f);
 
 	shader.use();
 	shader.setMat4("projection", projection);
@@ -114,6 +117,7 @@ int main(int argc, char* argv[])
 	while (!window.getShouldClose())
 	{
 		//Input
+		processInput(window, clock);
 
 		//Render
 		window.clear();
@@ -124,9 +128,7 @@ int main(int argc, char* argv[])
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex1.ID);
 
-		cameraPos.i = sin(camAngle) * radius;
-		cameraPos.k = cos(camAngle) * radius;
-		view = LookAt(cameraPos, cameraTarget, cameraUp);
+		view = LookAt(cameraPos, cameraFront, cameraUp);
 		shader.setMat4("view", view);
 		
 		for (unsigned int i = 0; i < 10; i++)
@@ -149,4 +151,18 @@ int main(int argc, char* argv[])
 		clock.poll();
 	}
 	clock.shutdown();
+}
+
+void processInput(GLWindow& window, Clock& clock)
+{
+	const float cameraSpeed = 0.05f;
+
+	if (window.getKeyPressed(KEY_W))
+		cameraPos += cameraSpeed * cameraFront;
+	if (window.getKeyPressed(KEY_S))
+		cameraPos -= cameraSpeed * cameraFront;
+	if (window.getKeyPressed(KEY_A))
+		cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
+	if (window.getKeyPressed(KEY_D))
+		cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
 }

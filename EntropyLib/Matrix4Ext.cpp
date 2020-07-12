@@ -128,20 +128,16 @@ Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, 
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::LookAt(Vector4 cameraPos, Vector4 cameraTarget, Vector4 cameraUp)
+Entropy::Math::Matrix4 Entropy::Math::LookAt(Vector3 cameraPos, Vector3 cameraTarget, Vector3 cameraUp)
 {
-	Vector3 cp = Vector3(cameraPos.i, cameraPos.j, cameraPos.k);
-	Vector3 ct = Vector3(cameraTarget.i, cameraTarget.j, cameraTarget.k);
-	Vector3 u = Vector3(cameraUp.i, cameraUp.j, cameraUp.k);
-
-	Vector3 cd = normalize(cp - ct);
-	Vector3 cr = normalize(cross(cd, u));
+	Vector3 cd = normalize(cameraPos - cameraTarget);
+	Vector3 cr = normalize(cross(cd, cameraUp));
 	Vector3 cu = cross(cr, cd);
 
 	return Matrix4(
-		cr.i, cr.j, cr.k, -dot(cr, cp),
-		cu.i, cu.j, cu.k, -dot(cu, cp),
-		cd.i, cd.j, cd.k, -dot(cd, cp),
+		cr.i, cr.j, cr.k, -dot(cr, cameraPos),
+		cu.i, cu.j, cu.k, -dot(cu, cameraPos),
+		cd.i, cd.j, cd.k, -dot(cd, cameraPos),
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }
