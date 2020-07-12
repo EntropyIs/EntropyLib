@@ -1,27 +1,19 @@
 #include "Clock.h"
 
-#include <Windows.h>
+#include<GLFW/glfw3.h>
 
 void Entropy::Timing::Clock::poll()
 {
-    timeLast = timeCurrent;
-    QueryPerformanceCounter(&timeCurrent);
-
-    LARGE_INTEGER delta;
-    delta.QuadPart = timeCurrent.QuadPart - timeLast.QuadPart;
-
-    deltaTime = ((float)delta.QuadPart) / frequency.QuadPart;
+    float timeCurrent = (float)glfwGetTime();
+    deltaTime = timeCurrent - lastTime;
+    lastTime = timeCurrent;
 }
 
 bool Entropy::Timing::Clock::initialize()
 {
-    bool b = QueryPerformanceFrequency(&frequency);
-    if (!b)
-        return false;
-    b = QueryPerformanceCounter(&timeLast);
-    timeCurrent = timeLast;
     deltaTime = 0.0f;
-    return b;
+    lastTime = 0.0f;
+    return true;
 }
 
 bool Entropy::Timing::Clock::shutdown()

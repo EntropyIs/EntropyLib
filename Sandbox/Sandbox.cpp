@@ -12,6 +12,9 @@ using namespace Entropy::Timing;
 
 void processInput(GLWindow& window, Clock& clock);
 
+float yaw;
+float pitch;
+
 Vector3 cameraPos;
 Vector3 cameraFront;
 Vector3 cameraUp;
@@ -99,8 +102,13 @@ int main(int argc, char* argv[])
 	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	yaw = -90.0f;
+	pitch = 0.0f;
+
+	Vector3 direction(cos(radians(yaw)) * cos(radians(pitch)), sin(radians(pitch)), sin(radians(yaw)) * cos(radians(pitch)));
+
 	cameraPos = Vector3(0.0f, 0.0f, 3.0f);
-	cameraFront = Vector3(0.0f, 0.0f, -1.0f);
+	cameraFront = normalize(direction);
 	cameraUp = Vector3(0.0f, 1.0f, 0.0f);
 
 	shader.use();
@@ -144,6 +152,11 @@ int main(int argc, char* argv[])
 		//Update
 		angle += 0.5f * clock.timeElapsed();
 
+		direction.i = cos(radians(yaw)) * cos(radians(pitch));
+		direction.j = sin(radians(pitch));
+		direction.k = sin(radians(yaw)) * cos(radians(pitch));
+		cameraFront = normalize(direction);
+
 		window.processEvents();
 		clock.poll();
 	}
@@ -152,9 +165,7 @@ int main(int argc, char* argv[])
 
 void processInput(GLWindow& window, Clock& clock)
 {
-	const float cameraSpeed = 0.05f;
-
-	
+	const float cameraSpeed = 2.5 * clock.timeElapsed();
 
 	if (window.getKeyPressed(KEY_W))
 		cameraPos += cameraFront * cameraSpeed;

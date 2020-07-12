@@ -18,7 +18,7 @@ TEST(TimerClock, Initialize)
 	EXPECT_TRUE(clock.shutdown());
 }
 
-TEST(TimerClock, TimeMeasureing)
+/*TEST(TimerClock, TimeMeasureing)
 {
 	Clock clock;
 	EXPECT_TRUE(clock.initialize());
@@ -69,5 +69,4 @@ TEST(TimerClock, TimeMeasureing)
 #endif // OVERNIGHT_TEST
 	
 	EXPECT_TRUE(clock.shutdown());
-}
-
+}*/

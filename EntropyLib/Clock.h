@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 namespace Entropy
 {
@@ -8,11 +7,7 @@ namespace Entropy
 		class __declspec(dllexport) Clock
 		{
 		private:
-			LARGE_INTEGER frequency;
-
-			LARGE_INTEGER timeLast;
-			LARGE_INTEGER timeCurrent;
-
+			float lastTime;
 			float deltaTime;
 
 		public:
@@ -22,7 +17,6 @@ namespace Entropy
 			bool shutdown();
 
 			float timeElapsed() const;
-			float currentTime() const;
 		};
 	}
 }
