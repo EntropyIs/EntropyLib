@@ -22,6 +22,7 @@ namespace Entropy
 			bool shutdown();
 
 			float timeElapsed() const;
+			float currentTime() const;
 		};
 	}
 }

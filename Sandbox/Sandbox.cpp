@@ -57,9 +57,9 @@ int main(int argc, char* argv[])
 
 	Vector4 cubePos[] = {
 		Vector4( 0.0f,  0.0f,  0.0f),
-		Vector4( 2.0f,  5.0f, -15.0),
+		Vector4( 2.0f,  5.0f, -15.0f),
 		Vector4(-1.5f, -2.2f, -2.5f),
-		Vector4(-3.8f, -2.0f, -12.3),
+		Vector4(-3.8f, -2.0f, -12.3f),
 		Vector4( 2.4f, -0.4f, -3.5f),
 		Vector4(-1.7f,  3.0f, -7.5f),
 		Vector4( 1.3f, -2.0f, -2.5f),
@@ -96,16 +96,15 @@ int main(int argc, char* argv[])
 	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-	Vector3 up(0.0f, 1.0f, 0.0f);
-
-	Vector3 cameraPos(0.0f, 0.0f, 3.0f);
-	Vector3 cameraTarget(0.0f, 0.0f, 0.0f);
-	Vector3 cameraDirection = normalize(cameraPos - cameraTarget);
-	Vector3 cameraRight = normalize(up.cross(cameraDirection));
-	Vector3 cameraUp = cameraDirection.cross(cameraRight);
-
 	const float radius = 10.0f;
-	float camX = sin(clock.currentTime()) * radius;
+	float camAngle = 0;
+
+	Vector4 cameraPos(sin(camAngle) * radius, 0.0f, cos(camAngle) * radius);
+	Vector4 cameraTarget(0.0f, 0.0f, 0.0f);
+	Vector4 cameraUp(0.0f, 1.0f, 0.0f);
+
+	shader.use();
+	shader.setMat4("projection", projection);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
@@ -125,23 +124,27 @@ int main(int argc, char* argv[])
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex1.ID);
 
-		
+		cameraPos.i = sin(camAngle) * radius;
+		cameraPos.k = cos(camAngle) * radius;
+		view = LookAt(cameraPos, cameraTarget, cameraUp);
 		shader.setMat4("view", view);
-		shader.setMat4("projection", projection);
+		
 		for (unsigned int i = 0; i < 10; i++)
 		{
 			float offset = 20.0f * i;
-			if (i % 3 == 0)
-				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), angle + offset);
-			else
-				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0 + i, 4.3f - i, 0.5f + i), offset);
+			//if (i % 3 == 0)
+				//model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0f + i, 4.3f - i, 0.5f + i), angle + offset);
+			//else
+				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
 			
 			shader.setMat4("model", model);
 			window.drawElements();
 		}
 
 		//Update
-		angle += 0.5 * clock.timeElapsed();
+		angle += 0.5f * clock.timeElapsed();
+		camAngle += 0.3f * clock.timeElapsed();
+
 		window.processEvents();
 		clock.poll();
 	}

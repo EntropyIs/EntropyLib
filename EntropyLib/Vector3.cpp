@@ -22,6 +22,16 @@ Entropy::Math::Vector3 Entropy::Math::operator*(const Vector3& vector, float sca
 	return scalar * vector;
 }
 
+Entropy::Math::Vector3 Entropy::Math::cross(const Vector3& left, const Vector3& right)
+{
+	return Vector3(left.j * right.k - left.k * right.j, -1 * (left.i * right.k - left.k * right.i), left.i * right.j - left.j * right.i);
+}
+
+float Entropy::Math::dot(const Vector3& left, const Vector3& right)
+{
+	return left.i * right.i + left.j * right.j + left.k * right.k;
+}
+
 Entropy::Math::Vector3 Entropy::Math::normalize(const Vector3& vector)
 {
 	float magnitude = vector.magnitude();

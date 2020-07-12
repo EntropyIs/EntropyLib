@@ -35,6 +35,9 @@ namespace Entropy
 		Vector3 __declspec(dllexport) operator* (float left, const Vector3& right);
 		Vector3 __declspec(dllexport) operator* (const Vector3& left, float right);
 
+		Vector3 __declspec(dllexport) cross(const Vector3& left, const Vector3& right);
+		float __declspec(dllexport) dot(const Vector3& left, const Vector3& right);
+
 		Vector3 __declspec(dllexport) normalize(const Vector3& vector);
 	}
 	
