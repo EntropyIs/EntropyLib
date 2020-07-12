@@ -147,6 +147,7 @@
     <ClCompile Include="Matrix3Tests.cpp" />
     <ClCompile Include="Matrix4Tests.cpp" />
     <ClCompile Include="MatrixTests.cpp" />
+    <ClCompile Include="ProfileTests.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Matrix2Tests.cpp" />
     <ClCompile Include="TimerTests.cpp" />

@@ -43,6 +43,18 @@
     <Filter Include="Source Files\Math\Vector">
       <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DebugTools">
+      <UniqueIdentifier>{a29a5a02-770b-4f1d-a2fd-be7f84107bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DebugTools">
+      <UniqueIdentifier>{be373db2-7ee4-40a2-bc53-95f4302eca81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DebugTools\Profiling">
+      <UniqueIdentifier>{86d8b97b-e402-4ab1-a69d-da7d4a8da21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DebugTools\Profiling">
+      <UniqueIdentifier>{e9c9af0b-0ce3-4680-97c8-b800213f4777}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLShader.cpp">
@@ -95,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="GLCamera.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiler.cpp">
+      <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="GLCamera.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiler.h">
+      <Filter>Header Files\DebugTools\Profiling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

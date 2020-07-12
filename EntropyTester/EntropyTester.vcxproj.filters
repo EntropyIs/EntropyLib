@@ -14,6 +14,12 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{333190b6-f4c9-4fc1-8c49-6a922cc377ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DebugTools">
+      <UniqueIdentifier>{2d00e9fa-de3a-492d-ae18-bd3de1de03bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DebugTools\Profiling">
+      <UniqueIdentifier>{099849a0-00e7-45fc-94f2-f24b934ece01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -48,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="MatrixTests.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileTests.cpp">
+      <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
