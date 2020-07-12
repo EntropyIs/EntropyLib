@@ -78,7 +78,7 @@ TEST(Vector3, DotProduct)
 	Vector3 a(-1, 7, 4);
 	Vector3 b(-5, 8, 4);
 
-	float dotProduct = a.dot(b);
+	float dotProduct = dot(a,b);
 	
 	EXPECT_FLOAT_EQ(77, dotProduct);
 }
@@ -88,7 +88,7 @@ TEST(Vector3, CrossProduct)
 	Vector3 a(-1, 7, 4);
 	Vector3 b(-5, 8, 4);
 
-	Vector3 crossProduct = a.cross(b);
+	Vector3 crossProduct = cross(a,b);
 
 	EXPECT_FLOAT_EQ(-4, crossProduct.i);
 	EXPECT_FLOAT_EQ(-16, crossProduct.j);
@@ -108,7 +108,7 @@ TEST(Vector3, UnitVector)
 {
 	Vector3 a(-1, 7, 4);
 
-	Vector3 unit = a.unit();
+	Vector3 unit = normalize(a);
 
 	EXPECT_FLOAT_EQ(1, unit.magnitude());
 }

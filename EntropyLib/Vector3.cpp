@@ -67,22 +67,6 @@ const bool Entropy::Math::Vector3::operator!=(const Vector3& right) const
 	return !(*this == right);
 }
 
-float Entropy::Math::Vector3::dot(const Vector3& other)
-{
-	return i * other.i + j * other.j + k * other.k;
-}
-
-Entropy::Math::Vector3 Entropy::Math::Vector3::cross(const Vector3& other)
-{
-	return Vector3(j * other.k - k * other.j, -1 * (i * other.k - k * other.i), i * other.j - j * other.i);
-}
-
-Entropy::Math::Vector3 Entropy::Math::Vector3::unit()
-{
-	float r = magnitude();
-	return Vector3(i / r, j / r, k / r);
-}
-
 const float Entropy::Math::Vector3::magnitude() const
 {
 	return std::sqrt(i * i + j * j + k * k);

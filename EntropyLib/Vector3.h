@@ -21,13 +21,7 @@ namespace Entropy
 			const bool operator==(const Vector3& right) const;
 			const bool operator!=(const Vector3& right) const;
 
-			float dot(const Vector3& other);
-			Vector3 cross(const Vector3& other);
-
-			Vector3 unit();
-
 			const float magnitude() const;
-
 		};
 
 		Vector3 __declspec(dllexport) operator+ (const Vector3& left, const Vector3& right);
