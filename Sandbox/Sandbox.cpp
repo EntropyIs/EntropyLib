@@ -99,10 +99,7 @@ int main(int argc, char* argv[])
 	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-	const float radius = 10.0f;
-	float camAngle = 0;
-
-	cameraPos = Vector3(sin(camAngle) * radius, 0.0f, cos(camAngle) * radius);
+	cameraPos = Vector3(0.0f, 0.0f, 3.0f);
 	cameraFront = Vector3(0.0f, 0.0f, -1.0f);
 	cameraUp = Vector3(0.0f, 1.0f, 0.0f);
 
@@ -128,9 +125,10 @@ int main(int argc, char* argv[])
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex1.ID);
 
-		view = LookAt(cameraPos, cameraFront, cameraUp);
+		view = LookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		shader.setMat4("view", view);
 		
+		for (unsigned int i = 0; i < 10; i++)
 		for (unsigned int i = 0; i < 10; i++)
 		{
 			float offset = 20.0f * i;
@@ -145,7 +143,6 @@ int main(int argc, char* argv[])
 
 		//Update
 		angle += 0.5f * clock.timeElapsed();
-		camAngle -= 0.5f * clock.timeElapsed();
 
 		window.processEvents();
 		clock.poll();
@@ -157,12 +154,14 @@ void processInput(GLWindow& window, Clock& clock)
 {
 	const float cameraSpeed = 0.05f;
 
+	
+
 	if (window.getKeyPressed(KEY_W))
-		cameraPos += cameraSpeed * cameraFront;
+		cameraPos += cameraFront * cameraSpeed;
 	if (window.getKeyPressed(KEY_S))
-		cameraPos -= cameraSpeed * cameraFront;
+		cameraPos -= cameraFront * cameraSpeed;
 	if (window.getKeyPressed(KEY_A))
-		cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
-	if (window.getKeyPressed(KEY_D))
 		cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
+	if (window.getKeyPressed(KEY_D))
+		cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
 }
