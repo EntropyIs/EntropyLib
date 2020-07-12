@@ -138,6 +138,7 @@ int main(int argc, char* argv[])
 		glBindTexture(GL_TEXTURE_2D, tex1.ID);
 
 		view = LookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+
 		shader.setMat4("view", view);
 		
 		for (unsigned int i = 0; i < 10; i++)
@@ -156,10 +157,23 @@ int main(int argc, char* argv[])
 		//Update
 		angle += 0.5f * clock.timeElapsed();
 
-		direction.i = cos(radians(yaw)) * cos(radians(pitch));
-		direction.j = sin(radians(pitch));
-		direction.k = sin(radians(yaw)) * cos(radians(pitch));
-		cameraFront = normalize(direction);
+		if (mouse.moveTrigger)
+		{
+			yaw -= mouse.xOffset;
+			pitch += mouse.yOffset;
+
+			if (pitch > 89.0f)
+				pitch = 89.0f;
+			if (pitch < -89.0f)
+				pitch = -89.0f;
+
+			direction.i = cos(radians(yaw)) * cos(radians(pitch));
+			direction.j = sin(radians(pitch));
+			direction.k = sin(radians(yaw)) * cos(radians(pitch));
+			cameraFront = normalize(direction);
+
+			mouse.moveTrigger = false;
+		}
 
 		window.processEvents();
 		clock.poll();

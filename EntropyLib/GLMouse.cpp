@@ -6,6 +6,10 @@ Entropy::GLMouse::GLMouse(GLFWwindow* window, unsigned int witdth, unsigned int 
 	lastY = height / 2.0f;
 	xOffset = 0.0f;
 	yOffset = 0.0f;
+	sXOffset = 0.0f;
+	sYOffset = 0.0f;
+
+	fisrtMouse = true;
 
 	this->window = window;
 
@@ -14,55 +18,41 @@ Entropy::GLMouse::GLMouse(GLFWwindow* window, unsigned int witdth, unsigned int 
 	glfwSetCursorPosCallback(window, mouse_callback);
 }
 
-float Entropy::GLMouse::getLastX()
+void Entropy::GLMouse::moveEvent(float xPos, float yPos)
 {
-	return lastX;
+	if (fisrtMouse)
+	{
+		lastX = xPos;
+		lastY = yPos;
+		fisrtMouse = false;
+	}
+
+	xOffset = xPos - lastX;
+	yOffset = lastY - yPos;
+	lastX = xPos;
+	lastY = yPos;
+
+	const float sensitivity = 0.1f;
+	xOffset *= sensitivity;
+	yOffset *= sensitivity;
+	moveTrigger = true;
 }
 
-float Entropy::GLMouse::getLastY()
+void Entropy::GLMouse::scrollEvent(float xOffset, float yOffset)
 {
-	return lastY;
-}
-
-float Entropy::GLMouse::getXOffset()
-{
-	return xOffset;
-}
-
-float Entropy::GLMouse::getYOffset()
-{
-	return yOffset;
-}
-
-void Entropy::GLMouse::setLastX(float value)
-{
-	lastX = value;
-}
-
-void Entropy::GLMouse::setLastY(float value)
-{
-	lastY = value;
-}
-
-void Entropy::GLMouse::setXOffset(float value)
-{
-	xOffset = value;
-}
-
-void Entropy::GLMouse::setYOffset(float value)
-{
-	yOffset = value;
+	sXOffset = xOffset;
+	sYOffset = yOffset;
+	scrollTrigger = true;
 }
 
 void Entropy::GLMouse::mouse_callback(GLFWwindow* window, double xPos, double yPos)
 {
-	GLMouse* mouse = reinterpret_cast<GLMouse*>(glfwGetWindowUserPointer);
-	mouse->xOffset = (float) xPos - mouse->lastX;
-	mouse->yOffset = mouse->lastY - (float) yPos;
-	mouse->lastX = (float) xPos;
-	mouse->lastY = (float) yPos;
+	GLMouse* mouse = reinterpret_cast<GLMouse*>(glfwGetWindowUserPointer(window));
+	mouse->moveEvent((float)xPos, (float)yPos);
+}
 
-	const float sensitivity = 0.1f;
-	mouse->xOffset *= sensitivity;
-	mouse->yOffset *= sensitivity;
+void Entropy::GLMouse::scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	GLMouse* mouse = reinterpret_cast<GLMouse*>(glfwGetWindowUserPointer(window));
+	mouse->scrollEvent((float)xOffset, (float)yOffset);
 }

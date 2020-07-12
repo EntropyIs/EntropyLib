@@ -8,24 +8,25 @@ namespace Entropy
 	{
 	public:
 		GLFWwindow* window;
+
 		float lastX;
 		float lastY;
 		float xOffset;
 		float yOffset;
+		float sXOffset;
+		float sYOffset;
+
+		bool fisrtMouse;
+		bool moveTrigger;
+		bool scrollTrigger;
 
 		GLMouse(GLFWwindow* window, unsigned int witdth, unsigned int height);
 
-		float getLastX();
-		float getLastY();
-		float getXOffset();
-		float getYOffset();
-
-		void setLastX(float value);
-		void setLastY(float value);
-		void setXOffset(float value);
-		void setYOffset(float value);
+		void moveEvent(float xPos, float yPos);
+		void scrollEvent(float xOffset, float yOffset);
 
 		static void mouse_callback(GLFWwindow* window, double xPos, double yPos);
+		static void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 	};
 
 	
