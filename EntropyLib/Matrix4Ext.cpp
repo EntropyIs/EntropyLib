@@ -135,13 +135,13 @@ Entropy::Math::Matrix4 Entropy::Math::LookAt(Vector4 cameraPos, Vector4 cameraTa
 	Vector3 u = Vector3(cameraUp.i, cameraUp.j, cameraUp.k);
 
 	Vector3 cd = normalize(cp - ct);
-	Vector3 cr = normalize(cross(u, cd));
-	Vector3 cu = cross(cd, cr);
+	Vector3 cr = normalize(cross(cd, u));
+	Vector3 cu = cross(cr, cd);
 
 	return Matrix4(
-		cr.i, cr.j, cr.k, -cp.i,
-		cu.i, cu.j, cu.k, -cp.j,
-		cd.i, cd.j, cd.k, -cp.k,
+		cr.i, cr.j, cr.k, -dot(cr, cp),
+		cu.i, cu.j, cu.k, -dot(cu, cp),
+		cd.i, cd.j, cd.k, -dot(cd, cp),
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
 }

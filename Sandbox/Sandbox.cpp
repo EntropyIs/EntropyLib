@@ -132,9 +132,9 @@ int main(int argc, char* argv[])
 		for (unsigned int i = 0; i < 10; i++)
 		{
 			float offset = 20.0f * i;
-			//if (i % 3 == 0)
-				//model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0f + i, 4.3f - i, 0.5f + i), angle + offset);
-			//else
+			if (i % 3 == 0)
+				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0f + i, 4.3f - i, 0.5f + i), angle + offset);
+			else
 				model = TranslationMatrix4(cubePos[i]) * RotationAboutAxisMatrix4(Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
 			
 			shader.setMat4("model", model);
@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
 
 		//Update
 		angle += 0.5f * clock.timeElapsed();
-		camAngle += 0.3f * clock.timeElapsed();
+		camAngle -= 0.5f * clock.timeElapsed();
 
 		window.processEvents();
 		clock.poll();
