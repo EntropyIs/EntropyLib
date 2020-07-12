@@ -1,6 +1,7 @@
 #include <GLWindow.h>
 #include <GLShader.h>
 #include <GLTexture.h>
+#include <GLMouse.h>
 #include <Clock.h>
 #include <Matrix4Ext.h>
 #include <Converters.h>
@@ -80,6 +81,9 @@ int main(int argc, char* argv[])
 	window.setVertexAttributes(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)0);
 	window.setVertexAttributes(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(4 * sizeof(float)));
 	window.setVertexAttributes(2, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(8 * sizeof(float)));
+
+	//Initallize Mouse
+	GLMouse mouse(window.window, window.width, window.height);
 
 	//Generate Shader Program
 	GLShader shader("vshader.glsl", "fShader.glsl");
@@ -165,7 +169,7 @@ int main(int argc, char* argv[])
 
 void processInput(GLWindow& window, Clock& clock)
 {
-	const float cameraSpeed = 2.5 * clock.timeElapsed();
+	const float cameraSpeed = 2.5f * clock.timeElapsed();
 
 	if (window.getKeyPressed(KEY_W))
 		cameraPos += cameraFront * cameraSpeed;
@@ -175,4 +179,7 @@ void processInput(GLWindow& window, Clock& clock)
 		cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
 	if (window.getKeyPressed(KEY_D))
 		cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
+
+	if (window.getKeyPressed(KEY_ESCAPE))
+		window.setShouldClose(true);
 }

@@ -17,8 +17,9 @@ namespace Entropy
 
 	public:
 		GLFWwindow* window;
+		unsigned int width, height;
 
-		GLWindow(int width, int height, const char* title);
+		GLWindow(unsigned int width, unsigned int height, const char* title);
 		~GLWindow();
 
 		void processEvents();

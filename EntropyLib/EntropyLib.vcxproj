@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLMouse.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="GLShader.cpp" />
@@ -37,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLKeys.h" />
+    <ClInclude Include="GLMouse.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="Clock.h" />

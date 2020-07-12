@@ -32,7 +32,7 @@ namespace Entropy
 		}
 	}
 
-	GLWindow::GLWindow(int width, int height, const char* title)
+	GLWindow::GLWindow(unsigned int width, unsigned int height, const char* title)
 	{
 		// Initalize OpenGL Window
 		initGLFW();
@@ -46,6 +46,9 @@ namespace Entropy
 		glfwMakeContextCurrent(window);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		initGLEW();
+
+		this->width = width;
+		this->height = height;
 
 		// Generate Object Buffers
 		glGenVertexArrays(1, &VAO);
