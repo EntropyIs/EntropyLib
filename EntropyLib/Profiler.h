@@ -12,13 +12,15 @@ namespace Entropy
 			unsigned int categoryIndex;
 			unsigned int numUsedCategories;
 
-			static const unsigned int MAX_FRAME_SAMPLES = 2048;
+			bool firstFrame;
+
+			static const unsigned int MAX_PROFILE_SAMPLES = 512;
 			static const unsigned int MAX_PROFILE_CATEGORIES = 20;
 
 			struct Catergory
 			{
 				const char* name;
-				float samples[MAX_FRAME_SAMPLES];
+				float samples[MAX_PROFILE_SAMPLES];
 			} categories[MAX_PROFILE_CATEGORIES];
 
 		public:

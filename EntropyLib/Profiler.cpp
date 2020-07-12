@@ -5,11 +5,10 @@
 
 void Entropy::Debug::Profiler::addEntry(const char* categoryName, float time)
 {
-	assert(frameIndex < MAX_FRAME_SAMPLES);
 	assert(categoryIndex < MAX_PROFILE_CATEGORIES);
 	Catergory& cat = categories[categoryIndex];
 
-	if (frameIndex == 0)
+	if (firstFrame)
 	{
 		cat.name = categoryName;
 		numUsedCategories++;
@@ -25,19 +24,25 @@ void Entropy::Debug::Profiler::addEntry(const char* categoryName, float time)
 
 void Entropy::Debug::Profiler::poll()
 {
-	if (frameIndex > 0)
+	if (!firstFrame)
 		assert(categoryIndex == numUsedCategories);
+	else if (frameIndex != 0)
+		firstFrame = false;
 	frameIndex++;
+
+	if (frameIndex > MAX_PROFILE_SAMPLES)
+		frameIndex = 0;
+
 	categoryIndex = 0;
 }
 
 void Entropy::Debug::Profiler::initialize(const char* fileName)
 {
-	
 	this->fileName = fileName;
 	frameIndex = -1;
 	categoryIndex = 0;
 	numUsedCategories = 0;
+	firstFrame = true;
 }
 
 void Entropy::Debug::Profiler::shutdown()
@@ -53,6 +58,7 @@ void Entropy::Debug::Profiler::shutdown()
 		else
 			file << '\n';
 	}
+
 	//WriteSamples
 	for (unsigned int i = 0; i <= frameIndex; i++)
 	{
