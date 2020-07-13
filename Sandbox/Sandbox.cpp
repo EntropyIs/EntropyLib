@@ -2,6 +2,7 @@
 #include <GLShader.h>
 #include <GLTexture.h>
 #include <GLMouse.h>
+#include <GLCamera.h>
 #include <Clock.h>
 #include <Matrix4Ext.h>
 #include <Converters.h>
@@ -10,15 +11,6 @@
 using namespace Entropy;
 using namespace Entropy::Math;
 using namespace Entropy::Timing;
-
-void processInput(GLWindow& window, Clock& clock);
-
-float yaw;
-float pitch;
-
-Vector3 cameraPos;
-Vector3 cameraFront;
-Vector3 cameraUp;
 
 int main(int argc, char* argv[])
 {
@@ -103,30 +95,31 @@ int main(int argc, char* argv[])
 
 	//Setup Transformations & Camera
 	Matrix4 model = RotationAboutXMatrix4(radians(-55.0f));
-	Matrix4 view = TranslationMatrix4(0.0f, 0.0f, -3.0f);
 	Matrix4 projection = Perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-	yaw = -90.0f;
-	pitch = 0.0f;
-
-	Vector3 direction(cos(radians(yaw)) * cos(radians(pitch)), sin(radians(pitch)), sin(radians(yaw)) * cos(radians(pitch)));
-
-	cameraPos = Vector3(0.0f, 0.0f, 3.0f);
-	cameraFront = normalize(direction);
-	cameraUp = Vector3(0.0f, 1.0f, 0.0f);
+	GLCamera camera(Vector3(0.0f, 0.0f, 3.0f), Vector3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 	shader.use();
 	shader.setMat4("projection", projection);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
 	float angle = 0;
 
 	//Graphics Loop
 	while (!window.getShouldClose())
 	{
 		//Input
-		processInput(window, clock);
+		if (window.getKeyPressed(KEY_W))
+			camera.updatePosition(CAMERA_FORWARD, clock.timeElapsed());
+		if (window.getKeyPressed(KEY_S))
+			camera.updatePosition(CAMERA_BACKWARD, clock.timeElapsed());
+		if (window.getKeyPressed(KEY_A))
+			camera.updatePosition(CAMERA_LEFT, clock.timeElapsed());
+		if (window.getKeyPressed(KEY_D))
+			camera.updatePosition(CAMERA_RIGHT, clock.timeElapsed());
+
+		if (window.getKeyPressed(KEY_ESCAPE))
+			window.setShouldClose(true);
 
 		//Render
 		window.clear();
@@ -137,11 +130,8 @@ int main(int argc, char* argv[])
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex1.ID);
 
-		view = LookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-
-		shader.setMat4("view", view);
+		shader.setMat4("view", camera.getViewMatrix());
 		
-		for (unsigned int i = 0; i < 10; i++)
 		for (unsigned int i = 0; i < 10; i++)
 		{
 			float offset = 20.0f * i;
@@ -159,41 +149,17 @@ int main(int argc, char* argv[])
 
 		if (mouse.moveTrigger)
 		{
-			yaw -= mouse.xOffset;
-			pitch += mouse.yOffset;
-
-			if (pitch > 89.0f)
-				pitch = 89.0f;
-			if (pitch < -89.0f)
-				pitch = -89.0f;
-
-			direction.i = cos(radians(yaw)) * cos(radians(pitch));
-			direction.j = sin(radians(pitch));
-			direction.k = sin(radians(yaw)) * cos(radians(pitch));
-			cameraFront = normalize(direction);
-
+			camera.updateRotation(mouse.xOffset, mouse.yOffset);
 			mouse.moveTrigger = false;
+		}
+		if (mouse.scrollTrigger)
+		{
+			camera.updateFOV(mouse.sYOffset);
+			mouse.scrollTrigger = false;
 		}
 
 		window.processEvents();
 		clock.poll();
 	}
 	clock.shutdown();
-}
-
-void processInput(GLWindow& window, Clock& clock)
-{
-	const float cameraSpeed = 2.5f * clock.timeElapsed();
-
-	if (window.getKeyPressed(KEY_W))
-		cameraPos += cameraFront * cameraSpeed;
-	if (window.getKeyPressed(KEY_S))
-		cameraPos -= cameraFront * cameraSpeed;
-	if (window.getKeyPressed(KEY_A))
-		cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
-	if (window.getKeyPressed(KEY_D))
-		cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
-
-	if (window.getKeyPressed(KEY_ESCAPE))
-		window.setShouldClose(true);
 }

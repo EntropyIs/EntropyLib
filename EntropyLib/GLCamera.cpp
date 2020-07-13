@@ -4,19 +4,71 @@
 #include <cmath>
 
 Entropy::GLCamera::GLCamera(Math::Vector3 position, Math::Vector3 up, float yaw, float pitch)
-	: position(position), front(Math::Vector3(0.0f, 0.0f, -1.0f)), worldUp(up), yaw(yaw), pitch(pitch), movementSpeed(2.5f), mouseSensitivity(0.1f), zoom(45.0f)
+	: position(position), front(Math::Vector3(0.0f, 0.0f, -1.0f)), worldUp(up), yaw(yaw), pitch(pitch), zoom(45.0f)
 {
-	update();
+	updateVectors();
 }
 
-void Entropy::GLCamera::update()
+Entropy::Math::Matrix4 Entropy::GLCamera::getViewMatrix()
 {
-	Math::Vector3 direction;
-	direction.i = cos(Math::radians(yaw)) * cos(Math::radians(pitch));
-	direction.j = sin(Math::radians(pitch));
-	direction.k = sin(Math::radians(yaw)) * cos(Math::radians(pitch));
-	front = normalize(direction);
+	return Math::LookAt(position, position + front, up);
+}
 
-	right = normalize(cross(front, worldUp));
+void Entropy::GLCamera::updatePosition(CameraMovement direction, float deltaTime, float velocity)
+{
+	float adjustedVelocity = velocity * deltaTime;
+	if (direction == CAMERA_FORWARD)
+		position += front * adjustedVelocity;
+	if (direction == CAMERA_BACKWARD)
+		position -= front * adjustedVelocity;
+	if (direction == CAMERA_RIGHT)
+		position += right * adjustedVelocity;
+	if (direction == CAMERA_LEFT)
+		position -= right * adjustedVelocity;
+	if (direction == CAMERA_UP)
+		position += up * adjustedVelocity;
+	if (direction == CAMERA_DOWN)
+		position -= up * adjustedVelocity;
+
+	if (direction == WORLD_UP)
+		position += worldUp * adjustedVelocity;
+	if (direction == WORLD_DOWN)
+		position -= worldUp * adjustedVelocity;
+}
+
+void Entropy::GLCamera::updateRotation(float xOffset, float yOffset, bool constrainPitch, float minPitch, float maxPitch)
+{
+	yaw -= xOffset;
+	pitch += yOffset;
+
+	if (constrainPitch)
+	{
+		if (pitch > maxPitch)
+			pitch = maxPitch;
+		if (pitch < minPitch)
+			pitch = minPitch;
+	}
+
+	updateVectors();
+}
+
+void Entropy::GLCamera::updateFOV(float offset)
+{
+	zoom -= offset;
+	if (zoom < 1.0f)
+		zoom = 1.0f;
+	if (zoom > 110.0f)
+		zoom = 110.0f;
+}
+
+void Entropy::GLCamera::updateVectors()
+{
+	Math::Vector3 direction(
+		cos(Math::radians(yaw)) * cos(Math::radians(pitch)),
+		sin(Math::radians(pitch)),
+		sin(Math::radians(yaw)) * cos(Math::radians(pitch)));
+
+	front = normalize(direction);
+	right = normalize(cross(worldUp, front));
 	up = normalize(cross(front, right));
 }

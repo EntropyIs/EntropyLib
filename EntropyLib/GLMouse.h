@@ -28,6 +28,4 @@ namespace Entropy
 		static void mouse_callback(GLFWwindow* window, double xPos, double yPos);
 		static void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 	};
-
-	
 }

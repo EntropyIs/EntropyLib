@@ -16,7 +16,7 @@ std::string getNexToken(std::ifstream& file)
 	{
 		file >> std::noskipws;
 		file >> c;
-		if (c == ',' || c == '\n' || c == '\n\r' || c == '\r' || c == '\r\n')
+		if (c == ',' || c == '\n')
 			break;
 		result += c;
 	}
