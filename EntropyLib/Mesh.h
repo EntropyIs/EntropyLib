@@ -12,14 +12,14 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		struct __declspec(dllexport) Vertex
+		struct Vertex
 		{
 			Math::Vector3 Position;
 			Math::Vector3 Normal;
 			Math::Vector2 TexCoord;
 		};
 
-		struct __declspec(dllexport) Texture
+		struct Texture
 		{
 			unsigned int ID;
 			std::string type;
