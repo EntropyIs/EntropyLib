@@ -115,6 +115,31 @@ namespace Entropy
 		glUniform4f(glGetUniformLocation(ID, name), v0, v1, v2, v3);
 	}
 
+	void GLShader::setVec2(const char* name, const Math::Vector2& v0)
+	{
+		glUniform2fv(glGetUniformLocation(ID, name), 1, v0.data);
+	}
+
+	void GLShader::setVec3(const char* name, const Math::Vector3& v0)
+	{
+		glUniform3fv(glGetUniformLocation(ID, name), 1, v0.data);
+	}
+
+	void GLShader::setVec4(const char* name, const Math::Vector4& v0)
+	{
+		glUniform4fv(glGetUniformLocation(ID, name), 1, v0.data);
+	}
+
+	void GLShader::setMat2(const char* name, const Math::Matrix2& v0)
+	{
+		glUniformMatrix2fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	}
+
+	void GLShader::setMat3(const char* name, const Math::Matrix3& v0)
+	{
+		glUniformMatrix3fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	}
+
 	void GLShader::setMat4(const char* name, const Math::Matrix4& v0)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);

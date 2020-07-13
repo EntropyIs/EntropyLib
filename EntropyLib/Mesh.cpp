@@ -23,7 +23,7 @@ void Entropy::Graphics::Mesh::Draw(GLShader& shader)
 			number = std::to_string(diffuseNr++);
 		else if (name == "texture_specilar")
 			number = std::to_string(specularNr++);
-		shader.set1Float(("material." + name + number).c_str(), i);
+		shader.set1Float(("material." + name + number).c_str(), (float)i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].ID);
 	}
 	glActiveTexture(GL_TEXTURE0);

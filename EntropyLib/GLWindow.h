@@ -10,12 +10,11 @@ namespace Entropy
 	class __declspec(dllexport) GLWindow
 	{
 	private:
-		unsigned int VAO, VBO, EBO, EBO_SIZE, VBO_SIZE; //Graphics Buffers
-
 		void initGLFW();
 		void initGLEW();
 
 	public:
+		unsigned int VAO, VBO, EBO, EBO_SIZE, VBO_SIZE; //Graphics Buffers
 		GLFWwindow* window;
 		unsigned int width, height;
 

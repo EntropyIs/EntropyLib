@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix2.h"
+#include "Matrix3.h"
 #include "Matrix4.h"
 
 namespace Entropy
@@ -29,6 +34,12 @@ namespace Entropy
 		void set3Float(const char* name, float v0, float v1, float v2) const;
 		void set4Float(const char* name, float v0, float v1, float v2, float v3) const;
 
+		void setVec2(const char* name, const Math::Vector2& v0);
+		void setVec3(const char* name, const Math::Vector3& v0);
+		void setVec4(const char* name, const Math::Vector4& v0);
+
+		void setMat2(const char* name, const Math::Matrix2& v0);
+		void setMat3(const char* name, const Math::Matrix3& v0);
 		void setMat4(const char* name, const Math::Matrix4& v0);
 
 	private:
