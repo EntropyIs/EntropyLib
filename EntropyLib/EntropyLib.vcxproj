@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="GLCamera.cpp" />
     <ClCompile Include="GLMouse.cpp" />
     <ClCompile Include="GLTexture.cpp" />
@@ -35,12 +36,12 @@
     <ClCompile Include="Matrix4Ext.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Profiler.cpp" />
-    <ClCompile Include="src\Entropy\Graphics\Window.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="GLKeys.h" />
     <ClInclude Include="GLMouse.h" />
@@ -49,7 +50,6 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
-    <ClInclude Include="include\Entropy\Graphics\Window.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Matrix2.h" />

@@ -120,7 +120,7 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Graphics\Object Handling</Filter>
     </ClCompile>
-    <ClCompile Include="src\Entropy\Graphics\Window.cpp">
+    <ClCompile Include="Entropy\Graphics\Window.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,7 +185,7 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
-    <ClInclude Include="include\Entropy\Graphics\Window.h">
+    <ClInclude Include="Entropy\Graphics\Window.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
