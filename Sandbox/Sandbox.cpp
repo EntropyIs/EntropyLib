@@ -1,4 +1,4 @@
-#include <GLWindow.h>
+/*#include <GLWindow.h>
 #include <GLShader.h>
 #include <GLTexture.h>
 #include <GLMouse.h>
@@ -12,7 +12,7 @@ using namespace Entropy;
 using namespace Entropy::Math;
 using namespace Entropy::Timing;
 
-int main(int argc, char* argv[])
+int mainOLD(int argc, char* argv[])
 {
 	//Initalize OpenGL Window
 	GLWindow window(800, 600, "OpenGL Sandbox");
@@ -162,4 +162,4 @@ int main(int argc, char* argv[])
 		clock.poll();
 	}
 	clock.shutdown();
-}
+}*/

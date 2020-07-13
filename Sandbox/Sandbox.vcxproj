@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\EntropyLib;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(projectdir)..\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\$(intdir);$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Refactor.cpp" />
     <ClCompile Include="Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
