@@ -8,35 +8,59 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 	try
 	{
 		initializeGLFW();
-	}
-	catch (std::exception e)
-	{
-		throw e;
-	}
 
-	// Initialize OpenGL Window
-	GLWindow = glfwCreateWindow(Width, Height, title, NULL, NULL);
-	if (GLWindow == NULL)
-	{
+		// Initialize OpenGL Window
+		GLWindow = glfwCreateWindow(Width, Height, title, NULL, NULL);
+		if (GLWindow == NULL)
+		{
 #ifdef _DEBUG
-		std::cout << "Failed to create GLFW Window." << std::endl;
+			std::cout << "Failed to create GLFW Window." << std::endl;
 #endif // _DEBUG
-		glfwTerminate();
-		throw std::exception("Failed to create GLFW Window.", 10001);
-	}
-	glfwMakeContextCurrent(GLWindow);
-	glfwSetWindowUserPointer(GLWindow, reinterpret_cast<void*>(this));
-	glfwSetFramebufferSizeCallback(GLWindow, framebuffer_size_callback);
+			glfwTerminate();
+			throw "Failed to create GLFW Window.";
+		}
+		glfwMakeContextCurrent(GLWindow);
+		glfwSetWindowUserPointer(GLWindow, reinterpret_cast<void*>(this));
+		glfwSetFramebufferSizeCallback(GLWindow, framebuffer_size_callback);
 
-	// Initialize GLEW
-	try
-	{
+		// Initialize GLEW
 		initializeGLEW();
 	}
 	catch (std::exception e)
 	{
-		throw e;
+		throw;
 	}
+}
+
+void Entropy::Graphics::Window::clear()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Entropy::Graphics::Window::processEvents()
+{
+	glfwSwapBuffers(GLWindow);
+	glfwPollEvents();
+}
+
+bool Entropy::Graphics::Window::getShouldClose()
+{
+	return glfwWindowShouldClose(GLWindow);
+}
+
+bool Entropy::Graphics::Window::getKeyPressed(GLKeys key)
+{
+	return glfwGetKey(GLWindow, key) == GLFW_PRESS;
+}
+
+void Entropy::Graphics::Window::setWindowClearColor(float red, float green, float blue, float alpha)
+{
+	glClearColor(red, green, blue, alpha);
+}
+
+void Entropy::Graphics::Window::setShouldClose(bool value)
+{
+	glfwSetWindowShouldClose(GLWindow, value);
 }
 
 void Entropy::Graphics::Window::initializeGLFW()
@@ -47,7 +71,7 @@ void Entropy::Graphics::Window::initializeGLFW()
 #ifdef _DEBUG
 		std::cout << "Failed to initalize GLFW." << std::endl;
 #endif // _DEBUG
-		throw std::exception("Failed to initialize GLFW.", 10000);
+		throw "Failed to initialize GLFW.";
 	}
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -67,7 +91,7 @@ void Entropy::Graphics::Window::initializeGLEW()
 #ifdef _DEBUG
 		std::cout << "Failed to initialize GLEW.\n" << glewGetErrorString(error);
 #endif // _DEBUG
-		throw std::exception("Failed to initialize GLEW.", 10002);
+		throw "Failed to initialize GLEW.";
 	}
 }
 
