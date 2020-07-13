@@ -55,6 +55,12 @@
     <Filter Include="Source Files\DebugTools\Profiling">
       <UniqueIdentifier>{e9c9af0b-0ce3-4680-97c8-b800213f4777}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\ObjectHandling">
+      <UniqueIdentifier>{cbb391f9-152e-4450-862b-90447ded9760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Object Handling">
+      <UniqueIdentifier>{f553fb9a-6f36-4d66-bb6c-596794980dfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLShader.cpp">
@@ -110,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Graphics\Object Handling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\DebugTools\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

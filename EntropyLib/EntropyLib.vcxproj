@@ -33,6 +33,7 @@
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Matrix2Ext.cpp" />
     <ClCompile Include="Matrix4Ext.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Matrix2.h" />
     <ClInclude Include="Matrix2Ext.h" />
