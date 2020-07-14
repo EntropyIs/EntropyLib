@@ -20,11 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
+    <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="GLCamera.cpp" />
     <ClCompile Include="GLMouse.cpp" />
     <ClCompile Include="GLTexture.cpp" />
-    <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Converters.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -41,11 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
+    <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="GLKeys.h" />
     <ClInclude Include="GLMouse.h" />
-    <ClInclude Include="GLShader.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
