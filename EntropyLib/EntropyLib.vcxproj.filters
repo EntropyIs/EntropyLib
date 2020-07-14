@@ -183,7 +183,4 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Errors.md" />
-  </ItemGroup>
 </Project>

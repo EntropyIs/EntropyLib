@@ -61,9 +61,6 @@
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Errors.md" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

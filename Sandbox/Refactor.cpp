@@ -1,7 +1,6 @@
 #include <Entropy/Graphics/Window.h>
 #include <Entropy/Graphics/Mesh.h>
-
-#include <GLShader.h>
+#include <Entropy/Graphics/Shader.h>
 
 #include <vector>
 #include <exception>
@@ -30,12 +29,17 @@ int main(int argc, char* argv[])
 		// Load Triangle Texture Data
 		std::vector<Entropy::Graphics::Texture> textures;
 
-
 		// Construct Data
 		Entropy::Graphics::Mesh triangle(vertices, indices, textures);
 
 		// Load Shader
-		Entropy::GLShader shader("vShader.glsl", "fShader.glsl");
+		std::vector<const char*> shaderPaths;
+		shaderPaths.push_back("vShader.glsl");
+		shaderPaths.push_back("fShader.glsl");
+		std::vector<unsigned int> shaderTypes;
+		shaderTypes.push_back(GL_VERTEX_SHADER);
+		shaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader shader(shaderPaths, shaderTypes);
 
 		// Render Loop
 		while (!window.getShouldClose())

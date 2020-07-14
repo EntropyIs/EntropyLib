@@ -63,7 +63,7 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 	}
 }
 
-Entropy::Graphics::Shader::Shader(std::vector<char*> shaderPath, std::vector<unsigned int> shaderType)
+Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vector<unsigned int> shaderType)
 {
 	try
 	{
@@ -110,4 +110,49 @@ Entropy::Graphics::Shader::Shader(std::vector<char*> shaderPath, std::vector<uns
 void Entropy::Graphics::Shader::use()
 {
 	glUseProgram(ID);
+}
+
+void Entropy::Graphics::Shader::setBool(const char* name, bool v0) const
+{
+	glUniform1i(glGetUniformLocation(ID, name), (int) v0);
+}
+
+void Entropy::Graphics::Shader::setInt(const char* name, int v0) const
+{
+	glUniform1i(glGetUniformLocation(ID, name), v0);
+}
+
+void Entropy::Graphics::Shader::setFloat(const char* name, float v0) const
+{
+	glUniform1f(glGetUniformLocation(ID, name), v0);
+}
+
+void Entropy::Graphics::Shader::setVec2(const char* name, const Math::Vector2& v0) const
+{
+	glUniform2fv(glGetUniformLocation(ID, name), 1, v0.data);
+}
+
+void Entropy::Graphics::Shader::setVec3(const char* name, const Math::Vector3& v0) const
+{
+	glUniform3fv(glGetUniformLocation(ID, name), 1, v0.data);
+}
+
+void Entropy::Graphics::Shader::setVec4(const char* name, const Math::Vector4& v0) const
+{
+	glUniform4fv(glGetUniformLocation(ID, name), 1, v0.data);
+}
+
+void Entropy::Graphics::Shader::setMat2(const char* name, const Math::Matrix2& v0) const
+{
+	glUniformMatrix2fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+}
+
+void Entropy::Graphics::Shader::setMat3(const char* name, const Math::Matrix3& v0) const
+{
+	glUniformMatrix3fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+}
+
+void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Matrix4& v0) const
+{
+	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
 }

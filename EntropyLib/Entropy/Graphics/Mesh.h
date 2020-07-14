@@ -3,7 +3,7 @@
 #include "../../Vector3.h"
 #include "../../Vector2.h"
 
-#include "../../GLShader.h"
+#include "Shader.h"
 
 #include <string>
 #include <vector>
@@ -38,7 +38,7 @@ namespace Entropy
 			std::vector<Texture> textures;
 
 			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
-			void Draw(GLShader& shader);
+			void Draw(Shader& shader);
 		private:
 			unsigned int VAO, VBO, EBO;
 			
