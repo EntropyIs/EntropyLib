@@ -11,6 +11,7 @@ Entropy::Graphics::Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned
 
 void Entropy::Graphics::Mesh::Draw(GLShader& shader)
 {
+	shader.use();
 	// assign textures
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
@@ -18,7 +19,7 @@ void Entropy::Graphics::Mesh::Draw(GLShader& shader)
 	{
 		glActiveTexture(GL_TEXTURE0 + 1);
 		std::string number;
-		std::string name = textures[i].type;
+		std::string name = textures[i].Type;
 		if (name == "texture_diffuse")
 			number = std::to_string(diffuseNr++);
 		else if (name == "texture_specilar")

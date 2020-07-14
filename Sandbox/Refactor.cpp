@@ -1,5 +1,9 @@
-#include<Entropy/Graphics/Window.h>
+#include <Entropy/Graphics/Window.h>
+#include <Entropy/Graphics/Mesh.h>
 
+#include <GLShader.h>
+
+#include <vector>
 #include <exception>
 #include <iostream>
 
@@ -11,6 +15,28 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Window window("My OpenGL Window");
 		window.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
+		// Load Triangle Position Data
+		std::vector<Entropy::Graphics::Vertex> vertices;
+		vertices.push_back(Entropy::Graphics::Vertex(0.0f, 0.5f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.0f));
+
+		// Load Triangle Index Data
+		std::vector<unsigned int> indices;
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(2);
+
+		// Load Triangle Texture Data
+		std::vector<Entropy::Graphics::Texture> textures;
+
+
+		// Construct Data
+		Entropy::Graphics::Mesh triangle(vertices, indices, textures);
+
+		// Load Shader
+		Entropy::GLShader shader("vShader.glsl", "fShader.glsl");
+
 		// Render Loop
 		while (!window.getShouldClose())
 		{
@@ -21,6 +47,7 @@ int main(int argc, char* argv[])
 
 			// Render
 			window.clear();
+			triangle.Draw(shader);
 
 			// Update
 			window.processEvents();

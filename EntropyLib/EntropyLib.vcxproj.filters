@@ -114,11 +114,11 @@
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files\Graphics\Object Handling</Filter>
-    </ClCompile>
     <ClCompile Include="Entropy\Graphics\Window.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Graphics\Mesh.cpp">
+      <Filter>Source Files\Graphics\Object Handling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,11 +176,11 @@
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\DebugTools\Profiling</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Header Files\Graphics\ObjectHandling</Filter>
-    </ClInclude>
     <ClInclude Include="Entropy\Graphics\Window.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\Mesh.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
