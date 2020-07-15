@@ -123,7 +123,7 @@ Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, 
 	return Matrix4(
 		1.0f / (aspectRatio * tanHalfFOV), 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f / tanHalfFOV, 0.0f, 0.0f,
-		0.0f, 0.0f, zFar / (zNear - zFar), -(zFar * zNear) / (zFar - zNear),
+		0.0f, 0.0f, -(zFar + zNear) / (zFar - zNear), -(2.0f * zFar * zNear) / (zFar - zNear),
 		0.0f, 0.0f, -1.0f, 0.0f
 	);
 }

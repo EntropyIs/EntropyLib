@@ -39,7 +39,7 @@ void Entropy::GLCamera::updatePosition(CameraMovement direction, float deltaTime
 void Entropy::GLCamera::updateRotation(float xOffset, float yOffset, bool constrainPitch, float minPitch, float maxPitch)
 {
 	yaw -= xOffset;
-	pitch += yOffset;
+	pitch -= yOffset;
 
 	if (constrainPitch)
 	{

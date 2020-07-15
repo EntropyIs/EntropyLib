@@ -7,7 +7,7 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		enum __declspec(dllexport) GLKeys
+		enum class __declspec(dllexport) GLKeys
 		{
 			KEY_SPACE = 32,
 			KEY_APOSTROPHE = 39,  /* ' */

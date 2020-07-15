@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		// Initalize Window
-		Entropy::Graphics::Window window("My OpenGL Window");
+		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
 		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Load Cube Position Data
@@ -99,7 +99,19 @@ int main(int argc, char* argv[])
 		Entropy::GLCamera camera(Entropy::Math::Vector3(0.0f, 0.0f, 3.0f), Entropy::Math::Vector3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
-		Entropy::Math::Vector4 cubePos(0.0f, 0.0f, 0.0f);
+		Entropy::Math::Vector4 cubePos[] = {
+		Entropy::Math::Vector4(0.0f,  0.0f,  0.0f),
+		Entropy::Math::Vector4(2.0f,  5.0f, -15.0f),
+		Entropy::Math::Vector4(-1.5f, -2.2f, -2.5f),
+		Entropy::Math::Vector4(-3.8f, -2.0f, -12.3f),
+		Entropy::Math::Vector4(2.4f, -0.4f, -3.5f),
+		Entropy::Math::Vector4(-1.7f,  3.0f, -7.5f),
+		Entropy::Math::Vector4(1.3f, -2.0f, -2.5f),
+		Entropy::Math::Vector4(1.5f,  2.0f, -2.5f),
+		Entropy::Math::Vector4(1.5f,  0.2f, -1.5f),
+		Entropy::Math::Vector4(-1.3f,  1.0f, -1.5f)
+		};
+
 		float cubeAngle = 0.0f;
 
 		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
@@ -130,20 +142,29 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
-			Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), window.Width / window.Height, 0.1f, 100.0f);
+			Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
 			Entropy::Math::Matrix4 view = camera.getViewMatrix();
-			Entropy::Math::Matrix4 model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
+			Entropy::Math::Matrix4 model;
 
-			model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
-			lightingShader.use();
-			lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
-			lightingShader.setVec3("lightColor", Entropy::Math::Vector3(1.0f, 1.0f, 1.0f));
-			lightingShader.setVec3("lightPos", lightPos);
-			lightingShader.setVec3("viewPos", camera.position);
-			lightingShader.setMat4("projection", projection);
-			lightingShader.setMat4("view", view);
-			lightingShader.setMat4("model", model);
-			block.Draw(lightingShader);
+			for (unsigned int i = 0; i < 10; i++)
+			{
+				float offset = 20.0f * i;
+
+				if(i%3 == 0)
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
+				else
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
+
+				lightingShader.use();
+				lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
+				lightingShader.setVec3("lightColor", Entropy::Math::Vector3(1.0f, 1.0f, 1.0f));
+				lightingShader.setVec3("lightPos", lightPos);
+				lightingShader.setVec3("viewPos", camera.position);
+				lightingShader.setMat4("projection", projection);
+				lightingShader.setMat4("view", view);
+				lightingShader.setMat4("model", model);
+				block.Draw(lightingShader);
+			}
 
 			model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(lightPos.i, lightPos.j, lightPos.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
 			lightCubeShader.use();

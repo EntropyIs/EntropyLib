@@ -56,7 +56,7 @@ bool Entropy::Graphics::Window::getShouldClose()
 
 bool Entropy::Graphics::Window::getKeyPressed(GLKeys key)
 {
-	return glfwGetKey(GLWindow, key) == GLFW_PRESS;
+	return glfwGetKey(GLWindow, static_cast<int>(key)) == GLFW_PRESS;
 }
 
 void Entropy::Graphics::Window::setWindowClearColor(float red, float green, float blue, float alpha)
@@ -115,15 +115,15 @@ void Entropy::Graphics::Window::mouse_movement_callback(GLFWwindow* glWindow, do
 
 	if (window->MouseDelta.FirstMouse)
 	{
-		window->MouseDelta.LastX = xPos;
-		window->MouseDelta.LastY = yPos;
+		window->MouseDelta.LastX = (float)xPos;
+		window->MouseDelta.LastY = (float)yPos;
 		window->MouseDelta.FirstMouse = false;
 	}
 
-	window->MouseDelta.XOffset = (xPos - window->MouseDelta.LastX) * window->MouseSensitivity;
-	window->MouseDelta.YOffset = (yPos - window->MouseDelta.LastY) * window->MouseSensitivity;
-	window->MouseDelta.LastX = xPos;
-	window->MouseDelta.LastY = yPos;
+	window->MouseDelta.XOffset = ((float)xPos - window->MouseDelta.LastX) * window->MouseSensitivity;
+	window->MouseDelta.YOffset = ((float)yPos - window->MouseDelta.LastY) * window->MouseSensitivity;
+	window->MouseDelta.LastX = (float)xPos;
+	window->MouseDelta.LastY = (float)yPos;
 
 	window->MouseDelta.MoveTrigger = true;
 }
@@ -132,8 +132,8 @@ void Entropy::Graphics::Window::mouse_scroll_callback(GLFWwindow* glWindow, doub
 {
 	Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glWindow));
 
-	window->MouseDelta.ScrollXOffset = xOffset;
-	window->MouseDelta.ScrollYOffset = yOffset;
+	window->MouseDelta.ScrollXOffset = (float)xOffset;
+	window->MouseDelta.ScrollYOffset = (float)yOffset;
 
 	window->MouseDelta.ScrollTrigger = true;
 }
