@@ -23,7 +23,6 @@
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="GLCamera.cpp" />
-    <ClCompile Include="GLMouse.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Converters.cpp" />
@@ -44,8 +43,6 @@
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="GLCamera.h" />
-    <ClInclude Include="GLKeys.h" />
-    <ClInclude Include="GLMouse.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />

@@ -102,9 +102,6 @@
     <ClCompile Include="Converters.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="GLMouse.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="GLCamera.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -122,9 +119,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLKeys.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Timing</Filter>
     </ClInclude>
@@ -163,9 +157,6 @@
     </ClInclude>
     <ClInclude Include="Converters.h">
       <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="GLMouse.h">
-      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GLCamera.h">
       <Filter>Header Files\Graphics</Filter>
