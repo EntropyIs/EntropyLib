@@ -72,16 +72,12 @@ int main(int argc, char* argv[])
 		indices.push_back(20); indices.push_back(21); indices.push_back(22);
 		indices.push_back(22); indices.push_back(23); indices.push_back(20);
 
-		// Load Triangle Texture Data
-		
-		
-
+		//Load Texture Data
 		std::vector<Entropy::Graphics::Texture> textures;
 		Entropy::Texture specularMap("assets/container2_specular.bmp");
 		textures.push_back(Entropy::Graphics::Texture(specularMap.ID, "texture_specular"));
 		Entropy::Texture diffuseMap("assets/container2.bmp");
 		textures.push_back(Entropy::Graphics::Texture(diffuseMap.ID, "texture_diffuse"));
-		
 
 		// Construct Data
 		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
@@ -138,7 +134,7 @@ int main(int argc, char* argv[])
 
 		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
 
-		Entropy::Math::Vector3 lightColor(1.0f, 1.0f, 1.0f);
+		Entropy::Math::Vector3 lightColor(0.5f, 0.5f, 1.0f);
 		Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
 		Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
 
@@ -180,7 +176,10 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 
-				model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
+				if(i % 3 == 0)
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
+				else
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
 
 				lightingShader.setMaterial(cubeMaterial[i]);
 
