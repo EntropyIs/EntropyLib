@@ -43,7 +43,8 @@ namespace Entropy
 			static Material RedRubber = Material(0.05f, 0.0f, 0.0f, 0.5f, 0.4f, 0.4f, 0.7f, 0.04f, 0.04f, 0.078125f);
 			static Material WhiteRubber = Material(0.05f, 0.05f, 0.05f, 0.5f, 0.5f, 0.5f, 0.7f, 0.7f, 0.7f, 0.078125f);
 			static Material YellowRubber = Material(0.05f, 0.05f, 0.0f, 0.5f, 0.5f, 0.4f, 0.7f, 0.7f, 0.04f, 0.078125f);
-
+			
+			static Material White = Material(0.2f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f, 0.5f, 0.5f, 0.5f, 0.1f);
 		}
 	}
 }

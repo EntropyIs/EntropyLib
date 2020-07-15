@@ -73,10 +73,14 @@ int main(int argc, char* argv[])
 		indices.push_back(22); indices.push_back(23); indices.push_back(20);
 
 		// Load Triangle Texture Data
-		Entropy::Texture boxTexture("assets/container2.bmp");
+		
+		
 
 		std::vector<Entropy::Graphics::Texture> textures;
+		Entropy::Texture boxTexture("assets/container2.bmp");
 		textures.push_back(Entropy::Graphics::Texture(boxTexture.ID, "texture_diffuse"));
+		Entropy::Texture boxSpecular("assets/container2_specular.bmp");
+		textures.push_back(Entropy::Graphics::Texture(boxSpecular.ID, "texture_specular"));
 
 		// Construct Data
 		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
@@ -117,16 +121,16 @@ int main(int argc, char* argv[])
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
-			Entropy::Graphics::Materials::Emerald,
-			Entropy::Graphics::Materials::Jade,
-			Entropy::Graphics::Materials::Obsidian,
-			Entropy::Graphics::Materials::Pearl,
-			Entropy::Graphics::Materials::Ruby,
-			Entropy::Graphics::Materials::Bronze,
-			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Copper,
-			Entropy::Graphics::Materials::Gold,
-			Entropy::Graphics::Materials::Silver,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::White,
 		};
 
 		float cubeAngle = 0.0f;

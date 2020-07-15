@@ -12,8 +12,8 @@ struct Material {
     float shininess;
 
     sampler2D texture_diffuse1;
-    sampler2D texture_diffuse2;
-    sampler2D texture_diffuse3;
+
+    sampler2D texture_specular1;
 };
 
 struct Light {
@@ -32,21 +32,20 @@ uniform vec3 viewPos;
 void main()
 {
     // Ambient Lighting
-    vec3 ambient = light.ambient * vec3(texture(material.texture_diffuse1, texCoord));
+    vec3 ambient = light.ambient * vec3(texture(material.texture_diffuse1, texCoord)).rgb;
 
     // Diffuse Lighting
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position - fragPos);
 
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * diff * vec3(texture (material.texture_diffuse1, texCoord));
+    vec3 diffuse = light.diffuse * diff * vec3(texture (material.texture_diffuse1, texCoord)).rgb;
 
     // Specular Lighting
     vec3 viewDir = normalize(viewPos - fragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
-
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    vec3 specular = light.specular * spec * material.color_specular;
+    vec3 specular = light.specular * spec * vec3(texture(material.texture_specular1, texCoord)).rgb;
 
     // Combine lighting
     vec3 result = ambient + diffuse + specular;
