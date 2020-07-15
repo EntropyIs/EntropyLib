@@ -107,7 +107,7 @@ Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vect
 	}
 }
 
-void Entropy::Graphics::Shader::use()
+void Entropy::Graphics::Shader::use() const
 {
 	glUseProgram(ID);
 }
@@ -155,4 +155,13 @@ void Entropy::Graphics::Shader::setMat3(const char* name, const Math::Matrix3& v
 void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Matrix4& v0) const
 {
 	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+}
+
+void Entropy::Graphics::Shader::setMaterial(const Material& v0) const
+{
+	use();
+	setVec3("material.ambient", v0.Ambient);
+	setVec3("material.diffuse", v0.Diffuse);
+	setVec3("material.specular", v0.Specular);
+	setFloat("material.shininess", v0.Shininess);
 }

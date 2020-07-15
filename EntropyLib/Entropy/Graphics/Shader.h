@@ -7,6 +7,8 @@
 #include "../../Matrix3.h"
 #include "../../Matrix4.h"
 
+#include "Material.h"
+
 #include <vector>
 
 namespace Entropy
@@ -21,7 +23,7 @@ namespace Entropy
 			unsigned int compile(const char* path, unsigned int type);
 		public:
 			Shader(std::vector<const char*> shaderPath, std::vector<unsigned int> shaderType);
-			void use();
+			void use() const;
 
 			void setBool(const char* name, bool v0) const;
 			void setInt(const char* name, int v0) const;
@@ -34,6 +36,8 @@ namespace Entropy
 			void setMat2(const char* name, const Math::Matrix2& v0) const;
 			void setMat3(const char* name, const Math::Matrix3& v0) const;
 			void setMat4(const char* name, const Math::Matrix4& v0) const;
+
+			void setMaterial(const Material& v0) const;
 		};
 	}
 }

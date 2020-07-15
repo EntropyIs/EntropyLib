@@ -112,6 +112,19 @@ int main(int argc, char* argv[])
 		Entropy::Math::Vector4(-1.3f,  1.0f, -1.5f)
 		};
 
+		Entropy::Graphics::Material cubeMaterial[] = {
+			Entropy::Graphics::Materials::Emerald,
+			Entropy::Graphics::Materials::Jade,
+			Entropy::Graphics::Materials::Obsidian,
+			Entropy::Graphics::Materials::Pearl,
+			Entropy::Graphics::Materials::Ruby,
+			Entropy::Graphics::Materials::Turquoise,
+			Entropy::Graphics::Materials::Brass,
+			Entropy::Graphics::Materials::Bronze,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Gold,
+		};
+
 		float cubeAngle = 0.0f;
 
 		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
@@ -146,25 +159,23 @@ int main(int argc, char* argv[])
 			Entropy::Math::Matrix4 view = camera.getViewMatrix();
 			Entropy::Math::Matrix4 model;
 
+			Entropy::Math::Vector3 lightColor(1.0f, 0.95f, 0.89f);
+			Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
+			Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
+
+			// Render Cubes
 			for (unsigned int i = 0; i < 10; i++)
 			{
 				float offset = 1.0f * i;
 
-				if(i%3 == 0)
-					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
-				else
-					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
+				model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
 
-				lightingShader.use();
-				lightingShader.setVec3("material.ambient", Entropy::Math::Vector3(1.0f,0.5f,0.31f));
-				lightingShader.setVec3("material.diffuse", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
-				lightingShader.setVec3("material.specular", Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
-				lightingShader.setFloat("material.shininess", 32.0f);
+				lightingShader.setMaterial(cubeMaterial[i]);
 
 				lightingShader.setVec3("light.position", lightPos);
-				lightingShader.setVec3("light.ambient", Entropy::Math::Vector3(0.2f, 0.2f, 0.2f));
-				lightingShader.setVec3("light.diffuse", Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
-				lightingShader.setVec3("light.specular", Entropy::Math::Vector3(1.0f, 1.0f, 1.0f));
+				lightingShader.setVec3("light.ambient", lightAmbient);
+				lightingShader.setVec3("light.diffuse", lightDiffuse);
+				lightingShader.setVec3("light.specular", lightColor);
 
 				lightingShader.setVec3("viewPos", camera.position);
 
@@ -174,8 +185,10 @@ int main(int argc, char* argv[])
 				block.Draw(lightingShader);
 			}
 
+			// Render Light Source
 			model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(lightPos.i, lightPos.j, lightPos.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
 			lightCubeShader.use();
+			lightCubeShader.setVec3("lightColor", lightColor);
 			lightCubeShader.setMat4("projection", projection);
 			lightCubeShader.setMat4("view", view);
 			lightCubeShader.setMat4("model", model);
