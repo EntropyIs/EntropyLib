@@ -6,6 +6,7 @@
 #include <Clock.h>
 #include <Matrix4Ext.h>
 #include <Converters.h>
+#include <GLTexture.h>
 
 #include <vector>
 #include <exception>
@@ -21,35 +22,35 @@ int main(int argc, char* argv[])
 
 		// Load Cube Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex( 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex( 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex( 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex( 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f));
 
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f));
 
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f));
 
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f));
 
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f));
 
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f));
 
 		// Load Triangle Index Data
 		std::vector<unsigned int> indices;
@@ -72,7 +73,10 @@ int main(int argc, char* argv[])
 		indices.push_back(22); indices.push_back(23); indices.push_back(20);
 
 		// Load Triangle Texture Data
+		Entropy::Texture boxTexture("assets/container2.bmp");
+
 		std::vector<Entropy::Graphics::Texture> textures;
+		textures.push_back(Entropy::Graphics::Texture(boxTexture.ID, "texture_diffuse"));
 
 		// Construct Data
 		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
@@ -132,6 +136,9 @@ int main(int argc, char* argv[])
 		Entropy::Math::Vector3 lightColor(1.0f, 1.0f, 1.0f);
 		Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
 		Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
+
+		// Load Textures
+		
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;

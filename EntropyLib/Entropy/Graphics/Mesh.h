@@ -25,9 +25,9 @@ namespace Entropy
 		struct __declspec(dllexport) Texture
 		{
 			unsigned int ID;
-			char* Type;
+			const char* Type;
 
-			Texture(unsigned int ID, char* type) : ID(ID), Type(type) {};
+			Texture(unsigned int ID, const char* type) : ID(ID), Type(type) {};
 		};
 
 		class __declspec(dllexport) Mesh

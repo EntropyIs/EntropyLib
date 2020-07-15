@@ -160,8 +160,8 @@ void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Matrix4& v
 void Entropy::Graphics::Shader::setMaterial(const Material& v0) const
 {
 	use();
-	setVec3("material.ambient", v0.Ambient);
-	setVec3("material.diffuse", v0.Diffuse);
-	setVec3("material.specular", v0.Specular);
+	setVec3("material.color_ambient", v0.Ambient);
+	setVec3("material.color_diffuse", v0.Diffuse);
+	setVec3("material.color_specular", v0.Specular);
 	setFloat("material.shininess", v0.Shininess);
 }
