@@ -77,10 +77,11 @@ int main(int argc, char* argv[])
 		
 
 		std::vector<Entropy::Graphics::Texture> textures;
-		Entropy::Texture boxTexture("assets/container2.bmp");
-		textures.push_back(Entropy::Graphics::Texture(boxTexture.ID, "texture_diffuse"));
-		Entropy::Texture boxSpecular("assets/container2_specular.bmp");
-		textures.push_back(Entropy::Graphics::Texture(boxSpecular.ID, "texture_specular"));
+		Entropy::Texture specularMap("assets/container2_specular.bmp");
+		textures.push_back(Entropy::Graphics::Texture(specularMap.ID, "texture_specular"));
+		Entropy::Texture diffuseMap("assets/container2.bmp");
+		textures.push_back(Entropy::Graphics::Texture(diffuseMap.ID, "texture_diffuse"));
+		
 
 		// Construct Data
 		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
