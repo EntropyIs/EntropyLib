@@ -49,7 +49,7 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 			std::cout << "-- --------------------------------------------------- --" << std::endl;
 #endif
 			std::string errString = "Error Compiling " + shaderType + ".";
-			throw errString;
+			throw std::exception(errString.c_str());
 		}
 		return compileID;
 	}
@@ -59,7 +59,7 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 #ifdef _DEBUG
 		std::cout << errString << std::endl;
 #endif // _DEBUG
-		throw errString;
+		throw std::exception(errString.c_str());
 	}
 }
 

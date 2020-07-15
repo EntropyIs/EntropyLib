@@ -2,6 +2,11 @@
 #include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Shader.h>
 
+#include <GLCamera.h>
+
+#include <Matrix4Ext.h>
+#include <Converters.h>
+
 #include <vector>
 #include <exception>
 #include <iostream>
@@ -12,34 +17,70 @@ int main(int argc, char* argv[])
 	{
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window");
-		window.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-		// Load Triangle Position Data
+		// Load Cube Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;
-		vertices.push_back(Entropy::Graphics::Vertex(0.0f, 0.5f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex( -0.5f,  0.5f, -0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex( -0.5f, -0.5f, -0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex(  0.5f, -0.5f, -0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex(  0.5f,  0.5f, -0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex( -0.5f,  0.5f,  0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex( -0.5f, -0.5f,  0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex(  0.5f, -0.5f,  0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex(  0.5f,  0.5f,  0.5f));
 
 		// Load Triangle Index Data
 		std::vector<unsigned int> indices;
-		indices.push_back(0);
-		indices.push_back(1);
-		indices.push_back(2);
+		indices.push_back(0); indices.push_back(1); indices.push_back(2);
+		indices.push_back(0); indices.push_back(2); indices.push_back(3);
+		indices.push_back(3); indices.push_back(2); indices.push_back(6);
+		indices.push_back(3); indices.push_back(6); indices.push_back(7);
+		indices.push_back(7); indices.push_back(6); indices.push_back(5);
+		indices.push_back(7); indices.push_back(5); indices.push_back(4);
+		indices.push_back(4); indices.push_back(5); indices.push_back(1);
+		indices.push_back(4); indices.push_back(1); indices.push_back(0);
+		indices.push_back(1); indices.push_back(5); indices.push_back(6);
+		indices.push_back(1); indices.push_back(6); indices.push_back(2);
+		indices.push_back(4); indices.push_back(0); indices.push_back(3);
+		indices.push_back(4); indices.push_back(3); indices.push_back(7);
 
 		// Load Triangle Texture Data
 		std::vector<Entropy::Graphics::Texture> textures;
 
 		// Construct Data
-		Entropy::Graphics::Mesh triangle(vertices, indices, textures);
+		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
+		Entropy::Graphics::Mesh block(vertices, indices, textures);
 
 		// Load Shader
-		std::vector<const char*> shaderPaths;
-		shaderPaths.push_back("vShader.glsl");
-		shaderPaths.push_back("fShader.glsl");
-		std::vector<unsigned int> shaderTypes;
-		shaderTypes.push_back(GL_VERTEX_SHADER);
-		shaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader shader(shaderPaths, shaderTypes);
+		std::vector<const char*> lightingShaderPaths;
+		lightingShaderPaths.push_back("vLightingShader.glsl");
+		lightingShaderPaths.push_back("fLightingShader.glsl");
+		std::vector<unsigned int> lightingShaderTypes;
+		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
+		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader lightingShader(lightingShaderPaths, lightingShaderTypes);
+
+		std::vector<const char*> lightCubeShaderPaths;
+		lightCubeShaderPaths.push_back("vLightCubeShader.glsl");
+		lightCubeShaderPaths.push_back("fLightCubeShader.glsl");
+		std::vector<unsigned int> lightCubeShaderTypes;
+		lightCubeShaderTypes.push_back(GL_VERTEX_SHADER);
+		lightCubeShaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader lightCubeShader(lightCubeShaderPaths, lightCubeShaderTypes);
+
+		// Setup Camera
+		Entropy::GLCamera camera(Entropy::Math::Vector3(0.0f, 0.0f, 3.0f), Entropy::Math::Vector3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+
+		// Offset Vectors
+		Entropy::Math::Vector4 cubePos(0.0f, 0.0f, 0.0f);
+		float cubeAngle = 0.0f;
+
+		Entropy::Math::Vector4 lightPos(1.2f, 1.0f, 2.0f);
+
+		Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(45.0f), window.Width / window.Height, 0.1f, 100.0f);
+		Entropy::Math::Matrix4 view = camera.getViewMatrix();
+		Entropy::Math::Matrix4 model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
 
 		// Render Loop
 		while (!window.getShouldClose())
@@ -51,10 +92,27 @@ int main(int argc, char* argv[])
 
 			// Render
 			window.clear();
-			triangle.Draw(shader);
+
+			model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
+			lightingShader.use();
+			lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
+			lightingShader.setVec3("lightColor", Entropy::Math::Vector3(1.0f, 1.0f, 1.0f));
+			lightingShader.setMat4("projection", projection);
+			lightingShader.setMat4("view", view);
+			lightingShader.setMat4("model", model);
+			block.Draw(lightingShader);
+
+			model = Entropy::Math::TranslationMatrix4(lightPos) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
+			lightCubeShader.use();
+			lightCubeShader.setMat4("projection", projection);
+			lightCubeShader.setMat4("view", view);
+			lightCubeShader.setMat4("model", model);
+			lightSource.Draw(lightCubeShader);
 
 			// Update
 			window.processEvents();
+
+			cubeAngle += 0.01f;
 		}
 		return 0;
 	}

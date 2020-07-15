@@ -18,10 +18,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fShader.glsl">
+    <None Include="vLightingShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="vShader.glsl">
+    <None Include="fLightingShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vLightCubeShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fLightCubeShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
