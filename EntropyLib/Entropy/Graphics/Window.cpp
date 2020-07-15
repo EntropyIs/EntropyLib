@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Entropy::Graphics::Window::Window(const char* title, const unsigned int width, const unsigned int height) : Width(width), Height(height)
+Entropy::Graphics::Window::Window(const char* title, const unsigned int width, const unsigned int height) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f)
 {
 	// Initialize GLFW
 	try
@@ -17,11 +17,16 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 			std::cout << "Failed to create GLFW Window." << std::endl;
 #endif // _DEBUG
 			glfwTerminate();
-			throw "Failed to create GLFW Window.";
+			throw std::exception("Failed to create GLFW Window.");
 		}
 		glfwMakeContextCurrent(GLWindow);
 		glfwSetWindowUserPointer(GLWindow, reinterpret_cast<void*>(this));
+
 		glfwSetFramebufferSizeCallback(GLWindow, framebuffer_size_callback);
+		glfwSetCursorPosCallback(GLWindow, mouse_movement_callback);
+		glfwSetScrollCallback(GLWindow, mouse_scroll_callback);
+
+		glfwSetInputMode(GLWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		// Initialize GLEW
 		initializeGLEW();
@@ -29,7 +34,7 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 	}
 	catch (std::exception e)
 	{
-		throw;
+		throw e;
 	}
 }
 
@@ -72,7 +77,7 @@ void Entropy::Graphics::Window::initializeGLFW()
 #ifdef _DEBUG
 		std::cout << "Failed to initalize GLFW." << std::endl;
 #endif // _DEBUG
-		throw "Failed to initialize GLFW.";
+		throw std::exception("Failed to initialize GLFW.");
 	}
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -92,7 +97,7 @@ void Entropy::Graphics::Window::initializeGLEW()
 #ifdef _DEBUG
 		std::cout << "Failed to initialize GLEW.\n" << glewGetErrorString(error);
 #endif // _DEBUG
-		throw "Failed to initialize GLEW.";
+		throw std::exception("Failed to initialize GLEW.");
 	}
 }
 
@@ -102,4 +107,33 @@ void Entropy::Graphics::Window::framebuffer_size_callback(GLFWwindow* glWindow, 
 	glViewport(0, 0, width, height);
 	window->Width = width;
 	window->Height = height;
+}
+
+void Entropy::Graphics::Window::mouse_movement_callback(GLFWwindow* glWindow, double xPos, double yPos)
+{
+	Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glWindow));
+
+	if (window->MouseDelta.FirstMouse)
+	{
+		window->MouseDelta.LastX = xPos;
+		window->MouseDelta.LastY = yPos;
+		window->MouseDelta.FirstMouse = false;
+	}
+
+	window->MouseDelta.XOffset = (xPos - window->MouseDelta.LastX) * window->MouseSensitivity;
+	window->MouseDelta.YOffset = (yPos - window->MouseDelta.LastY) * window->MouseSensitivity;
+	window->MouseDelta.LastX = xPos;
+	window->MouseDelta.LastY = yPos;
+
+	window->MouseDelta.MoveTrigger = true;
+}
+
+void Entropy::Graphics::Window::mouse_scroll_callback(GLFWwindow* glWindow, double xOffset, double yOffset)
+{
+	Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glWindow));
+
+	window->MouseDelta.ScrollXOffset = xOffset;
+	window->MouseDelta.ScrollYOffset = yOffset;
+
+	window->MouseDelta.ScrollTrigger = true;
 }

@@ -104,10 +104,6 @@ int main(int argc, char* argv[])
 
 		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
 
-		Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(45.0f), window.Width / window.Height, 0.1f, 100.0f);
-		Entropy::Math::Matrix4 view = camera.getViewMatrix();
-		Entropy::Math::Matrix4 model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
-
 		// Setup Clock
 		Entropy::Timing::Clock clock;
 		clock.initialize();
@@ -134,7 +130,10 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
-			view = camera.getViewMatrix();
+			Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), window.Width / window.Height, 0.1f, 100.0f);
+			Entropy::Math::Matrix4 view = camera.getViewMatrix();
+			Entropy::Math::Matrix4 model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
+
 			model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
 			lightingShader.use();
 			lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
@@ -156,6 +155,12 @@ int main(int argc, char* argv[])
 			// Update
 			clock.poll();
 			window.processEvents();
+
+			if (window.MouseDelta.MoveTrigger)
+			{
+				camera.updateRotation(window.MouseDelta.XOffset, window.MouseDelta.YOffset);
+				window.MouseDelta.MoveTrigger = false;
+			}
 
 			cubeAngle += 1.0f * clock.timeElapsed();
 		}

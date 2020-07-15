@@ -133,11 +133,32 @@ namespace Entropy
 			KEY_MENU = 348
 		};
 
+		struct __declspec(dllexport) Mouse
+		{
+			float LastY;
+			float LastX;
+			
+			float XOffset;
+			float YOffset;
+			
+			float ScrollXOffset;
+			float ScrollYOffset;
+
+			bool FirstMouse;
+			bool MoveTrigger;
+			bool ScrollTrigger;
+
+			Mouse(float lastY, float lastX) : LastY(lastY), LastX(lastX), XOffset(0.0f), YOffset(0.0f), ScrollXOffset(0.0f), ScrollYOffset(0.0f), FirstMouse(true), MoveTrigger(false), ScrollTrigger(false) {};
+		};
+
 		class __declspec(dllexport) Window
 		{
 		public:
 			GLFWwindow* GLWindow;
 			unsigned int Width, Height;
+			float MouseSensitivity;
+
+			Mouse MouseDelta;
 
 			Window(const char* title, const unsigned int width = 800, const unsigned int height = 600);
 			
@@ -154,6 +175,8 @@ namespace Entropy
 			void initializeGLEW();
 
 			static void framebuffer_size_callback(GLFWwindow* glWindow, int width, int height);
+			static void mouse_movement_callback(GLFWwindow* glWindow, double xPos, double yPos);
+			static void mouse_scroll_callback(GLFWwindow* glWindow, double xOffset, double yOffset);
 		};
 	}
 }
