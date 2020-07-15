@@ -21,29 +21,55 @@ int main(int argc, char* argv[])
 
 		// Load Cube Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;
-		vertices.push_back(Entropy::Graphics::Vertex( -0.5f,  0.5f, -0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex( -0.5f, -0.5f, -0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex(  0.5f, -0.5f, -0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex(  0.5f,  0.5f, -0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex( -0.5f,  0.5f,  0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex( -0.5f, -0.5f,  0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex(  0.5f, -0.5f,  0.5f));
-		vertices.push_back(Entropy::Graphics::Vertex(  0.5f,  0.5f,  0.5f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex( 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex( 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f));
+
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f));
+
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f));
+
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f));
+
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f));
+
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f));
+		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f));
 
 		// Load Triangle Index Data
 		std::vector<unsigned int> indices;
 		indices.push_back(0); indices.push_back(1); indices.push_back(2);
-		indices.push_back(0); indices.push_back(2); indices.push_back(3);
-		indices.push_back(3); indices.push_back(2); indices.push_back(6);
-		indices.push_back(3); indices.push_back(6); indices.push_back(7);
-		indices.push_back(7); indices.push_back(6); indices.push_back(5);
-		indices.push_back(7); indices.push_back(5); indices.push_back(4);
-		indices.push_back(4); indices.push_back(5); indices.push_back(1);
-		indices.push_back(4); indices.push_back(1); indices.push_back(0);
-		indices.push_back(1); indices.push_back(5); indices.push_back(6);
-		indices.push_back(1); indices.push_back(6); indices.push_back(2);
-		indices.push_back(4); indices.push_back(0); indices.push_back(3);
-		indices.push_back(4); indices.push_back(3); indices.push_back(7);
+		indices.push_back(2); indices.push_back(3); indices.push_back(0);
+
+		indices.push_back(4); indices.push_back(5); indices.push_back(6);
+		indices.push_back(6); indices.push_back(7); indices.push_back(4);
+
+		indices.push_back(8); indices.push_back(9); indices.push_back(10);
+		indices.push_back(10); indices.push_back(11); indices.push_back(8);
+
+		indices.push_back(12); indices.push_back(13); indices.push_back(14);
+		indices.push_back(14); indices.push_back(15); indices.push_back(12);
+
+		indices.push_back(16); indices.push_back(17); indices.push_back(18);
+		indices.push_back(18); indices.push_back(19); indices.push_back(16);
+
+		indices.push_back(20); indices.push_back(21); indices.push_back(22);
+		indices.push_back(22); indices.push_back(23); indices.push_back(20);
 
 		// Load Triangle Texture Data
 		std::vector<Entropy::Graphics::Texture> textures;
@@ -76,7 +102,7 @@ int main(int argc, char* argv[])
 		Entropy::Math::Vector4 cubePos(0.0f, 0.0f, 0.0f);
 		float cubeAngle = 0.0f;
 
-		Entropy::Math::Vector4 lightPos(1.2f, 1.0f, 2.0f);
+		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
 
 		Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(45.0f), window.Width / window.Height, 0.1f, 100.0f);
 		Entropy::Math::Matrix4 view = camera.getViewMatrix();
@@ -97,12 +123,14 @@ int main(int argc, char* argv[])
 			lightingShader.use();
 			lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
 			lightingShader.setVec3("lightColor", Entropy::Math::Vector3(1.0f, 1.0f, 1.0f));
+			lightingShader.setVec3("lightPos", lightPos);
+
 			lightingShader.setMat4("projection", projection);
 			lightingShader.setMat4("view", view);
 			lightingShader.setMat4("model", model);
 			block.Draw(lightingShader);
 
-			model = Entropy::Math::TranslationMatrix4(lightPos) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
+			model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(lightPos.i, lightPos.j, lightPos.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
 			lightCubeShader.use();
 			lightCubeShader.setMat4("projection", projection);
 			lightCubeShader.setMat4("view", view);
