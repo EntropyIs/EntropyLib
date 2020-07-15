@@ -3,7 +3,7 @@
 #include <Entropy/Graphics/Shader.h>
 
 #include <GLCamera.h>
-
+#include <Clock.h>
 #include <Matrix4Ext.h>
 #include <Converters.h>
 
@@ -108,10 +108,25 @@ int main(int argc, char* argv[])
 		Entropy::Math::Matrix4 view = camera.getViewMatrix();
 		Entropy::Math::Matrix4 model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
 
+		// Setup Clock
+		Entropy::Timing::Clock clock;
+		clock.initialize();
+		clock.poll();
+
 		// Render Loop
 		while (!window.getShouldClose())
 		{
 			// Input
+
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed());
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed());
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_A))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed());
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_D))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed());
+
 			// Set window to close when KEY_ESCAPE is pressed
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_ESCAPE))
 				window.setShouldClose(true);
@@ -119,6 +134,7 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
+			view = camera.getViewMatrix();
 			model = Entropy::Math::TranslationMatrix4(cubePos) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(1.0f, 1.0f, 1.0f), cubeAngle);
 			lightingShader.use();
 			lightingShader.setVec3("objectColor", Entropy::Math::Vector3(1.0f, 0.5f, 0.31f));
@@ -138,9 +154,10 @@ int main(int argc, char* argv[])
 			lightSource.Draw(lightCubeShader);
 
 			// Update
+			clock.poll();
 			window.processEvents();
 
-			cubeAngle += 0.01f;
+			cubeAngle += 1.0f * clock.timeElapsed();
 		}
 		return 0;
 	}
