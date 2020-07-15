@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entropy\Graphics\Material.cpp" />
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entropy\Graphics\Material.h" />
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
