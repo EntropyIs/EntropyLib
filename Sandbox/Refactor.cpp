@@ -118,16 +118,20 @@ int main(int argc, char* argv[])
 			Entropy::Graphics::Materials::Obsidian,
 			Entropy::Graphics::Materials::Pearl,
 			Entropy::Graphics::Materials::Ruby,
-			Entropy::Graphics::Materials::Turquoise,
-			Entropy::Graphics::Materials::Brass,
 			Entropy::Graphics::Materials::Bronze,
 			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Copper,
 			Entropy::Graphics::Materials::Gold,
+			Entropy::Graphics::Materials::Silver,
 		};
 
 		float cubeAngle = 0.0f;
 
 		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
+
+		Entropy::Math::Vector3 lightColor(1.0f, 1.0f, 1.0f);
+		Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
+		Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;
@@ -158,10 +162,6 @@ int main(int argc, char* argv[])
 			Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
 			Entropy::Math::Matrix4 view = camera.getViewMatrix();
 			Entropy::Math::Matrix4 model;
-
-			Entropy::Math::Vector3 lightColor(1.0f, 0.95f, 0.89f);
-			Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
-			Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
 
 			// Render Cubes
 			for (unsigned int i = 0; i < 10; i++)
