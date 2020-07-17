@@ -1,5 +1,5 @@
 #include "Matrix4Ext.h"
-#include "Vector3.h"
+#include "Vec3.h"
 
 #include <cmath>
 
@@ -128,11 +128,11 @@ Entropy::Math::Matrix4 Entropy::Math::Perspective(float fov, float aspectRatio, 
 	);
 }
 
-Entropy::Math::Matrix4 Entropy::Math::LookAt(Vector3 cameraPos, Vector3 cameraTarget, Vector3 cameraUp)
+Entropy::Math::Matrix4 Entropy::Math::LookAt(Vec3 cameraPos, Vec3 cameraTarget, Vec3 cameraUp)
 {
-	Vector3 cd = normalize(cameraPos - cameraTarget);
-	Vector3 cr = normalize(cross(cd, cameraUp));
-	Vector3 cu = cross(cr, cd);
+	Vec3 cd = normalize(cameraPos - cameraTarget);
+	Vec3 cr = normalize(cross(cd, cameraUp));
+	Vec3 cu = cross(cr, cd);
 
 	return Matrix4(
 		cr.i, cr.j, cr.k, -dot(cr, cameraPos),

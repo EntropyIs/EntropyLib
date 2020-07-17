@@ -2,7 +2,7 @@
 
 #include "Matrix4.h"
 #include "Vector4.h"
-#include "Vector3.h"
+#include "Entropy/Math/Vec3.h"
 
 namespace Entropy
 {
@@ -32,6 +32,6 @@ namespace Entropy
 		Matrix4 __declspec(dllexport) Ortho(float left, float right, float top, float bottom, float zNear, float zFar);
 		Matrix4 __declspec(dllexport) Perspective(float fov, float aspectRatio, float zNear, float zFar);
 
-		Matrix4 __declspec(dllexport) LookAt(Vector3 cameraPos, Vector3 cameraTarget, Vector3 cameraUp);
+		Matrix4 __declspec(dllexport) LookAt(Vec3 cameraPos, Vec3 cameraTarget, Vec3 cameraUp);
 	}
 }

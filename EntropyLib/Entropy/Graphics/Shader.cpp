@@ -129,14 +129,14 @@ void Entropy::Graphics::Shader::setFloat(const char* name, float v0) const
 	glUniform1f(glGetUniformLocation(ID, name), v0);
 }
 
-void Entropy::Graphics::Shader::setVec2(const char* name, const Math::Vector2& v0) const
+void Entropy::Graphics::Shader::setVec2(const char* name, const Math::Vec2& v0) const
 {
-	glUniform2fv(glGetUniformLocation(ID, name), 1, v0.data);
+	glUniform2fv(glGetUniformLocation(ID, name), 1, v0.Data);
 }
 
-void Entropy::Graphics::Shader::setVec3(const char* name, const Math::Vector3& v0) const
+void Entropy::Graphics::Shader::setVec3(const char* name, const Math::Vec3& v0) const
 {
-	glUniform3fv(glGetUniformLocation(ID, name), 1, v0.data);
+	glUniform3fv(glGetUniformLocation(ID, name), 1, v0.Data);
 }
 
 void Entropy::Graphics::Shader::setVec4(const char* name, const Math::Vector4& v0) const

@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Shader lightCubeShader(lightCubeShaderPaths, lightCubeShaderTypes);
 
 		// Setup Camera
-		Entropy::GLCamera camera(Entropy::Math::Vector3(0.0f, 0.0f, 3.0f), Entropy::Math::Vector3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
 		Entropy::Math::Vector4 cubePos[] = {
@@ -133,20 +133,20 @@ int main(int argc, char* argv[])
 		float cubeAngle = 0.0f;
 
 		// Setup Lights
-		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vector3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vector3(0.2f, 0.2f, 0.2f), Entropy::Math::Vector3(0.4f, 0.4f, 0.4f), Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f, 0.2f, 0.2f), Entropy::Math::Vec3(0.4f, 0.4f, 0.4f), Entropy::Math::Vec3(0.5f, 0.5f, 0.5f));
 
-		Entropy::Math::Vector3 colors[] = {
-			Entropy::Math::Vector3(1.0f, 0.0f, 0.0f),
-			Entropy::Math::Vector3(0.0f, 1.0f, 0.0f),
-			Entropy::Math::Vector3(1.0f, 1.0f, 1.0f),
-			Entropy::Math::Vector3(0.0f, 0.0f, 1.0f)
+		Entropy::Math::Vec3 colors[] = {
+			Entropy::Math::Vec3(1.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(0.0f, 1.0f, 0.0f),
+			Entropy::Math::Vec3(1.0f, 1.0f, 1.0f),
+			Entropy::Math::Vec3(0.0f, 0.0f, 1.0f)
 		};
 
 		Entropy::Graphics::PointLight pointLights[] = {
-			Entropy::Graphics::PointLight(Entropy::Math::Vector3(0.7f, 0.2f, 0.2f), 1.0f, 0.09f, 0.032f, colors[0] * 0.1f, colors[0] * 0.8f, colors[0]),
-			Entropy::Graphics::PointLight(Entropy::Math::Vector3(2.3f, -3.3f, -4.0f), 1.0f, 0.09f, 0.032f, colors[1] * 0.1f, colors[1] * 0.8f, colors[1]),
-			Entropy::Graphics::PointLight(Entropy::Math::Vector3(-4.0f, 2.0f, -12.0f), 1.0f, 0.09f, 0.032f, colors[2] * 0.1f, colors[2] * 0.8f, colors[2]),
-			Entropy::Graphics::PointLight(Entropy::Math::Vector3(0.0f, 0.0f, -3.0f), 1.0f, 0.09f, 0.032f, colors[3] * 0.1f, colors[3] * 0.8f, colors[3])
+			Entropy::Graphics::PointLight(Entropy::Math::Vec3(0.7f, 0.2f, 0.2f), 1.0f, 0.09f, 0.032f, colors[0] * 0.1f, colors[0] * 0.8f, colors[0]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vec3(2.3f, -3.3f, -4.0f), 1.0f, 0.09f, 0.032f, colors[1] * 0.1f, colors[1] * 0.8f, colors[1]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vec3(-4.0f, 2.0f, -12.0f), 1.0f, 0.09f, 0.032f, colors[2] * 0.1f, colors[2] * 0.8f, colors[2]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vec3(0.0f, 0.0f, -3.0f), 1.0f, 0.09f, 0.032f, colors[3] * 0.1f, colors[3] * 0.8f, colors[3])
 		};
 
 		lightingShader.use();

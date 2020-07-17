@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Vector3.h"
-#include "../../Vector2.h"
+#include "../Math/Vec3.h"
+#include "../Math/Vec2.h"
 
 #include "Shader.h"
 
@@ -14,11 +14,11 @@ namespace Entropy
 	{
 		struct __declspec(dllexport) Vertex
 		{
-			Math::Vector3 Position;
-			Math::Vector3 Normal;
-			Math::Vector2 TexCoord;
+			Math::Vec3 Position;
+			Math::Vec3 Normal;
+			Math::Vec2 TexCoord;
 
-			Vertex(Math::Vector3 position, Math::Vector3 normal = Math::Vector3(), Math::Vector2 texCoord = Math::Vector2()) : Position(position), Normal(normal), TexCoord(texCoord) {};
+			Vertex(Math::Vec3 position, Math::Vec3 normal = Math::Vec3(), Math::Vec2 texCoord = Math::Vec2()) : Position(position), Normal(normal), TexCoord(texCoord) {};
 			Vertex(float x, float y, float z, float i = 0.0f, float j = 0.0f, float k = 0.0f, float tX = 0.0f, float tY = 0.0f) : Position(x, y, z), Normal(i, j, k), TexCoord(tX, tY) {};
 		};
 

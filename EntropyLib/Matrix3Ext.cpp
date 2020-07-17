@@ -2,16 +2,16 @@
 
 #include <cmath>
 
-Entropy::Math::Vector3 Entropy::Math::operator*(const Matrix3& left, const Vector3& right)
+Entropy::Math::Vec3 Entropy::Math::operator*(const Matrix3& left, const Vec3& right)
 {
-    return Vector3(
+    return Vec3(
         left.r0c0 * right.i + left.r0c1 * right.j + left.r0c2 * right.k,
         left.r1c0 * right.i + left.r1c1 * right.j + left.r1c2 * right.k,
         left.r2c0 * right.i + left.r2c1 * right.j + left.r2c2 * right.k
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(const Vector3& scaleVector)
+Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(const Vec3& scaleVector)
 {
     return Matrix3(
 		scaleVector.i, 0.0f, 0.0f,
@@ -38,7 +38,7 @@ Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float scale)
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(const Vector3& translationVector)
+Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(const Vec3& translationVector)
 {
     return Matrix3(
         1.0f, 0.0f, translationVector.i,

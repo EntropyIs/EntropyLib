@@ -3,8 +3,8 @@
 
 #include <cmath>
 
-Entropy::GLCamera::GLCamera(Math::Vector3 position, Math::Vector3 up, float yaw, float pitch)
-	: position(position), front(Math::Vector3(0.0f, 0.0f, -1.0f)), worldUp(up), yaw(yaw), pitch(pitch), zoom(45.0f)
+Entropy::GLCamera::GLCamera(Math::Vec3 position, Math::Vec3 up, float yaw, float pitch)
+	: position(position), front(Math::Vec3(0.0f, 0.0f, -1.0f)), worldUp(up), yaw(yaw), pitch(pitch), zoom(45.0f)
 {
 	updateVectors();
 }
@@ -63,7 +63,7 @@ void Entropy::GLCamera::updateFOV(float offset)
 
 void Entropy::GLCamera::updateVectors()
 {
-	Math::Vector3 direction(
+	Math::Vec3 direction(
 		cos(Math::radians(yaw)) * cos(Math::radians(pitch)),
 		sin(Math::radians(pitch)),
 		sin(Math::radians(yaw)) * cos(Math::radians(pitch)));
