@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	{
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
-		window.setWindowClearColor(0.75f, 0.52f, 0.3f, 1.0f);
+		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Load Cube Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;
@@ -118,28 +118,28 @@ int main(int argc, char* argv[])
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
-			Entropy::Graphics::Materials::Emerald,
-			Entropy::Graphics::Materials::Turquoise,
-			Entropy::Graphics::Materials::Ruby,
-			Entropy::Graphics::Materials::Bronze,
 			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Gold,
+			Entropy::Graphics::Materials::Silver,
 			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Gold,
+			Entropy::Graphics::Materials::Silver,
 			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Gold,
+			Entropy::Graphics::Materials::Silver,
 			Entropy::Graphics::Materials::Chrome,
 		};
 
 		float cubeAngle = 0.0f;
 
 		// Setup Lights
-		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vector3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vector3(0.3f, 0.24f, 0.14f), Entropy::Math::Vector3(0.7f, 0.42f, 0.26f), Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vector3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vector3(0.2f, 0.2f, 0.2f), Entropy::Math::Vector3(0.4f, 0.4f, 0.4f), Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
 
 		Entropy::Math::Vector3 colors[] = {
-			Entropy::Math::Vector3(1.0f, 0.6f, 0.0f),
 			Entropy::Math::Vector3(1.0f, 0.0f, 0.0f),
-			Entropy::Math::Vector3(1.0f, 1.0f, 0.0f),
-			Entropy::Math::Vector3(0.2f, 0.2f, 1.0f)
+			Entropy::Math::Vector3(0.0f, 1.0f, 0.0f),
+			Entropy::Math::Vector3(1.0f, 1.0f, 1.0f),
+			Entropy::Math::Vector3(0.0f, 0.0f, 1.0f)
 		};
 
 		Entropy::Graphics::PointLight pointLights[] = {

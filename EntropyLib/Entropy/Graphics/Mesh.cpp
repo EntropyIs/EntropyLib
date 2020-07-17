@@ -13,8 +13,8 @@ void Entropy::Graphics::Mesh::Draw(Shader& shader)
 {
 	shader.use();
 	// assign textures
-	unsigned int diffuseNr = 1;
-	unsigned int specularNr = 1;
+	unsigned int diffuseNr = 0;
+	unsigned int specularNr = 0;
 
 	for (unsigned int i = 0; i < textures.size(); i++)
 	{
@@ -27,8 +27,11 @@ void Entropy::Graphics::Mesh::Draw(Shader& shader)
 			number = std::to_string(diffuseNr++);
 		else if (name == "texture_specular")
 			number = std::to_string(specularNr++);
-		shader.setInt(("material." + name + number).c_str(), i);
+		shader.setInt(("material." + name + "[" + number  + "]").c_str(), i);
 	}
+
+	shader.setInt("material.diffuseNr", diffuseNr);
+	shader.setInt("material.specularNr", specularNr);
 
 	// draw mesh
 	glBindVertexArray(VAO);
