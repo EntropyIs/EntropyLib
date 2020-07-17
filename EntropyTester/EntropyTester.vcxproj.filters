@@ -58,6 +58,9 @@
     <ClCompile Include="ProfileTests.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
+    <ClCompile Include="Vec2Tests.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h">

@@ -151,6 +151,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Matrix2Tests.cpp" />
     <ClCompile Include="TimerTests.cpp" />
+    <ClCompile Include="Vec2Tests.cpp" />
     <ClCompile Include="Vector2Tests.cpp" />
     <ClCompile Include="Vector3Tests.cpp" />
     <ClCompile Include="Vector4Tests.cpp" />
