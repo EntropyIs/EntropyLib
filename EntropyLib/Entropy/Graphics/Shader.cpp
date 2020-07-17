@@ -6,6 +6,7 @@
 #include <iostream>
 #include <exception>
 #include <cassert>
+#include <cstring>
 
 unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int type)
 {
@@ -45,10 +46,11 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 				shaderType = "Fragment Shader";
 #ifdef _DEBUG
 			std::cout << "Error Compiling " << shaderType << std::endl;
+			std::cout << path << std::endl;
 			std::cout << errorLog << std::endl;
 			std::cout << "-- --------------------------------------------------- --" << std::endl;
 #endif
-			std::string errString = "Error Compiling " + shaderType + ".";
+			std::string errString = "Error Compiling " + shaderType + "." + std::string(path);
 			throw std::exception(errString.c_str());
 		}
 		return compileID;
@@ -159,9 +161,48 @@ void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Matrix4& v
 
 void Entropy::Graphics::Shader::setMaterial(const Material& v0) const
 {
-	use();
 	setVec3("material.color_ambient", v0.Ambient);
 	setVec3("material.color_diffuse", v0.Diffuse);
 	setVec3("material.color_specular", v0.Specular);
 	setFloat("material.shininess", v0.Shininess);
+}
+
+void Entropy::Graphics::Shader::setDirectionalLight(const DirectionalLight& v0) const
+{
+	setVec3("directionalLight.direction", v0.Direction);
+	setVec3("directionalLight.ambient", v0.Ambient);
+	setVec3("directionalLight.diffuse", v0.Diffuse);
+	setVec3("directionalLight.specular", v0.Specular);
+
+	setBool("directionalLight.use", true);
+}
+
+void Entropy::Graphics::Shader::setPointLight(unsigned int index, const PointLight& v0) const
+{
+	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].position").c_str(), v0.Position);
+
+	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].constant").c_str(), v0.Constant);
+	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].linear").c_str(), v0.Constant);
+	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].quadratic").c_str(), v0.Constant);
+
+	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].ambient").c_str(), v0.Ambient);
+	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].diffuse").c_str(), v0.Diffuse);
+	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].specular").c_str(), v0.Specular);
+
+	setBool(std::string("pointLights[").append(std::to_string(index)).append("].use").c_str(), true);
+}
+
+void Entropy::Graphics::Shader::setSpotLight(unsigned int index, const SpotLight& v0) const
+{
+	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].position").c_str(), v0.Position);
+	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].direction").c_str(), v0.Direction);
+
+	setFloat(std::string("spotLights[").append(std::to_string(index)).append("].innerCutOff").c_str(), v0.InnerCutOff);
+	setFloat(std::string("spotLights[").append(std::to_string(index)).append("].outerCutOff").c_str(), v0.OuterCutOff);
+
+	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].ambient").c_str(), v0.Ambient);
+	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].diffuse").c_str(), v0.Diffuse);
+	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].specular").c_str(), v0.Specular);
+
+	setBool(std::string("spotLights[").append(std::to_string(index)).append("].use").c_str(), true);
 }

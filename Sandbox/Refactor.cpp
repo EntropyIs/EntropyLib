@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	{
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
-		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		window.setWindowClearColor(0.75f, 0.52f, 0.3f, 1.0f);
 
 		// Load Cube Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;
@@ -132,14 +132,27 @@ int main(int argc, char* argv[])
 
 		float cubeAngle = 0.0f;
 
-		Entropy::Math::Vector3 lightPos(1.2f, 1.0f, 2.0f);
+		// Setup Lights
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vector3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vector3(0.3f, 0.24f, 0.14f), Entropy::Math::Vector3(0.7f, 0.42f, 0.26f), Entropy::Math::Vector3(0.5f, 0.5f, 0.5f));
 
-		Entropy::Math::Vector3 lightColor(0.5f, 0.5f, 1.0f);
-		Entropy::Math::Vector3 lightDiffuse = lightColor * 0.5f;
-		Entropy::Math::Vector3 lightAmbient = lightColor * 0.2f;
+		Entropy::Math::Vector3 colors[] = {
+			Entropy::Math::Vector3(1.0f, 0.6f, 0.0f),
+			Entropy::Math::Vector3(1.0f, 0.0f, 0.0f),
+			Entropy::Math::Vector3(1.0f, 1.0f, 0.0f),
+			Entropy::Math::Vector3(0.2f, 0.2f, 1.0f)
+		};
 
-		// Load Textures
-		
+		Entropy::Graphics::PointLight pointLights[] = {
+			Entropy::Graphics::PointLight(Entropy::Math::Vector3(0.7f, 0.2f, 0.2f), 1.0f, 0.09f, 0.032f, colors[0] * 0.1f, colors[0] * 0.8f, colors[0]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vector3(2.3f, -3.3f, -4.0f), 1.0f, 0.09f, 0.032f, colors[1] * 0.1f, colors[1] * 0.8f, colors[1]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vector3(-4.0f, 2.0f, -12.0f), 1.0f, 0.09f, 0.032f, colors[2] * 0.1f, colors[2] * 0.8f, colors[2]),
+			Entropy::Graphics::PointLight(Entropy::Math::Vector3(0.0f, 0.0f, -3.0f), 1.0f, 0.09f, 0.032f, colors[3] * 0.1f, colors[3] * 0.8f, colors[3])
+		};
+
+		lightingShader.use();
+		lightingShader.setDirectionalLight(directionalLight);
+		for (unsigned int i = 0; i < 4; i++)
+			lightingShader.setPointLight(i, pointLights[i]);
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;
@@ -150,7 +163,6 @@ int main(int argc, char* argv[])
 		while (!window.getShouldClose())
 		{
 			// Input
-
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
 				camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed());
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
@@ -176,20 +188,13 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 
-				if(i % 3 == 0)
+				if(i % 2 == 0)
 					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
 				else
 					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
 
 				lightingShader.setMaterial(cubeMaterial[i]);
-
-				lightingShader.setVec3("light.position", lightPos);
-				lightingShader.setVec3("light.ambient", lightAmbient);
-				lightingShader.setVec3("light.diffuse", lightDiffuse);
-				lightingShader.setVec3("light.specular", lightColor);
-
 				lightingShader.setVec3("viewPos", camera.position);
-
 				lightingShader.setMat4("projection", projection);
 				lightingShader.setMat4("view", view);
 				lightingShader.setMat4("model", model);
@@ -197,14 +202,18 @@ int main(int argc, char* argv[])
 			}
 
 			// Render Light Source
-			model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(lightPos.i, lightPos.j, lightPos.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
-			lightCubeShader.use();
-			lightCubeShader.setVec3("lightColor", lightColor);
-			lightCubeShader.setMat4("projection", projection);
-			lightCubeShader.setMat4("view", view);
-			lightCubeShader.setMat4("model", model);
-			lightSource.Draw(lightCubeShader);
-
+			for (unsigned int i = 0; i < 4; i++)
+			{
+				model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(pointLights[i].Position.i, pointLights[i].Position.j, pointLights[i].Position.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
+				
+				lightCubeShader.use();
+				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);
+				lightCubeShader.setMat4("projection", projection);
+				lightCubeShader.setMat4("view", view);
+				lightCubeShader.setMat4("model", model);
+				lightSource.Draw(lightCubeShader);
+			}
+			
 			// Update
 			clock.poll();
 			window.processEvents();

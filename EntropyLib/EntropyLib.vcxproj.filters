@@ -176,5 +176,8 @@
     <ClInclude Include="Entropy\Graphics\Material.h">
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
+    <ClInclude Include="Entropy\Graphics\Lighting.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

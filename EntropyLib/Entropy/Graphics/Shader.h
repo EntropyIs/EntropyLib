@@ -8,6 +8,7 @@
 #include "../../Matrix4.h"
 
 #include "Material.h"
+#include "Lighting.h"
 
 #include <vector>
 
@@ -38,6 +39,10 @@ namespace Entropy
 			void setMat4(const char* name, const Math::Matrix4& v0) const;
 
 			void setMaterial(const Material& v0) const;
+
+			void setDirectionalLight(const DirectionalLight& v0) const;
+			void setPointLight(unsigned int index, const PointLight& v0) const;
+			void setSpotLight(unsigned int index, const SpotLight& v0) const;
 		};
 	}
 }
