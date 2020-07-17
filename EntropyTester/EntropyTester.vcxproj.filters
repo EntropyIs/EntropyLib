@@ -14,12 +14,6 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{333190b6-f4c9-4fc1-8c49-6a922cc377ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\DebugTools">
-      <UniqueIdentifier>{2d00e9fa-de3a-492d-ae18-bd3de1de03bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DebugTools\Profiling">
-      <UniqueIdentifier>{099849a0-00e7-45fc-94f2-f24b934ece01}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -28,38 +22,35 @@
     <ClCompile Include="..\Middleware\GTest\src\gtest-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector4Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="TimerTests.cpp">
-      <Filter>Source Files\Timing</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix2Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4Tests.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
     <ClCompile Include="HelperFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Vec2Tests.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="MatrixTests.cpp">
-      <Filter>Source Files\Math</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProfileTests.cpp">
-      <Filter>Source Files\DebugTools\Profiling</Filter>
+    <ClCompile Include="Vector2Tests.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vec2Tests.cpp">
-      <Filter>Source Files\Math</Filter>
+    <ClCompile Include="Vector3Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerTests.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

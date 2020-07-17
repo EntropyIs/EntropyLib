@@ -117,9 +117,6 @@
     <ClCompile Include="Entropy\Graphics\Shader.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Entropy\Math\Vec2.cpp">
-      <Filter>Source Files\Math\Vector</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">

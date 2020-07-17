@@ -22,7 +22,6 @@
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
-    <ClCompile Include="Entropy\Math\Vec2.cpp" />
     <ClCompile Include="GLCamera.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
