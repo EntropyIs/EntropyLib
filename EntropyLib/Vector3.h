@@ -13,7 +13,9 @@ namespace Entropy
 				float data[3];
 			};
 
-			Vector3(float i = 0.0f, float j = 0.0f, float k = 0.0f) : i(i), j(j), k(k) {}
+			Vector3() : i(0.0f), j(0.0f), k(0.0f) {}
+			Vector3(float i , float j, float k = 0.0f) : i(i), j(j), k(k) {}
+			Vector3(float value) : i(value), j(value), k(value) {}
 
 			Vector3& operator+= (const Vector3& right);
 			Vector3& operator-= (const Vector3& right);
