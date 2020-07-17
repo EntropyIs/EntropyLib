@@ -104,17 +104,17 @@ int main(int argc, char* argv[])
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
-		Entropy::Math::Vector4 cubePos[] = {
-		Entropy::Math::Vector4(0.0f,  0.0f,  0.0f, 1.0f),
-		Entropy::Math::Vector4(2.0f,  5.0f, -15.0f, 1.0f),
-		Entropy::Math::Vector4(-1.5f, -2.2f, -2.5f, 1.0f),
-		Entropy::Math::Vector4(-3.8f, -2.0f, -12.3f, 1.0f),
-		Entropy::Math::Vector4(2.4f, -0.4f, -3.5f, 1.0f),
-		Entropy::Math::Vector4(-1.7f,  3.0f, -7.5f, 1.0f),
-		Entropy::Math::Vector4(1.3f, -2.0f, -2.5f, 1.0f),
-		Entropy::Math::Vector4(1.5f,  2.0f, -2.5f, 1.0f),
-		Entropy::Math::Vector4(1.5f,  0.2f, -1.5f, 1.0f),
-		Entropy::Math::Vector4(-1.3f,  1.0f, -1.5f, 1.0f)
+		Entropy::Math::Vec4 cubePos[] = {
+		Entropy::Math::Vec4(0.0f,  0.0f,  0.0f, 1.0f),
+		Entropy::Math::Vec4(2.0f,  5.0f, -15.0f, 1.0f),
+		Entropy::Math::Vec4(-1.5f, -2.2f, -2.5f, 1.0f),
+		Entropy::Math::Vec4(-3.8f, -2.0f, -12.3f, 1.0f),
+		Entropy::Math::Vec4(2.4f, -0.4f, -3.5f, 1.0f),
+		Entropy::Math::Vec4(-1.7f,  3.0f, -7.5f, 1.0f),
+		Entropy::Math::Vec4(1.3f, -2.0f, -2.5f, 1.0f),
+		Entropy::Math::Vec4(1.5f,  2.0f, -2.5f, 1.0f),
+		Entropy::Math::Vec4(1.5f,  0.2f, -1.5f, 1.0f),
+		Entropy::Math::Vec4(-1.3f,  1.0f, -1.5f, 1.0f)
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
@@ -189,9 +189,9 @@ int main(int argc, char* argv[])
 				float offset = 1.0f * i;
 
 				if(i % 2 == 0)
-					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vec4(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
 				else
-					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vector4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
+					model = Entropy::Math::TranslationMatrix4(cubePos[i]) * Entropy::Math::RotationAboutAxisMatrix4(Entropy::Math::Vec4(-3.0f + i, 4.3f - i, 0.5f + i), offset);
 
 				lightingShader.setMaterial(cubeMaterial[i]);
 				lightingShader.setVec3("viewPos", camera.position);
@@ -204,7 +204,7 @@ int main(int argc, char* argv[])
 			// Render Light Source
 			for (unsigned int i = 0; i < 4; i++)
 			{
-				model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vector4(pointLights[i].Position.i, pointLights[i].Position.j, pointLights[i].Position.k, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
+				model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
 				
 				lightCubeShader.use();
 				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);

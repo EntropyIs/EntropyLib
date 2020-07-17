@@ -81,9 +81,6 @@
     <ClCompile Include="Matrix.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="Vector4.cpp">
-      <Filter>Source Files\Math\Vector</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix2Ext.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
@@ -117,6 +114,9 @@
     <ClCompile Include="Entropy\Math\Vec3.cpp">
       <Filter>Source Files\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Math\Vec4.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
@@ -136,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Matrix4.h">
       <Filter>Header Files\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>Header Files\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2Ext.h">
       <Filter>Header Files\Math\Matrix</Filter>
@@ -177,6 +174,9 @@
       <Filter>Header Files\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Math\Vec3.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math\Vec4.h">
       <Filter>Header Files\Math\Vector</Filter>
     </ClInclude>
   </ItemGroup>

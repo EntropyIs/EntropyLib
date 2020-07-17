@@ -1,7 +1,7 @@
 #pragma once
 #include "Matrix4Ext.h"
 #include "Entropy/Math/Vec3.h"
-#include "Vector4.h"
+#include "Entropy/Math/Vec4.h"
 
 namespace Entropy
 {

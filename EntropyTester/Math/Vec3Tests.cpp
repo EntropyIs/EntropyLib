@@ -51,19 +51,19 @@ TEST(VEC3, ConstructionIJ)
 
 	EXPECT_FLOAT_EQ(3.9f, textVector.X);
 	EXPECT_FLOAT_EQ(-6.7f, textVector.Y);
-	EXPECT_FLOAT_EQ(1.0f, textVector.Z);
+	EXPECT_FLOAT_EQ(0.0f, textVector.Z);
 
 	EXPECT_FLOAT_EQ(3.9f, textVector.I);
 	EXPECT_FLOAT_EQ(-6.7f, textVector.J);
-	EXPECT_FLOAT_EQ(1.0f, textVector.K);
+	EXPECT_FLOAT_EQ(0.0f, textVector.K);
 
 	EXPECT_FLOAT_EQ(3.9f, textVector.R);
 	EXPECT_FLOAT_EQ(-6.7f, textVector.G);
-	EXPECT_FLOAT_EQ(1.0f, textVector.B);
+	EXPECT_FLOAT_EQ(0.0f, textVector.B);
 
 	EXPECT_FLOAT_EQ(3.9f, textVector.Data[0]);
 	EXPECT_FLOAT_EQ(-6.7f, textVector.Data[1]);
-	EXPECT_FLOAT_EQ(1.0f, textVector.Data[2]);
+	EXPECT_FLOAT_EQ(0.0f, textVector.Data[2]);
 }
 
 TEST(VEC3, ConstructionIJK)

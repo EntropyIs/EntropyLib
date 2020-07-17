@@ -24,6 +24,7 @@
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="Entropy\Math\Vec2.cpp" />
     <ClCompile Include="Entropy\Math\Vec3.cpp" />
+    <ClCompile Include="Entropy\Math\Vec4.cpp" />
     <ClCompile Include="GLCamera.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -36,7 +37,6 @@
     <ClCompile Include="Matrix2Ext.cpp" />
     <ClCompile Include="Matrix4Ext.cpp" />
     <ClCompile Include="Profiler.cpp" />
-    <ClCompile Include="Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
@@ -46,6 +46,7 @@
     <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="Entropy\Math\Vec2.h" />
     <ClInclude Include="Entropy\Math\Vec3.h" />
+    <ClInclude Include="Entropy\Math\Vec4.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
@@ -58,7 +59,6 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Matrix4Ext.h" />
     <ClInclude Include="Profiler.h" />
-    <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

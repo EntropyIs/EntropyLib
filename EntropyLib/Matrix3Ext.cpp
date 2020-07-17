@@ -5,17 +5,17 @@
 Entropy::Math::Vec3 Entropy::Math::operator*(const Matrix3& left, const Vec3& right)
 {
     return Vec3(
-        left.r0c0 * right.i + left.r0c1 * right.j + left.r0c2 * right.k,
-        left.r1c0 * right.i + left.r1c1 * right.j + left.r1c2 * right.k,
-        left.r2c0 * right.i + left.r2c1 * right.j + left.r2c2 * right.k
+        left.r0c0 * right.I + left.r0c1 * right.J + left.r0c2 * right.K,
+        left.r1c0 * right.I + left.r1c1 * right.J + left.r1c2 * right.K,
+        left.r2c0 * right.I + left.r2c1 * right.J + left.r2c2 * right.K
     );
 }
 
 Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(const Vec3& scaleVector)
 {
     return Matrix3(
-		scaleVector.i, 0.0f, 0.0f,
-		0.0f, scaleVector.j, 0.0f,
+		scaleVector.I, 0.0f, 0.0f,
+		0.0f, scaleVector.K, 0.0f,
 		0.0f, 0.0f, 1.0f
     );
 }
@@ -41,8 +41,8 @@ Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float scale)
 Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(const Vec3& translationVector)
 {
     return Matrix3(
-        1.0f, 0.0f, translationVector.i,
-        0.0f, 1.0f, translationVector.j,
+        1.0f, 0.0f, translationVector.I,
+        0.0f, 1.0f, translationVector.J,
         0.0f, 0.0f, 1.0f
     );
 }

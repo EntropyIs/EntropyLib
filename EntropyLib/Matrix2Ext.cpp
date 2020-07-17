@@ -5,16 +5,16 @@
 Entropy::Math::Vec2 Entropy::Math::operator*(const Matrix2& left, const Vec2& right)
 {
     return Vec2(
-        left.r0c0 * right.i + left.r0c1 * right.j,
-        left.r1c0 * right.i + left.r1c1 * right.j
+        left.r0c0 * right.I + left.r0c1 * right.J,
+        left.r1c0 * right.I + left.r1c1 * right.J
     );
 }
 
 Entropy::Math::Matrix2 Entropy::Math::ScaleMatrix2(const Vec2 & scaleVector)
 {
     return Matrix2(
-        scaleVector.i, 0.0f,
-        0.0f, scaleVector.j
+        scaleVector.I, 0.0f,
+        0.0f, scaleVector.J
     );
 }
 

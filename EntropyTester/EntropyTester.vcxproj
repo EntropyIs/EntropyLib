@@ -145,6 +145,7 @@
     <ClCompile Include="..\Middleware\GTest\src\gtest-all.cc" />
     <ClCompile Include="Math\Vec2Tests.cpp" />
     <ClCompile Include="Math\Vec3Tests.cpp" />
+    <ClCompile Include="Math\Vec4Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h" />

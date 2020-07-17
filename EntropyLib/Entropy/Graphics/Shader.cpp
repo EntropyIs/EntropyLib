@@ -139,9 +139,9 @@ void Entropy::Graphics::Shader::setVec3(const char* name, const Math::Vec3& v0) 
 	glUniform3fv(glGetUniformLocation(ID, name), 1, v0.Data);
 }
 
-void Entropy::Graphics::Shader::setVec4(const char* name, const Math::Vector4& v0) const
+void Entropy::Graphics::Shader::setVec4(const char* name, const Math::Vec4& v0) const
 {
-	glUniform4fv(glGetUniformLocation(ID, name), 1, v0.data);
+	glUniform4fv(glGetUniformLocation(ID, name), 1, v0.Data);
 }
 
 void Entropy::Graphics::Shader::setMat2(const char* name, const Math::Matrix2& v0) const
@@ -182,7 +182,7 @@ void Entropy::Graphics::Shader::setPointLight(unsigned int index, const PointLig
 	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].position").c_str(), v0.Position);
 
 	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].constant").c_str(), v0.Constant);
-	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].linear").c_str(), v0.Constant);
+	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].Linear").c_str(), v0.Constant);
 	setFloat(std::string("pointLights[").append(std::to_string(index)).append("].quadratic").c_str(), v0.Constant);
 
 	setVec3(std::string("pointLights[").append(std::to_string(index)).append("].ambient").c_str(), v0.Ambient);
@@ -197,7 +197,7 @@ void Entropy::Graphics::Shader::setSpotLight(unsigned int index, const SpotLight
 	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].position").c_str(), v0.Position);
 	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].direction").c_str(), v0.Direction);
 
-	setFloat(std::string("spotLights[").append(std::to_string(index)).append("].innerCutOff").c_str(), v0.InnerCutOff);
+	setFloat(std::string("spotLights[").append(std::to_string(index)).append("].InnerCutOff").c_str(), v0.InnerCutOff);
 	setFloat(std::string("spotLights[").append(std::to_string(index)).append("].outerCutOff").c_str(), v0.OuterCutOff);
 
 	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].ambient").c_str(), v0.Ambient);
