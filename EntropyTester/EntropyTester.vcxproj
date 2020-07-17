@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\EntropyLib;$(ProjectDir)..\Middleware\GTest\;$(IncludePath)</IncludePath>
+    <IncludePath>$(projectdir)..\EntropyLib\;$(ProjectDir)..\Middleware\GTest\;$(IncludePath)</IncludePath>
     <LibraryPath>$(projectdir)..\$(intdir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
