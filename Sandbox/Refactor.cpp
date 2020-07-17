@@ -118,16 +118,16 @@ int main(int argc, char* argv[])
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
-			Entropy::Graphics::Materials::White,
+			Entropy::Graphics::Materials::Emerald,
+			Entropy::Graphics::Materials::Turquoise,
+			Entropy::Graphics::Materials::Ruby,
+			Entropy::Graphics::Materials::Bronze,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::Chrome,
 		};
 
 		float cubeAngle = 0.0f;
