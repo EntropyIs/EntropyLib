@@ -262,3 +262,11 @@ TEST(VEC4, DotProduct)
 	EXPECT_FLOAT_EQ(-15057.11f, resultA);
 	EXPECT_FLOAT_EQ(resultA, resultB);
 }
+
+TEST(VEC4, Magnitude)
+{
+	Math::Vec4 testVector = vectors[0];
+	float result = Math::magnitude(testVector);
+
+	EXPECT_FLOAT_EQ(154.5769387716f, result);
+}

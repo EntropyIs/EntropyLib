@@ -33,7 +33,7 @@ namespace Entropy
 
 		float __declspec(dllexport) dot(const Vec3& left, const Vec3& right);
 		Vec3 __declspec(dllexport) cross(const Vec3& left, const Vec3& right);
-
+		float __declspec(dllexport) magnitude(const Vec3& vector);
 		Vec3 __declspec(dllexport) normalize(const Vec3& vector);
 	}
 }

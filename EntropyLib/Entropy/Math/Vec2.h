@@ -29,7 +29,7 @@ namespace Entropy
 		Vec2 __declspec(dllexport) operator* (const Vec2& left, const float right);
 
 		float __declspec(dllexport) dot(const Vec2& left, const Vec2& right);
-
+		float __declspec(dllexport) magnitude(const Vec2& vector);
 		Vec2 __declspec(dllexport) normalize(const Vec2& vector);
 	}
 }

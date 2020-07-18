@@ -1,5 +1,7 @@
 #include "Vec3.h"
 
+#include <cmath>
+
 Entropy::Math::Vec3& Entropy::Math::Vec3::operator+=(const Vec3& right)
 {
     I += right.I;
@@ -44,6 +46,11 @@ float Entropy::Math::dot(const Vec3& left, const Vec3& right)
 Entropy::Math::Vec3 Entropy::Math::cross(const Vec3& left, const Vec3& right)
 {
     return Vec3();
+}
+
+float Entropy::Math::magnitude(const Vec3& vector)
+{
+    return std::sqrtf((vector.I * vector.I) + (vector.J * vector.J) + (vector.K * vector.K));
 }
 
 Entropy::Math::Vec3 Entropy::Math::normalize(const Vec3& vector)
