@@ -52,5 +52,6 @@ float Entropy::Math::magnitude(const Vec4& vector)
 
 Entropy::Math::Vec4 Entropy::Math::normalize(const Vec4& vector)
 {
-    return Vec4();
+    float mag = magnitude(vector);
+    return Vec4(vector.I / mag, vector.J / mag, vector.K / mag, vector.L / mag);
 }
