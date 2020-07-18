@@ -143,10 +143,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Middleware\GTest\src\gtest-all.cc" />
-    <ClCompile Include="Math\Source.cpp" />
     <ClCompile Include="Math\Vec2Tests.cpp" />
     <ClCompile Include="Math\Vec3Tests.cpp" />
     <ClCompile Include="Math\Vec4Tests.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h" />
