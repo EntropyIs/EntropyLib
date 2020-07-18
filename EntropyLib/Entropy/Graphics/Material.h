@@ -18,7 +18,7 @@ namespace Entropy
 			Material(float shininess) : Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(shininess) {}
 			// Shininess + Color
 			Material(float shininess, float r, float g, float b) : Ambient(0.2f * r, 0.2f * g, 0.2f * b), Diffuse(0.8f * r, 0.8f * g, 0.8f * b), Specular(r, g, b), Shininess(shininess) {}
-			Material(float shininess, Math::Vec3 color) : Ambient(0.2f * color), Diffuse(0.8 * color), Specular(color), Shininess(shininess) {}
+			Material(float shininess, Math::Vec3 color) : Ambient(0.2f * color), Diffuse(0.8f * color), Specular(color), Shininess(shininess) {}
 			// Shininess + Ambient + Diffuse + Specular
 			Material(float shininess, float aR, float aG, float aB, float dR, float dG, float dB, float sR, float sG, float sB) : Ambient(aR, aG, aB), Diffuse(dR, dG, dB), Specular(sR, sG, sB), Shininess(shininess) {}
 			Material(float shininess,Math::Vec3 ambient, Math::Vec3 diffuse, Math::Vec3 specular) : Ambient(ambient), Diffuse(diffuse), Specular(specular), Shininess(shininess) {}
