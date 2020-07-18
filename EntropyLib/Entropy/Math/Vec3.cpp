@@ -38,7 +38,7 @@ Entropy::Math::Vec3 Entropy::Math::operator*(const Vec3& left, const float right
 
 float Entropy::Math::dot(const Vec3& left, const Vec3& right)
 {
-    return 0.0f;
+    return left.I * right.I + left.J * right.J + left.K * right.K;
 }
 
 Entropy::Math::Vec3 Entropy::Math::cross(const Vec3& left, const Vec3& right)

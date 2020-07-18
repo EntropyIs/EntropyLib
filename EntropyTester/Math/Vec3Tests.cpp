@@ -197,3 +197,15 @@ TEST(VEC3, MultiplicationScalar)
 	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
 	EXPECT_FLOAT_EQ(testVectorA.K, testVectorB.K);
 }
+
+TEST(VEC3, DotProduct)
+{
+	Math::Vec3 a = vectors[0];
+	Math::Vec3 b = vectors[1];
+
+	float resultA = Math::dot(a, b);
+	float resultB = Math::dot(b, a);
+
+	EXPECT_FLOAT_EQ(-14023.7f, resultA);
+	EXPECT_FLOAT_EQ(resultA, resultB);
+}

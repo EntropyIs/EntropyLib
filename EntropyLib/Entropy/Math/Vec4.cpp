@@ -40,7 +40,7 @@ Entropy::Math::Vec4 Entropy::Math::operator*(const Vec4& left, const float right
 
 float Entropy::Math::dot(const Vec4& left, const Vec4& right)
 {
-    return 0.0f;
+    return left.I * right.I + left.J * right.J + left.K * right.K + left.L * right.L;
 }
 
 Entropy::Math::Vec4 Entropy::Math::normalize(const Vec4& vector)
