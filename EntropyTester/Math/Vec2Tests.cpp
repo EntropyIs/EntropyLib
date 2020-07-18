@@ -97,3 +97,35 @@ TEST(VEC2, AssignmentSubtraction)
 	EXPECT_FLOAT_EQ( 98.0f, testVector.X);
 	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
 }
+
+TEST(VEC2, Addition)
+{
+	Math::Vec2 a = vectors[0];
+	Math::Vec2 b = vectors[1];
+	Math::Vec2 testVector = a + b;
+
+	EXPECT_FLOAT_EQ( 59.5f, a.X);
+	EXPECT_FLOAT_EQ(100.0f, a.Y);
+
+	EXPECT_FLOAT_EQ(-38.5f, b.X);
+	EXPECT_FLOAT_EQ(-55.9f, b.Y);
+
+	EXPECT_FLOAT_EQ(21.0f, testVector.X);
+	EXPECT_FLOAT_EQ(44.1f, testVector.Y);
+}
+
+TEST(VEC2, Subtraction)
+{
+	Math::Vec2 a = vectors[0];
+	Math::Vec2 b = vectors[1];
+	Math::Vec2 testVector = a - b;
+
+	EXPECT_FLOAT_EQ(59.5f, a.X);
+	EXPECT_FLOAT_EQ(100.0f, a.Y);
+
+	EXPECT_FLOAT_EQ(-38.5f, b.X);
+	EXPECT_FLOAT_EQ(-55.9f, b.Y);
+
+	EXPECT_FLOAT_EQ(98.0f, testVector.X);
+	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
+}

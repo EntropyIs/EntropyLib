@@ -143,3 +143,41 @@ TEST(VEC3, AssignmentSubtraction)
 	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
 	EXPECT_FLOAT_EQ(159.2f, testVector.Z);
 }
+
+TEST(VEC3, Addition)
+{
+	Math::Vec3 a = vectors[0];
+	Math::Vec3 b = vectors[1];
+	Math::Vec3 testVector = a + b;
+
+	EXPECT_FLOAT_EQ( 59.5f, a.X);
+	EXPECT_FLOAT_EQ(100.0f, a.Y);
+	EXPECT_FLOAT_EQ( 65.7f, a.Z);
+
+	EXPECT_FLOAT_EQ(-38.5, b.X);
+	EXPECT_FLOAT_EQ(-55.9, b.Y);
+	EXPECT_FLOAT_EQ(-93.5, b.Z);
+
+	EXPECT_FLOAT_EQ(21.0f, testVector.X);
+	EXPECT_FLOAT_EQ(44.1f, testVector.Y);
+	EXPECT_FLOAT_EQ(-27.8f, testVector.Z);
+}
+
+TEST(VEC3, Subtraction)
+{
+	Math::Vec3 a = vectors[0];
+	Math::Vec3 b = vectors[1];
+	Math::Vec3 testVector = a - b;
+
+	EXPECT_FLOAT_EQ( 59.5f, a.X);
+	EXPECT_FLOAT_EQ(100.0f, a.Y);
+	EXPECT_FLOAT_EQ( 65.7f, a.Z);
+
+	EXPECT_FLOAT_EQ(-38.5, b.X);
+	EXPECT_FLOAT_EQ(-55.9, b.Y);
+	EXPECT_FLOAT_EQ(-93.5, b.Z);
+
+	EXPECT_FLOAT_EQ(98.0f, testVector.X);
+	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
+	EXPECT_FLOAT_EQ(159.2f, testVector.Z);
+}
