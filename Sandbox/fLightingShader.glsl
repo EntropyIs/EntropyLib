@@ -128,7 +128,7 @@ vec3 calulatePointLighting(PointLight light, vec3 normal, vec3 fragPos, vec3 vie
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     // Attenuation
     float attDistance = length(light.position - fragPos);
-    float attenuation = 1.0 / (light.constant + light.Linear * attDistance + light.quadtratic * (attDistance * attDistance));
+    float attenuation = 1.0 / (light.constant + light.linear * attDistance + light.quadtratic * (attDistance * attDistance));
     // Combine Results
     vec3 ambient = material.color_ambient * light.ambient;
     for(int i = 0; i < material.diffuseNr; i++)
@@ -150,7 +150,7 @@ vec3 calulateSpotLighting(SpotLight light, vec3 normal, vec3 viewDir)
     vec3 lightDir = normalize(light.direction);
     // Calulate Base Values
     float theta = dot(lightDir, normalize(-lightDir));
-    float epsilon = (light.InnerCutOff - light.outerCutOff);
+    float epsilon = (light.innerCutOff - light.outerCutOff);
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
 
     // Diffuse Shading

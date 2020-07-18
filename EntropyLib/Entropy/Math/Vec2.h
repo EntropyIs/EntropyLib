@@ -17,9 +17,19 @@ namespace Entropy
 			Vec2() : I(0.0f), J(0.0f) {};
 			Vec2(float value) : I(value), J(value) {};
 			Vec2(float i, float j) : I(i), J(j) {};
+
+			Vec2& operator += (const Vec2& right);
+			Vec2& operator -= (const Vec2& right);
 		};
+
+		Vec2 __declspec(dllexport) operator+ (const Vec2& left, const Vec2& right);
+		Vec2 __declspec(dllexport) operator- (const Vec2& left, const Vec2& right);
 
 		Vec2 __declspec(dllexport) operator* (const float left, const Vec2& right);
 		Vec2 __declspec(dllexport) operator* (const Vec2& left, const float right);
+
+		float __declspec(dllexport) dot(const Vec2& left, const Vec2& right);
+
+		Vec2 __declspec(dllexport) normalize(const Vec2& vector);
 	}
 }

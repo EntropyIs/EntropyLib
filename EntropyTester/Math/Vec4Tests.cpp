@@ -3,6 +3,33 @@
 
 using namespace Entropy;
 
+Math::Vec4 vectors[]{
+	Math::Vec4( 59.5f, 100.0f,  65.7f, -77.7f),
+	Math::Vec4(-38.5f, -55.9f, -93.5f,  13.3f),
+	Math::Vec4( 55.1f,  46.4f,  77.1f, -96.2f),
+	Math::Vec4(-43.2f, -68.2f, -83.0f,  90.0f),
+	Math::Vec4(-85.9f, - 4.4f, -68.0f,  86.7f),
+	Math::Vec4(-39.5f, -30.0f,  75.2f, -50.1f),
+	Math::Vec4( 46.1f, -12.8f,  62.9f,  60.0f),
+	Math::Vec4( 91.2f,   3.4f, -47.1f, -84.5f),
+	Math::Vec4(-55.7f,  45.3f,  61.0f,   9.7f),
+	Math::Vec4(  1.5f, -31.3f, -84.7f, -91.8f),
+	Math::Vec4(- 9.3f, -94.5f,  90.0f, -49.9f),
+	Math::Vec4(-85.4f, -63.4f,  91.4f,   8.0f),
+	Math::Vec4( 23.4f,  53.5f, -49.3f, -70.0f),
+	Math::Vec4(-55.5f, - 7.0f,  90.0f,   4.4f),
+	Math::Vec4( 98.1f,  57.0f,  78.0f,  64.5f),
+	Math::Vec4( 75.9f, -58.4f, -87.2f, -96.9f),
+	Math::Vec4( 22.0f,  23.0f,  54.6f, -73.5f),
+	Math::Vec4(-14.7f, -50.4f, -67.8f, -49.7f),
+	Math::Vec4(-23.6f, - 4.6f,  12.5f,  49.1f),
+	Math::Vec4( 34.6f, -58.3f, -13.9f,  35.0f),
+	Math::Vec4( 92.5f,  89.5f,  93.5f, -50.1f),
+	Math::Vec4( 41.6f,  48.1f,  34.1f, -21.0f),
+	Math::Vec4(-90.5f,  38.8f, -85.8f,  80.2f),
+	Math::Vec4(-44.0f,  42.8f, -92.6f, -13.0f)
+};
+
 TEST(VEC4, ConstructionEmpty)
 {
 	Math::Vec4 empty;
@@ -126,4 +153,21 @@ TEST(VEC4, ConstructionIJKL)
 	EXPECT_FLOAT_EQ(-2.9f, testVector.Data[1]);
 	EXPECT_FLOAT_EQ(-4.9f, testVector.Data[2]);
 	EXPECT_FLOAT_EQ(8.3f, testVector.Data[3]);
+}
+
+TEST(VEC4, AssignmentAdition)
+{
+	Math::Vec4 testVector;
+
+	testVector = vectors[0];
+	EXPECT_FLOAT_EQ( 59.5f, testVector.X);
+	EXPECT_FLOAT_EQ( 100.0f, testVector.Y);
+	EXPECT_FLOAT_EQ( 65.7f, testVector.Z);
+	EXPECT_FLOAT_EQ(-77.7f, testVector.W);
+
+	testVector += vectors[1];
+	EXPECT_FLOAT_EQ( 21.0f, testVector.X);
+	EXPECT_FLOAT_EQ( 44.1f, testVector.Y);
+	EXPECT_FLOAT_EQ(-32.2f, testVector.Z);
+	EXPECT_FLOAT_EQ(-64.4f, testVector.W);
 }
