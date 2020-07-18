@@ -31,14 +31,8 @@
     <Filter Include="Header Files\Timing">
       <UniqueIdentifier>{2def33e6-03c2-4177-bd61-145584dae27d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Math\Matrix">
-      <UniqueIdentifier>{8b7572ba-1d0b-42e9-8163-69cd419d60fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Math\Matrix">
       <UniqueIdentifier>{a9ed4983-6b37-4fa0-bb2b-0470e8986ccb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Math\Vector">
-      <UniqueIdentifier>{e3446126-4eef-4c0b-b735-ac54f2ddcb5e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Math\Vector">
       <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
@@ -60,6 +54,12 @@
     </Filter>
     <Filter Include="Source Files\Graphics\Object Handling">
       <UniqueIdentifier>{f553fb9a-6f36-4d66-bb6c-596794980dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Type">
+      <UniqueIdentifier>{e3446126-4eef-4c0b-b735-ac54f2ddcb5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Extentions">
+      <UniqueIdentifier>{8b7572ba-1d0b-42e9-8163-69cd419d60fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,25 +126,25 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix3.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix4.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2Ext.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix3Ext.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix4Ext.h">
-      <Filter>Header Files\Math\Matrix</Filter>
+      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Converters.h">
       <Filter>Header Files\Math</Filter>
@@ -171,13 +171,16 @@
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Math\Vec2.h">
-      <Filter>Header Files\Math\Vector</Filter>
+      <Filter>Header Files\Math\Type</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Math\Vec3.h">
-      <Filter>Header Files\Math\Vector</Filter>
+      <Filter>Header Files\Math\Type</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Math\Vec4.h">
-      <Filter>Header Files\Math\Vector</Filter>
+      <Filter>Header Files\Math\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math\Mat4.h">
+      <Filter>Header Files\Math\Type</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -44,6 +44,7 @@
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
+    <ClInclude Include="Entropy\Math\Mat4.h" />
     <ClInclude Include="Entropy\Math\Vec2.h" />
     <ClInclude Include="Entropy\Math\Vec3.h" />
     <ClInclude Include="Entropy\Math\Vec4.h" />
