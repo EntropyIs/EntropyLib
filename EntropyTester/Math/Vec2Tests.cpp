@@ -137,11 +137,11 @@ TEST(VEC2, MultiplicationScalar)
 	Math::Vec2 testVectorA = vector * scalar;
 	Math::Vec2 testVectorB = scalar * vector;
 
-	EXPECT_FLOAT_EQ(124.95f, testVectorA.I);
-	EXPECT_FLOAT_EQ(210.0f, testVectorA.J);
+	EXPECT_FLOAT_EQ(124.95f, testVectorA.X);
+	EXPECT_FLOAT_EQ(210.0f, testVectorA.Y);
 
-	EXPECT_FLOAT_EQ(testVectorA.I, testVectorB.I);
-	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
+	EXPECT_FLOAT_EQ(testVectorA.X, testVectorB.X);
+	EXPECT_FLOAT_EQ(testVectorA.Y, testVectorB.Y);
 }
 
 TEST(VEC2, DotProduct)
@@ -162,4 +162,19 @@ TEST(VEC2, Magnitude)
 	float result = Math::magnitude(testVector);
 
 	EXPECT_FLOAT_EQ(116.36257989577f, result);
+}
+
+TEST(VEC2, Normalize)
+{
+	Math::Vec2 a = vectors[0];
+	float magnitude = Math::magnitude(a);
+	EXPECT_FLOAT_EQ(116.36257989577f, magnitude);
+
+	Math::Vec2 resultVector = Math::normalize(a);
+
+	EXPECT_FLOAT_EQ(0.5113327674f, resultVector.X);
+	EXPECT_FLOAT_EQ(0.8593828023f, resultVector.Y);
+
+	float resultMagnitude = Math::magnitude(resultVector);
+	EXPECT_FLOAT_EQ(1.0, resultMagnitude);
 }

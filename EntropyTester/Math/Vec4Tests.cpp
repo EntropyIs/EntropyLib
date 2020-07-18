@@ -240,15 +240,15 @@ TEST(VEC4, MultiplicationScalar)
 	Math::Vec4 testVectorA = vector * scalar;
 	Math::Vec4 testVectorB = scalar * vector;
 
-	EXPECT_FLOAT_EQ(124.95f, testVectorA.I);
-	EXPECT_FLOAT_EQ(210.0f, testVectorA.J);
-	EXPECT_FLOAT_EQ(137.97f, testVectorA.K);
-	EXPECT_FLOAT_EQ(-163.17f, testVectorA.L);
+	EXPECT_FLOAT_EQ(124.95f, testVectorA.X);
+	EXPECT_FLOAT_EQ(210.0f, testVectorA.Y);
+	EXPECT_FLOAT_EQ(137.97f, testVectorA.Z);
+	EXPECT_FLOAT_EQ(-163.17f, testVectorA.W);
 
-	EXPECT_FLOAT_EQ(testVectorA.I, testVectorB.I);
-	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
-	EXPECT_FLOAT_EQ(testVectorA.K, testVectorB.K);
-	EXPECT_FLOAT_EQ(testVectorA.L, testVectorB.L);
+	EXPECT_FLOAT_EQ(testVectorA.X, testVectorB.X);
+	EXPECT_FLOAT_EQ(testVectorA.Y, testVectorB.Y);
+	EXPECT_FLOAT_EQ(testVectorA.Z, testVectorB.Z);
+	EXPECT_FLOAT_EQ(testVectorA.W, testVectorB.W);
 }
 
 TEST(VEC4, DotProduct)
@@ -269,4 +269,21 @@ TEST(VEC4, Magnitude)
 	float result = Math::magnitude(testVector);
 
 	EXPECT_FLOAT_EQ(154.5769387716f, result);
+}
+
+TEST(VEC4, Normalize)
+{
+	Math::Vec4 a = vectors[0];
+	float magnitude = Math::magnitude(a);
+	EXPECT_FLOAT_EQ(154.5769387716f, magnitude);
+
+	Math::Vec4 resultVector = Math::normalize(a);
+
+	EXPECT_FLOAT_EQ(0.3849215832f, resultVector.X);
+	EXPECT_FLOAT_EQ(0.6469270306f, resultVector.Y);
+	EXPECT_FLOAT_EQ(0.4250310591f, resultVector.Z);
+	EXPECT_FLOAT_EQ(-0.502662302f, resultVector.W);
+
+	float resultMagnitude = Math::magnitude(resultVector);
+	EXPECT_FLOAT_EQ(1.0, resultMagnitude);
 }
