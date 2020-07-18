@@ -210,6 +210,18 @@ TEST(VEC3, DotProduct)
 	EXPECT_FLOAT_EQ(resultA, resultB);
 }
 
+TEST(VEC3, CrossProduct)
+{
+	Math::Vec3 a = vectors[0];
+	Math::Vec3 b = vectors[1];
+
+	Math::Vec3 resultVector = Math::cross(a, b);
+
+	EXPECT_FLOAT_EQ(-5677.37f, resultVector.X);
+	EXPECT_FLOAT_EQ(3033.8f, resultVector.Y);
+	EXPECT_FLOAT_EQ(523.95f, resultVector.Z);
+}
+
 TEST(VEC3, Magnitude)
 {
 	Math::Vec3 testVector = vectors[0];

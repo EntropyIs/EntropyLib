@@ -45,7 +45,7 @@ float Entropy::Math::dot(const Vec3& left, const Vec3& right)
 
 Entropy::Math::Vec3 Entropy::Math::cross(const Vec3& left, const Vec3& right)
 {
-    return Vec3();
+    return Vec3((left.J * right.K) - (left.K * right.J), (left.K * right.I) - (left.I * right.K), (left.I * right.J) - (left.J * right.I));
 }
 
 float Entropy::Math::magnitude(const Vec3& vector)
