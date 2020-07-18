@@ -18,12 +18,12 @@ Entropy::Math::Vec3& Entropy::Math::Vec3::operator-=(const Vec3& right)
 
 Entropy::Math::Vec3 Entropy::Math::operator+(const Vec3& left, const Vec3& right)
 {
-    return Vec3();
+    return Vec3(left.I + right.I, left.J + right.J, left.K + right.K);
 }
 
 Entropy::Math::Vec3 Entropy::Math::operator-(const Vec3& left, const Vec3& right)
 {
-    return Vec3();
+    return Vec3(left.I - right.I, left.J - right.J, left.K - right.K);
 }
 
 Entropy::Math::Vec3 Entropy::Math::operator*(const float left, const Vec3& right)
