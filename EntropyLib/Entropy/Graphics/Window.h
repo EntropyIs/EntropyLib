@@ -161,6 +161,8 @@ namespace Entropy
 			Mouse MouseDelta;
 
 			Window(const char* title, const unsigned int width = 800, const unsigned int height = 600);
+
+			void captureMouse();
 			
 			void clear();
 			void processEvents();

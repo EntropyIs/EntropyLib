@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	{
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
+		window.captureMouse();
 		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Load Cube Position Data

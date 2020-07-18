@@ -23,10 +23,6 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 		glfwSetWindowUserPointer(GLWindow, reinterpret_cast<void*>(this));
 
 		glfwSetFramebufferSizeCallback(GLWindow, framebuffer_size_callback);
-		glfwSetCursorPosCallback(GLWindow, mouse_movement_callback);
-		glfwSetScrollCallback(GLWindow, mouse_scroll_callback);
-
-		glfwSetInputMode(GLWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		// Initialize GLEW
 		initializeGLEW();
@@ -36,6 +32,14 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 	{
 		throw e;
 	}
+}
+
+void Entropy::Graphics::Window::captureMouse()
+{
+	glfwSetCursorPosCallback(GLWindow, mouse_movement_callback);
+	glfwSetScrollCallback(GLWindow, mouse_scroll_callback);
+
+	glfwSetInputMode(GLWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void Entropy::Graphics::Window::clear()
