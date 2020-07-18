@@ -30,12 +30,12 @@ Entropy::Math::Vec4 Entropy::Math::operator-(const Vec4& left, const Vec4& right
 
 Entropy::Math::Vec4 Entropy::Math::operator*(const float left, const Vec4& right)
 {
-    return Vec4();
+    return Vec4(left * right.I, left * right.J, left * right.K, left * right.L);
 }
 
 Entropy::Math::Vec4 Entropy::Math::operator*(const Vec4& left, const float right)
 {
-    return Vec4();
+    return right * left;
 }
 
 float Entropy::Math::dot(const Vec4& left, const Vec4& right)

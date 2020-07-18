@@ -154,9 +154,9 @@ TEST(VEC3, Addition)
 	EXPECT_FLOAT_EQ(100.0f, a.Y);
 	EXPECT_FLOAT_EQ( 65.7f, a.Z);
 
-	EXPECT_FLOAT_EQ(-38.5, b.X);
-	EXPECT_FLOAT_EQ(-55.9, b.Y);
-	EXPECT_FLOAT_EQ(-93.5, b.Z);
+	EXPECT_FLOAT_EQ(-38.5f, b.X);
+	EXPECT_FLOAT_EQ(-55.9f, b.Y);
+	EXPECT_FLOAT_EQ(-93.5f, b.Z);
 
 	EXPECT_FLOAT_EQ(21.0f, testVector.X);
 	EXPECT_FLOAT_EQ(44.1f, testVector.Y);
@@ -173,11 +173,27 @@ TEST(VEC3, Subtraction)
 	EXPECT_FLOAT_EQ(100.0f, a.Y);
 	EXPECT_FLOAT_EQ( 65.7f, a.Z);
 
-	EXPECT_FLOAT_EQ(-38.5, b.X);
-	EXPECT_FLOAT_EQ(-55.9, b.Y);
-	EXPECT_FLOAT_EQ(-93.5, b.Z);
+	EXPECT_FLOAT_EQ(-38.5f, b.X);
+	EXPECT_FLOAT_EQ(-55.9f, b.Y);
+	EXPECT_FLOAT_EQ(-93.5f, b.Z);
 
 	EXPECT_FLOAT_EQ(98.0f, testVector.X);
 	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
 	EXPECT_FLOAT_EQ(159.2f, testVector.Z);
+}
+
+TEST(VEC3, MultiplicationScalar)
+{
+	Math::Vec3 vector = vectors[0];
+	float scalar = 2.1f;
+	Math::Vec3 testVectorA = vector * scalar;
+	Math::Vec3 testVectorB = scalar * vector;
+
+	EXPECT_FLOAT_EQ(124.95f, testVectorA.I);
+	EXPECT_FLOAT_EQ(210.0f, testVectorA.J);
+	EXPECT_FLOAT_EQ(137.97f, testVectorA.K);
+
+	EXPECT_FLOAT_EQ(testVectorA.I, testVectorB.I);
+	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
+	EXPECT_FLOAT_EQ(testVectorA.K, testVectorB.K);
 }

@@ -232,3 +232,21 @@ TEST(VEC4, Subtraction)
 	EXPECT_FLOAT_EQ(159.2f, testVector.Z);
 	EXPECT_FLOAT_EQ(-91.0f, testVector.W);
 }
+
+TEST(VEC4, MultiplicationScalar)
+{
+	Math::Vec4 vector = vectors[0];
+	float scalar = 2.1f;
+	Math::Vec4 testVectorA = vector * scalar;
+	Math::Vec4 testVectorB = scalar * vector;
+
+	EXPECT_FLOAT_EQ(124.95f, testVectorA.I);
+	EXPECT_FLOAT_EQ(210.0f, testVectorA.J);
+	EXPECT_FLOAT_EQ(137.97f, testVectorA.K);
+	EXPECT_FLOAT_EQ(-163.17f, testVectorA.L);
+
+	EXPECT_FLOAT_EQ(testVectorA.I, testVectorB.I);
+	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
+	EXPECT_FLOAT_EQ(testVectorA.K, testVectorB.K);
+	EXPECT_FLOAT_EQ(testVectorA.L, testVectorB.L);
+}

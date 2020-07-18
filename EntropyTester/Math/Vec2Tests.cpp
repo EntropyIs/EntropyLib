@@ -129,3 +129,17 @@ TEST(VEC2, Subtraction)
 	EXPECT_FLOAT_EQ(98.0f, testVector.X);
 	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
 }
+
+TEST(VEC2, MultiplicationScalar)
+{
+	Math::Vec2 vector = vectors[0];
+	float scalar = 2.1f;
+	Math::Vec2 testVectorA = vector * scalar;
+	Math::Vec2 testVectorB = scalar * vector;
+
+	EXPECT_FLOAT_EQ(124.95f, testVectorA.I);
+	EXPECT_FLOAT_EQ(210.0f, testVectorA.J);
+
+	EXPECT_FLOAT_EQ(testVectorA.I, testVectorB.I);
+	EXPECT_FLOAT_EQ(testVectorA.J, testVectorB.J);
+}
