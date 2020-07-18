@@ -84,3 +84,16 @@ TEST(VEC2, AssignmentAdition)
 	EXPECT_FLOAT_EQ(21.0f, testVector.X);
 	EXPECT_FLOAT_EQ(44.1f, testVector.Y);
 }
+
+TEST(VEC2, AssignmentSubtraction)
+{
+	Math::Vec2 testVector;
+
+	testVector = vectors[0];
+	EXPECT_FLOAT_EQ( 59.5f, testVector.X);
+	EXPECT_FLOAT_EQ(100.0f, testVector.Y);
+
+	testVector -= vectors[1];
+	EXPECT_FLOAT_EQ( 98.0f, testVector.X);
+	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
+}

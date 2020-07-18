@@ -168,6 +168,23 @@ TEST(VEC4, AssignmentAdition)
 	testVector += vectors[1];
 	EXPECT_FLOAT_EQ( 21.0f, testVector.X);
 	EXPECT_FLOAT_EQ( 44.1f, testVector.Y);
-	EXPECT_FLOAT_EQ(-32.2f, testVector.Z);
+	EXPECT_FLOAT_EQ(-27.8f, testVector.Z);
 	EXPECT_FLOAT_EQ(-64.4f, testVector.W);
+}
+
+TEST(VEC4, AssignmentSubtraction)
+{
+	Math::Vec4 testVector;
+
+	testVector = vectors[0];
+	EXPECT_FLOAT_EQ(59.5f, testVector.X);
+	EXPECT_FLOAT_EQ(100.0f, testVector.Y);
+	EXPECT_FLOAT_EQ(65.7f, testVector.Z);
+	EXPECT_FLOAT_EQ(-77.7f, testVector.W);
+
+	testVector -= vectors[1];
+	EXPECT_FLOAT_EQ( 98.0f, testVector.X);
+	EXPECT_FLOAT_EQ(155.9f, testVector.Y);
+	EXPECT_FLOAT_EQ(159.2f, testVector.Z);
+	EXPECT_FLOAT_EQ(-91.0f, testVector.W);
 }
