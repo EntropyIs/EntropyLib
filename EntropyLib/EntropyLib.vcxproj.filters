@@ -31,12 +31,6 @@
     <Filter Include="Header Files\Timing">
       <UniqueIdentifier>{2def33e6-03c2-4177-bd61-145584dae27d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Math\Matrix">
-      <UniqueIdentifier>{a9ed4983-6b37-4fa0-bb2b-0470e8986ccb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Math\Vector">
-      <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\DebugTools">
       <UniqueIdentifier>{a29a5a02-770b-4f1d-a2fd-be7f84107bc6}</UniqueIdentifier>
     </Filter>
@@ -61,6 +55,12 @@
     <Filter Include="Header Files\Math\Extentions">
       <UniqueIdentifier>{8b7572ba-1d0b-42e9-8163-69cd419d60fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Math\Type">
+      <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Extentions">
+      <UniqueIdentifier>{a9ed4983-6b37-4fa0-bb2b-0470e8986ccb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clock.cpp">
@@ -70,22 +70,22 @@
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Matrix2.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Matrix3.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Matrix4.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Matrix2Ext.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Matrix3Ext.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Matrix4Ext.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
+      <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
     <ClCompile Include="Converters.cpp">
       <Filter>Source Files\Math</Filter>
@@ -106,22 +106,22 @@
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Vec2.cpp">
-      <Filter>Source Files\Math\Vector</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Vec3.cpp">
-      <Filter>Source Files\Math\Vector</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Vec4.cpp">
-      <Filter>Source Files\Math\Vector</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Mat2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Mat3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Math\Mat4.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
