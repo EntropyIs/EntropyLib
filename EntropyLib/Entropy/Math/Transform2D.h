@@ -12,10 +12,12 @@ namespace Entropy
 
 		// Scale
 		Mat3 __declspec(dllexport) Scale(float scale);
+		Mat3 __declspec(dllexport) Scale(const Vec3& scale);
 		Mat3 __declspec(dllexport) Scale(const Vec2& scale);
 		Mat3 __declspec(dllexport) Scale(float sX, float sY);
 
 		// Translation
+		Mat3 __declspec(dllexport) Translate(const Vec3& translation);
 		Mat3 __declspec(dllexport) Translate(const Vec2& translation);
 		Mat3 __declspec(dllexport) Translate(float dX, float dY);
 

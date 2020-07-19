@@ -49,3 +49,45 @@ TEST(TRANSFORM2D, ScaleByDeltas)
 	EXPECT_FLOAT_EQ(-3.45f, testVector.Y);
 	EXPECT_FLOAT_EQ( 1.00f, testVector.Z);
 }
+
+TEST(TRANSFORM2D, TranslateByVector)
+{
+	Math::Vec3 a( 5.5f,  9.0f, 1.0f);
+	Math::Vec3 b(-3.5f, -5.9f, 1.0f);
+	Math::Vec2 translation(2.0f, 3.0f);
+
+	Math::Vec3 testVectorA = Math::Translate(translation) * a;
+	EXPECT_FLOAT_EQ( 7.5f, testVectorA.X);
+	EXPECT_FLOAT_EQ(12.0f, testVectorA.Y);
+	EXPECT_FLOAT_EQ(1.00f, testVectorA.Z);
+
+	Math::Vec3 testVectorB = Math::Translate(translation) * b;
+	EXPECT_FLOAT_EQ(-1.5f, testVectorB.X);
+	EXPECT_FLOAT_EQ(-2.9f, testVectorB.Y);
+	EXPECT_FLOAT_EQ(1.00f, testVectorB.Z);
+}
+
+TEST(TRANSFORM2D, TranslateByValues)
+{
+	Math::Vec3 a( 5.5f,  9.0f, 1.0f);
+	Math::Vec3 b(-3.5f, -5.9f, 1.0f);
+	Math::Mat3 translator = Math::Translate(2.0f, 3.0f);
+	Math::Vec3 testVectorA = Math::Translate(2.0f, 3.0f) * a;
+	EXPECT_FLOAT_EQ(7.5f, testVectorA.X);
+	EXPECT_FLOAT_EQ(12.0f, testVectorA.Y);
+	EXPECT_FLOAT_EQ(1.00f, testVectorA.Z);
+
+	Math::Vec3 testVectorB = Math::Translate(2.0f, 3.0f) * b;
+	EXPECT_FLOAT_EQ(-1.5f, testVectorB.X);
+	EXPECT_FLOAT_EQ(-2.9f, testVectorB.Y);
+	EXPECT_FLOAT_EQ(1.00f, testVectorB.Z);
+}
+
+TEST(TRANSFORM2D, RotateByAngle)
+{
+	Math::Vec3 a(5.5f, 9.0f, 1.0f);
+	Math::Vec3 testVector = Math::Roatate(1.0f) * a;
+	EXPECT_FLOAT_EQ(-4.601575f, testVector.X);
+	EXPECT_FLOAT_EQ( 9.49081f, testVector.Y);
+	EXPECT_FLOAT_EQ( 1.00f, testVector.Z);
+}
