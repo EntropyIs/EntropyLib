@@ -63,7 +63,8 @@ TEST(MAT3, ConstructionArray)
 	float data[9] = {
 		 7.4f,  4.4f,  3.6f,
 		-8.3f, -6.8f, -2.3f,
-		-1.7f,  2.9f, -9.8f };
+		-1.7f,  2.9f, -9.8f
+	};
 
 	Math::Mat3 testMatrix(data);
 
@@ -86,7 +87,8 @@ TEST(MAT3, Construction2DArray)
 	float data[3][3] = {
 		{ 7.4f,  4.4f,  3.6f},
 		{-8.3f, -6.8f, -2.3f},
-		{-1.7f,  2.9f, -9.8f} };
+		{-1.7f,  2.9f, -9.8f}
+	};
 
 	Math::Mat3 testMatrix(*data);
 
