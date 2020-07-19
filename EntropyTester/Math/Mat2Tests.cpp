@@ -104,3 +104,21 @@ TEST(MAT2, Addition)
 	EXPECT_FLOAT_EQ( 7.5f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-8.4f, testMatrix.R0C1);
 	EXPECT_FLOAT_EQ( 6.5f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-3.4f, testMatrix.R1C1);
 }
+
+TEST(MAT2, Subtraction)
+{
+	Math::Mat2 a(
+		 7.4f,  4.4f,
+		-8.3f, -6.8f
+	);
+
+	Math::Mat2 b{
+		 0.1f,  2.1f,
+		-0.1f,  3.4f
+	};
+
+	Math::Mat2 testMatrix = a - b;
+
+	EXPECT_FLOAT_EQ( 7.3f, testMatrix.R0C0); EXPECT_FLOAT_EQ( -8.2f, testMatrix.R0C1);
+	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-10.2f, testMatrix.R1C1);
+}

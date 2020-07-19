@@ -147,10 +147,10 @@ TEST(MAT4, Addition)
 TEST(MAT4, Subtraction)
 {
 	Math::Mat4 a(
-		7.4f, 4.4f, 3.6f, 0.2f,
-		-8.3f, -6.8f, -2.3f, 2.9f,
-		-1.7f, 2.9f, -9.8f, 3.0f,
-		5.8f, 0.8f, -6.9f, -3.4f
+		 7.4f,  4.4f,  3.6f,  0.2f,
+		-8.3f, -6.8f, -2.3f,  2.9f,
+		-1.7f,  2.9f, -9.8f,  3.0f,
+		 5.8f,  0.8f, -6.9f, -3.4f 
 	);
 
 	Math::Mat4 b{
@@ -162,19 +162,19 @@ TEST(MAT4, Subtraction)
 
 	Math::Mat4 testMatrix = a - b;
 
-	EXPECT_FLOAT_EQ(7.4f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-8.3f, testMatrix.R0C1); EXPECT_FLOAT_EQ(-1.7f, testMatrix.R0C2); EXPECT_FLOAT_EQ(5.8f, testMatrix.R0C3);
-	EXPECT_FLOAT_EQ(4.4f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-6.8f, testMatrix.R1C1); EXPECT_FLOAT_EQ(2.9f, testMatrix.R1C2); EXPECT_FLOAT_EQ(0.8f, testMatrix.R1C3);
-	EXPECT_FLOAT_EQ(3.6f, testMatrix.R2C0); EXPECT_FLOAT_EQ(-2.3f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-9.8f, testMatrix.R2C2); EXPECT_FLOAT_EQ(-6.9f, testMatrix.R2C3);
-	EXPECT_FLOAT_EQ(0.2f, testMatrix.R3C0); EXPECT_FLOAT_EQ(2.9f, testMatrix.R3C1); EXPECT_FLOAT_EQ(3.0f, testMatrix.R3C2); EXPECT_FLOAT_EQ(-3.4f, testMatrix.R3C3);
+	EXPECT_FLOAT_EQ( 7.3f, testMatrix.R0C0); EXPECT_FLOAT_EQ( -8.2f, testMatrix.R0C1); EXPECT_FLOAT_EQ(  5.1f, testMatrix.R0C2); EXPECT_FLOAT_EQ( 3.6f, testMatrix.R0C3);
+	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-10.2f, testMatrix.R1C1); EXPECT_FLOAT_EQ(  0.3f, testMatrix.R1C2); EXPECT_FLOAT_EQ( 0.2f, testMatrix.R1C3);
+	EXPECT_FLOAT_EQ( 4.9f, testMatrix.R2C0); EXPECT_FLOAT_EQ(  0.2f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-13.7f, testMatrix.R2C2); EXPECT_FLOAT_EQ(-7.1f, testMatrix.R2C3);
+	EXPECT_FLOAT_EQ(-7.1f, testMatrix.R3C0); EXPECT_FLOAT_EQ( 10.5f, testMatrix.R3C1); EXPECT_FLOAT_EQ(  5.0f, testMatrix.R3C2); EXPECT_FLOAT_EQ( 3.3f, testMatrix.R3C3);
 }
 
 TEST(MAT4, Multiplication)
 {
 	Math::Mat4 a(
-		7.4f, 4.4f, 3.6f, 0.2f,
-		-8.3f, -6.8f, -2.3f, 2.9f,
-		-1.7f, 2.9f, -9.8f, 3.0f,
-		5.8f, 0.8f, -6.9f, -3.4f
+		 7.4f,  4.4f,  3.6f,  0.2f,
+		-8.3f, -6.8f, -2.3f,  2.9f,
+		-1.7f,  2.9f, -9.8f,  3.0f,
+		 5.8f,  0.8f, -6.9f, -3.4f 
 	);
 
 	Math::Mat4 b{
