@@ -137,6 +137,6 @@ TEST(MAT2, Multiplication)
 
 	Math::Mat2 testMatrix = a * b;
 
-	EXPECT_FLOAT_EQ(  0.30f, testMatrix.R0C0); EXPECT_FLOAT_EQ( -0.15f, testMatrix.R0C1);
-	EXPECT_FLOAT_EQ( 30.50f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-40.55f, testMatrix.R1C1);
+	EXPECT_FLOAT_EQ(-16.69f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-28.96f, testMatrix.R0C1);
+	EXPECT_FLOAT_EQ(-13.84f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-23.56f, testMatrix.R1C1);
 }

@@ -163,7 +163,7 @@ TEST(MAT3, Multiplication)
 
 	Math::Mat3 testMatrix = a * b;
 
-	EXPECT_FLOAT_EQ(-23.46f, testMatrix.R0C0); EXPECT_FLOAT_EQ( 15.03f, testMatrix.R0C1); EXPECT_FLOAT_EQ( 64.22f, testMatrix.R0C2);
-	EXPECT_FLOAT_EQ( 39.86f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-46.53f, testMatrix.R1C1); EXPECT_FLOAT_EQ(-19.19f, testMatrix.R1C2);
-	EXPECT_FLOAT_EQ( -6.58f, testMatrix.R2C0); EXPECT_FLOAT_EQ( 18.82f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-43.26f, testMatrix.R2C2);
+	EXPECT_FLOAT_EQ(-14.48f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-24.71f, testMatrix.R0C1); EXPECT_FLOAT_EQ(-77.05f, testMatrix.R0C2);
+	EXPECT_FLOAT_EQ(-17.61f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-30.81f, testMatrix.R1C1); EXPECT_FLOAT_EQ(-35.41f, testMatrix.R1C2);
+	EXPECT_FLOAT_EQ(  8.27f, testMatrix.R2C0); EXPECT_FLOAT_EQ( 16.32f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-67.96f, testMatrix.R2C2);
 }
