@@ -32,9 +32,6 @@
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Converters.cpp" />
-    <ClCompile Include="Matrix3Ext.cpp" />
-    <ClCompile Include="Matrix2Ext.cpp" />
-    <ClCompile Include="Matrix4Ext.cpp" />
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +43,8 @@
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />
     <ClInclude Include="Entropy\Math\Mat4.h" />
+    <ClInclude Include="Entropy\Math\Transform2D.h" />
+    <ClInclude Include="Entropy\Math\Transform3D.h" />
     <ClInclude Include="Entropy\Math\Vec2.h" />
     <ClInclude Include="Entropy\Math\Vec3.h" />
     <ClInclude Include="Entropy\Math\Vec4.h" />
@@ -53,9 +52,6 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
-    <ClInclude Include="Matrix2Ext.h" />
-    <ClInclude Include="Matrix3Ext.h" />
-    <ClInclude Include="Matrix4Ext.h" />
     <ClInclude Include="Profiler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
