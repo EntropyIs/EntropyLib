@@ -102,4 +102,26 @@ TEST(MAT3, Construction2DArray)
 
 	EXPECT_FLOAT_EQ(7.4f, testMatrix.Data2[0][0]); EXPECT_FLOAT_EQ(-8.3f, testMatrix.Data2[1][0]); EXPECT_FLOAT_EQ(-1.7f, testMatrix.Data2[2][0]);
 	EXPECT_FLOAT_EQ(4.4f, testMatrix.Data2[0][1]); EXPECT_FLOAT_EQ(-6.8f, testMatrix.Data2[1][1]); EXPECT_FLOAT_EQ( 2.9f, testMatrix.Data2[2][1]); 
-	EXPECT_FLOAT_EQ(3.6f, testMatrix.Data2[0][2]); EXPECT_FLOAT_EQ(-2.3f, testMatrix.Data2[1][2]); EXPECT_FLOAT_EQ(-9.8f, testMatrix.Data2[2][2]);}
+	EXPECT_FLOAT_EQ(3.6f, testMatrix.Data2[0][2]); EXPECT_FLOAT_EQ(-2.3f, testMatrix.Data2[1][2]); EXPECT_FLOAT_EQ(-9.8f, testMatrix.Data2[2][2]);
+}
+
+TEST(MAT3, Addition)
+{
+	Math::Mat3 a(
+		 7.4f,  4.4f,  3.6f,
+		-8.3f, -6.8f, -2.3f,
+		-1.7f,  2.9f, -9.8f
+	);
+
+	Math::Mat3 b{
+		 0.1f,  2.1f, -1.3f,
+		-0.1f,  3.4f, -2.5f,
+		-6.6f,  2.6f,  3.9f
+	};
+
+	Math::Mat3 testMatrix = a + b;
+
+	EXPECT_FLOAT_EQ( 7.5f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-8.4f, testMatrix.R0C1); EXPECT_FLOAT_EQ(-8.1f, testMatrix.R0C2);
+	EXPECT_FLOAT_EQ( 6.5f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-3.4f, testMatrix.R1C1); EXPECT_FLOAT_EQ( 5.5f, testMatrix.R1C2);
+	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R2C0); EXPECT_FLOAT_EQ(-4.8f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-5.9f, testMatrix.R2C2);
+}

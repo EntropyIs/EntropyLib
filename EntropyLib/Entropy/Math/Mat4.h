@@ -55,5 +55,9 @@ namespace Entropy
 				R0C2(data[2][0]), R1C2(data[2][1]), R2C2(data[2][2]), R3C2(data[2][3]),
 				R0C3(data[3][0]), R1C3(data[3][1]), R2C3(data[3][2]), R3C3(data[3][3]) {};
 		};
+
+		Mat4 __declspec(dllexport) operator+ (const Mat4& left, const Mat4& right);
+		Mat4 __declspec(dllexport) operator- (const Mat4& left, const Mat4& right);
+		Mat4 __declspec(dllexport) operator* (const Mat4& left, const Mat4& right);
 	}
 }

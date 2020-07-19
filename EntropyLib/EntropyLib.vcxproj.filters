@@ -78,9 +78,6 @@
     <ClCompile Include="Matrix4.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files\Math\Matrix</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix2Ext.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
@@ -117,6 +114,15 @@
     <ClCompile Include="Entropy\Math\Vec4.cpp">
       <Filter>Source Files\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Math\Mat2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Math\Mat3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Math\Mat4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
@@ -124,9 +130,6 @@
     </ClInclude>
     <ClInclude Include="GLTexture.h">
       <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2.h">
       <Filter>Header Files\Math\Extentions</Filter>

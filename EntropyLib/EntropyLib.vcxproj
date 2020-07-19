@@ -22,6 +22,9 @@
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
+    <ClCompile Include="Entropy\Math\Mat2.cpp" />
+    <ClCompile Include="Entropy\Math\Mat3.cpp" />
+    <ClCompile Include="Entropy\Math\Mat4.cpp" />
     <ClCompile Include="Entropy\Math\Vec2.cpp" />
     <ClCompile Include="Entropy\Math\Vec3.cpp" />
     <ClCompile Include="Entropy\Math\Vec4.cpp" />
@@ -29,7 +32,6 @@
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Converters.cpp" />
-    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Matrix2.cpp" />
     <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix3Ext.cpp" />
@@ -54,7 +56,6 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
-    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Matrix2.h" />
     <ClInclude Include="Matrix2Ext.h" />
     <ClInclude Include="Matrix3.h" />
