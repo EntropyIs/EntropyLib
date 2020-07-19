@@ -180,9 +180,9 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
-			Entropy::Math::Matrix4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
-			Entropy::Math::Matrix4 view = camera.getViewMatrix();
-			Entropy::Math::Matrix4 model;
+			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
+			Entropy::Math::Mat4 view = camera.getViewMatrix();
+			Entropy::Math::Mat4 model;
 
 			// Render Cubes
 			for (unsigned int i = 0; i < 10; i++)
@@ -205,7 +205,7 @@ int main(int argc, char* argv[])
 			// Render Light Source
 			for (unsigned int i = 0; i < 4; i++)
 			{
-				model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::ScaleMatrix4(0.2f, 0.2f, 0.2f);
+				model = Entropy::Math::TranslationMatrix4(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::ScaleMat4(0.2f, 0.2f, 0.2f);
 				
 				lightCubeShader.use();
 				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);

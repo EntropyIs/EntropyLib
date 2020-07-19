@@ -144,19 +144,19 @@ void Entropy::Graphics::Shader::setVec4(const char* name, const Math::Vec4& v0) 
 	glUniform4fv(glGetUniformLocation(ID, name), 1, v0.Data);
 }
 
-void Entropy::Graphics::Shader::setMat2(const char* name, const Math::Matrix2& v0) const
+void Entropy::Graphics::Shader::setMat2(const char* name, const Math::Mat2& v0) const
 {
-	glUniformMatrix2fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	glUniformMatrix2fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.Data);
 }
 
-void Entropy::Graphics::Shader::setMat3(const char* name, const Math::Matrix3& v0) const
+void Entropy::Graphics::Shader::setMat3(const char* name, const Math::Mat3& v0) const
 {
-	glUniformMatrix3fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	glUniformMatrix3fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.Data);
 }
 
-void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Matrix4& v0) const
+void Entropy::Graphics::Shader::setMat4(const char* name, const Math::Mat4& v0) const
 {
-	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.data);
+	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, v0.Data);
 }
 
 void Entropy::Graphics::Shader::setMaterial(const Material& v0) const

@@ -3,9 +3,9 @@
 #include "../Math/Vec2.h"
 #include "../Math/Vec3.h"
 #include "../Math/Vec4.h"
-#include "../../Matrix2.h"
-#include "../../Matrix3.h"
-#include "../../Matrix4.h"
+#include "../Math/Mat2.h"
+#include "../Math/Mat3.h"
+#include "../Math/Mat4.h"
 
 #include "Material.h"
 #include "Lighting.h"
@@ -34,9 +34,9 @@ namespace Entropy
 			void setVec3(const char* name, const Math::Vec3& v0) const;
 			void setVec4(const char* name, const Math::Vec4& v0) const;
 
-			void setMat2(const char* name, const Math::Matrix2& v0) const;
-			void setMat3(const char* name, const Math::Matrix3& v0) const;
-			void setMat4(const char* name, const Math::Matrix4& v0) const;
+			void setMat2(const char* name, const Math::Mat2& v0) const;
+			void setMat3(const char* name, const Math::Mat3& v0) const;
+			void setMat4(const char* name, const Math::Mat4& v0) const;
 
 			void setMaterial(const Material& v0) const;
 

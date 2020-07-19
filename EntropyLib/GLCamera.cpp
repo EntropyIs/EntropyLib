@@ -9,7 +9,7 @@ Entropy::GLCamera::GLCamera(Math::Vec3 position, Math::Vec3 up, float yaw, float
 	updateVectors();
 }
 
-Entropy::Math::Matrix4 Entropy::GLCamera::getViewMatrix()
+Entropy::Math::Mat4 Entropy::GLCamera::getViewMatrix()
 {
 	return Math::LookAt(position, position + front, up);
 }

@@ -2,63 +2,63 @@
 
 #include <cmath>
 
-Entropy::Math::Vec3 Entropy::Math::operator*(const Matrix3& left, const Vec3& right)
+Entropy::Math::Vec3 Entropy::Math::operator*(const Mat3& left, const Vec3& right)
 {
     return Vec3(
-        left.r0c0 * right.I + left.r0c1 * right.J + left.r0c2 * right.K,
-        left.r1c0 * right.I + left.r1c1 * right.J + left.r1c2 * right.K,
-        left.r2c0 * right.I + left.r2c1 * right.J + left.r2c2 * right.K
+        left.R0C0 * right.I + left.R0C1 * right.J + left.R0C2 * right.K,
+        left.R1C0 * right.I + left.R1C1 * right.J + left.R1C2 * right.K,
+        left.R2C0 * right.I + left.R2C1 * right.J + left.R2C2 * right.K
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(const Vec3& scaleVector)
+Entropy::Math::Mat3 Entropy::Math::ScaleMat3(const Vec3& scaleVector)
 {
-    return Matrix3(
+    return Mat3(
 		scaleVector.I, 0.0f, 0.0f,
 		0.0f, scaleVector.K, 0.0f,
 		0.0f, 0.0f, 1.0f
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float sX, float sY)
+Entropy::Math::Mat3 Entropy::Math::ScaleMat3(float sX, float sY)
 {
-    return Matrix3(
+    return Mat3(
         sX, 0.0f, 0.0f,
         0.0f, sY, 0.0f,
         0.0f, 0.0f, 1.0f
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ScaleMatrix3(float scale)
+Entropy::Math::Mat3 Entropy::Math::ScaleMat3(float scale)
 {
-    return Matrix3(
+    return Mat3(
         scale, 0.0f, 0.0f,
         0.0f, scale, 0.0f,
         0.0f, 0.0f, 1.0f
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(const Vec3& translationVector)
+Entropy::Math::Mat3 Entropy::Math::TranslationMat3(const Vec3& translationVector)
 {
-    return Matrix3(
+    return Mat3(
         1.0f, 0.0f, translationVector.I,
         0.0f, 1.0f, translationVector.J,
         0.0f, 0.0f, 1.0f
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::TranslationMatrix3(float dX, float dY)
+Entropy::Math::Mat3 Entropy::Math::TranslationMat3(float dX, float dY)
 {
-    return Matrix3(
+    return Mat3(
         1.0f, 0.0f, dX,
         0.0f, 1.0f, dY,
         0.0f, 0.0f, 1.0f
     );
 }
 
-Entropy::Math::Matrix3 Entropy::Math::ZRotationMatrix3(float angle)
+Entropy::Math::Mat3 Entropy::Math::ZRotationMat3(float angle)
 {
-    return Matrix3(
+    return Mat3(
         cos(angle), -sin(angle), 0.0f,
         sin(angle), cos(angle), 0.0f,
         0.0f, 0.0f, 1.0f

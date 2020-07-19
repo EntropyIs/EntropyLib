@@ -69,15 +69,6 @@
     <ClCompile Include="GLTexture.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix2.cpp">
-      <Filter>Source Files\Math\Extentions</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3.cpp">
-      <Filter>Source Files\Math\Extentions</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4.cpp">
-      <Filter>Source Files\Math\Extentions</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix2Ext.cpp">
       <Filter>Source Files\Math\Extentions</Filter>
     </ClCompile>
@@ -130,15 +121,6 @@
     </ClInclude>
     <ClInclude Include="GLTexture.h">
       <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix2.h">
-      <Filter>Header Files\Math\Extentions</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3.h">
-      <Filter>Header Files\Math\Extentions</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4.h">
-      <Filter>Header Files\Math\Extentions</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2Ext.h">
       <Filter>Header Files\Math\Extentions</Filter>
