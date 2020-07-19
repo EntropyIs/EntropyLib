@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Middleware\GTest\src\gtest-all.cc" />
+    <ClCompile Include="HelperFunctions.cpp" />
     <ClCompile Include="Math\Mat2Tests.cpp" />
     <ClCompile Include="Math\Mat3Tests.cpp" />
     <ClCompile Include="Math\Mat4Tests.cpp" />

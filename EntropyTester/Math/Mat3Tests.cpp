@@ -121,7 +121,7 @@ TEST(MAT3, Addition)
 
 	Math::Mat3 testMatrix = a + b;
 
-	EXPECT_FLOAT_EQ( 7.5f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-8.4f, testMatrix.R0C1); EXPECT_FLOAT_EQ(-8.1f, testMatrix.R0C2);
+	EXPECT_FLOAT_EQ( 7.5f, testMatrix.R0C0); EXPECT_FLOAT_EQ(-8.4f, testMatrix.R0C1); EXPECT_FLOAT_EQ(-8.3f, testMatrix.R0C2);
 	EXPECT_FLOAT_EQ( 6.5f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-3.4f, testMatrix.R1C1); EXPECT_FLOAT_EQ( 5.5f, testMatrix.R1C2);
 	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R2C0); EXPECT_FLOAT_EQ(-4.8f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-5.9f, testMatrix.R2C2);
 }
@@ -142,8 +142,8 @@ TEST(MAT3, Subtraction)
 
 	Math::Mat3 testMatrix = a - b;
 
-	EXPECT_FLOAT_EQ( 7.3f, testMatrix.R0C0); EXPECT_FLOAT_EQ( -8.2f, testMatrix.R0C1); EXPECT_FLOAT_EQ(  5.1f, testMatrix.R0C2);
-	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-10.2f, testMatrix.R1C1); EXPECT_FLOAT_EQ(  0.3f, testMatrix.R1C2);
+	EXPECT_FLOAT_EQ( 7.3f, testMatrix.R0C0); EXPECT_FLOAT_EQ( -8.2f, testMatrix.R0C1); EXPECT_FLOAT_EQ(  4.9f, testMatrix.R0C2);
+	EXPECT_FLOAT_EQ( 2.3f, testMatrix.R1C0); EXPECT_FLOAT_EQ(-10.2f, testMatrix.R1C1); EXPECT_FLOAT_EQ(  0.3000001f, testMatrix.R1C2); //Note small error in R1C2
 	EXPECT_FLOAT_EQ( 4.9f, testMatrix.R2C0); EXPECT_FLOAT_EQ(  0.2f, testMatrix.R2C1); EXPECT_FLOAT_EQ(-13.7f, testMatrix.R2C2);
 }
 
