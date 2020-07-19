@@ -99,6 +99,9 @@
     <ClCompile Include="Entropy\Math\Mat4.cpp">
       <Filter>Source Files\Math\Type</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Math\Transform2D.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">

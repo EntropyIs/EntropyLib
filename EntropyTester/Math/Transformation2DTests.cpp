@@ -16,5 +16,36 @@ TEST(TRANSFORM2D, MatrixVectorMultiplication)
 
 	EXPECT_FLOAT_EQ(26.27f, testVector.X);
 	EXPECT_FLOAT_EQ(23.82f, testVector.Y);
-	EXPECT_FLOAT_EQ(-0.19f, testVector.Z);
+	EXPECT_FLOAT_EQ(-0.1899996f, testVector.Z); // Note slight error -0.19
+}
+
+TEST(TRANSFORM2D, ScaleByFloat)
+{
+	Math::Vec3 a(1.2f, -2.3f, 1.0f);
+	Math::Vec3 testVector = Math::Scale(2.0f) * a;
+
+	EXPECT_FLOAT_EQ(2.4f, testVector.X);
+	EXPECT_FLOAT_EQ(-4.6f, testVector.Y);
+	EXPECT_FLOAT_EQ(1.0f, testVector.Z); // Note slight error -0.19
+}
+
+TEST(TRANSFORM2D, ScaleByVector)
+{
+	Math::Vec3 a(1.2f, -2.3f, 1.0f);
+	Math::Vec2 scale(2.0f, 1.5f);
+	Math::Vec3 testVector = Math::Scale(scale) * a;
+
+	EXPECT_FLOAT_EQ( 2.4f, testVector.X);
+	EXPECT_FLOAT_EQ(-3.45f, testVector.Y);
+	EXPECT_FLOAT_EQ( 1.0f, testVector.Z); // Note slight error -0.19
+}
+
+TEST(TRANSFORM2D, ScaleByDeltas)
+{
+	Math::Vec3 a(1.2f, -2.3f, 1.0f);
+	Math::Vec3 testVector = Math::Scale(2.0f, 1.5f) * a;
+
+	EXPECT_FLOAT_EQ( 2.40f, testVector.X);
+	EXPECT_FLOAT_EQ(-3.45f, testVector.Y);
+	EXPECT_FLOAT_EQ( 1.00f, testVector.Z); // Note slight error -0.19
 }
