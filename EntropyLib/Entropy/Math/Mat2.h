@@ -44,9 +44,9 @@ namespace Entropy
 				R0C3(r0c3), R1C3(r1c3), R2C3(r2c3), R3C3(r3c3) {};
 
 			Mat4(float* data) :
-				R0C0(data[ 0]), R1C0(data[ 1]), R2C0(data[ 2]), R3C0(data[ 3]),
-				R0C1(data[ 4]), R1C1(data[ 5]), R2C1(data[ 6]), R3C1(data[ 7]),
-				R0C2(data[ 8]), R1C2(data[ 9]), R2C2(data[10]), R3C2(data[11]),
+				R0C0(data[0]), R1C0(data[1]), R2C0(data[2]), R3C0(data[3]),
+				R0C1(data[4]), R1C1(data[5]), R2C1(data[6]), R3C1(data[7]),
+				R0C2(data[8]), R1C2(data[9]), R2C2(data[10]), R3C2(data[11]),
 				R0C3(data[12]), R1C3(data[13]), R2C3(data[14]), R3C3(data[15]) {};
 
 			Mat4(float* data[]) :

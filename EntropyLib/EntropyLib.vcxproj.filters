@@ -182,5 +182,11 @@
     <ClInclude Include="Entropy\Math\Mat4.h">
       <Filter>Header Files\Math\Type</Filter>
     </ClInclude>
+    <ClInclude Include="Entropy\Math\Mat3.h">
+      <Filter>Header Files\Math\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math\Mat2.h">
+      <Filter>Header Files\Math\Type</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
