@@ -26,7 +26,7 @@ TEST(TRANSFORM2D, ScaleByFloat)
 
 	EXPECT_FLOAT_EQ(2.4f, testVector.X);
 	EXPECT_FLOAT_EQ(-4.6f, testVector.Y);
-	EXPECT_FLOAT_EQ(1.0f, testVector.Z); // Note slight error -0.19
+	EXPECT_FLOAT_EQ(1.0f, testVector.Z);
 }
 
 TEST(TRANSFORM2D, ScaleByVector)
@@ -37,7 +37,7 @@ TEST(TRANSFORM2D, ScaleByVector)
 
 	EXPECT_FLOAT_EQ( 2.4f, testVector.X);
 	EXPECT_FLOAT_EQ(-3.45f, testVector.Y);
-	EXPECT_FLOAT_EQ( 1.0f, testVector.Z); // Note slight error -0.19
+	EXPECT_FLOAT_EQ( 1.0f, testVector.Z);
 }
 
 TEST(TRANSFORM2D, ScaleByDeltas)
@@ -47,5 +47,5 @@ TEST(TRANSFORM2D, ScaleByDeltas)
 
 	EXPECT_FLOAT_EQ( 2.40f, testVector.X);
 	EXPECT_FLOAT_EQ(-3.45f, testVector.Y);
-	EXPECT_FLOAT_EQ( 1.00f, testVector.Z); // Note slight error -0.19
+	EXPECT_FLOAT_EQ( 1.00f, testVector.Z);
 }
