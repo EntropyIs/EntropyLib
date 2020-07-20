@@ -106,49 +106,49 @@ Entropy::Graphics::Mesh Entropy::Graphics::LoadWavefrontObj(const char* path)
 
             if (tokenStr == "v") // Phase Vertex Data
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Vertex Data: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
                 if (components.size() == 4) // Vec3 Position Data
                     Positions.push_back(Math::Vec3(std::stof(components[1]), std::stof(components[2]), std::stof(components[3])));
                 else if (components.size() == 5) // Vec4 Position Data, TODO: decide how to handle W component.
                     Positions.push_back(Math::Vec3(std::stof(components[1]), std::stof(components[2]), std::stof(components[3])));
-#ifdef _DEBUG
+#ifdef DEBUG
                 else
                     std::cout << "Error Reading Vertex Data.";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "vt")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Texture Coords Data: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
                 if (components.size() == 3) // Vec2 Texture Coord Data
                     TexCoords.push_back(Math::Vec2(std::stof(components[1]), std::stof(components[2])));
                 else if (components.size() == 4) // Vec3 Texture Coord Data TODO: Decide how to handle
                     TexCoords.push_back(Math::Vec2(std::stof(components[1]), std::stof(components[2])));
-#ifdef _DEBUG
+#ifdef DEBUG
                 else
                     std::cout << "Error Reading Texture Coords Data.";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "vn")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Normal Data: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
                 if (components.size() == 4) // Vec3 Normal Data
                     Normals.push_back(Math::normalize(Math::Vec3(std::stof(components[1]), std::stof(components[2]), std::stof(components[3]))));
-#ifdef _DEBUG
+#ifdef DEBUG
                 else
                     std::cout << "Error Reading Normal Data.";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "p" || tokenStr == "l" || tokenStr == "f")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Face, Line or Point Data: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
                 for (unsigned int i = 1; i < components.size(); i++)
                 {
                     std::stringstream vtnStream(components[i]);
@@ -187,55 +187,55 @@ Entropy::Graphics::Mesh Entropy::Graphics::LoadWavefrontObj(const char* path)
             }
             else if (tokenStr == "u")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Material desc. settler: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "mtllib")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Material Library: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "mg")
             { 
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Merging Group: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "g")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Group Name: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "s")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Group Number: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "o")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Object Name: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else if (tokenStr == "#")
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Comment: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
             else
             {
-#ifdef _DEBUG
+#ifdef DEBUG
                 std::cout << "Unkown Line: " << line << ", ";
-#endif // _DEBUG
+#endif // DEBUG
             }
-#ifdef _DEBUG
+#ifdef DEBUG
             std::cout << std::endl;
-#endif // _DEBUG
+#endif // DEBUG
         }
 
         // Generate Mesh
@@ -252,9 +252,9 @@ Entropy::Graphics::Mesh Entropy::Graphics::LoadWavefrontObj(const char* path)
     catch (std::ifstream::failure e)
     {
         std::string errString = "Object file, " + std::string(path) + ", not succefully read. " + e.what();
-#ifdef _DEBUG
+#ifdef DEBUG
         std::cout << errString << std::endl;
-#endif // _DEBUG
+#endif // DEBUG
         throw std::exception(errString.c_str());
     }
 }

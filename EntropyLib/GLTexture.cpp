@@ -11,18 +11,18 @@
 
 Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 {
-#ifdef _DEBUG
+#ifdef DEBUG
 	std::cout << "Loading Image: " << path << std::endl;
-#endif // _DEBUG
+#endif // DEBUG
 
 	// load file into buffer
 	std::ifstream file;
 	file.open(path, std::ios::binary);
 	if (!file.is_open())
 	{
-#ifdef _DEBUG
+#ifdef DEBUG
 		std::cout << "Error: Unable to open file" << std::endl;
-#endif //_DEBUG
+#endif //DEBUG
 		throw std::exception("Unable to open file");
 	}
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
@@ -49,9 +49,9 @@ Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 		buffer.erase(buffer.begin(), it);
 	}
 
-#ifdef _DEBUG
+#ifdef DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px"<< std::endl;
-#endif // _DEBUG	
+#endif // DEBUG	
 
 	return result;
 }

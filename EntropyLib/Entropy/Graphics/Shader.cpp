@@ -44,7 +44,7 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 				shaderType = "Geomerty Shader";
 			else if (type == GL_FRAGMENT_SHADER)
 				shaderType = "Fragment Shader";
-#ifdef _DEBUG
+#ifdef DEBUG
 			std::cout << "Error Compiling " << shaderType << std::endl;
 			std::cout << path << std::endl;
 			std::cout << errorLog << std::endl;
@@ -58,9 +58,9 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 	catch (std::ifstream::failure e)
 	{
 		std::string errString = "Shader file, " + std::string(path) + ", not succefully read.";
-#ifdef _DEBUG
+#ifdef DEBUG
 		std::cout << errString << std::endl;
-#endif // _DEBUG
+#endif // DEBUG
 		throw std::exception(errString.c_str());
 	}
 }
@@ -86,7 +86,7 @@ Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vect
 		glGetProgramiv(ID, GL_LINK_STATUS, &isLinked);
 		if (!isLinked)
 		{
-#ifdef _DEBUG
+#ifdef DEBUG
 			int maxLength;
 			glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &maxLength);
 			char* errorLog = new char[maxLength];

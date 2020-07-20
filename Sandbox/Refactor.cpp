@@ -13,8 +13,6 @@
 #include <exception>
 #include <iostream>
 
-#undef _DEBUG
-
 int main(int argc, char* argv[])
 {
 	try
