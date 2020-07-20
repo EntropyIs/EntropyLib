@@ -54,7 +54,7 @@ Entropy::Math::Mat3 Entropy::Math::Translate(float dX, float dY)
     );
 }
 
-Entropy::Math::Mat3 Entropy::Math::Roatate(float angle)
+Entropy::Math::Mat3 Entropy::Math::Rotate(float angle)
 {
     return Mat3(
          cosf(angle), sinf(angle), 0.0f,

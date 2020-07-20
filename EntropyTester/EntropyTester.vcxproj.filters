@@ -43,7 +43,10 @@
     <ClCompile Include="HelperFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Transformation2DTests.cpp">
+    <ClCompile Include="Transform3DTests.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Transform2DTests.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
   </ItemGroup>

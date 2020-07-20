@@ -86,7 +86,7 @@ TEST(TRANSFORM2D, TranslateByValues)
 TEST(TRANSFORM2D, RotateByAngle)
 {
 	Math::Vec3 a(5.5f, 9.0f, 1.0f);
-	Math::Vec3 testVector = Math::Roatate(1.0f) * a;
+	Math::Vec3 testVector = Math::Rotate(1.0f) * a;
 	EXPECT_FLOAT_EQ(-4.601575f, testVector.X);
 	EXPECT_FLOAT_EQ( 9.49081f, testVector.Y);
 	EXPECT_FLOAT_EQ( 1.00f, testVector.Z);

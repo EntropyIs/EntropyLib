@@ -22,6 +22,6 @@ namespace Entropy
 		Mat3 __declspec(dllexport) Translate(float dX, float dY);
 
 		// Roatation
-		Mat3 __declspec(dllexport) Roatate(float angle);
+		Mat3 __declspec(dllexport) Rotate(float angle);
 	}
 }

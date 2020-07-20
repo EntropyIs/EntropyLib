@@ -147,11 +147,12 @@
     <ClCompile Include="Math\Mat2Tests.cpp" />
     <ClCompile Include="Math\Mat3Tests.cpp" />
     <ClCompile Include="Math\Mat4Tests.cpp" />
-    <ClCompile Include="Math\Transformation2DTests.cpp" />
+    <ClCompile Include="Math\Transform2DTests.cpp" />
     <ClCompile Include="Math\Vec2Tests.cpp" />
     <ClCompile Include="Math\Vec3Tests.cpp" />
     <ClCompile Include="Math\Vec4Tests.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Transform3DTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h" />
