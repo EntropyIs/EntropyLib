@@ -12,6 +12,13 @@ namespace Entropy
 {
 	namespace Graphics
 	{
+		struct __declspec(dllexport) FaceIndex
+		{
+			unsigned int Position;
+			unsigned int Normal;
+			unsigned int TexCoord;
+		};
+
 		struct __declspec(dllexport) Vertex
 		{
 			Math::Vec3 Position;
@@ -44,5 +51,8 @@ namespace Entropy
 			
 			void setupMesh();
 		};
+
+		Mesh __declspec(dllexport) LoadWavefrontObj(const char* filename);
+		std::vector<Texture> __declspec(dllexport) LoadTextures(const char* filename);
 	}
 }

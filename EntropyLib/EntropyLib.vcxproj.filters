@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Math\Type">
       <UniqueIdentifier>{50a484f9-3139-4cfc-a185-f179331c7546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\ModelProcessing">
+      <UniqueIdentifier>{6292f1bb-62de-43dd-851e-a311b0cb796a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\ModelProcessing">
+      <UniqueIdentifier>{499c8ec3-f94b-47cf-833c-6bb14123c495}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clock.cpp">

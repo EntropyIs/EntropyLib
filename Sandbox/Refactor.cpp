@@ -13,6 +13,8 @@
 #include <exception>
 #include <iostream>
 
+#undef _DEBUG
+
 int main(int argc, char* argv[])
 {
 	try
@@ -22,58 +24,6 @@ int main(int argc, char* argv[])
 		window.captureMouse();
 		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-		// Load Cube Position Data
-		std::vector<Entropy::Graphics::Vertex> vertices;
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex( 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex( 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f));
-
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f));
-
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f));
-
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f));
-
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f));
-
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f));
-		vertices.push_back(Entropy::Graphics::Vertex(-0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f));
-
-		// Load Triangle Index Data
-		std::vector<unsigned int> indices;
-		indices.push_back(0); indices.push_back(1); indices.push_back(2);
-		indices.push_back(2); indices.push_back(3); indices.push_back(0);
-
-		indices.push_back(4); indices.push_back(5); indices.push_back(6);
-		indices.push_back(6); indices.push_back(7); indices.push_back(4);
-
-		indices.push_back(8); indices.push_back(9); indices.push_back(10);
-		indices.push_back(10); indices.push_back(11); indices.push_back(8);
-
-		indices.push_back(12); indices.push_back(13); indices.push_back(14);
-		indices.push_back(14); indices.push_back(15); indices.push_back(12);
-
-		indices.push_back(16); indices.push_back(17); indices.push_back(18);
-		indices.push_back(18); indices.push_back(19); indices.push_back(16);
-
-		indices.push_back(20); indices.push_back(21); indices.push_back(22);
-		indices.push_back(22); indices.push_back(23); indices.push_back(20);
-
 		//Load Texture Data
 		std::vector<Entropy::Graphics::Texture> textures;
 		Entropy::Texture specularMap("assets/container2_specular.bmp");
@@ -82,8 +32,8 @@ int main(int argc, char* argv[])
 		textures.push_back(Entropy::Graphics::Texture(diffuseMap.ID, "texture_diffuse"));
 
 		// Construct Data
-		Entropy::Graphics::Mesh lightSource(vertices, indices, textures);
-		Entropy::Graphics::Mesh block(vertices, indices, textures);
+		Entropy::Graphics::Mesh cube = Entropy::Graphics::LoadWavefrontObj("assets/banana.obj");
+		//cube.textures = textures;
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
@@ -120,16 +70,16 @@ int main(int argc, char* argv[])
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
-			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Gold,
-			Entropy::Graphics::Materials::Silver,
-			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Gold,
-			Entropy::Graphics::Materials::Silver,
-			Entropy::Graphics::Materials::Chrome,
-			Entropy::Graphics::Materials::Gold,
-			Entropy::Graphics::Materials::Silver,
-			Entropy::Graphics::Materials::Chrome,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowRubber,
 		};
 
 		float cubeAngle = 0.0f;
@@ -190,30 +140,30 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 
-				if(i % 2 == 0)
-					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset);
+				if (i % 2 == 0)
+					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(10.0f);
 				else
-					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset);
+					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset) * Entropy::Math::Scale(10.0f);
 
 				lightingShader.setMaterial(cubeMaterial[i]);
 				lightingShader.setVec3("viewPos", camera.position);
 				lightingShader.setMat4("projection", projection);
 				lightingShader.setMat4("view", view);
 				lightingShader.setMat4("model", model);
-				block.Draw(lightingShader);
+				cube.Draw(lightingShader);
 			}
 
 			// Render Light Source
 			for (unsigned int i = 0; i < 4; i++)
 			{
-				model = Entropy::Math::Translate(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::Scale(0.2f, 0.2f, 0.2f);
+				model = Entropy::Math::Translate(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::Scale(2.0f);
 				
 				lightCubeShader.use();
 				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);
 				lightCubeShader.setMat4("projection", projection);
 				lightCubeShader.setMat4("view", view);
 				lightCubeShader.setMat4("model", model);
-				lightSource.Draw(lightCubeShader);
+				cube.Draw(lightCubeShader);
 			}
 			
 			// Update
