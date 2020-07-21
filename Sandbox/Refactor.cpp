@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
 		// Construct Object Data
 		Entropy::Graphics::WavefrontObj platonic("assets/platonic.obj");
 
-		Entropy::Graphics::Mesh cube = platonic.getMesh("tetrahedron");
-		Entropy::Graphics::Mesh light = platonic.getMesh("octahedron");
+		Entropy::Graphics::Mesh cube = platonic.getMesh("icosahedron");
+		Entropy::Graphics::Mesh light = platonic.getMesh("hexahedron");
 		//cube.textures = textures;
 
 		// Load Shader
@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
 		float cubeAngle = 0.0f;
 
 		// Setup Lights
-		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f, 0.2f, 0.2f), Entropy::Math::Vec3(0.4f, 0.4f, 0.4f), Entropy::Math::Vec3(0.5f, 0.5f, 0.5f));
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.5f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(0.8f));
 
 		Entropy::Math::Vec3 colors[] = {
 			Entropy::Math::Vec3(1.0f, 0.0f, 0.0f),
