@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::WavefrontObj platonic("assets/platonic.obj");
 
 		Entropy::Graphics::Mesh cube = platonic.getMesh("tetrahedron");
-		Entropy::Graphics::Mesh light = platonic.getMesh("cube");
+		Entropy::Graphics::Mesh light = platonic.getMesh("octahedron");
 		//cube.textures = textures;
 
 		// Load Shader

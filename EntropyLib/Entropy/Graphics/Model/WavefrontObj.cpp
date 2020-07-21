@@ -1,3 +1,4 @@
+#define LIB_API __declspec(dllexport)
 #include "WavefrontObj.h"
 
 #include <fstream>
@@ -210,7 +211,17 @@ Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(const char* obj
 
 Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(unsigned int index)
 {
-	// Build Mesh
+	std::vector<Texture> textures;
+	return Mesh(getVertices(index), getIndices(index), textures);
+}
+
+std::vector<Entropy::Graphics::Vertex> Entropy::Graphics::WavefrontObj::getVertices(const char* objectName)
+{
+	return getVertices(getObjectIndex(objectName));
+}
+
+std::vector<Entropy::Graphics::Vertex> Entropy::Graphics::WavefrontObj::getVertices(unsigned int index)
+{
 	std::vector<Vertex> vertices;
 	for (unsigned int i = 0; i < objects[index].faceIndices.size(); i++)
 		vertices.push_back(Vertex(
@@ -218,12 +229,20 @@ Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(unsigned int in
 			objects[index].vertexNormals[objects[index].faceIndices[i].vertexNormal],
 			objects[index].vertexTextureCoords[objects[index].faceIndices[i].vertexTextureCoord]
 		));
+	return vertices;
+}
+
+std::vector<unsigned int> Entropy::Graphics::WavefrontObj::getIndices(const char* objectName)
+{
+	return getIndices(getObjectIndex(objectName));
+}
+
+std::vector<unsigned int> Entropy::Graphics::WavefrontObj::getIndices(unsigned int index)
+{
 	std::vector<unsigned int> indices;
 	for (unsigned int i = 0; i < objects[index].faceIndices.size(); i++)
 		indices.push_back(i);
-	std::vector<Texture> textures;
-
-	return Mesh(vertices, indices, textures);
+	return indices;
 }
 
 

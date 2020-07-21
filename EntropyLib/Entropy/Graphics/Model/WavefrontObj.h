@@ -7,11 +7,15 @@
 #include <vector>
 #include <string>
 
+#ifndef LIB_API
+#define LIB_API __declspec(dllimport)
+#endif // !LIB_API
+
 namespace Entropy
 {
 	namespace Graphics
 	{
-		class __declspec(dllexport) WavefrontObj
+		class LIB_API WavefrontObj
 		{
 		private:
 			struct FaceIndex {
@@ -47,6 +51,12 @@ namespace Entropy
 
 			Mesh getMesh(const char* objectName);
 			Mesh getMesh(unsigned int index);
+
+			std::vector<Vertex> getVertices(const char* objectName);
+			std::vector<Vertex> getVertices(unsigned int index);
+
+			std::vector<unsigned int> getIndices(const char* objectName);
+			std::vector<unsigned int> getIndices(unsigned int index);
 		};
 	}
 }
