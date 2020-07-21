@@ -2,6 +2,8 @@
 #include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Shader.h>
 
+#include <Entropy/Graphics/Model/WavefrontObj.h>
+
 #include <Entropy/Math/Transform3D.h>
 
 #include <GLCamera.h>
@@ -29,8 +31,11 @@ int main(int argc, char* argv[])
 		Entropy::Texture diffuseMap("assets/container2.bmp");
 		textures.push_back(Entropy::Graphics::Texture(diffuseMap.ID, "texture_diffuse"));
 
-		// Construct Data
-		Entropy::Graphics::Mesh cube = Entropy::Graphics::LoadWavefrontObj("assets/banana.obj");
+		// Construct Object Data
+		Entropy::Graphics::WavefrontObj platonic("assets/platonic.obj");
+
+		Entropy::Graphics::Mesh cube = platonic.getMesh("tetrahedron");
+		Entropy::Graphics::Mesh light = platonic.getMesh("cube");
 		//cube.textures = textures;
 
 		// Load Shader
@@ -68,16 +73,16 @@ int main(int argc, char* argv[])
 		};
 
 		Entropy::Graphics::Material cubeMaterial[] = {
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
-			Entropy::Graphics::Materials::YellowRubber,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
+			Entropy::Graphics::Materials::YellowPlastic,
 		};
 
 		float cubeAngle = 0.0f;
@@ -139,9 +144,9 @@ int main(int argc, char* argv[])
 				float offset = 1.0f * i;
 
 				if (i % 2 == 0)
-					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(10.0f);
+					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
 				else
-					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset) * Entropy::Math::Scale(10.0f);
+					model = Entropy::Math::Translate(cubePos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset) * Entropy::Math::Scale(1.0f);
 
 				lightingShader.setMaterial(cubeMaterial[i]);
 				lightingShader.setVec3("viewPos", camera.position);
@@ -154,14 +159,14 @@ int main(int argc, char* argv[])
 			// Render Light Source
 			for (unsigned int i = 0; i < 4; i++)
 			{
-				model = Entropy::Math::Translate(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::Scale(2.0f);
+				model = Entropy::Math::Translate(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::Scale(0.2f);
 				
 				lightCubeShader.use();
 				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);
 				lightCubeShader.setMat4("projection", projection);
 				lightCubeShader.setMat4("view", view);
 				lightCubeShader.setMat4("model", model);
-				cube.Draw(lightCubeShader);
+				light.Draw(lightCubeShader);
 			}
 			
 			// Update

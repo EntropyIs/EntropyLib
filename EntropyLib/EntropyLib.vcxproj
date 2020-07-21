@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
+    <ClCompile Include="Entropy\Graphics\Model\WavefrontObj.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="Entropy\Math\Mat2.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
     <ClInclude Include="Entropy\Graphics\Material.h" />
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
+    <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
