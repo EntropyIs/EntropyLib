@@ -25,16 +25,30 @@ namespace Entropy
 				FaceIndex() :vertexPosition(0), vertexNormal(0), vertexTextureCoord(0) {};
 			};
 
-			struct Data {
+			struct ObjectData {
 				std::string objectName;
 				std::vector<Math::Vec3> vertexPositions;
 				std::vector<Math::Vec3> vertexNormals;
 				std::vector<Math::Vec2> vertexTextureCoords;
 				std::vector<FaceIndex> faceIndices;
-				Data(std::string objectName);
+				std::string materialName;
+				ObjectData(std::string objectName);
 			};
 
-			std::vector<Data> objects;
+			struct MaterialData {
+				std::string materialName;
+				Math::Vec3 ambients;
+				Math::Vec3 diffuse;
+				Math::Vec3 specular;
+				float specularExponent;
+				float transparancy;
+				std::vector<std::vector<Texture>> textures;
+			};
+
+			std::vector<ObjectData> objects;
+			std::vector<MaterialData> materials;
+
+			std::vector<const char*> mtlFiles;
 
 			void pharseVertexPosition(std::vector<std::string> lineData, unsigned int index);
 			void pharseTextureCoord(std::vector<std::string> lineData, unsigned int index);
@@ -45,6 +59,9 @@ namespace Entropy
 
 			unsigned int getObjectIndex(std::string objectName);
 			bool hasObject(std::string objectName);
+
+			bool readObjFile(const char* path);
+			bool readMtlFile(const char* path);
 
 		public:
 			WavefrontObj(const char* path);

@@ -12,8 +12,8 @@ int main(int argc, char* argv[])
 {
 	// Load objects from file
 	Graphics::WavefrontObj object("platonic.obj");
-	std::vector<Graphics::Vertex> vertices = object.getVertices("icosahedron");
-	std::vector<unsigned int> indices = object.getIndices("icosahedron");
+	std::vector<Graphics::Vertex> vertices = object.getVertices("dodecahedron");
+	std::vector<unsigned int> indices = object.getIndices("dodecahedron");
 
 	for (int i = 0; i < indices.size(); i += 3) // add 3 each time to get next tri
 	{

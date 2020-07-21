@@ -5,7 +5,7 @@
 #include <sstream>
 #include <exception>
 
-Entropy::Graphics::WavefrontObj::Data::Data(std::string objectName) : objectName(objectName)
+Entropy::Graphics::WavefrontObj::ObjectData::ObjectData(std::string objectName) : objectName(objectName)
 {
 	// Add empties to data (because wavefront obj files index from 1).
 	vertexPositions.push_back(Math::Vec3());
@@ -91,7 +91,7 @@ unsigned int Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
 {
 	if (hasObject(objectName))
 		return getObjectIndex(objectName);
-	objects.push_back(Data(objectName));
+	objects.push_back(ObjectData(objectName));
 	return objects.size() - 1;
 }
 
@@ -113,7 +113,7 @@ bool Entropy::Graphics::WavefrontObj::hasObject(std::string objectName)
 	return false;
 }
 
-Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
+bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 {
 	// Read Contents of file into lines vector
 	std::ifstream inFile;
@@ -131,7 +131,7 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 	{
 		std::string line;
 		std::getline(inFile, line);
-		if(!line.empty())
+		if (!line.empty())
 			lines.push_back(line);
 	}
 	inFile.close();
@@ -152,7 +152,7 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 				lineComp.push_back(lineToken);
 		lineToken = lineComp[0];
 
-		std::string objectName;
+		std::string nameBuffer;
 
 		switch (lineToken.c_str()[0])
 		{
@@ -170,12 +170,19 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 			pharseFace(lineComp, objectIndex, positionOffset, textureCoordOffset, normalOffset);
 			break;
 		case 'u':
-			// TODO: Implement Matreial Useage
+			// TODO: Implement Split Matreial Useage?
+			for (unsigned int i = 1; i < lineComp.size(); i++)
+				nameBuffer.append(lineComp[i]); // Treat everything after first comp as material name
+			objects[objectIndex].materialName = nameBuffer;
 			break;
 		case 'm':
 			if (lineToken == "mtllib")
-				// TODO: Pharse .mtl file
+			{
+				for (unsigned int i = 1; i < lineComp.size(); i++)
+					nameBuffer.append(lineComp[i]); // Treat everything after first comp as mtl filename
+				mtlFiles.push_back(nameBuffer.c_str());
 				break;
+			}
 			else if (lineToken == "mg")
 				// TODO: Handle merging group
 				break;
@@ -183,15 +190,15 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 			// Todo: Handle Group
 			break;
 		case 's':
-			// Todo: Handle Group Number
+			// Todo: Handle Smoothing Group
 		case 'o':
 			for (unsigned int i = 1; i < lineComp.size(); i++)
-				objectName.append(lineComp[i]); // treate everything after first comp as object name
-			objectIndex = addObject(objectName);
+				nameBuffer.append(lineComp[i]); // Treat everything after first comp as object name
+			objectIndex = addObject(nameBuffer);
 			positionOffset = 0;
 			normalOffset = 0;
 			textureCoordOffset = 0;
-			for (unsigned int i = 0; i < objectIndex; i++) // get object offset
+			for (unsigned int i = 0; i < objectIndex; i++) // Get object offset
 			{
 				positionOffset += objects[i].vertexPositions.size() - 1;
 				normalOffset += objects[i].vertexNormals.size() - 1;
@@ -202,6 +209,122 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 			break;
 		}
 	}
+	return true;
+}
+
+bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
+{
+	// Read Contents of file into lines vector
+	std::ifstream inFile;
+	inFile.open(path, std::ios_base::in);
+	if (!inFile.is_open())
+	{
+		std::string error = "Could not open file: ";
+		error.append(path);
+		throw std::exception(error.c_str());
+	}
+
+	std::vector<std::string> lines;
+
+	while (inFile.good() && inFile.peek() != EOF)
+	{
+		std::string line;
+		std::getline(inFile, line);
+		if (!line.empty())
+			lines.push_back(line);
+	}
+	inFile.close();
+
+	// Pharse
+	for (unsigned int i = 0; i < lines.size(); i++)
+	{
+		std::stringstream lineStream(lines[i]);
+		std::vector<std::string> lineComp;
+		std::string lineToken;
+		while (std::getline(lineStream, lineToken, ' '))
+			if (!lineToken.empty())
+				lineComp.push_back(lineToken);
+		lineToken = lineComp[0];
+
+		std::string nameBuffer;
+
+		switch (lineToken.c_str()[0])
+		{
+		case 'n': // New Material
+			break;
+		case 'K':
+			if (lineToken == "Ka") // Ambient Color
+			{
+
+			}
+			else if (lineToken == "Kd") // Diffuse Color
+			{
+
+			}
+			else if (lineToken == "Ks") // Specular Color
+			{
+
+			}
+			break;
+		case 'N': 
+			if (lineToken == "Ns")// Specular Exponent
+			{
+
+			}
+			else if (lineToken == "Ni") // Optical Density (Index of Refraction)
+			{
+
+			}
+			break;
+		case 'd':
+		case 'T':
+			if (lineToken == "d" || lineToken == "Tr")// Transparency or Disolve
+			{
+
+			}
+			break;
+		case 'i': // Illum
+			break;
+		case 'm':
+		case 'b':
+			if (lineToken == "map_Ka") // Ambient Texture Map
+			{
+
+			}
+			else if (lineToken == "map_Kd") // Diffuse Texture Map
+			{
+
+			}
+			else if (lineToken == "map_Ks") // Specular Texture Map
+			{
+
+			}
+			else if (lineToken == "map_Ns") // Specular Highlight Component Map
+			{
+
+			}
+			else if (lineToken == "map_bump" || lineToken == "bump") // bump map
+			{
+
+			}
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	return false;
+}
+
+Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
+{
+	// Phase OBJ File
+	readObjFile(path);
+
+	// Phase any associated MTL Files
+	for (unsigned int i = 0; i < mtlFiles.size(); i++)
+		readMtlFile(mtlFiles[i]);
 }
 
 Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(const char* objectName)
