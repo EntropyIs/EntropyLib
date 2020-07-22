@@ -33,7 +33,7 @@ namespace Entropy
 	DLNode<T> DLNode<T>::NIL;
 
 	template<class T>
-	void DLNode<T>::prepend(Node& node)
+	inline void DLNode<T>::prepend(Node& node)
 	{
 		node.next = this;
 		if (prev != &NIL)
@@ -45,7 +45,7 @@ namespace Entropy
 	}
 
 	template<class T>
-	void DLNode<T>::append(Node& node)
+	inline void DLNode<T>::append(Node& node)
 	{
 		node.prev = this;
 		if (next != &NIL)
@@ -57,7 +57,7 @@ namespace Entropy
 	}
 
 	template<class T>
-	void DLNode<T>::remove()
+	inline void DLNode<T>::remove()
 	{
 		if (prev != &NIL)
 			prev->next = next;
@@ -66,19 +66,19 @@ namespace Entropy
 	}
 
 	template<class T>
-	const T& DLNode<T>::getValue() const
+	inline const T& DLNode<T>::getValue() const
 	{
 		return value;
 	}
 
 	template<class T>
-	const DLNode<T>& DLNode<T>::getNext() const
+	inline const DLNode<T>& DLNode<T>::getNext() const
 	{
 		return *next;
 	}
 
 	template<class T>
-	const DLNode<T>& DLNode<T>::getPrev() const
+	inline const DLNode<T>& DLNode<T>::getPrev() const
 	{
 		return *prev;
 	}

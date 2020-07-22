@@ -53,6 +53,7 @@
     <ClInclude Include="Entropy\Math\Vec3.h" />
     <ClInclude Include="Entropy\Math\Vec4.h" />
     <ClInclude Include="Entropy\Type\DLNode.h" />
+    <ClInclude Include="Entropy\Type\List.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="GLTexture.h" />

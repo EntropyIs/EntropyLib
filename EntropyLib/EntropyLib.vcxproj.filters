@@ -179,5 +179,8 @@
     <ClInclude Include="Entropy\Type\DLNode.h">
       <Filter>Header Files\Type</Filter>
     </ClInclude>
+    <ClInclude Include="Entropy\Type\List.h">
+      <Filter>Header Files\Type</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
