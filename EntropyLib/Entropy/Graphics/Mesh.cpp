@@ -1,3 +1,4 @@
+#define LIB_API __declspec(dllexport)
 #include "Mesh.h"
 
 #include <GL/glew.h>

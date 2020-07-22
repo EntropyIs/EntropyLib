@@ -35,21 +35,10 @@ namespace Entropy
 				ObjectData(std::string objectName);
 			};
 
-			struct MaterialData {
-				std::string materialName;
-				Math::Vec3 ambients;
-				Math::Vec3 diffuse;
-				Math::Vec3 specular;
-				float specularExponent;
-				float transparancy;
-				std::vector<std::vector<Texture>> textures;
-				MaterialData(std::string materialName) : materialName(materialName), specularExponent(0.0f), transparancy(0.0f) {};
-			};
-
 			std::vector<ObjectData> objects;
-			std::vector<MaterialData> materials;
+			std::vector<Material> materials;
 
-			std::vector<const char*> mtlFiles;
+			std::vector<std::string> mtlFiles;
 
 			void pharseVertexPosition(std::vector<std::string> lineData, unsigned int index);
 			void pharseTextureCoord(std::vector<std::string> lineData, unsigned int index);
@@ -60,6 +49,10 @@ namespace Entropy
 			unsigned int getObjectIndex(std::string objectName);
 			bool hasObject(std::string objectName);
 
+			void pharseColorAmbient(std::vector<std::string> lineData, unsigned int index);
+			void pharseColorDiffuse(std::vector<std::string> lineData, unsigned int index);
+			void pharseColorSpecular(std::vector<std::string> lineData, unsigned int index);
+			void pharseShininess(std::vector<std::string> lineData, unsigned int index);
 
 			unsigned int addMaterial(std::string materialName);
 			unsigned int getMaterialIndex(std::string materialName);

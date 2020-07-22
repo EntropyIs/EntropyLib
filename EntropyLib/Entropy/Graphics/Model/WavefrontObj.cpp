@@ -113,18 +113,58 @@ bool Entropy::Graphics::WavefrontObj::hasObject(std::string objectName)
 	return false;
 }
 
+void Entropy::Graphics::WavefrontObj::pharseColorAmbient(std::vector<std::string> lineData, unsigned int index)
+{
+	if (lineData.size() == 4) // Vec3 Color Data
+		materials[index].Ambient = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
+#ifdef DEBUG
+	else
+		std::cout << "Error Reading Ambient Color Data." << std::endl;
+#endif // DEBUG
+}
+
+void Entropy::Graphics::WavefrontObj::pharseColorDiffuse(std::vector<std::string> lineData, unsigned int index)
+{
+	if (lineData.size() == 4) // Vec3 Color Data
+		materials[index].Diffuse = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
+#ifdef DEBUG
+	else
+		std::cout << "Error Reading Diffuse Color Data." << std::endl;
+#endif // DEBUG
+}
+
+void Entropy::Graphics::WavefrontObj::pharseColorSpecular(std::vector<std::string> lineData, unsigned int index)
+{
+	if (lineData.size() == 4) // Vec3 Color Data
+		materials[index].Specular = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
+#ifdef DEBUG
+	else
+		std::cout << "Error Reading Specular Color Data." << std::endl;
+#endif // DEBUG
+}
+
+void Entropy::Graphics::WavefrontObj::pharseShininess(std::vector<std::string> lineData, unsigned int index)
+{
+	if (lineData.size() == 2) // Shinyness Data
+		materials[index].Shininess = std::stof(lineData[1]);
+#ifdef DEBUG
+	else
+		std::cout << "Error Reading Shininess Data." << std::endl;
+#endif // DEBUG
+}
+
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
 {
 	if (hasMaterial(materialName))
-		return getObjectIndex(materialName);
-	materials.push_back(MaterialData(materialName));
+		return getMaterialIndex(materialName);
+	materials.push_back(Material(materialName));
 	return materials.size() - 1;
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::getMaterialIndex(std::string materialName)
 {
 	for (unsigned int i = 0; i < materials.size(); i++)
-		if (materials[i].materialName.compare(materialName) == 0)
+		if (materials[i].Name.compare(materialName) == 0)
 			return i;
 	std::string error = "Material not found: ";
 	error.append(materialName);
@@ -134,7 +174,7 @@ unsigned int Entropy::Graphics::WavefrontObj::getMaterialIndex(std::string mater
 bool Entropy::Graphics::WavefrontObj::hasMaterial(std::string materialName)
 {
 	for (unsigned int i = 0; i < materials.size(); i++)
-		if (materials[i].materialName.compare(materialName) == 0)
+		if (materials[i].Name.compare(materialName) == 0)
 			return true;
 	return false;
 }
@@ -206,7 +246,7 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 			{
 				for (unsigned int i = 1; i < lineComp.size(); i++)
 					nameBuffer.append(lineComp[i]); // Treat everything after first comp as mtl filename
-				mtlFiles.push_back(nameBuffer.c_str());
+				mtlFiles.push_back(nameBuffer);
 				break;
 			}
 			else if (lineToken == "mg")
@@ -261,6 +301,8 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 	}
 	inFile.close();
 
+	unsigned int materialIndex = addMaterial(""); // Add unammed material;
+	
 	// Pharse
 	for (unsigned int i = 0; i < lines.size(); i++)
 	{
@@ -277,36 +319,39 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 		switch (lineToken.c_str()[0])
 		{
 		case 'n': // New Material
+			for (unsigned int i = 1; i < lineComp.size(); i++)
+				nameBuffer.append(lineComp[i]); // Treat everything after first comp as object name
+			materialIndex = addMaterial(nameBuffer);
 			break;
 		case 'K':
 			if (lineToken == "Ka") // Ambient Color
 			{
-
+				pharseColorAmbient(lineComp, materialIndex);
 			}
 			else if (lineToken == "Kd") // Diffuse Color
 			{
-
+				pharseColorDiffuse(lineComp, materialIndex);
 			}
 			else if (lineToken == "Ks") // Specular Color
 			{
-
+				pharseColorSpecular(lineComp, materialIndex);
 			}
 			break;
 		case 'N':
 			if (lineToken == "Ns")// Specular Exponent
 			{
-
+				pharseShininess(lineComp, materialIndex);
 			}
 			else if (lineToken == "Ni") // Optical Density (Index of Refraction)
 			{
-
+				// TODO: Handle Transparancy
 			}
 			break;
 		case 'd':
 		case 'T':
 			if (lineToken == "d" || lineToken == "Tr")// Transparency or Disolve
 			{
-
+				// TODO: Handle Transparancy
 			}
 			break;
 		case 'i': // Illum
@@ -337,9 +382,7 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 		default:
 			break;
 		}
-
 	}
-
 	return false;
 }
 
@@ -350,7 +393,7 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 
 	// Phase any associated MTL Files
 	for (unsigned int i = 0; i < mtlFiles.size(); i++)
-		readMtlFile(mtlFiles[i]);
+		readMtlFile(mtlFiles[i].c_str());
 }
 
 Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(const char* objectName)

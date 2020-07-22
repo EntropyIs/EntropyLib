@@ -1,16 +1,22 @@
 #pragma once
 
+#ifndef LIB_API
+#define LIB_API __declspec(dllimport)
+#endif // !LIB_API
+
 #include "../Math/Vec3.h"
 #include "../../GLTexture.h"
+
 #include <vector>
+#include <string>
 
 namespace Entropy
 {
 	namespace Graphics
 	{
-		struct __declspec(dllexport) Material
+		struct LIB_API Material
 		{
-			const char* Name;
+			std::string Name;
 			Math::Vec3 Ambient;
 			Math::Vec3 Diffuse;
 			Math::Vec3 Specular;
@@ -19,15 +25,15 @@ namespace Entropy
 			std::vector<std::vector<Texture>> Textures;
 
 			// Default
-			Material(const char* name) : Name(name), Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(0.5f), Transparancy(1.0f) {};
+			Material(std::string name) : Name(name), Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(0.5f), Transparancy(1.0f) {};
 			// Shininess
-			Material(const char* name, float shininess) : Name(name), Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(shininess), Transparancy(1.0f) {}
+			Material(std::string name, float shininess) : Name(name), Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(shininess), Transparancy(1.0f) {}
 			// Shininess + Color
-			Material(const char* name, float shininess, float r, float g, float b) : Name(name), Ambient(0.2f * r, 0.2f * g, 0.2f * b), Diffuse(0.8f * r, 0.8f * g, 0.8f * b), Specular(r, g, b), Shininess(shininess), Transparancy(1.0f) {}
-			Material(const char* name, float shininess, Math::Vec3 color) : Name(name), Ambient(0.2f * color), Diffuse(0.8f * color), Specular(color), Shininess(shininess), Transparancy(1.0f) {}
+			Material(std::string name, float shininess, float r, float g, float b) : Name(name), Ambient(0.2f * r, 0.2f * g, 0.2f * b), Diffuse(0.8f * r, 0.8f * g, 0.8f * b), Specular(r, g, b), Shininess(shininess), Transparancy(1.0f) {}
+			Material(std::string name, float shininess, Math::Vec3 color) : Name(name), Ambient(0.2f * color), Diffuse(0.8f * color), Specular(color), Shininess(shininess), Transparancy(1.0f) {}
 			// Shininess + Ambient + Diffuse + Specular
-			Material(const char* name, float shininess, float aR, float aG, float aB, float dR, float dG, float dB, float sR, float sG, float sB) : Name(name), Ambient(aR, aG, aB), Diffuse(dR, dG, dB), Specular(sR, sG, sB), Shininess(shininess), Transparancy(1.0f) {}
-			Material(const char* name, float shininess, Math::Vec3 ambient, Math::Vec3 diffuse, Math::Vec3 specular) : Name(name), Ambient(ambient), Diffuse(diffuse), Specular(specular), Shininess(shininess), Transparancy(1.0f) {}
+			Material(std::string name, float shininess, float aR, float aG, float aB, float dR, float dG, float dB, float sR, float sG, float sB) : Name(name), Ambient(aR, aG, aB), Diffuse(dR, dG, dB), Specular(sR, sG, sB), Shininess(shininess), Transparancy(1.0f) {}
+			Material(std::string name, float shininess, Math::Vec3 ambient, Math::Vec3 diffuse, Math::Vec3 specular) : Name(name), Ambient(ambient), Diffuse(diffuse), Specular(specular), Shininess(shininess), Transparancy(1.0f) {}
 		};
 
 		namespace Materials
