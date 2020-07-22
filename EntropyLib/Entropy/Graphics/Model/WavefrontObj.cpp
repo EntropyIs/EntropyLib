@@ -113,6 +113,32 @@ bool Entropy::Graphics::WavefrontObj::hasObject(std::string objectName)
 	return false;
 }
 
+unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
+{
+	if (hasMaterial(materialName))
+		return getObjectIndex(materialName);
+	materials.push_back(MaterialData(materialName));
+	return materials.size() - 1;
+}
+
+unsigned int Entropy::Graphics::WavefrontObj::getMaterialIndex(std::string materialName)
+{
+	for (unsigned int i = 0; i < materials.size(); i++)
+		if (materials[i].materialName.compare(materialName) == 0)
+			return i;
+	std::string error = "Material not found: ";
+	error.append(materialName);
+	throw std::exception(error.c_str());
+}
+
+bool Entropy::Graphics::WavefrontObj::hasMaterial(std::string materialName)
+{
+	for (unsigned int i = 0; i < materials.size(); i++)
+		if (materials[i].materialName.compare(materialName) == 0)
+			return true;
+	return false;
+}
+
 bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 {
 	// Read Contents of file into lines vector
@@ -266,7 +292,7 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 
 			}
 			break;
-		case 'N': 
+		case 'N':
 			if (lineToken == "Ns")// Specular Exponent
 			{
 
@@ -367,5 +393,3 @@ std::vector<unsigned int> Entropy::Graphics::WavefrontObj::getIndices(unsigned i
 		indices.push_back(i);
 	return indices;
 }
-
-
