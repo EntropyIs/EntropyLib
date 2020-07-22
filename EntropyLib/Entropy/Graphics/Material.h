@@ -17,9 +17,9 @@ namespace Entropy
 		struct Texture
 		{
 			unsigned int ID;
-			const char* Type;
+			std::string Type;
 
-			Texture(unsigned int ID, const char* type) : ID(ID), Type(type) {};
+			Texture(unsigned int ID, std::string type) : ID(ID), Type(type) {};
 		};
 
 		struct LIB_API Material

@@ -57,6 +57,7 @@
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
     <ClInclude Include="Profiler.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

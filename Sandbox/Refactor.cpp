@@ -22,30 +22,18 @@ int main(int argc, char* argv[])
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
 		window.captureMouse();
-		window.setWindowClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-		//Load Texture Data
-		std::vector<Entropy::Graphics::Texture> textures;
-		Entropy::Texture specularMap("assets/container2_specular.bmp");
-		textures.push_back(Entropy::Graphics::Texture(specularMap.ID, "texture_specular"));
-		Entropy::Texture diffuseMap("assets/container2.bmp");
-		textures.push_back(Entropy::Graphics::Texture(diffuseMap.ID, "texture_diffuse"));
+		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Construct Object Data
-		Entropy::Graphics::WavefrontObj platonic("assets/platonic.obj");
+		Entropy::Graphics::WavefrontObj platonic("assets/box.obj");
 
-		Entropy::Graphics::Mesh tetra  = platonic.getMesh("tetrahedron");
-		Entropy::Graphics::Mesh octa   = platonic.getMesh("octahedron");
-		Entropy::Graphics::Mesh hexa   = platonic.getMesh("hexahedron");
-		Entropy::Graphics::Mesh icosa  = platonic.getMesh("icosahedron");
-		Entropy::Graphics::Mesh dodeca = platonic.getMesh("dodecahedron");
-
-		Entropy::Graphics::Mesh light = platonic.getMesh("hexahedron");
+		Entropy::Graphics::Mesh box  = platonic.getMesh("box");
+		Entropy::Graphics::Mesh light = platonic.getMesh("box");
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
 		lightingShaderPaths.push_back("vLightingShader.glsl");
-		lightingShaderPaths.push_back("fLightingShader.glsl");
+		lightingShaderPaths.push_back("fLShader2.glsl");
 		std::vector<unsigned int> lightingShaderTypes;
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
@@ -63,23 +51,15 @@ int main(int argc, char* argv[])
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
-		Entropy::Math::Vec4 tetraPos[] = {
-			Entropy::Math::Vec4( 0.0f,  0.0f,  -2.0f, 1.0f),
-			Entropy::Math::Vec4( 2.0f,  5.0f, -15.0f, 1.0f)
-		};
-		Entropy::Math::Vec4 octaPos[] = {
+		Entropy::Math::Vec4 boxPos[] = {
+			Entropy::Math::Vec4( 0.0f,  0.0f, -2.0f, 1.0f),
+			Entropy::Math::Vec4( 2.0f,  5.0f, -15.0f, 1.0f),
 			Entropy::Math::Vec4( 1.5f,  0.2f, -1.5f, 1.0f),
-			Entropy::Math::Vec4(-1.3f,  1.0f, -1.5f, 1.0f)
-		};
-		Entropy::Math::Vec4 hexaPos[] = {
+			Entropy::Math::Vec4(-1.3f,  1.0f, -1.5f, 1.0f),
 			Entropy::Math::Vec4( 1.3f, -2.0f, -2.5f, 1.0f),
-			Entropy::Math::Vec4( 1.5f,  2.0f, -2.5f, 1.0f)
-		};
-		Entropy::Math::Vec4 icosaPos[] = {
+			Entropy::Math::Vec4( 1.5f,  2.0f, -2.5f, 1.0f),
 			Entropy::Math::Vec4( 2.4f, -0.4f, -3.5f, 1.0f),
-			Entropy::Math::Vec4(-1.7f,  3.0f, -7.5f, 1.0f)
-		};
-		Entropy::Math::Vec4 dodecaPos[] = {
+			Entropy::Math::Vec4(-1.7f,  3.0f, -7.5f, 1.0f),
 			Entropy::Math::Vec4(-1.5f, -2.2f, -2.5f, 1.0f),
 			Entropy::Math::Vec4(-3.8f, -2.0f, -12.3f, 1.0f)
 		};
@@ -87,13 +67,13 @@ int main(int argc, char* argv[])
 		float cubeAngle = 0.0f;
 
 		// Setup Lights
-		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.5f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(0.8f));
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.05f, 0.05f, 0.1f), Entropy::Math::Vec3(0.2f, 0.2f, 0.7f), Entropy::Math::Vec3(0.7f, 0.7f, 0.7f));
 
 		Entropy::Math::Vec3 colors[] = {
-			Entropy::Math::Vec3(1.0f),
-			Entropy::Math::Vec3(1.0f),
-			Entropy::Math::Vec3(1.0f),
-			Entropy::Math::Vec3(1.0f)
+			Entropy::Math::Vec3(0.2f, 0.2f, 0.6f),
+			Entropy::Math::Vec3(0.3f, 0.3f, 0.7f),
+			Entropy::Math::Vec3(0.0f, 0.0f, 0.3f),
+			Entropy::Math::Vec3(0.4f, 0.4f, 0.4f)
 		};
 
 		Entropy::Graphics::PointLight pointLights[] = {
@@ -104,7 +84,7 @@ int main(int argc, char* argv[])
 		};
 
 		lightingShader.use();
-		//lightingShader.setDirectionalLight(directionalLight);
+		lightingShader.setDirectionalLight(directionalLight);
 		for (unsigned int i = 0; i < 4; i++)
 			lightingShader.setPointLight(i, pointLights[i]);
 
@@ -144,49 +124,13 @@ int main(int argc, char* argv[])
 			lightingShader.setMat4("projection", projection);
 			lightingShader.setMat4("view", view);
 
-			// Render tetra
-			for (unsigned int i = 0; i < 2; i++)
+			// Render Box
+			for (unsigned int i = 0; i < 10; i++)
 			{
 				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(tetraPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
+				model = Entropy::Math::Translate(boxPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
 				lightingShader.setMat4("model", model);
-				tetra.Draw(lightingShader);
-			}
-
-			// Render octa
-			for (unsigned int i = 0; i < 2; i++)
-			{
-				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(octaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMat4("model", model);
-				octa.Draw(lightingShader);
-			}
-
-			// Render hexa
-			for (unsigned int i = 0; i < 2; i++)
-			{
-				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(hexaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMat4("model", model);
-				hexa.Draw(lightingShader);
-			}
-
-			// Render icosa
-			for (unsigned int i = 0; i < 2; i++)
-			{
-				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(icosaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMat4("model", model);
-				icosa.Draw(lightingShader);
-			}
-
-			// Render dodeca
-			for (unsigned int i = 0; i < 2; i++)
-			{
-				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(dodecaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(0.8f);
-				lightingShader.setMat4("model", model);
-				dodeca.Draw(lightingShader);
+				box.Draw(lightingShader);
 			}
 
 			// Render Light Source

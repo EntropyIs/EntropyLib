@@ -9,7 +9,7 @@
 
 #include <GLFW/glfw3.h>
 
-Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
+Entropy::LoadTexture::Image Entropy::LoadTexture::loadBitmap(const char* path)
 {
 #ifdef DEBUG
 	std::cout << "Loading Image: " << path << std::endl;
@@ -23,7 +23,9 @@ Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 #ifdef DEBUG
 		std::cout << "Error: Unable to open file" << std::endl;
 #endif //DEBUG
-		throw std::exception("Unable to open file");
+		std::string error = "Unable to open file: ";
+		error.append(path);
+		throw std::exception(error.c_str());
 	}
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
 	file.close();
@@ -56,7 +58,7 @@ Entropy::Texture::Image Entropy::Texture::loadBitmap(const char* path)
 	return result;
 }
 
-Entropy::Texture::Texture(const char* path)
+Entropy::LoadTexture::LoadTexture(const char* path)
 {
 	// Load Image.
 	Image image = loadBitmap(path);

@@ -53,6 +53,7 @@ namespace Entropy
 			void pharseColorDiffuse(std::vector<std::string> lineData, unsigned int index);
 			void pharseColorSpecular(std::vector<std::string> lineData, unsigned int index);
 			void pharseShininess(std::vector<std::string> lineData, unsigned int index);
+			void pharseTexture(std::vector<std::string> lineData, unsigned int index);
 
 			unsigned int addMaterial(std::string materialName);
 			unsigned int getMaterialIndex(std::string materialName);

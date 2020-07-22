@@ -173,5 +173,8 @@
     <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h">
       <Filter>Header Files\Graphics\ModelProcessing</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files\Graphics\ModelProcessing</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

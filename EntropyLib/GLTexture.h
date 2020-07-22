@@ -4,7 +4,7 @@
 
 namespace Entropy
 {
-	class __declspec(dllexport) Texture
+	class __declspec(dllexport) LoadTexture
 	{
 	private:
 		struct Image
@@ -18,6 +18,6 @@ namespace Entropy
 
 	public:
 		unsigned int ID;
-		Texture(const char* path);
+		LoadTexture(const char* path);
 	};
 }

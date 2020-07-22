@@ -1,6 +1,8 @@
 #define LIB_API __declspec(dllexport)
 #include "WavefrontObj.h"
 
+#include "../../../GLTexture.h"
+
 #include <fstream>
 #include <sstream>
 #include <exception>
@@ -153,6 +155,28 @@ void Entropy::Graphics::WavefrontObj::pharseShininess(std::vector<std::string> l
 #endif // DEBUG
 }
 
+void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lineData, unsigned int index)
+{
+	std::string type;
+	if (lineData[0] == "map_Ka") // Ambient Texture Map
+		type = "texture_ambient";
+	else if (lineData[0] == "map_Kd") // Diffuse Texture Map
+		type = "texture_diffuse";
+	else if (lineData[0] == "map_Ks") // Specular Texture Map
+		type = "texture_specular";
+	else if (lineData[0] == "map_Ns") // Specular Highlight Component Map
+		type = "texture_shininess";
+	else if (lineData[0] == "map_bump" || lineData[0] == "bump") // bump map
+		type = "texture_bump";
+
+	std::string nameBuffer;
+	for (unsigned int i = 1; i < lineData.size(); i++)
+		nameBuffer.append(lineData[i]); // Treat everything after first comp as texture file name
+
+	LoadTexture tex(nameBuffer.c_str());
+	materials[index].Textures.push_back(Texture(tex.ID, type));
+}
+
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
 {
 	if (hasMaterial(materialName))
@@ -257,6 +281,7 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 			break;
 		case 's':
 			// Todo: Handle Smoothing Group
+			break;
 		case 'o':
 			for (unsigned int i = 1; i < lineComp.size(); i++)
 				nameBuffer.append(lineComp[i]); // Treat everything after first comp as object name
@@ -325,17 +350,11 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 			break;
 		case 'K':
 			if (lineToken == "Ka") // Ambient Color
-			{
 				pharseColorAmbient(lineComp, materialIndex);
-			}
 			else if (lineToken == "Kd") // Diffuse Color
-			{
 				pharseColorDiffuse(lineComp, materialIndex);
-			}
 			else if (lineToken == "Ks") // Specular Color
-			{
 				pharseColorSpecular(lineComp, materialIndex);
-			}
 			break;
 		case 'N':
 			if (lineToken == "Ns")// Specular Exponent
@@ -358,26 +377,8 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 			break;
 		case 'm':
 		case 'b':
-			if (lineToken == "map_Ka") // Ambient Texture Map
-			{
-
-			}
-			else if (lineToken == "map_Kd") // Diffuse Texture Map
-			{
-
-			}
-			else if (lineToken == "map_Ks") // Specular Texture Map
-			{
-
-			}
-			else if (lineToken == "map_Ns") // Specular Highlight Component Map
-			{
-
-			}
-			else if (lineToken == "map_bump" || lineToken == "bump") // bump map
-			{
-
-			}
+			if (lineToken == "map_Ka" || lineToken == "map_Kd" || lineToken == "map_Ks" || lineToken == "map_Ns" || lineToken == "map_bump" || lineToken == "bump")
+				pharseTexture(lineComp, materialIndex);
 			break;
 		default:
 			break;

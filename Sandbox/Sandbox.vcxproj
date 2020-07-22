@@ -150,6 +150,7 @@
   <ItemGroup>
     <None Include="fLightCubeShader.glsl" />
     <None Include="fLightingShader.glsl" />
+    <None Include="fLShader2.glsl" />
     <None Include="vLightCubeShader.glsl" />
     <None Include="vLightingShader.glsl" />
   </ItemGroup>
