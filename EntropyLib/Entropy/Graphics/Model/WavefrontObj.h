@@ -65,6 +65,8 @@ namespace Entropy
 		public:
 			WavefrontObj(const char* path);
 
+			std::vector<Mesh> getAll();
+
 			Mesh getMesh(const char* objectName);
 			Mesh getMesh(unsigned int index);
 

@@ -397,6 +397,14 @@ Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
 		readMtlFile(mtlFiles[i].c_str());
 }
 
+std::vector<Entropy::Graphics::Mesh> Entropy::Graphics::WavefrontObj::getAll()
+{
+	std::vector<Mesh> result;
+	for (unsigned int i = 1; i < objects.size(); i++)
+		result.push_back(getMesh(i));
+	return result;
+}
+
 Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(const char* objectName)
 {
 	return getMesh(getObjectIndex(objectName));

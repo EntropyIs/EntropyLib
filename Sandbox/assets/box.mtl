@@ -3,5 +3,5 @@ Ka 0.200000 0.100000 0.062000
 Kd 0.800000 0.400000 0.248000
 Ks 1.000000 0.500000 0.310000
 Ns 32.00000
-map_Kd assets/box_diffuse.png
-map_Ks assets/box_specular.png
+map_Kd assets/box_diffuse.bmp
+map_Ks assets/box_specular.bmp
