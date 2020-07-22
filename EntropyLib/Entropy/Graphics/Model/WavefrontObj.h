@@ -43,7 +43,6 @@ namespace Entropy
 				float specularExponent;
 				float transparancy;
 				std::vector<std::vector<Texture>> textures;
-				MaterialData(std::string materialName) : materialName(materialName), specularExponent(0.0f), transparancy(0.0f) {};
 			};
 
 			std::vector<ObjectData> objects;
@@ -57,13 +56,9 @@ namespace Entropy
 			void pharseFace(std::vector<std::string> lineData, unsigned int index, unsigned int positionOffset, unsigned int textureCoordOffset, unsigned int normalOffset);
 
 			unsigned int addObject(std::string objectName);
+
 			unsigned int getObjectIndex(std::string objectName);
 			bool hasObject(std::string objectName);
-
-
-			unsigned int addMaterial(std::string materialName);
-			unsigned int getMaterialIndex(std::string materialName);
-			bool hasMaterial(std::string materialName);
 
 			bool readObjFile(const char* path);
 			bool readMtlFile(const char* path);
