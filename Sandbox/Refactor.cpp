@@ -1,8 +1,6 @@
 #include <Entropy/Graphics/Window.h>
-#include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Shader.h>
-
-#include <Entropy/Graphics/Model/WavefrontObj.h>
+#include <Entropy/Graphics/Model.h>
 
 #include <Entropy/Math/Transform3D.h>
 
@@ -25,10 +23,8 @@ int main(int argc, char* argv[])
 		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Construct Object Data
-		Entropy::Graphics::WavefrontObj backpackWavefront("assets/backpack.obj");
-
-		std::vector<Entropy::Graphics::Mesh> backpack  = backpackWavefront.getAll();
-		std::vector<Entropy::Graphics::Mesh> light = backpackWavefront.getAll();
+		Entropy::Graphics::Model backpack("assets/backpack.obj");
+		Entropy::Graphics::Model light("assets/box.obj");
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
@@ -130,8 +126,7 @@ int main(int argc, char* argv[])
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(backpackPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
 				lightingShader.setMat4("model", model);
-				for(unsigned int j = 0; j < backpack.size(); j++)
-					backpack[j].Draw(lightingShader);
+				backpack.Draw(lightingShader);
 			}
 
 			// Render Light Source
@@ -144,8 +139,7 @@ int main(int argc, char* argv[])
 				lightCubeShader.setMat4("projection", projection);
 				lightCubeShader.setMat4("view", view);
 				lightCubeShader.setMat4("model", model);
-				for (unsigned int j = 0; j < backpack.size(); j++)
-					light[j].Draw(lightingShader);
+				light.Draw(lightingShader);
 			}
 			
 			// Update

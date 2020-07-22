@@ -10,7 +10,7 @@ Ke 0.0 0.0 0.0
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd assets/backpack_diffuse.bmp
-map_Bump assets/backpack_normal.bmp
-map_Ks assets/backpack_specular.bmp
+map_Kd backpack_diffuse.bmp
+map_Bump backpack_normal.bmp
+map_Ks backpack_specular.bmp
 

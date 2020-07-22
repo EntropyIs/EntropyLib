@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
+    <ClCompile Include="Entropy\Graphics\Model.cpp" />
     <ClCompile Include="Entropy\Graphics\Model\WavefrontObj.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
     <ClInclude Include="Entropy\Graphics\Material.h" />
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
+    <ClInclude Include="Entropy\Graphics\Model.h" />
     <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
@@ -164,7 +166,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

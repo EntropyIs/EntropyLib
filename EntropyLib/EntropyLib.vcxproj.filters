@@ -114,6 +114,9 @@
     <ClCompile Include="Entropy\Graphics\Model\WavefrontObj.cpp">
       <Filter>Source Files\Graphics\ModelProcessing</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Graphics\Model.cpp">
+      <Filter>Source Files\Graphics\Object Handling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h">
       <Filter>Header Files\Graphics\ModelProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\Model.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
