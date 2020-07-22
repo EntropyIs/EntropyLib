@@ -25,10 +25,10 @@ int main(int argc, char* argv[])
 		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Construct Object Data
-		Entropy::Graphics::WavefrontObj platonic("assets/box.obj");
+		Entropy::Graphics::WavefrontObj backpackWavefront("assets/backpack.obj");
 
-		Entropy::Graphics::Mesh box  = platonic.getMesh("box");
-		Entropy::Graphics::Mesh light = platonic.getMesh("box");
+		std::vector<Entropy::Graphics::Mesh> backpack  = backpackWavefront.getAll();
+		std::vector<Entropy::Graphics::Mesh> light = backpackWavefront.getAll();
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
-		Entropy::Math::Vec4 boxPos[] = {
+		Entropy::Math::Vec4 backpackPos[] = {
 			Entropy::Math::Vec4( 0.0f,  0.0f, -2.0f, 1.0f),
 			Entropy::Math::Vec4( 2.0f,  5.0f, -15.0f, 1.0f),
 			Entropy::Math::Vec4( 1.5f,  0.2f, -1.5f, 1.0f),
@@ -128,9 +128,10 @@ int main(int argc, char* argv[])
 			for (unsigned int i = 0; i < 10; i++)
 			{
 				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(boxPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
+				model = Entropy::Math::Translate(backpackPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
 				lightingShader.setMat4("model", model);
-				box.Draw(lightingShader);
+				for(unsigned int j = 0; j < backpack.size(); j++)
+					backpack[j].Draw(lightingShader);
 			}
 
 			// Render Light Source
@@ -143,7 +144,8 @@ int main(int argc, char* argv[])
 				lightCubeShader.setMat4("projection", projection);
 				lightCubeShader.setMat4("view", view);
 				lightCubeShader.setMat4("model", model);
-				light.Draw(lightCubeShader);
+				for (unsigned int j = 0; j < backpack.size(); j++)
+					light[j].Draw(lightingShader);
 			}
 			
 			// Update
