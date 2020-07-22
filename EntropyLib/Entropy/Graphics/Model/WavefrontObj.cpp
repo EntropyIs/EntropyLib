@@ -1,7 +1,4 @@
-#define LIB_API __declspec(dllexport)
 #include "WavefrontObj.h"
-
-#include "../../../GLTexture.h"
 
 #include <fstream>
 #include <sstream>
@@ -89,7 +86,7 @@ void Entropy::Graphics::WavefrontObj::pharseFace(std::vector<std::string> lineDa
 	}
 }
 
-size_t Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
+unsigned int Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
 {
 	if (hasObject(objectName))
 		return getObjectIndex(objectName);

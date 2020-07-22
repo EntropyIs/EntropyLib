@@ -19,7 +19,7 @@ namespace Entropy
 			unsigned int ID;
 			std::string Type;
 
-			Texture(Image image, std::string type);
+			Texture(unsigned int id, std::string type) : ID(id), Type(type) {};
 		};
 
 		static class __declspec(dllexport) LoadImage

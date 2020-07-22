@@ -7,15 +7,11 @@
 #include <vector>
 #include <string>
 
-#ifndef LIB_API
-#define LIB_API __declspec(dllimport)
-#endif // !LIB_API
-
 namespace Entropy
 {
 	namespace Graphics
 	{
-		class LIB_API WavefrontObj
+		class __declspec(dllexport) WavefrontObj
 		{
 		private:
 			struct FaceIndex {

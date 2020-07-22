@@ -4,18 +4,6 @@
 
 #include <GLFW/glfw3.h>
 
-Entropy::Graphics::Texture::Texture(Image image, std::string type) : Type(type)
-{
-	glGenTextures(1, &ID);
-	glBindTexture(GL_TEXTURE_2D, ID);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// Load Image into Texture.
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.width, image.height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (char*)&image.data[0]);
-}
-
 Entropy::Graphics::Texture Entropy::Graphics::LoadImage::LoadBitmap(const char* path, const char* type)
 {
 #ifdef DEBUG
@@ -59,5 +47,17 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadImage::LoadBitmap(const char* 
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 
-    return Texture(result, type);
+	unsigned int id;
+
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Load Image into Texture.
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, result.width, result.height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (char*)&result.data[0]);
+
+
+    return Texture(id, type);
 }

@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef LIB_API
-#define LIB_API __declspec(dllimport)
-#endif // !LIB_API
-
 #include "../Math/Vec3.h"
 #include "Model/Image.h"
 
@@ -14,7 +10,7 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		struct LIB_API Material
+		struct __declspec(dllexport) Material
 		{
 			std::string Name;
 			Math::Vec3 Ambient;
