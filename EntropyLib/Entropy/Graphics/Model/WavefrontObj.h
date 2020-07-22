@@ -72,6 +72,10 @@ namespace Entropy
 
 			std::vector<unsigned int> getIndices(const char* objectName);
 			std::vector<unsigned int> getIndices(unsigned int index);
+
+			Material getMaterial(const char* objectName);
+			Material getMaterial(unsigned int index);
+
 		};
 	}
 }

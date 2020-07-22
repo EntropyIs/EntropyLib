@@ -149,7 +149,6 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(tetraPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMaterial(tetra.Material);
 				lightingShader.setMat4("model", model);
 				tetra.Draw(lightingShader);
 			}
@@ -159,7 +158,6 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(octaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMaterial(octa.Material);
 				lightingShader.setMat4("model", model);
 				octa.Draw(lightingShader);
 			}
@@ -169,7 +167,6 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(hexaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMaterial(hexa.Material);
 				lightingShader.setMat4("model", model);
 				hexa.Draw(lightingShader);
 			}
@@ -179,7 +176,6 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(icosaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMaterial(icosa.Material);
 				lightingShader.setMat4("model", model);
 				icosa.Draw(lightingShader);
 			}
@@ -189,7 +185,6 @@ int main(int argc, char* argv[])
 			{
 				float offset = 1.0f * i;
 				model = Entropy::Math::Translate(dodecaPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(0.8f);
-				lightingShader.setMaterial(dodeca.Material);
 				lightingShader.setMat4("model", model);
 				dodeca.Draw(lightingShader);
 			}

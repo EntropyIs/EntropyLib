@@ -3,6 +3,7 @@
 #include "../Math/Vec3.h"
 #include "../Math/Vec2.h"
 
+#include "Material.h"
 #include "Shader.h"
 
 #include <string>
@@ -29,22 +30,15 @@ namespace Entropy
 			Vertex(float x, float y, float z, float i = 0.0f, float j = 0.0f, float k = 0.0f, float tX = 0.0f, float tY = 0.0f) : Position(x, y, z), Normal(i, j, k), TexCoord(tX, tY) {};
 		};
 
-		struct __declspec(dllexport) Texture
-		{
-			unsigned int ID;
-			const char* Type;
-
-			Texture(unsigned int ID, const char* type) : ID(ID), Type(type) {};
-		};
-
 		class __declspec(dllexport) Mesh
 		{
-		public:
+		private:
 			std::vector<Vertex> vertices;
 			std::vector<unsigned int> indices;
-			std::vector<Texture> textures;
+			Material material;
 
-			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+		public:
+			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
 			void Draw(Shader& shader);
 		private:
 			unsigned int VAO, VBO, EBO;

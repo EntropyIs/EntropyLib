@@ -9,8 +9,8 @@
 #include <string>
 #include <sstream>
 
-Entropy::Graphics::Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
-	: vertices(vertices), indices(indices), textures(textures)
+Entropy::Graphics::Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material)
+	: vertices(vertices), indices(indices), material(material)
 {
 	setupMesh();
 }
@@ -18,17 +18,20 @@ Entropy::Graphics::Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned
 void Entropy::Graphics::Mesh::Draw(Shader& shader)
 {
 	shader.use();
-	// assign textures
+	// Set material
+	shader.setMaterial(material);
+
+	// Assign textures
 	unsigned int diffuseNr = 0;
 	unsigned int specularNr = 0;
 
-	for (unsigned int i = 0; i < textures.size(); i++)
+	for (unsigned int i = 0; i < material.Textures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, textures[i].ID);
+		glBindTexture(GL_TEXTURE_2D, material.Textures[i].ID);
 
 		std::string number;
-		std::string name = textures[i].Type;
+		std::string name = material.Textures[i].Type;
 		if (name == "texture_diffuse")
 			number = std::to_string(diffuseNr++);
 		else if (name == "texture_specular")

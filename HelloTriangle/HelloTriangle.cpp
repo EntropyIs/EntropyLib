@@ -27,11 +27,8 @@ int main(int argc, char* argv[])
 		indices.push_back(1);
 		indices.push_back(2);
 
-		// Load Triangle Texture Data
-		std::vector<Entropy::Graphics::Texture> textures;
-
 		// Construct Data
-		Entropy::Graphics::Mesh triangle(vertices, indices, textures);
+		Entropy::Graphics::Mesh triangle(vertices, indices, Entropy::Graphics::Materials::WhitePlastic);
 
 		// Load Shader
 		std::vector<const char*> shaderPaths;

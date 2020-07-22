@@ -14,6 +14,14 @@ namespace Entropy
 {
 	namespace Graphics
 	{
+		struct Texture
+		{
+			unsigned int ID;
+			const char* Type;
+
+			Texture(unsigned int ID, const char* type) : ID(ID), Type(type) {};
+		};
+
 		struct LIB_API Material
 		{
 			std::string Name;
@@ -22,7 +30,7 @@ namespace Entropy
 			Math::Vec3 Specular;
 			float Shininess;
 			float Transparancy;
-			std::vector<std::vector<Texture>> Textures;
+			std::vector<Texture> Textures;
 
 			// Default
 			Material(std::string name) : Name(name), Ambient(0.2f), Diffuse(0.8f), Specular(1.0f), Shininess(0.5f), Transparancy(1.0f) {};

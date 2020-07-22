@@ -403,8 +403,7 @@ Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(const char* obj
 
 Entropy::Graphics::Mesh Entropy::Graphics::WavefrontObj::getMesh(unsigned int index)
 {
-	std::vector<Texture> textures;
-	return Mesh(getVertices(index), getIndices(index), textures);
+	return Mesh(getVertices(index), getIndices(index), getMaterial(index));
 }
 
 std::vector<Entropy::Graphics::Vertex> Entropy::Graphics::WavefrontObj::getVertices(const char* objectName)
@@ -435,4 +434,18 @@ std::vector<unsigned int> Entropy::Graphics::WavefrontObj::getIndices(unsigned i
 	for (unsigned int i = 0; i < objects[index].faceIndices.size(); i++)
 		indices.push_back(i);
 	return indices;
+}
+
+Entropy::Graphics::Material Entropy::Graphics::WavefrontObj::getMaterial(const char* objectName)
+{
+	return getMaterial(getObjectIndex(objectName));
+}
+
+Entropy::Graphics::Material Entropy::Graphics::WavefrontObj::getMaterial(unsigned int index)
+{
+	if(hasMaterial(objects[index].materialName))
+		return materials[getMaterialIndex(objects[index].materialName)];
+	std::string error = "Material not found: ";
+	error.append(objects[index].materialName);
+	throw std::exception(error.c_str());
 }
