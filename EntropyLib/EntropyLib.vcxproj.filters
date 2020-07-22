@@ -66,9 +66,6 @@
     <ClCompile Include="Clock.cpp">
       <Filter>Source Files\Timing</Filter>
     </ClCompile>
-    <ClCompile Include="GLTexture.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Converters.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
@@ -116,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Entropy\Graphics\Model.cpp">
       <Filter>Source Files\Graphics\Object Handling</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Graphics\Model\Image.cpp">
+      <Filter>Source Files\Graphics\ModelProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\Model.h">
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\Model\Image.h">
+      <Filter>Header Files\Graphics\ModelProcessing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

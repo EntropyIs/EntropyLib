@@ -40,18 +40,7 @@ int main(int argc, char* argv[])
 		// Offset Vectors
 		Entropy::Math::Vec4 backpackPos[] = {
 			Entropy::Math::Vec4( 0.0f,  0.0f, -2.0f, 1.0f),
-			Entropy::Math::Vec4( 2.0f,  5.0f, -15.0f, 1.0f),
-			Entropy::Math::Vec4( 1.5f,  0.2f, -1.5f, 1.0f),
-			Entropy::Math::Vec4(-1.3f,  1.0f, -1.5f, 1.0f),
-			Entropy::Math::Vec4( 1.3f, -2.0f, -2.5f, 1.0f),
-			Entropy::Math::Vec4( 1.5f,  2.0f, -2.5f, 1.0f),
-			Entropy::Math::Vec4( 2.4f, -0.4f, -3.5f, 1.0f),
-			Entropy::Math::Vec4(-1.7f,  3.0f, -7.5f, 1.0f),
-			Entropy::Math::Vec4(-1.5f, -2.2f, -2.5f, 1.0f),
-			Entropy::Math::Vec4(-3.8f, -2.0f, -12.3f, 1.0f)
 		};
-
-		float cubeAngle = 0.0f;
 
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.05f, 0.05f, 0.1f), Entropy::Math::Vec3(0.2f, 0.2f, 0.7f), Entropy::Math::Vec3(0.7f, 0.7f, 0.7f));
@@ -104,21 +93,16 @@ int main(int argc, char* argv[])
 
 			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
-			Entropy::Math::Mat4 model;
+			Entropy::Math::Mat4 model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f));
 
 			lightingShader.use();
 			lightingShader.setVec3("viewPos", camera.position);
 			lightingShader.setMat4("projection", projection);
 			lightingShader.setMat4("view", view);
+			lightingShader.setMat4("model", model);
 
 			// Render Backpack
-			for (unsigned int i = 0; i < 10; i++)
-			{
-				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(backpackPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset) * Entropy::Math::Scale(1.0f);
-				lightingShader.setMat4("model", model);
-				backpack.Draw(lightingShader);
-			}
+			backpack.Draw(lightingShader);
 			
 			// Update
 			clock.poll();
@@ -129,8 +113,6 @@ int main(int argc, char* argv[])
 				camera.updateRotation(window.MouseDelta.XOffset, window.MouseDelta.YOffset);
 				window.MouseDelta.MoveTrigger = false;
 			}
-
-			cubeAngle += 1.0f * clock.timeElapsed();
 		}
 		return 0;
 	}

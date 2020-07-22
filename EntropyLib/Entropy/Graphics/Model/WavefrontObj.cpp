@@ -89,7 +89,7 @@ void Entropy::Graphics::WavefrontObj::pharseFace(std::vector<std::string> lineDa
 	}
 }
 
-unsigned int Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
+size_t Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
 {
 	if (hasObject(objectName))
 		return getObjectIndex(objectName);
@@ -175,8 +175,7 @@ void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lin
 
 	std::string filename = directory + '/' + nameBuffer;
 
-	LoadTexture tex(filename.c_str());
-	materials[index].Textures.push_back(Texture(tex.ID, type));
+	materials[index].Textures.push_back(LoadImage::LoadBitmap(filename.c_str(), type.c_str()));
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
