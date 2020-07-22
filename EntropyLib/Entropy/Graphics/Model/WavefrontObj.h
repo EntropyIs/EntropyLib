@@ -40,6 +40,8 @@ namespace Entropy
 
 			std::vector<std::string> mtlFiles;
 
+			std::string directory;
+
 			void pharseVertexPosition(std::vector<std::string> lineData, unsigned int index);
 			void pharseTextureCoord(std::vector<std::string> lineData, unsigned int index);
 			void pharseNormal(std::vector<std::string> lineData, unsigned int index);
@@ -63,7 +65,7 @@ namespace Entropy
 			bool readMtlFile(const char* path);
 
 		public:
-			WavefrontObj(const char* path);
+			WavefrontObj(std::string path);
 
 			std::vector<Mesh> getAll();
 

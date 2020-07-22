@@ -24,7 +24,6 @@ int main(int argc, char* argv[])
 
 		// Construct Object Data
 		Entropy::Graphics::Model backpack("assets/backpack.obj");
-		Entropy::Graphics::Model light("assets/box.obj");
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
@@ -34,14 +33,6 @@ int main(int argc, char* argv[])
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
 		Entropy::Graphics::Shader lightingShader(lightingShaderPaths, lightingShaderTypes);
-
-		std::vector<const char*> lightCubeShaderPaths;
-		lightCubeShaderPaths.push_back("vLightCubeShader.glsl");
-		lightCubeShaderPaths.push_back("fLightCubeShader.glsl");
-		std::vector<unsigned int> lightCubeShaderTypes;
-		lightCubeShaderTypes.push_back(GL_VERTEX_SHADER);
-		lightCubeShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader lightCubeShader(lightCubeShaderPaths, lightCubeShaderTypes);
 
 		// Setup Camera
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -120,26 +111,13 @@ int main(int argc, char* argv[])
 			lightingShader.setMat4("projection", projection);
 			lightingShader.setMat4("view", view);
 
-			// Render Box
+			// Render Backpack
 			for (unsigned int i = 0; i < 10; i++)
 			{
 				float offset = 1.0f * i;
-				model = Entropy::Math::Translate(backpackPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), cubeAngle + offset) * Entropy::Math::Scale(1.0f);
+				model = Entropy::Math::Translate(backpackPos[i]) * Entropy::Math::Rotate(Entropy::Math::Vec3(-3.0f + i, 4.3f - i, 0.5f + i), offset) * Entropy::Math::Scale(1.0f);
 				lightingShader.setMat4("model", model);
 				backpack.Draw(lightingShader);
-			}
-
-			// Render Light Source
-			for (unsigned int i = 0; i < 4; i++)
-			{
-				model = Entropy::Math::Translate(Entropy::Math::Vec4(pointLights[i].Position.I, pointLights[i].Position.J, pointLights[i].Position.K, 1.0f)) * Entropy::Math::Scale(0.2f);
-				
-				lightCubeShader.use();
-				lightCubeShader.setVec3("lightColor", pointLights[i].Specular);
-				lightCubeShader.setMat4("projection", projection);
-				lightCubeShader.setMat4("view", view);
-				lightCubeShader.setMat4("model", model);
-				light.Draw(lightingShader);
 			}
 			
 			// Update

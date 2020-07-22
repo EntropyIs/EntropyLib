@@ -173,7 +173,9 @@ void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lin
 	for (unsigned int i = 1; i < lineData.size(); i++)
 		nameBuffer.append(lineData[i]); // Treat everything after first comp as texture file name
 
-	LoadTexture tex(nameBuffer.c_str());
+	std::string filename = directory + '/' + nameBuffer;
+
+	LoadTexture tex(filename.c_str());
 	materials[index].Textures.push_back(Texture(tex.ID, type));
 }
 
@@ -306,8 +308,9 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 {
 	// Read Contents of file into lines vector
+	std::string filename = directory + '/' + std::string(path);
 	std::ifstream inFile;
-	inFile.open(path, std::ios_base::in);
+	inFile.open(filename, std::ios_base::in);
 	if (!inFile.is_open())
 	{
 		std::string error = "Could not open file: ";
@@ -387,10 +390,11 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 	return false;
 }
 
-Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
+Entropy::Graphics::WavefrontObj::WavefrontObj(std::string path)
 {
+	directory = path.substr(0, path.find_last_of("/"));
 	// Phase OBJ File
-	readObjFile(path);
+	readObjFile(path.c_str());
 
 	// Phase any associated MTL Files
 	for (unsigned int i = 0; i < mtlFiles.size(); i++)
