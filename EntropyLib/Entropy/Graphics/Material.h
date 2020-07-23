@@ -10,7 +10,7 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		struct __declspec(dllexport) Material
+		struct Material
 		{
 			std::string Name;
 			Math::Vec3 Ambient;

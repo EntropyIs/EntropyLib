@@ -13,14 +13,14 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		class __declspec(dllexport) Model
+		class Model
 		{
 		private:
 			std::vector<Mesh> meshes;
 
 		public:
-			Model(const char* path);
-			void Draw(Shader& shader);
+			__declspec(dllexport) Model(const char* path);
+			void __declspec(dllexport) Draw(Shader& shader);
 		};
 	}
 }

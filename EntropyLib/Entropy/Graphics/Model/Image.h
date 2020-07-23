@@ -14,7 +14,7 @@ namespace Entropy
 			std::vector<char> data;
 		};
 
-		struct __declspec(dllexport) Texture
+		struct Texture
 		{
 			unsigned int ID;
 			std::string Type;
@@ -22,10 +22,17 @@ namespace Entropy
 			Texture(unsigned int id, std::string type) : ID(id), Type(type) {};
 		};
 
-		static class __declspec(dllexport) LoadImage
+		class __declspec(dllexport) LoadTexture
 		{
+		private:
+			static Image LoadBitmap(std::string path);
+			static Image LoadJPEG(std::string path);
+			static Image LoadGif(std::string path);
+			static Image LoadTiff(std::string path);
+			static Image LoadPNG(std::string path);
+
 		public:
-			static Texture LoadBitmap(const char* path, const char* type);
+			static Texture LoadFromFile(std::string path, std::string type);
 		};
 	}
 }

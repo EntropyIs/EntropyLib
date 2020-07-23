@@ -91,7 +91,7 @@ unsigned int Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
 	if (hasObject(objectName))
 		return getObjectIndex(objectName);
 	objects.push_back(ObjectData(objectName));
-	return objects.size() - 1;
+	return static_cast<unsigned int>(objects.size()) - 1;
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::getObjectIndex(std::string objectName)
@@ -172,7 +172,7 @@ void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lin
 
 	std::string filename = directory + '/' + nameBuffer;
 
-	materials[index].Textures.push_back(LoadImage::LoadBitmap(filename.c_str(), type.c_str()));
+	materials[index].Textures.push_back(LoadTexture::LoadFromFile(filename.c_str(), type.c_str()));
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
@@ -180,7 +180,7 @@ unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialNa
 	if (hasMaterial(materialName))
 		return getMaterialIndex(materialName);
 	materials.push_back(Material(materialName));
-	return materials.size() - 1;
+	return static_cast<unsigned int>(materials.size()) - 1;
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::getMaterialIndex(std::string materialName)
@@ -289,9 +289,9 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 			textureCoordOffset = 0;
 			for (unsigned int i = 0; i < objectIndex; i++) // Get object offset
 			{
-				positionOffset += objects[i].vertexPositions.size() - 1;
-				normalOffset += objects[i].vertexNormals.size() - 1;
-				textureCoordOffset += objects[i].vertexTextureCoords.size() - 1;
+				positionOffset += static_cast<unsigned int>(objects[i].vertexPositions.size()) - 1;
+				normalOffset += static_cast<unsigned int>(objects[i].vertexNormals.size()) - 1;
+				textureCoordOffset += static_cast<unsigned int>(objects[i].vertexTextureCoords.size()) - 1;
 			}
 			break;
 		default:
