@@ -122,9 +122,6 @@
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Timing</Filter>
     </ClInclude>
-    <ClInclude Include="GLTexture.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Converters.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\Model\Image.h">
+      <Filter>Header Files\Graphics\ModelProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
       <Filter>Header Files\Graphics\ModelProcessing</Filter>
     </ClInclude>
   </ItemGroup>

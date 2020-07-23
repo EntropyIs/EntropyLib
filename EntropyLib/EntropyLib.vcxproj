@@ -57,9 +57,9 @@
     <ClInclude Include="Entropy\Math\Vec4.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
     <ClInclude Include="Profiler.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

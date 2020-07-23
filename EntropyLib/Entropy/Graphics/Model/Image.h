@@ -30,9 +30,9 @@ namespace Entropy
 			static Image LoadGif(std::string path);
 			static Image LoadTiff(std::string path);
 			static Image LoadPNG(std::string path);
-
 		public:
 			static Texture LoadFromFile(std::string path, std::string type);
+			static Texture LoadImage(std::string path, std::string type);
 		};
 	}
 }

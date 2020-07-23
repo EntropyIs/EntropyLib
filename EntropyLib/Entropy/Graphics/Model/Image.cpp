@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "..\..\..\stb_image.h"
+
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadBitmap(std::string path)
 {
 #ifdef DEBUG
@@ -141,6 +143,8 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadPNG(std::string pat
 	return result;
 }
 
+
+
 Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromFile(std::string path, std::string type)
 {
 	// Determine image format
@@ -174,6 +178,25 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromFile(std::str
 
 	// Load Image into Texture.
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.width, image.height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (char*)&image.data[0]);
+
+	return Texture(id, type);
+}
+
+Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadImage(std::string path, std::string type)
+{
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+
+	unsigned int id;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Load Image into Texture.
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
 
 	return Texture(id, type);
 }
