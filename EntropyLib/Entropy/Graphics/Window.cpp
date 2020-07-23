@@ -33,9 +33,9 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 
 		glEnable(GL_STENCIL_TEST);
 
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glFrontFace(GL_CCW);
+		//glEnable(GL_CULL_FACE);
+		//glCullFace(GL_BACK);
+		//glFrontFace(GL_CCW);
 	}
 	catch (std::exception e)
 	{

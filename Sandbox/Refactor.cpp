@@ -21,9 +21,6 @@ int main(int argc, char* argv[])
 		window.captureMouse();
 		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-		// Construct Object Data
-		Entropy::Graphics::Model backpack("assets/box.obj");
-
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
 		lightingShaderPaths.push_back("vLighting.glsl");
@@ -31,45 +28,47 @@ int main(int argc, char* argv[])
 		std::vector<unsigned int> lightingShaderTypes;
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader lightingShader(lightingShaderPaths, lightingShaderTypes);
-
-		std::vector<const char*> stencilShaderPaths;
-		stencilShaderPaths.push_back("vLighting.glsl");
-		stencilShaderPaths.push_back("fStencilTest.glsl");
-		std::vector<unsigned int> stencilShaderTypes;
-		stencilShaderTypes.push_back(GL_VERTEX_SHADER);
-		stencilShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader stencilShader(stencilShaderPaths, stencilShaderTypes);
+		Entropy::Graphics::Shader shader(lightingShaderPaths, lightingShaderTypes);
 
 		// Setup Camera
-		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 30.0f, 100.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
 		Entropy::Math::Vec4 backpackPos[] = {
 			Entropy::Math::Vec4( 0.0f,  0.0f, -2.0f, 1.0f),
 		};
 
+		// Setup Objects
+		Entropy::Graphics::Model planet("assets/planet.obj");
+		Entropy::Graphics::Model asteroid("assets/rock.obj");
+
+		// Large List of semi-random model transformation matrices
+		unsigned int count = 2000;
+		Entropy::Math::Mat4* modelMatricies = new Entropy::Math::Mat4[count];
+		srand(glfwGetTime());
+		float radius = 50.0f;
+		float offset = 2.5f;
+		for (unsigned int i = 0; i < count; i++)
+		{
+			float angle = (float)i / (float)count * 360.0f;
+			float displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float x = sin(angle) * radius + 5.0f * displacement;
+			displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float y = displacement * 0.4f;
+			displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float z = cos(angle) * radius + 5.0f * displacement;
+			float scale = (rand() % 20) / 100.0f + 0.05f;
+			float rotAngle = (rand() & 360);
+
+			Entropy::Math::Mat4 model = Entropy::Math::Translate(x, y, z) * Entropy::Math::Scale(scale) * Entropy::Math::Rotate(Entropy::Math::Vec3(0.4f, 0.6f, 0.8f), rotAngle);
+			modelMatricies[i] = model;
+		}
+
 		// Setup Lights
-		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.05f, 0.05f, 0.1f), Entropy::Math::Vec3(0.2f, 0.2f, 0.7f), Entropy::Math::Vec3(0.7f, 0.7f, 0.7f));
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
 
-		Entropy::Math::Vec3 colors[] = {
-			Entropy::Math::Vec3(0.2f, 0.2f, 0.6f),
-			Entropy::Math::Vec3(0.3f, 0.3f, 0.7f),
-			Entropy::Math::Vec3(0.0f, 0.0f, 0.3f),
-			Entropy::Math::Vec3(0.4f, 0.4f, 0.4f)
-		};
-
-		Entropy::Graphics::PointLight pointLights[] = {
-			Entropy::Graphics::PointLight(Entropy::Math::Vec3(0.7f, 0.2f, 0.2f), 1.0f, 0.09f, 0.032f, colors[0] * 0.1f, colors[0] * 0.5f, colors[0] * 0.8f),
-			Entropy::Graphics::PointLight(Entropy::Math::Vec3(2.3f, -3.3f, -4.0f), 1.0f, 0.09f, 0.032f, colors[1] * 0.1f, colors[1] * 0.5f, colors[1] * 0.8f),
-			Entropy::Graphics::PointLight(Entropy::Math::Vec3(-4.0f, 2.0f, -12.0f), 1.0f, 0.09f, 0.032f, colors[2] * 0.1f, colors[2] * 0.5f, colors[2] * 0.8f),
-			Entropy::Graphics::PointLight(Entropy::Math::Vec3(0.0f, 0.0f, -3.0f), 1.0f, 0.09f, 0.032f, colors[3] * 0.1f, colors[3] * 0.5f, colors[3] * 0.8f)
-		};
-
-		lightingShader.use();
-		lightingShader.setDirectionalLight(directionalLight);
-		for (unsigned int i = 0; i < 4; i++)
-			lightingShader.setPointLight(i, pointLights[i]);
+		shader.use();
+		shader.setDirectionalLight(directionalLight);
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;
@@ -78,21 +77,20 @@ int main(int argc, char* argv[])
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		//Outline Object Stencil Testing
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		float orbitAngle = 0.0f;
 
 		// Render Loop
 		while (!window.getShouldClose())
 		{
 			// Input
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
-				camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed());
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed(), 10.0f);
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
-				camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed());
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed(), 10.0f);
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_A))
-				camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed());
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed(), 10.0f);
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_D))
-				camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed());
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed(), 10.0f);
 
 			// Set window to close when KEY_ESCAPE is pressed
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_ESCAPE))
@@ -101,46 +99,29 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
-			glStencilFunc(GL_ALWAYS, 1, 0xFF);
-			glStencilMask(0xFF);
-
-			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
+			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
-			Entropy::Math::Mat4 model = Entropy::Math::Translate(Entropy::Math::Vec4(0.5f, 0.5f, -0.8f, 1.0f));
-			lightingShader.use();
-			lightingShader.setVec3("viewPos", camera.position);
-			lightingShader.setMat4("projection", projection);
-			lightingShader.setMat4("view", view);
-			lightingShader.setMat4("model", model);
-			backpack.Draw(lightingShader);
-			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f));
-			lightingShader.use();
-			lightingShader.setMat4("model", model);
-			backpack.Draw(lightingShader);
+			Entropy::Math::Mat4 model = Entropy::Math::Scale(4.0f);
 
-			
-			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-			glStencilMask(0x00);
+			shader.use();
+			shader.setVec3("viewPos", camera.position);
+			shader.setMat4("projection", projection);
+			shader.setMat4("view", view);
+			shader.setMat4("model", model);
 
-			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.5f, 0.5f, -0.8f, 1.0f)) * Entropy::Math::Scale(1.1f);
-			stencilShader.use();
-			stencilShader.setVec3("viewPos", camera.position);
-			stencilShader.setMat4("projection", projection);
-			stencilShader.setMat4("view", view);
-			stencilShader.setMat4("model", model);
-			backpack.Draw(stencilShader);
-			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f)) * Entropy::Math::Scale(1.1f);
-			stencilShader.use();
-			stencilShader.setMat4("model", model);
-			backpack.Draw(stencilShader);
+			planet.Draw(shader);
 
-			glStencilMask(0xFF);
-			glStencilFunc(GL_ALWAYS, 0, 0xFF);
-			glEnable(GL_DEPTH_TEST);
-			
+			for (unsigned int i = 0; i < count; i++)
+			{
+				shader.setMat4("model", Entropy::Math::RotateY(orbitAngle) * modelMatricies[i]);
+				asteroid.Draw(shader);
+			}
+
 			// Update
 			clock.poll();
 			window.processEvents();
+
+			orbitAngle += 0.1 * clock.timeElapsed();
 
 			if (window.MouseDelta.MoveTrigger)
 			{
