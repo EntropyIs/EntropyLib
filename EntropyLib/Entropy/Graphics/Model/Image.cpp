@@ -4,6 +4,7 @@
 
 #include <GLFW/glfw3.h>
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "..\..\..\stb_image.h"
 
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadBitmap(std::string path)
@@ -182,7 +183,7 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromFile(std::str
 	return Texture(id, type);
 }
 
-Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadImage(std::string path, std::string type)
+Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std::string path, std::string type)
 {
 	int width, height, nrChannels;
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);

@@ -22,7 +22,7 @@ namespace Entropy
 			Texture(unsigned int id, std::string type) : ID(id), Type(type) {};
 		};
 
-		class __declspec(dllexport) LoadTexture
+		class LoadTexture
 		{
 		private:
 			static Image LoadBitmap(std::string path);
@@ -31,8 +31,8 @@ namespace Entropy
 			static Image LoadTiff(std::string path);
 			static Image LoadPNG(std::string path);
 		public:
-			static Texture LoadFromFile(std::string path, std::string type);
-			static Texture LoadImage(std::string path, std::string type);
+			static __declspec(dllexport) Texture LoadFromFile(std::string path, std::string type);
+			static __declspec(dllexport) Texture LoadFromImageFile(std::string path, std::string type);
 		};
 	}
 }

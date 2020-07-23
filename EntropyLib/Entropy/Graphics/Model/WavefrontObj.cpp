@@ -172,7 +172,7 @@ void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lin
 
 	std::string filename = directory + '/' + nameBuffer;
 
-	materials[index].Textures.push_back(LoadTexture::LoadImage(filename, type));
+	materials[index].Textures.push_back(LoadTexture::LoadFromImageFile(filename, type));
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)

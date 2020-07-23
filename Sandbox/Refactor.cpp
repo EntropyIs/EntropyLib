@@ -7,7 +7,6 @@
 #include <GLCamera.h>
 #include <Clock.h>
 #include <Converters.h>
-#include <GLTexture.h>
 
 #include <vector>
 #include <exception>
