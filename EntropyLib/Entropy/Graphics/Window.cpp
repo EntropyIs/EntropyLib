@@ -26,8 +26,12 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 
 		// Initialize GLEW
 		initializeGLEW();
+
+		// Initalize GL Testing Features (Depth Testing, Stencil Testing)
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
+
+		glEnable(GL_STENCIL_TEST);
 	}
 	catch (std::exception e)
 	{
@@ -45,7 +49,7 @@ void Entropy::Graphics::Window::captureMouse()
 
 void Entropy::Graphics::Window::clear()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void Entropy::Graphics::Window::processEvents()

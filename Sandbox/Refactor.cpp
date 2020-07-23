@@ -26,12 +26,20 @@ int main(int argc, char* argv[])
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
-		lightingShaderPaths.push_back("vDepthTest.glsl");
-		lightingShaderPaths.push_back("fDepthTest.glsl");
+		lightingShaderPaths.push_back("vLighting.glsl");
+		lightingShaderPaths.push_back("fLighting.glsl");
 		std::vector<unsigned int> lightingShaderTypes;
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
 		Entropy::Graphics::Shader lightingShader(lightingShaderPaths, lightingShaderTypes);
+
+		std::vector<const char*> stencilShaderPaths;
+		stencilShaderPaths.push_back("vLighting.glsl");
+		stencilShaderPaths.push_back("fStencilTest.glsl");
+		std::vector<unsigned int> stencilShaderTypes;
+		stencilShaderTypes.push_back(GL_VERTEX_SHADER);
+		stencilShaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader stencilShader(stencilShaderPaths, stencilShaderTypes);
 
 		// Setup Camera
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, 3.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -70,6 +78,9 @@ int main(int argc, char* argv[])
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+		//Outline Object Stencil Testing
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
 		// Render Loop
 		while (!window.getShouldClose())
 		{
@@ -90,18 +101,42 @@ int main(int argc, char* argv[])
 			// Render
 			window.clear();
 
+			glStencilFunc(GL_ALWAYS, 1, 0xFF);
+			glStencilMask(0xFF);
+
 			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 100.0f);
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
-			Entropy::Math::Mat4 model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f));
-
+			Entropy::Math::Mat4 model = Entropy::Math::Translate(Entropy::Math::Vec4(0.5f, 0.5f, -0.8f, 1.0f));
 			lightingShader.use();
 			lightingShader.setVec3("viewPos", camera.position);
 			lightingShader.setMat4("projection", projection);
 			lightingShader.setMat4("view", view);
 			lightingShader.setMat4("model", model);
-
-			// Render Backpack
 			backpack.Draw(lightingShader);
+			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f));
+			lightingShader.use();
+			lightingShader.setMat4("model", model);
+			backpack.Draw(lightingShader);
+
+			
+			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+			glStencilMask(0x00);
+
+			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.5f, 0.5f, -0.8f, 1.0f)) * Entropy::Math::Scale(1.1f);
+			stencilShader.use();
+			stencilShader.setVec3("viewPos", camera.position);
+			stencilShader.setMat4("projection", projection);
+			stencilShader.setMat4("view", view);
+			stencilShader.setMat4("model", model);
+			backpack.Draw(stencilShader);
+			model = Entropy::Math::Translate(Entropy::Math::Vec4(0.0f, 0.0f, -2.0f, 1.0f)) * Entropy::Math::Scale(1.1f);
+			stencilShader.use();
+			stencilShader.setMat4("model", model);
+			backpack.Draw(stencilShader);
+
+			glStencilMask(0xFF);
+			glStencilFunc(GL_ALWAYS, 0, 0xFF);
+			glEnable(GL_DEPTH_TEST);
 			
 			// Update
 			clock.poll();

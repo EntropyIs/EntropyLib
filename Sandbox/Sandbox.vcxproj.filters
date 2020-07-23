@@ -24,10 +24,10 @@
     <None Include="fLighting.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="vDepthTest.glsl">
+    <None Include="fDepthTest.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="fDepthTest.glsl">
+    <None Include="fStencilTest.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

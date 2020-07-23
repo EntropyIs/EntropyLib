@@ -150,7 +150,7 @@
   <ItemGroup>
     <None Include="fDepthTest.glsl" />
     <None Include="fLighting.glsl" />
-    <None Include="vDepthTest.glsl" />
+    <None Include="fStencilTest.glsl" />
     <None Include="vLighting.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
