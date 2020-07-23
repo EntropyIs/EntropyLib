@@ -148,11 +148,10 @@
     <ClCompile Include="Refactor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fLightCubeShader.glsl" />
-    <None Include="fLightingShader.glsl" />
-    <None Include="fLShader2.glsl" />
-    <None Include="vLightCubeShader.glsl" />
-    <None Include="vLightingShader.glsl" />
+    <None Include="fDepthTest.glsl" />
+    <None Include="fLighting.glsl" />
+    <None Include="vDepthTest.glsl" />
+    <None Include="vLighting.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

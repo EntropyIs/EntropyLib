@@ -198,6 +198,7 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std
 
 	// Load Image into Texture.
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	stbi_image_free(data);
 
 	return Texture(id, type);
 }

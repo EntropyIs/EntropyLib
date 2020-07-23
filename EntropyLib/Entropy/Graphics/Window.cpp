@@ -27,6 +27,7 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 		// Initialize GLEW
 		initializeGLEW();
 		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 	}
 	catch (std::exception e)
 	{

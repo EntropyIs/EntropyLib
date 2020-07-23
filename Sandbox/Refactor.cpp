@@ -22,12 +22,12 @@ int main(int argc, char* argv[])
 		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Construct Object Data
-		Entropy::Graphics::Model backpack("assets/backpack.obj");
+		Entropy::Graphics::Model backpack("assets/box.obj");
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
-		lightingShaderPaths.push_back("vLightingShader.glsl");
-		lightingShaderPaths.push_back("fLShader2.glsl");
+		lightingShaderPaths.push_back("vDepthTest.glsl");
+		lightingShaderPaths.push_back("fDepthTest.glsl");
 		std::vector<unsigned int> lightingShaderTypes;
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
