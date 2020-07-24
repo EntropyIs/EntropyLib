@@ -172,6 +172,10 @@ namespace Entropy
 
 			void setWindowClearColor(float red, float green, float blue, float alpha);
 			void setShouldClose(bool value);
+
+			void enableDepthTest(bool value = true);
+			void enableStencilTest(bool value = true);
+			void enableFaceCulling(bool value = true);
 		private:
 			void initializeGLFW();
 			void initializeGLEW();

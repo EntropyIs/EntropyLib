@@ -27,15 +27,8 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 		// Initialize GLEW
 		initializeGLEW();
 
-		// Initalize GL Testing Features (Depth Testing, Stencil Testing)
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
-
-		glEnable(GL_STENCIL_TEST);
-
-		//glEnable(GL_CULL_FACE);
-		//glCullFace(GL_BACK);
-		//glFrontFace(GL_CCW);
 	}
 	catch (std::exception e)
 	{
@@ -80,6 +73,30 @@ void Entropy::Graphics::Window::setWindowClearColor(float red, float green, floa
 void Entropy::Graphics::Window::setShouldClose(bool value)
 {
 	glfwSetWindowShouldClose(GLWindow, value);
+}
+
+void Entropy::Graphics::Window::enableDepthTest(bool value)
+{
+	if (value)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
+}
+
+void Entropy::Graphics::Window::enableStencilTest(bool value)
+{
+	if (value)
+		glEnable(GL_STENCIL_TEST);
+	else
+		glDisable(GL_STENCIL_TEST);
+}
+
+void Entropy::Graphics::Window::enableFaceCulling(bool value)
+{
+	if (value)
+		glEnable(GL_CULL_FACE);
+	else
+		glDisable(GL_CULL_FACE);
 }
 
 void Entropy::Graphics::Window::initializeGLFW()
