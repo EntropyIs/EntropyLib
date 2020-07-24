@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Shader shader(lightingShaderPaths, lightingShaderTypes);
 
 		// Setup Camera
-		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 30.0f, 100.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
 		Entropy::Math::Vec4 backpackPos[] = {
@@ -39,36 +39,27 @@ int main(int argc, char* argv[])
 		};
 
 		// Setup Objects
-		Entropy::Graphics::Model planet("assets/planet.obj");
-		Entropy::Graphics::Model asteroid("assets/rock.obj");
-
-		// Large List of semi-random model transformation matrices
-		unsigned int count = 2000;
-		Entropy::Math::Mat4* modelMatricies = new Entropy::Math::Mat4[count];
-		srand(glfwGetTime());
-		float radius = 50.0f;
-		float offset = 2.5f;
-		for (unsigned int i = 0; i < count; i++)
-		{
-			float angle = (float)i / (float)count * 360.0f;
-			float displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
-			float x = sin(angle) * radius + 5.0f * displacement;
-			displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
-			float y = displacement * 0.4f;
-			displacement = (rand() % (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
-			float z = cos(angle) * radius + 5.0f * displacement;
-			float scale = (rand() % 20) / 100.0f + 0.05f;
-			float rotAngle = (rand() & 360);
-
-			Entropy::Math::Mat4 model = Entropy::Math::Translate(x, y, z) * Entropy::Math::Scale(scale) * Entropy::Math::Rotate(Entropy::Math::Vec3(0.4f, 0.6f, 0.8f), rotAngle);
-			modelMatricies[i] = model;
-		}
+		std::vector<Entropy::Graphics::Vertex> planeVertices;
+		planeVertices.push_back(Entropy::Graphics::Vertex( 10.0f, -0.5f,  10.0f, 0.0f, 1.0f, 0.0f, 10.0f,  0.0f));
+		planeVertices.push_back(Entropy::Graphics::Vertex(-10.0f, -0.5f,  10.0f, 0.0f, 1.0f, 0.0f,  0.0f,  0.0f));
+		planeVertices.push_back(Entropy::Graphics::Vertex(-10.0f, -0.5f, -10.0f, 0.0f, 1.0f, 0.0f,  0.0f, 10.0f));
+		planeVertices.push_back(Entropy::Graphics::Vertex( 10.0f, -0.5f, -10.0f, 0.0f, 1.0f, 0.0f, 10.0f, 10.0f));
+		std::vector<unsigned int> planeIndices;
+		planeIndices.push_back(0); planeIndices.push_back(1); planeIndices.push_back(2);
+		planeIndices.push_back(0); planeIndices.push_back(2); planeIndices.push_back(3);
+		Entropy::Graphics::Material planeMaterial("planeMaterial", 33.0f, 1.0f, 1.0f, 1.0f);
+		planeMaterial.Textures.push_back(Entropy::Graphics::LoadTexture::LoadFromImageFile("assets/wood.jpg", "texture_diffuse"));
+		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
 
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
 
+		Entropy::Math::Vec3 lightColor = Entropy::Math::Vec3(1.0f, 1.0f, 1.0f);
+		Entropy::Graphics::PointLight pointLight(Entropy::Math::Vec3(0.0f, 2.0f, 0.0f), 1.0f, 0.09f, 0.032f, lightColor * 0.1f, lightColor * 0.5f, lightColor * 0.8f);
+
 		shader.use();
-		shader.setDirectionalLight(directionalLight);
+		//shader.setDirectionalLight(directionalLight);
+		shader.setPointLight(0, pointLight);
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;
@@ -101,21 +92,14 @@ int main(int argc, char* argv[])
 
 			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
-			Entropy::Math::Mat4 model = Entropy::Math::Scale(4.0f);
+			Entropy::Math::Mat4 model;
 
 			shader.use();
 			shader.setVec3("viewPos", camera.position);
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
 			shader.setMat4("model", model);
-
-			planet.Draw(shader);
-
-			for (unsigned int i = 0; i < count; i++)
-			{
-				shader.setMat4("model", Entropy::Math::RotateY(orbitAngle) * modelMatricies[i]);
-				asteroid.Draw(shader);
-			}
+			plane.Draw(shader);
 
 			// Update
 			clock.poll();
