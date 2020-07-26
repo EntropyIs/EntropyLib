@@ -117,6 +117,9 @@
     <ClCompile Include="Entropy\Graphics\Model\Image.cpp">
       <Filter>Source Files\Graphics\ModelProcessing</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Header Files\Graphics\ModelProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\FrameBuffer.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
