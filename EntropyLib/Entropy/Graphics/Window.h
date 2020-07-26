@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "../Math/Vec4.h"
+
 namespace Entropy
 {
 	namespace Graphics
@@ -153,6 +155,13 @@ namespace Entropy
 
 		class __declspec(dllexport) Window
 		{
+		private:
+			bool depthTest;
+			bool stencilTest;
+			bool faceCulling;
+
+			Math::Vec4 clearColor;
+
 		public:
 			GLFWwindow* GLWindow;
 			unsigned int Width, Height;
@@ -160,22 +169,24 @@ namespace Entropy
 
 			Mouse MouseDelta;
 
-			Window(const char* title, const unsigned int width = 800, const unsigned int height = 600);
+			Window(const char* title, unsigned int width = 800, unsigned int height = 600, bool depthTest = true, bool stencilTest = false, bool faceCulling = false);
 
 			void captureMouse();
 			
+			void bind();
 			void clear();
 			void processEvents();
 
 			bool getShouldClose();
 			bool getKeyPressed(GLKeys key);
 
-			void setWindowClearColor(float red, float green, float blue, float alpha);
+			void setClearColor(float red, float green, float blue, float alpha);
 			void setShouldClose(bool value);
 
 			void enableDepthTest(bool value = true);
 			void enableStencilTest(bool value = true);
 			void enableFaceCulling(bool value = true);
+
 		private:
 			void initializeGLFW();
 			void initializeGLEW();

@@ -1,6 +1,7 @@
 #include <Entropy/Graphics/Window.h>
 #include <Entropy/Graphics/Shader.h>
 #include <Entropy/Graphics/Model.h>
+#include <Entropy/Graphics/FrameBuffer.h>
 
 #include <Entropy/Math/Transform3D.h>
 
@@ -19,7 +20,6 @@ int main(int argc, char* argv[])
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
 		window.captureMouse();
-		window.setWindowClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Load Shader
 		std::vector<const char*> lightingShaderPaths;
@@ -29,6 +29,17 @@ int main(int argc, char* argv[])
 		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
 		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
 		Entropy::Graphics::Shader shader(lightingShaderPaths, lightingShaderTypes);
+
+		std::vector<const char*> screenShaderPaths;
+		screenShaderPaths.push_back("vFramebuffer.glsl");
+		screenShaderPaths.push_back("fFramebuffer.glsl");
+		std::vector<unsigned int> screenShaderTypes;
+		screenShaderTypes.push_back(GL_VERTEX_SHADER);
+		screenShaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader screenShader(screenShaderPaths, screenShaderTypes);
+
+		screenShader.use();
+		screenShader.setInt("screenTexture", 0);
 
 		// Setup Camera
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -51,6 +62,26 @@ int main(int argc, char* argv[])
 		planeMaterial.Textures.push_back(Entropy::Graphics::LoadTexture::LoadFromImageFile("assets/wood.jpg", "texture_diffuse"));
 		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
 
+		float quadVertices[] = {
+			-1.0f,  1.0f,  0.0f, 1.0f,
+			-1.0f, -1.0f,  0.0f, 0.0f,
+			 1.0f, -1.0f,  1.0f, 0.0f,
+
+			-1.0f,  1.0f,  0.0f, 1.0f,
+			 1.0f, -1.0f,  1.0f, 0.0f,
+			 1.0f,  1.0f,  1.0f, 1.0f
+		};
+		unsigned int quadVAO, quadVBO;
+		glGenVertexArrays(1, &quadVAO);
+		glGenBuffers(1, &quadVBO);
+		glBindVertexArray(quadVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
 
@@ -70,6 +101,10 @@ int main(int argc, char* argv[])
 
 		float orbitAngle = 0.0f;
 
+		//setup framebuffers
+		Entropy::Graphics::FrameBuffer frameBuffer(window.Width, window.Height, true, false, false);
+		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
 		// Render Loop
 		while (!window.getShouldClose())
 		{
@@ -87,12 +122,13 @@ int main(int argc, char* argv[])
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_ESCAPE))
 				window.setShouldClose(true);
 
-			// Render
-			window.clear();
-
 			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
 			Entropy::Math::Mat4 model;
+
+			// Render Pass 1;
+			frameBuffer.bind();
+			frameBuffer.clear();
 
 			shader.use();
 			shader.setVec3("viewPos", camera.position);
@@ -101,11 +137,24 @@ int main(int argc, char* argv[])
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 
+			glBindVertexArray(0);
+
+			// Render Pass 2;
+			window.bind();
+			window.setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			window.clear();
+
+			screenShader.use();
+			glBindVertexArray(quadVAO);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, frameBuffer.ColorBuffer);	// use the color attachment texture as the texture of the quad plane
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
 			// Update
 			clock.poll();
 			window.processEvents();
 
-			orbitAngle += 0.1 * clock.timeElapsed();
+			orbitAngle += 0.1f * clock.timeElapsed();
 
 			if (window.MouseDelta.MoveTrigger)
 			{

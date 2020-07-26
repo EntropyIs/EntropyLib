@@ -30,6 +30,12 @@
     <None Include="fStencilTest.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="vFramebuffer.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fFramebuffer.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Refactor.cpp">

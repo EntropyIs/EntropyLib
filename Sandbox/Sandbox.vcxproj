@@ -149,8 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fDepthTest.glsl" />
+    <None Include="fFramebuffer.glsl" />
     <None Include="fLighting.glsl" />
     <None Include="fStencilTest.glsl" />
+    <None Include="vFramebuffer.glsl" />
     <None Include="vLighting.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
