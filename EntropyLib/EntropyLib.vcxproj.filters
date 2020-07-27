@@ -61,6 +61,9 @@
     <Filter Include="Source Files\Graphics\ModelProcessing">
       <UniqueIdentifier>{499c8ec3-f94b-47cf-833c-6bb14123c495}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Type">
+      <UniqueIdentifier>{a3f98326-f589-487c-b75a-e83ad9af78aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clock.cpp">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Type\Array.h">
+      <Filter>Header Files\Type</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
