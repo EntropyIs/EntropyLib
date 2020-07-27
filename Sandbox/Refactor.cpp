@@ -60,22 +60,25 @@ int main(int argc, char* argv[])
 		planeIndices.push_back(0); planeIndices.push_back(2); planeIndices.push_back(3);
 		Entropy::Graphics::Material planeMaterial("planeMaterial", 33.0f, 1.0f, 1.0f, 1.0f);
 		planeMaterial.Textures.push_back(Entropy::Graphics::LoadTexture::LoadFromImageFile("assets/wood.jpg", "texture_diffuse"));
+		planeMaterial.Textures.push_back(Entropy::Graphics::LoadTexture::LoadFromImageFile("assets/wood_specular.jpg", "texture_specular"));
 		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
+
+		Entropy::Graphics::Model box("assets/box.obj");
+		Entropy::Math::Vec3 boxPos[] = {
+			Entropy::Math::Vec3(-1.0f, 0.0f, -1.0f),
+			Entropy::Math::Vec3( 2.0f, 0.0f,  0.0f)
+		};
 
 		float quadVertices[] = {
 			 1.0f,  1.0f,  1.0f, 1.0f,
 			 1.0f, -1.0f,  1.0f, 0.0f,
 			-1.0f,  1.0f,  0.0f, 1.0f,
-			// 1.0f, -1.0f,  1.0f, 0.0f,
-			//-1.0f,  1.0f,  0.0f, 1.0f,
 			-1.0f, -1.0f,  0.0f, 0.0f
 		};
-
 		unsigned int quadIndices[] = {
 			0, 1, 2,
 			1, 2, 3
 		};
-
 		unsigned int quadVAO, quadVBO, quadEBO;
 		glGenVertexArrays(1, &quadVAO);
 		glGenBuffers(1, &quadVBO);
@@ -142,6 +145,14 @@ int main(int argc, char* argv[])
 			shader.setVec3("viewPos", camera.position);
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
+			// Boxes
+			for (unsigned int i = 0; i < 2; i++)
+			{
+				model = Entropy::Math::Translate(boxPos[i]);
+				shader.setMat4("model", model);
+				box.Draw(shader);
+			}
+			// Floor
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 
@@ -155,7 +166,6 @@ int main(int argc, char* argv[])
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, frameBuffer.ColorBuffer);	// use the color attachment texture as the texture of the quad plane
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			//glDrawArrays(GL_TRIANGLES, 0, 6);
 			glBindVertexArray(0);
 
 			// Update
