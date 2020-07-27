@@ -105,12 +105,12 @@ int main(int argc, char* argv[])
 
 		// Setup Skybox
 		std::vector<std::string> faces;
-		faces.push_back("assets/right.jpg");
-		faces.push_back("assets/left.jpg");
-		faces.push_back("assets/top.jpg");
-		faces.push_back("assets/bottom.jpg");
-		faces.push_back("assets/front.jpg");
-		faces.push_back("assets/back.jpg");
+		faces.push_back("assets/GalaxyRight.png");
+		faces.push_back("assets/GalaxyLeft.png");
+		faces.push_back("assets/GalaxyTop.png");
+		faces.push_back("assets/GalaxyBottom.png");
+		faces.push_back("assets/GalaxyFront.png");
+		faces.push_back("assets/GalaxyBack.png");
 		Entropy::Graphics::Texture skybox = Entropy::Graphics::LoadTexture::LoadCubeMap(faces);
 
 		float skyboxVertices[] = {
