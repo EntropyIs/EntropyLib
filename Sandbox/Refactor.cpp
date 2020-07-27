@@ -63,20 +63,28 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
 
 		float quadVertices[] = {
-			-1.0f,  1.0f,  0.0f, 1.0f,
-			-1.0f, -1.0f,  0.0f, 0.0f,
+			 1.0f,  1.0f,  1.0f, 1.0f,
 			 1.0f, -1.0f,  1.0f, 0.0f,
-
 			-1.0f,  1.0f,  0.0f, 1.0f,
-			 1.0f, -1.0f,  1.0f, 0.0f,
-			 1.0f,  1.0f,  1.0f, 1.0f
+			// 1.0f, -1.0f,  1.0f, 0.0f,
+			//-1.0f,  1.0f,  0.0f, 1.0f,
+			-1.0f, -1.0f,  0.0f, 0.0f
 		};
-		unsigned int quadVAO, quadVBO;
+
+		unsigned int quadIndices[] = {
+			0, 1, 2,
+			1, 2, 3
+		};
+
+		unsigned int quadVAO, quadVBO, quadEBO;
 		glGenVertexArrays(1, &quadVAO);
 		glGenBuffers(1, &quadVBO);
+		glGenBuffers(1, &quadEBO);
 		glBindVertexArray(quadVAO);
 		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quadEBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndices), quadIndices, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(1);
@@ -137,8 +145,6 @@ int main(int argc, char* argv[])
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 
-			glBindVertexArray(0);
-
 			// Render Pass 2;
 			window.bind();
 			window.setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -148,7 +154,9 @@ int main(int argc, char* argv[])
 			glBindVertexArray(quadVAO);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, frameBuffer.ColorBuffer);	// use the color attachment texture as the texture of the quad plane
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			//glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindVertexArray(0);
 
 			// Update
 			clock.poll();
