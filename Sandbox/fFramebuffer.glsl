@@ -16,10 +16,14 @@ void main()
 { 
     normal();
 
+    //inverted();
+
+    //grayscale();
+
     //kernel(float[](
-    //    1,  1, 1,
-    //    1, -8, 1,
-    //    1,  1, 1
+    //    -1, -1, -1,
+    //    -1,  9, -1,
+    //    -1, -1, -1
     //)); // Sharpen
 }
 

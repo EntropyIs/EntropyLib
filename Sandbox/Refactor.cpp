@@ -38,8 +38,18 @@ int main(int argc, char* argv[])
 		screenShaderTypes.push_back(GL_FRAGMENT_SHADER);
 		Entropy::Graphics::Shader screenShader(screenShaderPaths, screenShaderTypes);
 
+		std::vector<const char*> skyboxShaderPaths;
+		skyboxShaderPaths.push_back("vCubeMap.glsl");
+		skyboxShaderPaths.push_back("fCubeMap.glsl");
+		std::vector<unsigned int> skyboxShaderTypes;
+		skyboxShaderTypes.push_back(GL_VERTEX_SHADER);
+		skyboxShaderTypes.push_back(GL_FRAGMENT_SHADER);
+		Entropy::Graphics::Shader skyboxShader(skyboxShaderPaths, skyboxShaderTypes);
+
 		screenShader.use();
 		screenShader.setInt("screenTexture", 0);
+		skyboxShader.use();
+		skyboxShader.setInt("skybox", 0);
 
 		// Setup Camera
 		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -85,13 +95,76 @@ int main(int argc, char* argv[])
 		glGenBuffers(1, &quadEBO);
 		glBindVertexArray(quadVAO);
 		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quadEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndices), quadIndices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndices), &quadIndices, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+
+		// Setup Skybox
+		std::vector<std::string> faces;
+		faces.push_back("assets/right.jpg");
+		faces.push_back("assets/left.jpg");
+		faces.push_back("assets/top.jpg");
+		faces.push_back("assets/bottom.jpg");
+		faces.push_back("assets/front.jpg");
+		faces.push_back("assets/back.jpg");
+		Entropy::Graphics::Texture skybox = Entropy::Graphics::LoadTexture::LoadCubeMap(faces);
+
+		float skyboxVertices[] = {
+			// positions          
+			-1.0f,  1.0f, -1.0f,
+			-1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+
+			-1.0f, -1.0f,  1.0f,
+			-1.0f, -1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f,  1.0f,
+			-1.0f, -1.0f,  1.0f,
+
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+
+			-1.0f, -1.0f,  1.0f,
+			-1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f, -1.0f,  1.0f,
+			-1.0f, -1.0f,  1.0f,
+
+			-1.0f,  1.0f, -1.0f,
+			 1.0f,  1.0f, -1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			-1.0f,  1.0f,  1.0f,
+			-1.0f,  1.0f, -1.0f,
+
+			-1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f,  1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f,  1.0f,
+			 1.0f, -1.0f,  1.0f
+		};
+		unsigned int skyboxVAO, skyboxVBO;
+		glGenVertexArrays(1, &skyboxVAO);
+		glGenBuffers(1, &skyboxVBO);
+		glBindVertexArray(skyboxVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
@@ -100,7 +173,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::PointLight pointLight(Entropy::Math::Vec3(0.0f, 2.0f, 0.0f), 1.0f, 0.09f, 0.032f, lightColor * 0.1f, lightColor * 0.5f, lightColor * 0.8f);
 
 		shader.use();
-		//shader.setDirectionalLight(directionalLight);
+		shader.setDirectionalLight(directionalLight);
 		shader.setPointLight(0, pointLight);
 
 		// Setup Clock
@@ -156,15 +229,35 @@ int main(int argc, char* argv[])
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 
+			glDepthFunc(GL_LEQUAL);
+			skyboxShader.use();
+			Entropy::Math::Mat4 skyboxView(
+				view.R0C0, view.R1C0, view.R2C0, 0.0f,
+				view.R0C1, view.R1C1, view.R2C1, 0.0f,
+				view.R0C2, view.R1C2, view.R2C2, 0.0f,
+				0.0f, 0.0f, 0.0f, 1.0f
+			);
+			skyboxShader.setMat4("viewPos", skyboxView);
+			skyboxShader.setMat4("projection", projection);
+			glBindVertexArray(skyboxVAO);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.ID);
+			skyboxShader.setInt("cubemap", skybox.ID);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			glBindVertexArray(0);
+			glDepthFunc(GL_LESS);
+
 			// Render Pass 2;
 			window.bind();
 			window.setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			window.clear();
 
+			// render cube matrix
+
 			screenShader.use();
 			glBindVertexArray(quadVAO);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, frameBuffer.ColorBuffer);	// use the color attachment texture as the texture of the quad plane
+			glBindTexture(GL_TEXTURE_2D, frameBuffer.ColorBuffer);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
 

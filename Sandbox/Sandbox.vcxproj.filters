@@ -36,6 +36,12 @@
     <None Include="fFramebuffer.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="fCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Refactor.cpp">
