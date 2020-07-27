@@ -1,7 +1,4 @@
-#define LIB_API __declspec(dllexport)
 #include "WavefrontObj.h"
-
-#include "../../../GLTexture.h"
 
 #include <fstream>
 #include <sstream>
@@ -94,7 +91,7 @@ unsigned int Entropy::Graphics::WavefrontObj::addObject(std::string objectName)
 	if (hasObject(objectName))
 		return getObjectIndex(objectName);
 	objects.push_back(ObjectData(objectName));
-	return objects.size() - 1;
+	return static_cast<unsigned int>(objects.size()) - 1;
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::getObjectIndex(std::string objectName)
@@ -173,8 +170,9 @@ void Entropy::Graphics::WavefrontObj::pharseTexture(std::vector<std::string> lin
 	for (unsigned int i = 1; i < lineData.size(); i++)
 		nameBuffer.append(lineData[i]); // Treat everything after first comp as texture file name
 
-	LoadTexture tex(nameBuffer.c_str());
-	materials[index].Textures.push_back(Texture(tex.ID, type));
+	std::string filename = directory + '/' + nameBuffer;
+
+	materials[index].Textures.push_back(LoadTexture::LoadFromImageFile(filename, type));
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialName)
@@ -182,7 +180,7 @@ unsigned int Entropy::Graphics::WavefrontObj::addMaterial(std::string materialNa
 	if (hasMaterial(materialName))
 		return getMaterialIndex(materialName);
 	materials.push_back(Material(materialName));
-	return materials.size() - 1;
+	return static_cast<unsigned int>(materials.size()) - 1;
 }
 
 unsigned int Entropy::Graphics::WavefrontObj::getMaterialIndex(std::string materialName)
@@ -291,9 +289,9 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 			textureCoordOffset = 0;
 			for (unsigned int i = 0; i < objectIndex; i++) // Get object offset
 			{
-				positionOffset += objects[i].vertexPositions.size() - 1;
-				normalOffset += objects[i].vertexNormals.size() - 1;
-				textureCoordOffset += objects[i].vertexTextureCoords.size() - 1;
+				positionOffset += static_cast<unsigned int>(objects[i].vertexPositions.size()) - 1;
+				normalOffset += static_cast<unsigned int>(objects[i].vertexNormals.size()) - 1;
+				textureCoordOffset += static_cast<unsigned int>(objects[i].vertexTextureCoords.size()) - 1;
 			}
 			break;
 		default:
@@ -306,8 +304,9 @@ bool Entropy::Graphics::WavefrontObj::readObjFile(const char* path)
 bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 {
 	// Read Contents of file into lines vector
+	std::string filename = directory + '/' + std::string(path);
 	std::ifstream inFile;
-	inFile.open(path, std::ios_base::in);
+	inFile.open(filename, std::ios_base::in);
 	if (!inFile.is_open())
 	{
 		std::string error = "Could not open file: ";
@@ -387,10 +386,11 @@ bool Entropy::Graphics::WavefrontObj::readMtlFile(const char* path)
 	return false;
 }
 
-Entropy::Graphics::WavefrontObj::WavefrontObj(const char* path)
+Entropy::Graphics::WavefrontObj::WavefrontObj(std::string path)
 {
+	directory = path.substr(0, path.find_last_of("/"));
 	// Phase OBJ File
-	readObjFile(path);
+	readObjFile(path.c_str());
 
 	// Phase any associated MTL Files
 	for (unsigned int i = 0; i < mtlFiles.size(); i++)

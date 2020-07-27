@@ -1,11 +1,7 @@
 #pragma once
 
-#ifndef LIB_API
-#define LIB_API __declspec(dllimport)
-#endif // !LIB_API
-
 #include "../Math/Vec3.h"
-#include "../../GLTexture.h"
+#include "Model/Image.h"
 
 #include <vector>
 #include <string>
@@ -14,15 +10,7 @@ namespace Entropy
 {
 	namespace Graphics
 	{
-		struct Texture
-		{
-			unsigned int ID;
-			std::string Type;
-
-			Texture(unsigned int ID, std::string type) : ID(ID), Type(type) {};
-		};
-
-		struct LIB_API Material
+		struct Material
 		{
 			std::string Name;
 			Math::Vec3 Ambient;

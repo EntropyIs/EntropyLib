@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	{
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window");
-		window.setWindowClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		window.setClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 		// Load Triangle Position Data
 		std::vector<Entropy::Graphics::Vertex> vertices;

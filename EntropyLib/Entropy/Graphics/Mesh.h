@@ -30,7 +30,7 @@ namespace Entropy
 			Vertex(float x, float y, float z, float i = 0.0f, float j = 0.0f, float k = 0.0f, float tX = 0.0f, float tY = 0.0f) : Position(x, y, z), Normal(i, j, k), TexCoord(tX, tY) {};
 		};
 
-		class __declspec(dllexport) Mesh
+		class Mesh
 		{
 		private:
 			std::vector<Vertex> vertices;
@@ -38,8 +38,8 @@ namespace Entropy
 			Material material;
 
 		public:
-			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
-			void Draw(Shader& shader);
+			__declspec(dllexport) Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
+			void __declspec(dllexport) Draw(Shader& shader);
 		private:
 			unsigned int VAO, VBO, EBO;
 			

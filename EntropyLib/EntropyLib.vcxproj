@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
+    <ClCompile Include="Entropy\Graphics\Model.cpp" />
+    <ClCompile Include="Entropy\Graphics\Model\Image.cpp" />
     <ClCompile Include="Entropy\Graphics\Model\WavefrontObj.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
@@ -32,15 +35,17 @@
     <ClCompile Include="Entropy\Math\Vec3.cpp" />
     <ClCompile Include="Entropy\Math\Vec4.cpp" />
     <ClCompile Include="GLCamera.cpp" />
-    <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Converters.cpp" />
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entropy\Graphics\FrameBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
     <ClInclude Include="Entropy\Graphics\Material.h" />
     <ClInclude Include="Entropy\Graphics\Mesh.h" />
+    <ClInclude Include="Entropy\Graphics\Model.h" />
+    <ClInclude Include="Entropy\Graphics\Model\Image.h" />
     <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
@@ -54,9 +59,9 @@
     <ClInclude Include="Entropy\Math\Vec4.h" />
     <ClInclude Include="GLCamera.h" />
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Converters.h" />
     <ClInclude Include="Profiler.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -118,8 +123,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

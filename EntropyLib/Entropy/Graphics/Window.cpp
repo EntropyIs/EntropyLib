@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Entropy::Graphics::Window::Window(const char* title, const unsigned int width, const unsigned int height) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f)
+Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f)
 {
 	// Initialize GLFW
 	try
@@ -26,7 +26,9 @@ Entropy::Graphics::Window::Window(const char* title, const unsigned int width, c
 
 		// Initialize GLEW
 		initializeGLEW();
+
 		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 	}
 	catch (std::exception e)
 	{
@@ -44,7 +46,15 @@ void Entropy::Graphics::Window::captureMouse()
 
 void Entropy::Graphics::Window::clear()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(clearColor.R, clearColor.G, clearColor.B, clearColor.A);
+	if (depthTest == true && stencilTest == true)
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	else if (depthTest == true && stencilTest == false)
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	else if (depthTest == false && stencilTest == true)
+		glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	else
+		glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Entropy::Graphics::Window::processEvents()
@@ -63,14 +73,48 @@ bool Entropy::Graphics::Window::getKeyPressed(GLKeys key)
 	return glfwGetKey(GLWindow, static_cast<int>(key)) == GLFW_PRESS;
 }
 
-void Entropy::Graphics::Window::setWindowClearColor(float red, float green, float blue, float alpha)
+void Entropy::Graphics::Window::setClearColor(float red, float green, float blue, float alpha)
 {
-	glClearColor(red, green, blue, alpha);
+	clearColor = Math::Vec4(red, green, blue, alpha);
 }
 
 void Entropy::Graphics::Window::setShouldClose(bool value)
 {
 	glfwSetWindowShouldClose(GLWindow, value);
+}
+
+void Entropy::Graphics::Window::enableDepthTest(bool value)
+{
+	depthTest = value;
+}
+
+void Entropy::Graphics::Window::enableStencilTest(bool value)
+{
+	stencilTest = value;
+}
+
+void Entropy::Graphics::Window::enableFaceCulling(bool value)
+{
+	faceCulling = value;
+}
+
+void Entropy::Graphics::Window::bind()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	if (depthTest)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
+
+	if (stencilTest)
+		glEnable(GL_STENCIL_TEST);
+	else
+		glDisable(GL_STENCIL_TEST);
+
+	if (faceCulling)
+		glEnable(GL_CULL_FACE);
+	else
+		glDisable(GL_CULL_FACE);
 }
 
 void Entropy::Graphics::Window::initializeGLFW()

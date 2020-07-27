@@ -44,13 +44,8 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 				shaderType = "Geomerty Shader";
 			else if (type == GL_FRAGMENT_SHADER)
 				shaderType = "Fragment Shader";
-#ifdef DEBUG
-			std::cout << "Error Compiling " << shaderType << std::endl;
-			std::cout << path << std::endl;
-			std::cout << errorLog << std::endl;
-			std::cout << "-- --------------------------------------------------- --" << std::endl;
-#endif
-			std::string errString = "Error Compiling " + shaderType + "." + std::string(path);
+
+			std::string errString = "Error Compiling " + shaderType + ".\n" + std::string(path) + "\n" + errorLog;
 			throw std::exception(errString.c_str());
 		}
 		return compileID;
@@ -86,18 +81,14 @@ Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vect
 		glGetProgramiv(ID, GL_LINK_STATUS, &isLinked);
 		if (!isLinked)
 		{
-#ifdef DEBUG
 			int maxLength;
 			glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &maxLength);
 			char* errorLog = new char[maxLength];
 			glGetProgramInfoLog(ID, maxLength, &maxLength, errorLog);
 			glDeleteShader(ID);
 
-			std::cout << "Error linking shader program:" << std::endl;
-			std::cout << errorLog << std::endl;
-			std::cout << "-- --------------------------------------------------- --" << std::endl;
-#endif
-			throw "Error linking shader program.";
+			std::string errString = "Error linking shader program.\n";
+			throw std::exception(errString.c_str());
 		}
 
 		for (unsigned int i = 0; i < compilations.size(); i++)

@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\EntropyLib\;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdir)..\$(intdir);$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\EntropyLib\;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdir)..\$(intdir);$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,11 +148,14 @@
     <ClCompile Include="Refactor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fLightCubeShader.glsl" />
-    <None Include="fLightingShader.glsl" />
-    <None Include="fLShader2.glsl" />
-    <None Include="vLightCubeShader.glsl" />
-    <None Include="vLightingShader.glsl" />
+    <None Include="fCubeMap.glsl" />
+    <None Include="fDepthTest.glsl" />
+    <None Include="fFramebuffer.glsl" />
+    <None Include="fLighting.glsl" />
+    <None Include="fStencilTest.glsl" />
+    <None Include="vCubeMap.glsl" />
+    <None Include="vFramebuffer.glsl" />
+    <None Include="vLighting.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

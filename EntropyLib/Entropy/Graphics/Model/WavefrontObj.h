@@ -7,15 +7,11 @@
 #include <vector>
 #include <string>
 
-#ifndef LIB_API
-#define LIB_API __declspec(dllimport)
-#endif // !LIB_API
-
 namespace Entropy
 {
 	namespace Graphics
 	{
-		class LIB_API WavefrontObj
+		class WavefrontObj
 		{
 		private:
 			struct FaceIndex {
@@ -40,6 +36,8 @@ namespace Entropy
 
 			std::vector<std::string> mtlFiles;
 
+			std::string directory;
+
 			void pharseVertexPosition(std::vector<std::string> lineData, unsigned int index);
 			void pharseTextureCoord(std::vector<std::string> lineData, unsigned int index);
 			void pharseNormal(std::vector<std::string> lineData, unsigned int index);
@@ -63,21 +61,21 @@ namespace Entropy
 			bool readMtlFile(const char* path);
 
 		public:
-			WavefrontObj(const char* path);
+			__declspec(dllexport) WavefrontObj(std::string path);
 
-			std::vector<Mesh> getAll();
+			std::vector<Mesh> __declspec(dllexport) getAll();
 
-			Mesh getMesh(const char* objectName);
-			Mesh getMesh(unsigned int index);
+			Mesh __declspec(dllexport) getMesh(const char* objectName);
+			Mesh __declspec(dllexport) getMesh(unsigned int index);
 
-			std::vector<Vertex> getVertices(const char* objectName);
-			std::vector<Vertex> getVertices(unsigned int index);
+			std::vector<Vertex> __declspec(dllexport) getVertices(const char* objectName);
+			std::vector<Vertex> __declspec(dllexport) getVertices(unsigned int index);
 
-			std::vector<unsigned int> getIndices(const char* objectName);
-			std::vector<unsigned int> getIndices(unsigned int index);
+			std::vector<unsigned int> __declspec(dllexport) getIndices(const char* objectName);
+			std::vector<unsigned int> __declspec(dllexport) getIndices(unsigned int index);
 
-			Material getMaterial(const char* objectName);
-			Material getMaterial(unsigned int index);
+			Material __declspec(dllexport) getMaterial(const char* objectName);
+			Material __declspec(dllexport) getMaterial(unsigned int index);
 
 		};
 	}
