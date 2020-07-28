@@ -42,6 +42,21 @@
     <None Include="vCubeMap.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="vBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fRedShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fBlueShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fGreenShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fYellowShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Refactor.cpp">

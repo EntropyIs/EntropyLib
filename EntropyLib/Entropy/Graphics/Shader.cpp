@@ -100,6 +100,45 @@ Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vect
 	}
 }
 
+Entropy::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath)
+{
+	try
+	{
+		// Compile Shaders
+		std::vector<unsigned int> compilations;
+		compilations.push_back(compile(vertexShaderPath, GL_VERTEX_SHADER));
+		compilations.push_back(compile(fragmentShaderPath, GL_FRAGMENT_SHADER));
+
+		// Construct Program
+		ID = glCreateProgram();
+		for (unsigned int i = 0; i < compilations.size(); i++)
+			glAttachShader(ID, compilations[i]);
+		glLinkProgram(ID);
+
+		// Check for errors
+		int isLinked;
+		glGetProgramiv(ID, GL_LINK_STATUS, &isLinked);
+		if (!isLinked)
+		{
+			int maxLength;
+			glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &maxLength);
+			char* errorLog = new char[maxLength];
+			glGetProgramInfoLog(ID, maxLength, &maxLength, errorLog);
+			glDeleteShader(ID);
+
+			std::string errString = "Error linking shader program.\n";
+			throw std::exception(errString.c_str());
+		}
+
+		for (unsigned int i = 0; i < compilations.size(); i++)
+			glDeleteShader(compilations[i]);
+	}
+	catch (std::exception e)
+	{
+		throw e;
+	}
+}
+
 void Entropy::Graphics::Shader::use() const
 {
 	glUseProgram(ID);
@@ -196,4 +235,14 @@ void Entropy::Graphics::Shader::setSpotLight(unsigned int index, const SpotLight
 	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].specular").c_str(), v0.Specular);
 
 	setBool(std::string("spotLights[").append(std::to_string(index)).append("].use").c_str(), true);
+}
+
+void Entropy::Graphics::Shader::setUniformBlockBinding(const char* name, unsigned int v0) const
+{
+	glUniformBlockBinding(ID, getUniformBlockIndex(name), v0);
+}
+
+unsigned int Entropy::Graphics::Shader::getUniformBlockIndex(const char* name) const
+{
+	return glGetUniformBlockIndex(ID, name);
 }

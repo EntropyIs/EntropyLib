@@ -148,11 +148,16 @@
     <ClCompile Include="Refactor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="fBlueShader.glsl" />
     <None Include="fCubeMap.glsl" />
     <None Include="fDepthTest.glsl" />
     <None Include="fFramebuffer.glsl" />
+    <None Include="fGreenShader.glsl" />
     <None Include="fLighting.glsl" />
+    <None Include="fRedShader.glsl" />
     <None Include="fStencilTest.glsl" />
+    <None Include="fYellowShader.glsl" />
+    <None Include="vBaseShader.glsl" />
     <None Include="vCubeMap.glsl" />
     <None Include="vFramebuffer.glsl" />
     <None Include="vLighting.glsl" />

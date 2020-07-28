@@ -21,30 +21,17 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
 		window.captureMouse();
 
+		glEnable(GL_PROGRAM_POINT_SIZE);
+
 		// Load Shader
-		std::vector<const char*> lightingShaderPaths;
-		lightingShaderPaths.push_back("vLighting.glsl");
-		lightingShaderPaths.push_back("fLighting.glsl");
-		std::vector<unsigned int> lightingShaderTypes;
-		lightingShaderTypes.push_back(GL_VERTEX_SHADER);
-		lightingShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader shader(lightingShaderPaths, lightingShaderTypes);
+		Entropy::Graphics::Shader shader("vLighting.glsl", "fLighting.glsl");
+		Entropy::Graphics::Shader screenShader("vFramebuffer.glsl", "fFramebuffer.glsl");
+		Entropy::Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
-		std::vector<const char*> screenShaderPaths;
-		screenShaderPaths.push_back("vFramebuffer.glsl");
-		screenShaderPaths.push_back("fFramebuffer.glsl");
-		std::vector<unsigned int> screenShaderTypes;
-		screenShaderTypes.push_back(GL_VERTEX_SHADER);
-		screenShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader screenShader(screenShaderPaths, screenShaderTypes);
-
-		std::vector<const char*> skyboxShaderPaths;
-		skyboxShaderPaths.push_back("vCubeMap.glsl");
-		skyboxShaderPaths.push_back("fCubeMap.glsl");
-		std::vector<unsigned int> skyboxShaderTypes;
-		skyboxShaderTypes.push_back(GL_VERTEX_SHADER);
-		skyboxShaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader skyboxShader(skyboxShaderPaths, skyboxShaderTypes);
+		Entropy::Graphics::Shader redShader("vBaseShader.glsl", "fRedShader.glsl");
+		Entropy::Graphics::Shader greenShader("vBaseShader.glsl", "fGreenShader.glsl");
+		Entropy::Graphics::Shader blueShader("vBaseShader.glsl", "fBlueShader.glsl");
+		Entropy::Graphics::Shader yellowShader("vBaseShader.glsl", "fYellowShader.glsl");
 
 		screenShader.use();
 		screenShader.setInt("screenTexture", 0);
@@ -75,8 +62,10 @@ int main(int argc, char* argv[])
 
 		Entropy::Graphics::Model box("assets/box.obj");
 		Entropy::Math::Vec3 boxPos[] = {
-			Entropy::Math::Vec3(-1.0f, 0.0f, -1.0f),
-			Entropy::Math::Vec3( 2.0f, 0.0f,  0.0f)
+			Entropy::Math::Vec3(-1.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(-2.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(-3.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(-4.0f, 0.0f, 0.0f)
 		};
 
 		float quadVertices[] = {
@@ -189,6 +178,25 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::FrameBuffer frameBuffer(window.Width, window.Height, true, false, false);
 		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
+		// Setup uniform blocks
+		redShader.setUniformBlockBinding("Matrices", 0);
+		greenShader.setUniformBlockBinding("Matrices", 0);
+		blueShader.setUniformBlockBinding("Matrices", 0);
+		yellowShader.setUniformBlockBinding("Matrices", 0);
+
+		unsigned int uboMatrices;
+		glGenBuffers(1, &uboMatrices);
+
+		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+		glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(Entropy::Math::Mat4), NULL, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(Entropy::Math::Mat4));
+
+		Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
+		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Entropy::Math::Mat4), projection.Data);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 		// Render Loop
 		while (!window.getShouldClose())
 		{
@@ -206,29 +214,48 @@ int main(int argc, char* argv[])
 			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_ESCAPE))
 				window.setShouldClose(true);
 
-			Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
+			
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
+			glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+			glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Entropy::Math::Mat4), sizeof(Entropy::Math::Mat4), view.Data);
+			glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 			Entropy::Math::Mat4 model;
 
 			// Render Pass 1;
 			frameBuffer.bind();
 			frameBuffer.clear();
 
+			
+			// Boxes
+			redShader.use();
+			model = Entropy::Math::Translate(boxPos[0]);
+			redShader.setMat4("model", model);
+			box.Draw(redShader);
+
+			greenShader.use();
+			model = Entropy::Math::Translate(boxPos[1]);
+			greenShader.setMat4("model", model);
+			box.Draw(greenShader);
+
+			blueShader.use();
+			model = Entropy::Math::Translate(boxPos[2]);
+			blueShader.setMat4("model", model);
+			box.Draw(blueShader);
+
+			yellowShader.use();
+			model = Entropy::Math::Translate(boxPos[3]);
+			yellowShader.setMat4("model", model);
+			box.Draw(yellowShader);
+
+			// Floor
 			shader.use();
-			shader.setVec3("viewPos", camera.position);
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
-			// Boxes
-			for (unsigned int i = 0; i < 2; i++)
-			{
-				model = Entropy::Math::Translate(boxPos[i]);
-				shader.setMat4("model", model);
-				box.Draw(shader);
-			}
-			// Floor
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 
+			// Render Skybox
 			glDepthFunc(GL_LEQUAL);
 			skyboxShader.use();
 			Entropy::Math::Mat4 skyboxView(
