@@ -60,13 +60,9 @@ int main(int argc, char* argv[])
 		planeMaterial.Textures.push_back(Entropy::Graphics::LoadTexture::LoadFromImageFile("assets/wood_specular.jpg", "texture_specular"));
 		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
 
-		Entropy::Graphics::Model box("assets/box.obj");
-		Entropy::Math::Vec3 boxPos[] = {
-			Entropy::Math::Vec3(-1.0f,  1.0f, -1.0f),
-			Entropy::Math::Vec3(-3.0f,  1.0f, -3.0f),
-			Entropy::Math::Vec3( 1.0f,  1.0f,  1.0f),
-			Entropy::Math::Vec3( 3.0f,  1.0f,  3.0f)
-		};
+		Entropy::Graphics::Model box("assets/backpack.obj");
+		Entropy::Math::Vec3 boxPos(0.0f, 0.0f, 0.0f);
+		float boxAngle = 0;
 
 		float quadVertices[] = {
 			 1.0f,  1.0f,  1.0f, 1.0f,
@@ -184,7 +180,7 @@ int main(int argc, char* argv[])
 		glGenBuffers(1, &uboMatrices);
 
 		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
-		glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(Entropy::Math::Mat4), NULL, GL_STATIC_DRAW);
+		glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(Entropy::Math::Mat4), NULL, GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(Entropy::Math::Mat4));
 
@@ -222,26 +218,12 @@ int main(int argc, char* argv[])
 			frameBuffer.bind();
 			frameBuffer.clear();
 
-			// Boxes
+			// Box
 			shader.use();
-			for (unsigned int i = 0; i < 4; i++)
-			{
-				model = Entropy::Math::Translate(boxPos[i]);
-				shader.setMat4("model", model);
-				box.Draw(shader);
-			}
-			
-			// Box Normals
-			normalShader.use();
-			normalShader.setMat4("projection", projection);
-			normalShader.setMat4("view", view);
-
-			for (unsigned int i = 0; i < 4; i++)
-			{
-				model = Entropy::Math::Translate(boxPos[i]);
-				normalShader.setMat4("model", model);
-				box.Draw(normalShader);
-			}
+			shader.setVec3("viewPos", camera.position);
+			model = Entropy::Math::Translate(boxPos) * Entropy::Math::RotateY(boxAngle) * Entropy::Math::Scale(0.5f);
+			shader.setMat4("model", model);
+			box.Draw(shader);
 
 			// Floor
 			shader.use();
@@ -286,7 +268,8 @@ int main(int argc, char* argv[])
 			clock.poll();
 			window.processEvents();
 
-			orbitAngle += 0.1f * clock.timeElapsed();
+			orbitAngle += 0.01f * clock.timeElapsed();
+			boxAngle += 0.1f * clock.timeElapsed();
 
 			if (window.MouseDelta.MoveTrigger)
 			{
