@@ -24,14 +24,14 @@ int main(int argc, char* argv[])
 		glEnable(GL_PROGRAM_POINT_SIZE);
 
 		// Load Shader
-		Entropy::Graphics::Shader shader("vLighting.glsl", "fLighting.glsl");
+		Entropy::Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 		Entropy::Graphics::Shader screenShader("vFramebuffer.glsl", "fFramebuffer.glsl");
 		Entropy::Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
+		Entropy::Graphics::Shader normalShader("vNormalShader.glsl", "fNormalShader.glsl", "gNormalShader.glsl");
 
-		Entropy::Graphics::Shader redShader("vBaseShader.glsl", "fRedShader.glsl");
-		Entropy::Graphics::Shader greenShader("vBaseShader.glsl", "fGreenShader.glsl");
-		Entropy::Graphics::Shader blueShader("vBaseShader.glsl", "fBlueShader.glsl");
-		Entropy::Graphics::Shader yellowShader("vBaseShader.glsl", "fYellowShader.glsl");
+		shader.setUniformBlockBinding("Matrices", 0);
+		normalShader.setUniformBlockBinding("Matrices", 0);
+		screenShader.setUniformBlockBinding("Matrices", 0);
 
 		screenShader.use();
 		screenShader.setInt("screenTexture", 0);
@@ -62,10 +62,10 @@ int main(int argc, char* argv[])
 
 		Entropy::Graphics::Model box("assets/box.obj");
 		Entropy::Math::Vec3 boxPos[] = {
-			Entropy::Math::Vec3(-1.0f, 0.0f, 0.0f),
-			Entropy::Math::Vec3(-2.0f, 0.0f, 0.0f),
-			Entropy::Math::Vec3(-3.0f, 0.0f, 0.0f),
-			Entropy::Math::Vec3(-4.0f, 0.0f, 0.0f)
+			Entropy::Math::Vec3(-1.0f,  1.0f, -1.0f),
+			Entropy::Math::Vec3(-3.0f,  1.0f, -3.0f),
+			Entropy::Math::Vec3( 1.0f,  1.0f,  1.0f),
+			Entropy::Math::Vec3( 3.0f,  1.0f,  3.0f)
 		};
 
 		float quadVertices[] = {
@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::PointLight pointLight(Entropy::Math::Vec3(0.0f, 2.0f, 0.0f), 1.0f, 0.09f, 0.032f, lightColor * 0.1f, lightColor * 0.5f, lightColor * 0.8f);
 
 		shader.use();
-		shader.setDirectionalLight(directionalLight);
+		//shader.setDirectionalLight(directionalLight);
 		shader.setPointLight(0, pointLight);
 
 		// Setup Clock
@@ -179,10 +179,6 @@ int main(int argc, char* argv[])
 		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Setup uniform blocks
-		redShader.setUniformBlockBinding("Matrices", 0);
-		greenShader.setUniformBlockBinding("Matrices", 0);
-		blueShader.setUniformBlockBinding("Matrices", 0);
-		yellowShader.setUniformBlockBinding("Matrices", 0);
 
 		unsigned int uboMatrices;
 		glGenBuffers(1, &uboMatrices);
@@ -226,32 +222,30 @@ int main(int argc, char* argv[])
 			frameBuffer.bind();
 			frameBuffer.clear();
 
-			
 			// Boxes
-			redShader.use();
-			model = Entropy::Math::Translate(boxPos[0]);
-			redShader.setMat4("model", model);
-			box.Draw(redShader);
+			shader.use();
+			for (unsigned int i = 0; i < 4; i++)
+			{
+				model = Entropy::Math::Translate(boxPos[i]);
+				shader.setMat4("model", model);
+				box.Draw(shader);
+			}
+			
+			// Box Normals
+			normalShader.use();
+			normalShader.setMat4("projection", projection);
+			normalShader.setMat4("view", view);
 
-			greenShader.use();
-			model = Entropy::Math::Translate(boxPos[1]);
-			greenShader.setMat4("model", model);
-			box.Draw(greenShader);
-
-			blueShader.use();
-			model = Entropy::Math::Translate(boxPos[2]);
-			blueShader.setMat4("model", model);
-			box.Draw(blueShader);
-
-			yellowShader.use();
-			model = Entropy::Math::Translate(boxPos[3]);
-			yellowShader.setMat4("model", model);
-			box.Draw(yellowShader);
+			for (unsigned int i = 0; i < 4; i++)
+			{
+				model = Entropy::Math::Translate(boxPos[i]);
+				normalShader.setMat4("model", model);
+				box.Draw(normalShader);
+			}
 
 			// Floor
 			shader.use();
-			shader.setMat4("projection", projection);
-			shader.setMat4("view", view);
+			model = Entropy::Math::Mat4();
 			shader.setMat4("model", model);
 			plane.Draw(shader);
 

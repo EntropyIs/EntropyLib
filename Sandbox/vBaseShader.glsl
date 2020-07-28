@@ -11,8 +11,8 @@ layout (std140) uniform Matrices
 
 uniform mat4 model;
 
-out vec3 fragPos;
 out vec3 normal;
+out vec3 fragPos;
 out vec2 texCoord;
 
 void main()

@@ -139,6 +139,53 @@ Entropy::Graphics::Shader::Shader(const char* vertexShaderPath, const char* frag
 	}
 }
 
+Entropy::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath)
+{
+	try
+	{
+		// Compile Shaders
+		std::vector<unsigned int> compilations;
+		compilations.push_back(compile(vertexShaderPath, GL_VERTEX_SHADER));
+		compilations.push_back(compile(fragmentShaderPath, GL_FRAGMENT_SHADER));
+		compilations.push_back(compile(geometaryShaderPath, GL_GEOMETRY_SHADER));
+
+		// Construct Program
+		ID = glCreateProgram();
+		for (unsigned int i = 0; i < compilations.size(); i++)
+			glAttachShader(ID, compilations[i]);
+		glLinkProgram(ID);
+
+		// Check for errors
+		int isLinked;
+		glGetProgramiv(ID, GL_LINK_STATUS, &isLinked);
+		if (!isLinked)
+		{
+			int maxLength;
+			glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &maxLength);
+			char* errorLog = new char[maxLength];
+			glGetProgramInfoLog(ID, maxLength, &maxLength, errorLog);
+			glDeleteShader(ID);
+
+			std::string errString = "Error linking shader program.\n";
+			errString.append(vertexShaderPath);
+			errString.append(", ");
+			errString.append(fragmentShaderPath);
+			errString.append(", ");
+			errString.append(geometaryShaderPath);
+			errString.append(".\n");
+			errString.append(errorLog);
+			throw std::exception(errString.c_str());
+		}
+
+		for (unsigned int i = 0; i < compilations.size(); i++)
+			glDeleteShader(compilations[i]);
+	}
+	catch (std::exception e)
+	{
+		throw e;
+	}
+}
+
 void Entropy::Graphics::Shader::use() const
 {
 	glUseProgram(ID);
