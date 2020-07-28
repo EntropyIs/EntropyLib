@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Model plane(planeVertices, planeIndices, planeMaterial);
 
 		Entropy::Graphics::Model box("assets/backpack.obj");
-		Entropy::Math::Vec3 boxPos(0.0f, 0.0f, 0.0f);
+		Entropy::Math::Vec3 boxPos(0.0f, 1.0f, 0.0f);
 		float boxAngle = 0;
 
 		float quadVertices[] = {
@@ -154,12 +154,36 @@ int main(int argc, char* argv[])
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
 
-		Entropy::Math::Vec3 lightColor = Entropy::Math::Vec3(1.0f, 1.0f, 1.0f);
-		Entropy::Graphics::PointLight pointLight(Entropy::Math::Vec3(0.0f, 2.0f, 0.0f), 1.0f, 0.09f, 0.032f, lightColor * 0.1f, lightColor * 0.5f, lightColor * 0.8f);
+		Entropy::Math::Vec3 lightColor[] =
+		{
+			Entropy::Math::Vec3(1.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(0.0f, 1.0f, 0.0f),
+			Entropy::Math::Vec3(0.0f, 0.0f, 1.0f),
+			Entropy::Math::Vec3(1.0f, 1.0f, 0.0f)
+		};
+
+		Entropy::Math::Vec3 lightPos[] =
+		{
+			Entropy::Math::Vec3(-3.0f,  1.0f,  3.0f),
+			Entropy::Math::Vec3( 3.0f,  1.0f, -3.0f),
+			Entropy::Math::Vec3(-3.0f,  1.0f, -3.0f),
+			Entropy::Math::Vec3( 3.0f,  1.0f,  3.0f)
+		};
+
+		Entropy::Graphics::PointLight pointLight[] =
+		{
+			Entropy::Graphics::PointLight(lightPos[0], 1.0f, 0.09f, 0.032f, lightColor[0] * 0.1f, lightColor[0] * 0.5f, lightColor[0] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[1], 1.0f, 0.09f, 0.032f, lightColor[1] * 0.1f, lightColor[1] * 0.5f, lightColor[1] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[2], 1.0f, 0.09f, 0.032f, lightColor[2] * 0.1f, lightColor[2] * 0.5f, lightColor[2] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[3], 1.0f, 0.09f, 0.032f, lightColor[3] * 0.1f, lightColor[3] * 0.5f, lightColor[3] * 0.8f)
+		};
 
 		shader.use();
 		//shader.setDirectionalLight(directionalLight);
-		shader.setPointLight(0, pointLight);
+		shader.setPointLight(0, pointLight[0]);
+		shader.setPointLight(1, pointLight[1]);
+		shader.setPointLight(2, pointLight[2]);
+		shader.setPointLight(3, pointLight[3]);
 
 		// Setup Clock
 		Entropy::Timing::Clock clock;
