@@ -1,5 +1,5 @@
-#include <Entropy/Graphics/Window.h>
-#include <Entropy/Graphics/Shader.h>
+#include <Entropy/Graphics.h>
+#include <Entropy/Math.h>
 
 using namespace Entropy;
 
@@ -16,4 +16,5 @@ int main(int argc, char* argv[])
 	shader.setUniformBlockBinding("Matrices", 0);
 
 	// Load Scene Assets
+	// Camera
 }

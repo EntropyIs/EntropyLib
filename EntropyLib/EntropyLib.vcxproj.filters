@@ -200,5 +200,11 @@
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h">
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
+    <ClInclude Include="Entropy\Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

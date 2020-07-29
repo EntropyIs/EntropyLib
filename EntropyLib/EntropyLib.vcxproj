@@ -41,6 +41,7 @@
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entropy\Graphics.h" />
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
     <ClInclude Include="Entropy\Graphics\Material.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
+    <ClInclude Include="Entropy\Math.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />
     <ClInclude Include="Entropy\Math\Mat4.h" />
