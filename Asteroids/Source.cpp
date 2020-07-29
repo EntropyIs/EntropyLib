@@ -28,7 +28,6 @@ int main(int argc, char* argv[])
 		Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 		Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
-		shader.use();
 		shader.setUniformBlockBinding("Matrices", 0);
 
 		// Load Scene Assets
@@ -41,14 +40,10 @@ int main(int argc, char* argv[])
 		skyboxTextures.push_back("Assets/GalaxyBack.png");
 		Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(skyboxTextures);
 
-		//Graphics::Model planet("Assets/planet.obj");
-		//Graphics::Model asteroid("Assets/rock.obj");
+		Graphics::Model planet("Assets/box.obj");
 
 		// Setup Camera (Position, Up, Yaw, Pitch);
 		Entropy::Camera camera(Math::Vec3(0.0f, 0.0f, -5.0f), Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-
-		// Setup Uniform Blocks
-		Graphics::UniformBuffer matrices(2 * sizeof(Math::Mat4), NULL);
 
 		/**
 		 * Setup Scene Data
@@ -58,11 +53,18 @@ int main(int argc, char* argv[])
 		Math::Mat4 view = camera.getViewMatrix();
 		Math::Mat4 model;
 
+		// Setup Uniform Blocks
+		Graphics::UniformBuffer matrices(2 * sizeof(Math::Mat4), NULL);
 		matrices.setSubData(0, sizeof(Math::Mat4), projection.Data);
 		matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
 
 		// Window & Framebuffer Data
 		window.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+		// Planet
+		float planetRot = 0.0f;
+		Math::Vec3 planetPos(0.0f, 0.0f, 0.0f);
+		float planetScale = 1.0f;
 
 		// Asteroids
 
@@ -131,26 +133,28 @@ int main(int argc, char* argv[])
 				window.MouseDelta.MoveTrigger = false;
 			}
 
+			// Process View Changes
+			view = camera.getViewMatrix();
+			matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
+
 			// Render
 			// Clear Screen First
+			window.bind();
 			window.clear();
 
 			// Render Planet
-			//shader.use();
-			//model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::Scale(4.0f);
-			//shader.setMat4("model", model);
-			//planet.Draw(shader);
+			model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::RotateY(planetRot) * Math::Scale(1.0f);
+			shader.use();
+			shader.setVec3("viewPos", camera.position);
+			shader.setMat4("model", model);
+			planet.Draw(shader);
 
 			// Render Skybox Last
-			skybox.Draw(skyboxShader, view, projection);
+			// skybox.Draw(skyboxShader, view, projection);
 
 			// Update
 			window.processEvents();
 			clock.poll();
-
-			// Process View Changes
-			view = camera.getViewMatrix();
-			matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
 		}
 	}
 	catch (std::exception e)

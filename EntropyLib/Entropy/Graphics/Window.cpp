@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f)
+Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f), depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
 {
 	// Initialize GLFW
 	try
