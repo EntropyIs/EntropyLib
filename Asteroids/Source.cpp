@@ -40,10 +40,11 @@ int main(int argc, char* argv[])
 		skyboxTextures.push_back("Assets/GalaxyBack.png");
 		Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(skyboxTextures);
 
-		Graphics::Model planet("Assets/box.obj");
+		Graphics::Model planet("Assets/planet.obj");
+		Graphics::Model asteroid("Assets/rock.obj");
 
 		// Setup Camera (Position, Up, Yaw, Pitch);
-		Entropy::Camera camera(Math::Vec3(0.0f, 0.0f, -5.0f), Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Camera camera(Math::Vec3(0.0f, 5.0f, -80.0f), Math::Vec3(0.0f, 1.0f, 0.0f), 90.0f, -10.0f);
 
 		/**
 		 * Setup Scene Data
@@ -63,10 +64,37 @@ int main(int argc, char* argv[])
 
 		// Planet
 		float planetRot = 0.0f;
-		Math::Vec3 planetPos(0.0f, 0.0f, 0.0f);
-		float planetScale = 1.0f;
+		Math::Vec3 planetPos(0.0f, -3.0f, 0.0f);
+		float planetScale = 4.0f;
 
 		// Asteroids
+		unsigned int asteroidCount = 1000;
+
+		Math::Mat4* asteroidModelMatrices = new Math::Mat4[asteroidCount];
+
+		srand(glfwGetTime());
+		float radius = 50.0f;
+		float offset = 2.5f;
+
+		for (unsigned int i = 0; i < asteroidCount; i++)
+		{
+			// 1. translation
+			float angle = (float)i / (float)asteroidCount * 360.0f;
+			float displacement = (rand() & (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float x = sin(angle) * radius + displacement;
+			displacement = (rand() & (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float y = displacement + 0.4f;
+			displacement = (rand() & (int)(2.0f * offset * 100.0f)) / 100.0f - offset;
+			float z = cos(angle) * radius + displacement;
+
+			// 2. scale
+			float scale = (rand() % 20) / 100.0f + 0.05f;
+
+			// 3. rotation
+			float rotAngle = (rand() % 360);
+
+			asteroidModelMatrices[i] = Math::Translate(x, y, z) * Math::Rotate(Math::Vec3(0.4f, 0.6f, 0.8f), rotAngle) * Math::Scale(scale);
+		}
 
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
@@ -100,10 +128,10 @@ int main(int argc, char* argv[])
 
 		shader.use();
 		shader.setDirectionalLight(directionalLight);
-		shader.setPointLight(0, pointLight[0]);
-		shader.setPointLight(1, pointLight[1]);
-		shader.setPointLight(2, pointLight[2]);
-		shader.setPointLight(3, pointLight[3]);
+		//shader.setPointLight(0, pointLight[0]);
+		//shader.setPointLight(1, pointLight[1]);
+		//shader.setPointLight(2, pointLight[2]);
+		//shader.setPointLight(3, pointLight[3]);
 
 		// Timing
 		Entropy::Timing::Clock clock;
@@ -143,14 +171,22 @@ int main(int argc, char* argv[])
 			window.clear();
 
 			// Render Planet
-			model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::RotateY(planetRot) * Math::Scale(1.0f);
+			model = Math::Translate(planetPos) * Math::RotateY(planetRot) * Math::Scale(planetScale);
 			shader.use();
 			shader.setVec3("viewPos", camera.position);
 			shader.setMat4("model", model);
 			planet.Draw(shader);
 
+			// Render Asteroids
+			for (unsigned int i = 0; i < asteroidCount; i++)
+			{
+				shader.use();
+				shader.setMat4("model", asteroidModelMatrices[i]);
+				asteroid.Draw(shader);
+			}
+
 			// Render Skybox Last
-			// skybox.Draw(skyboxShader, view, projection);
+			skybox.Draw(skyboxShader, view, projection);
 
 			// Update
 			window.processEvents();
