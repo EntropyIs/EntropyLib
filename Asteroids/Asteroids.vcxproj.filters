@@ -22,4 +22,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fLighting.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

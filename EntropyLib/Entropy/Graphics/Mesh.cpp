@@ -129,7 +129,7 @@ Entropy::Graphics::SkyboxMesh::SkyboxMesh(Texture texture) : texture(texture)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 }
 
-void Entropy::Graphics::SkyboxMesh::Draw(Shader& shader, Math::Mat4 view, Math::Mat4 projection)
+void Entropy::Graphics::SkyboxMesh::Draw(Shader& shader, Math::Mat4& view, Math::Mat4& projection)
 {
 	glDepthFunc(GL_LEQUAL);
 	shader.use();

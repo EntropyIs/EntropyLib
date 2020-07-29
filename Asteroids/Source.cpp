@@ -28,6 +28,9 @@ int main(int argc, char* argv[])
 		Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 		Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
+		shader.use();
+		shader.setUniformBlockBinding("Matrices", 0);
+
 		// Load Scene Assets
 		std::vector<std::string> skyboxTextures;
 		skyboxTextures.push_back("Assets/GalaxyRight.png");
@@ -38,15 +41,14 @@ int main(int argc, char* argv[])
 		skyboxTextures.push_back("Assets/GalaxyBack.png");
 		Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(skyboxTextures);
 
-		Graphics::Model planet("Assets/planet.obj");
-		Graphics::Model asteroid("Assets/rock.obj");
+		//Graphics::Model planet("Assets/planet.obj");
+		//Graphics::Model asteroid("Assets/rock.obj");
 
 		// Setup Camera (Position, Up, Yaw, Pitch);
 		Entropy::Camera camera(Math::Vec3(0.0f, 0.0f, -5.0f), Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Setup Uniform Blocks
 		Graphics::UniformBuffer matrices(2 * sizeof(Math::Mat4), NULL);
-		shader.setUniformBlockBinding("Matrices", matrices.UBO);
 
 		/**
 		 * Setup Scene Data
@@ -67,6 +69,40 @@ int main(int argc, char* argv[])
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
 
+		// Setup Lights
+		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
+
+		Entropy::Math::Vec3 lightColor[] =
+		{
+			Entropy::Math::Vec3(1.0f, 0.0f, 0.0f),
+			Entropy::Math::Vec3(0.0f, 1.0f, 0.0f),
+			Entropy::Math::Vec3(0.0f, 0.0f, 1.0f),
+			Entropy::Math::Vec3(1.0f, 1.0f, 0.0f)
+		};
+
+		Entropy::Math::Vec3 lightPos[] =
+		{
+			Entropy::Math::Vec3(-3.0f,  1.0f,  3.0f),
+			Entropy::Math::Vec3(3.0f,  1.0f, -3.0f),
+			Entropy::Math::Vec3(-3.0f,  1.0f, -3.0f),
+			Entropy::Math::Vec3(3.0f,  1.0f,  3.0f)
+		};
+
+		Entropy::Graphics::PointLight pointLight[] =
+		{
+			Entropy::Graphics::PointLight(lightPos[0], 1.0f, 0.09f, 0.032f, lightColor[0] * 0.1f, lightColor[0] * 0.5f, lightColor[0] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[1], 1.0f, 0.09f, 0.032f, lightColor[1] * 0.1f, lightColor[1] * 0.5f, lightColor[1] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[2], 1.0f, 0.09f, 0.032f, lightColor[2] * 0.1f, lightColor[2] * 0.5f, lightColor[2] * 0.8f),
+			Entropy::Graphics::PointLight(lightPos[3], 1.0f, 0.09f, 0.032f, lightColor[3] * 0.1f, lightColor[3] * 0.5f, lightColor[3] * 0.8f)
+		};
+
+		shader.use();
+		shader.setDirectionalLight(directionalLight);
+		shader.setPointLight(0, pointLight[0]);
+		shader.setPointLight(1, pointLight[1]);
+		shader.setPointLight(2, pointLight[2]);
+		shader.setPointLight(3, pointLight[3]);
+
 		// Timing
 		Entropy::Timing::Clock clock;
 		clock.initialize();
@@ -76,52 +112,45 @@ int main(int argc, char* argv[])
 		while (window.getShouldClose() == false)
 		{
 			// Input
-			{
-				if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) == true) // If Escape Key Pressed, Close Scene
-					window.setShouldClose(true);
+			if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) == true) // If Escape Key Pressed, Close Scene
+				window.setShouldClose(true);
 
-				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
-					camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed(), 10.0f);
-				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
-					camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed(), 10.0f);
-				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_A))
-					camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed(), 10.0f);
-				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_D))
-					camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed(), 10.0f);
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed(), 10.0f);
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed(), 10.0f);
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_A))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed(), 10.0f);
+			if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_D))
+				camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed(), 10.0f);
 
 				
-				if (window.MouseDelta.MoveTrigger) // Handle Mouse Movement Event
-				{
-					camera.updateRotation(window.MouseDelta.XOffset, window.MouseDelta.YOffset);
-					window.MouseDelta.MoveTrigger = false;
-				}
+			if (window.MouseDelta.MoveTrigger) // Handle Mouse Movement Event
+			{
+				camera.updateRotation(window.MouseDelta.XOffset, window.MouseDelta.YOffset);
+				window.MouseDelta.MoveTrigger = false;
 			}
 
 			// Render
-			{
-				// Clear Screen First
-				window.bind();
-				window.clear();
+			// Clear Screen First
+			window.clear();
 
-				// Render Planet
-				model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::Scale(4.0f);
-				shader.use();
-				shader.setMat4("model", model);
-				planet.Draw(shader);
+			// Render Planet
+			//shader.use();
+			//model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::Scale(4.0f);
+			//shader.setMat4("model", model);
+			//planet.Draw(shader);
 
-				// Render Skybox Last
-				skybox.Draw(skyboxShader, view, projection);
-			}
+			// Render Skybox Last
+			skybox.Draw(skyboxShader, view, projection);
 
 			// Update
-			{
-				window.processEvents();
-				clock.poll();
+			window.processEvents();
+			clock.poll();
 
-				// Process View Changes
-				view = camera.getViewMatrix();
-				matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
-			}
+			// Process View Changes
+			view = camera.getViewMatrix();
+			matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
 		}
 	}
 	catch (std::exception e)

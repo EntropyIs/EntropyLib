@@ -3,6 +3,7 @@
 #include <Entropy/Graphics/Model.h>
 #include <Entropy/Graphics/FrameBuffer.h>
 #include <Entropy/Graphics/Camera.h>
+#include <Entropy/Graphics/UniformBuffer.h>
 
 #include <Entropy/Math/Transform3D.h>
 #include <Entropy/Math/Converters.h>
@@ -21,8 +22,6 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
 		window.captureMouse();
 
-		glEnable(GL_PROGRAM_POINT_SIZE);
-
 		// Load Shader
 		Entropy::Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 		Entropy::Graphics::Shader screenShader("vFramebuffer.glsl", "fFramebuffer.glsl");
@@ -35,8 +34,6 @@ int main(int argc, char* argv[])
 
 		screenShader.use();
 		screenShader.setInt("screenTexture", 0);
-		skyboxShader.use();
-		skyboxShader.setInt("skybox", 0);
 
 		// Setup Camera
 		Entropy::Camera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -96,60 +93,9 @@ int main(int argc, char* argv[])
 		faces.push_back("assets/GalaxyBottom.png");
 		faces.push_back("assets/GalaxyFront.png");
 		faces.push_back("assets/GalaxyBack.png");
-		Entropy::Graphics::Texture skybox = Entropy::Graphics::LoadTexture::LoadCubeMap(faces);
+		Entropy::Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(faces);
 
-		float skyboxVertices[] = {
-			// positions          
-			-1.0f,  1.0f, -1.0f,
-			-1.0f, -1.0f, -1.0f,
-			 1.0f, -1.0f, -1.0f,
-			 1.0f, -1.0f, -1.0f,
-			 1.0f,  1.0f, -1.0f,
-			-1.0f,  1.0f, -1.0f,
-
-			-1.0f, -1.0f,  1.0f,
-			-1.0f, -1.0f, -1.0f,
-			-1.0f,  1.0f, -1.0f,
-			-1.0f,  1.0f, -1.0f,
-			-1.0f,  1.0f,  1.0f,
-			-1.0f, -1.0f,  1.0f,
-
-			 1.0f, -1.0f, -1.0f,
-			 1.0f, -1.0f,  1.0f,
-			 1.0f,  1.0f,  1.0f,
-			 1.0f,  1.0f,  1.0f,
-			 1.0f,  1.0f, -1.0f,
-			 1.0f, -1.0f, -1.0f,
-
-			-1.0f, -1.0f,  1.0f,
-			-1.0f,  1.0f,  1.0f,
-			 1.0f,  1.0f,  1.0f,
-			 1.0f,  1.0f,  1.0f,
-			 1.0f, -1.0f,  1.0f,
-			-1.0f, -1.0f,  1.0f,
-
-			-1.0f,  1.0f, -1.0f,
-			 1.0f,  1.0f, -1.0f,
-			 1.0f,  1.0f,  1.0f,
-			 1.0f,  1.0f,  1.0f,
-			-1.0f,  1.0f,  1.0f,
-			-1.0f,  1.0f, -1.0f,
-
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, -1.0f,  1.0f,
-			 1.0f, -1.0f, -1.0f,
-			 1.0f, -1.0f, -1.0f,
-			-1.0f, -1.0f,  1.0f,
-			 1.0f, -1.0f,  1.0f
-		};
-		unsigned int skyboxVAO, skyboxVBO;
-		glGenVertexArrays(1, &skyboxVAO);
-		glGenBuffers(1, &skyboxVBO);
-		glBindVertexArray(skyboxVAO);
-		glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		Entropy::Graphics::SkyboxMesh skybox(skyboxTexture);
 
 		// Setup Lights
 		Entropy::Graphics::DirectionalLight directionalLight(Entropy::Math::Vec3(-0.2f, -1.0f, -0.3f), Entropy::Math::Vec3(0.2f), Entropy::Math::Vec3(0.8f), Entropy::Math::Vec3(1.0f));
@@ -199,19 +145,10 @@ int main(int argc, char* argv[])
 		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Setup uniform blocks
-
-		unsigned int uboMatrices;
-		glGenBuffers(1, &uboMatrices);
-
-		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
-		glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(Entropy::Math::Mat4), NULL, GL_DYNAMIC_DRAW);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
-		glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(Entropy::Math::Mat4));
+		Entropy::Graphics::UniformBuffer Matrices(2 * sizeof(Entropy::Math::Mat4), NULL);
 
 		Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::Radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
-		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
-		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Entropy::Math::Mat4), projection.Data);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		Matrices.setSubData(0, sizeof(Entropy::Math::Mat4), projection.Data);
 
 		// Render Loop
 		while (!window.getShouldClose())
@@ -232,9 +169,7 @@ int main(int argc, char* argv[])
 
 			
 			Entropy::Math::Mat4 view = camera.getViewMatrix();
-			glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
-			glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Entropy::Math::Mat4), sizeof(Entropy::Math::Mat4), view.Data);
-			glBindBuffer(GL_UNIFORM_BUFFER, 0);
+			Matrices.setSubData(sizeof(Entropy::Math::Mat4), sizeof(Entropy::Math::Mat4), view.Data);
 
 			Entropy::Math::Mat4 model;
 
@@ -256,31 +191,14 @@ int main(int argc, char* argv[])
 			plane.Draw(shader);
 
 			// Render Skybox
-			glDepthFunc(GL_LEQUAL);
-			skyboxShader.use();
-			Entropy::Math::Mat4 skyboxView(
-				view.R0C0, view.R1C0, view.R2C0, 0.0f,
-				view.R0C1, view.R1C1, view.R2C1, 0.0f,
-				view.R0C2, view.R1C2, view.R2C2, 0.0f,
-				0.0f, 0.0f, 0.0f, 1.0f
-			);
-			skyboxShader.setMat4("viewPos", skyboxView);
-			skyboxShader.setMat4("projection", projection);
-			glBindVertexArray(skyboxVAO);
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.ID);
-			skyboxShader.setInt("cubemap", skybox.ID);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-			glBindVertexArray(0);
-			glDepthFunc(GL_LESS);
+			skybox.Draw(skyboxShader, view, projection);
 
 			// Render Pass 2;
 			window.bind();
 			window.setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			window.clear();
 
-			// render cube matrix
-
+			// Render Screen Quad
 			screenShader.use();
 			glBindVertexArray(quadVAO);
 			glActiveTexture(GL_TEXTURE0);
