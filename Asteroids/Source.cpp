@@ -96,6 +96,8 @@ int main(int argc, char* argv[])
 			asteroidModelMatrices[i] = Math::Translate(x, y, z) * Math::Rotate(Math::Vec3(0.4f, 0.6f, 0.8f), rotAngle) * Math::Scale(scale);
 		}
 
+		float fieldRot = 0.0f;
+
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
 
@@ -175,12 +177,14 @@ int main(int argc, char* argv[])
 			shader.use();
 			shader.setVec3("viewPos", camera.position);
 			shader.setMat4("model", model);
+			shader.setMat4("alteration", Math::Mat4());
 			planet.Draw(shader);
 
 			// Render Asteroids
+			Math::Mat4 alteration = Math::RotateY(fieldRot);
+			shader.setMat4("alteration", alteration); // Designed to rotate field about planet (y - axis)
 			for (unsigned int i = 0; i < asteroidCount; i++)
 			{
-				shader.use();
 				shader.setMat4("model", asteroidModelMatrices[i]);
 				asteroid.Draw(shader);
 			}
@@ -191,6 +195,9 @@ int main(int argc, char* argv[])
 			// Update
 			window.processEvents();
 			clock.poll();
+
+			planetRot += 0.1f * clock.timeElapsed();
+			fieldRot += 0.01f * clock.timeElapsed();
 		}
 	}
 	catch (std::exception e)
