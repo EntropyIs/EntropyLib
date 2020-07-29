@@ -37,7 +37,7 @@
     <ClCompile Include="Entropy\Math\Vec2.cpp" />
     <ClCompile Include="Entropy\Math\Vec3.cpp" />
     <ClCompile Include="Entropy\Math\Vec4.cpp" />
-    <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Entropy\Timing\Clock.cpp" />
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -61,8 +61,8 @@
     <ClInclude Include="Entropy\Math\Vec2.h" />
     <ClInclude Include="Entropy\Math\Vec3.h" />
     <ClInclude Include="Entropy\Math\Vec4.h" />
+    <ClInclude Include="Entropy\Timing\Clock.h" />
     <ClInclude Include="Entropy\Type\Array.h" />
-    <ClInclude Include="Clock.h" />
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>

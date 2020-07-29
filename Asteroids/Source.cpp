@@ -23,7 +23,6 @@ int main(int argc, char* argv[])
 		window.captureMouse();
 
 		// Load Shaders
-	
 		Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 		Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
@@ -73,6 +72,15 @@ int main(int argc, char* argv[])
 			{
 				if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) == true) // If Escape Key Pressed, Close Scene
 					window.setShouldClose(true);
+
+				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_W))
+					camera.updatePosition(Entropy::CameraMovement::CAMERA_FORWARD, clock.timeElapsed(), 10.0f);
+				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_S))
+					camera.updatePosition(Entropy::CameraMovement::CAMERA_BACKWARD, clock.timeElapsed(), 10.0f);
+				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_A))
+					camera.updatePosition(Entropy::CameraMovement::CAMERA_LEFT, clock.timeElapsed(), 10.0f);
+				if (window.getKeyPressed(Entropy::Graphics::GLKeys::KEY_D))
+					camera.updatePosition(Entropy::CameraMovement::CAMERA_RIGHT, clock.timeElapsed(), 10.0f);
 
 				
 				if (window.MouseDelta.MoveTrigger) // Handle Mouse Movement Event

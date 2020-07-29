@@ -66,9 +66,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Timing</Filter>
-    </ClCompile>
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
@@ -126,11 +123,11 @@
     <ClCompile Include="Entropy\Math\Converters.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Timing\Clock.cpp">
+      <Filter>Source Files\Timing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clock.h">
-      <Filter>Header Files\Timing</Filter>
-    </ClInclude>
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\DebugTools\Profiling</Filter>
     </ClInclude>
@@ -199,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Math\Converters.h">
       <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Timing\Clock.h">
+      <Filter>Header Files\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
