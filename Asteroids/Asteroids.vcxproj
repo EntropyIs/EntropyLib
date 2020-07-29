@@ -144,12 +144,6 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Sandbox\fCubeMap.glsl" />
-    <None Include="..\Sandbox\fLighting.glsl" />
-    <None Include="..\Sandbox\vBaseShader.glsl" />
-    <None Include="..\Sandbox\vCubeMap.glsl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

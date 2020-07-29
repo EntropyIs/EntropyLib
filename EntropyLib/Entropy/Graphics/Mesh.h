@@ -45,5 +45,16 @@ namespace Entropy
 			
 			void setupMesh();
 		};
+
+		class SkyboxMesh
+		{
+		private:
+			std::vector<Vertex> vertices;
+			unsigned int VAO, VBO;
+			Texture texture;
+		public:
+			__declspec(dllexport) SkyboxMesh(Texture texture);
+			void __declspec(dllexport) Draw(Shader& shader, Math::Mat4 view, Math::Mat4 projection);
+		};
 	}
 }

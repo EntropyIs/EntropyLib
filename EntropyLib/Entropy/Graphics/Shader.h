@@ -23,9 +23,7 @@ namespace Entropy
 
 			unsigned int compile(const char* path, unsigned int type);
 		public:
-			Shader(std::vector<const char*> shaderPath, std::vector<unsigned int> shaderType);
-			Shader(const char* vertexShaderPath, const char* fragmentShaderPath);
-			Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath);
+			Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath = nullptr);
 			void use() const;
 
 			void setBool(const char* name, bool v0) const;

@@ -1,20 +1,20 @@
-#include "GLCamera.h"
-#include "Converters.h"
+#include "Camera.h"
+#include "../Math/Converters.h"
 
 #include <cmath>
 
-Entropy::GLCamera::GLCamera(Math::Vec3 position, Math::Vec3 up, float yaw, float pitch)
+Entropy::Camera::Camera(Math::Vec3 position, Math::Vec3 up, float yaw, float pitch)
 	: position(position), front(Math::Vec3(0.0f, 0.0f, -1.0f)), worldUp(up), yaw(yaw), pitch(pitch), zoom(45.0f)
 {
 	updateVectors();
 }
 
-Entropy::Math::Mat4 Entropy::GLCamera::getViewMatrix()
+Entropy::Math::Mat4 Entropy::Camera::getViewMatrix()
 {
 	return Math::Look(position, position + front, up);
 }
 
-void Entropy::GLCamera::updatePosition(CameraMovement direction, float deltaTime, float velocity)
+void Entropy::Camera::updatePosition(CameraMovement direction, float deltaTime, float velocity)
 {
 	float adjustedVelocity = velocity * deltaTime;
 	if (direction == CAMERA_FORWARD)
@@ -36,7 +36,7 @@ void Entropy::GLCamera::updatePosition(CameraMovement direction, float deltaTime
 		position -= worldUp * adjustedVelocity;
 }
 
-void Entropy::GLCamera::updateRotation(float xOffset, float yOffset, bool constrainPitch, float minPitch, float maxPitch)
+void Entropy::Camera::updateRotation(float xOffset, float yOffset, bool constrainPitch, float minPitch, float maxPitch)
 {
 	yaw -= xOffset;
 	pitch -= yOffset;
@@ -52,7 +52,7 @@ void Entropy::GLCamera::updateRotation(float xOffset, float yOffset, bool constr
 	updateVectors();
 }
 
-void Entropy::GLCamera::updateFOV(float offset)
+void Entropy::Camera::updateFOV(float offset)
 {
 	zoom -= offset;
 	if (zoom < 1.0f)
@@ -61,12 +61,12 @@ void Entropy::GLCamera::updateFOV(float offset)
 		zoom = 110.0f;
 }
 
-void Entropy::GLCamera::updateVectors()
+void Entropy::Camera::updateVectors()
 {
 	Math::Vec3 direction(
-		cos(Math::radians(yaw)) * cos(Math::radians(pitch)),
-		sin(Math::radians(pitch)),
-		sin(Math::radians(yaw)) * cos(Math::radians(pitch)));
+		cos(Math::Radians(yaw)) * cos(Math::Radians(pitch)),
+		sin(Math::Radians(pitch)),
+		sin(Math::Radians(yaw)) * cos(Math::Radians(pitch)));
 
 	front = normalize(direction);
 	right = normalize(cross(worldUp, front));

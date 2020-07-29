@@ -2,12 +2,12 @@
 #include <Entropy/Graphics/Shader.h>
 #include <Entropy/Graphics/Model.h>
 #include <Entropy/Graphics/FrameBuffer.h>
+#include <Entropy/Graphics/Camera.h>
 
 #include <Entropy/Math/Transform3D.h>
+#include <Entropy/Math/Converters.h>
 
-#include <GLCamera.h>
 #include <Clock.h>
-#include <Converters.h>
 
 #include <vector>
 #include <exception>
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 		skyboxShader.setInt("skybox", 0);
 
 		// Setup Camera
-		Entropy::GLCamera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Entropy::Camera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 		// Offset Vectors
 		Entropy::Math::Vec4 backpackPos[] = {
@@ -208,7 +208,7 @@ int main(int argc, char* argv[])
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(Entropy::Math::Mat4));
 
-		Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
+		Entropy::Math::Mat4 projection = Entropy::Math::Perspective(Entropy::Math::Radians(camera.zoom), (float)window.Width / (float)window.Height, 0.1f, 1000.0f);
 		glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Entropy::Math::Mat4), projection.Data);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);

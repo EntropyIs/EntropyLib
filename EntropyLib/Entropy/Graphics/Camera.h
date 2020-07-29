@@ -1,7 +1,7 @@
 #pragma once
-#include "Entropy/Math/Transform3D.h"
-#include "Entropy/Math/Vec3.h"
-#include "Entropy/Math/Vec4.h"
+#include "../Math/Transform3D.h"
+#include "../Math/Vec3.h"
+#include "../Math/Vec4.h"
 
 namespace Entropy
 {
@@ -18,7 +18,7 @@ namespace Entropy
 		WORLD_DOWN
 	};
 
-	class __declspec(dllexport) GLCamera
+	class __declspec(dllexport) Camera
 	{
 	public:
 		// Camera Attributes
@@ -35,7 +35,7 @@ namespace Entropy
 		float mouseSensitivity;
 		float zoom;
 
-		GLCamera(Math::Vec3 position = Math::Vec3(), Math::Vec3 up = Math::Vec3(0.0f, 1.0f, 0.0f), float yaw = -90.0f, float pitch = 0.0f);
+		Camera(Math::Vec3 position = Math::Vec3(), Math::Vec3 up = Math::Vec3(0.0f, 1.0f, 0.0f), float yaw = -90.0f, float pitch = 0.0f);
 
 		Math::Mat4 getViewMatrix();
 

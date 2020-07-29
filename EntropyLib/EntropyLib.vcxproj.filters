@@ -69,9 +69,6 @@
     <ClCompile Include="Clock.cpp">
       <Filter>Source Files\Timing</Filter>
     </ClCompile>
-    <ClCompile Include="Converters.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
@@ -126,13 +123,13 @@
     <ClCompile Include="Entropy\Graphics\UniformBuffer.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Math\Converters.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Timing</Filter>
-    </ClInclude>
-    <ClInclude Include="Converters.h">
-      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\DebugTools\Profiling</Filter>
@@ -197,14 +194,11 @@
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h">
       <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
-    <ClInclude Include="Entropy\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entropy\Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entropy\Graphics\Camera.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math\Converters.h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

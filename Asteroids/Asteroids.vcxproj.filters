@@ -22,18 +22,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Sandbox\vBaseShader.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="..\Sandbox\vCubeMap.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="..\Sandbox\fCubeMap.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="..\Sandbox\fLighting.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

@@ -28,6 +28,7 @@
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
     <ClCompile Include="Entropy\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
+    <ClCompile Include="Entropy\Math\Converters.cpp" />
     <ClCompile Include="Entropy\Math\Mat2.cpp" />
     <ClCompile Include="Entropy\Math\Mat3.cpp" />
     <ClCompile Include="Entropy\Math\Mat4.cpp" />
@@ -37,11 +38,9 @@
     <ClCompile Include="Entropy\Math\Vec3.cpp" />
     <ClCompile Include="Entropy\Math\Vec4.cpp" />
     <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="Converters.cpp" />
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entropy\Graphics.h" />
     <ClInclude Include="Entropy\Graphics\Camera.h" />
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
@@ -53,7 +52,7 @@
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
-    <ClInclude Include="Entropy\Math.h" />
+    <ClInclude Include="Entropy\Math\Converters.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />
     <ClInclude Include="Entropy\Math\Mat4.h" />
@@ -64,7 +63,6 @@
     <ClInclude Include="Entropy\Math\Vec4.h" />
     <ClInclude Include="Entropy\Type\Array.h" />
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="Converters.h" />
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
