@@ -9,6 +9,8 @@
 #include <Entropy/Math/Transform3D.h>
 #include <Entropy/Math/Converters.h>
 
+#include <Entropy/Timing/Clock.h>
+
 #include <iostream>
 #include <exception>
 
@@ -65,6 +67,11 @@ int main(int argc, char* argv[])
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
 
+		// Timing
+		Entropy::Timing::Clock clock;
+		clock.initialize();
+		clock.poll();
+
 		// Render Loop
 		while (window.getShouldClose() == false)
 		{
@@ -103,12 +110,13 @@ int main(int argc, char* argv[])
 				planet.Draw(shader);
 
 				// Render Skybox Last
-				//skybox.Draw(skyboxShader, view, projection);
+				skybox.Draw(skyboxShader, view, projection);
 			}
 
 			// Update
 			{
 				window.processEvents();
+				clock.poll();
 
 				// Process View Changes
 				view = camera.getViewMatrix();

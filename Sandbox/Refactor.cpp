@@ -7,7 +7,7 @@
 #include <Entropy/Math/Transform3D.h>
 #include <Entropy/Math/Converters.h>
 
-#include <Clock.h>
+#include <Entropy/Timing/Clock.h>
 
 #include <vector>
 #include <exception>
