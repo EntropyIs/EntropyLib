@@ -13,8 +13,6 @@ int main(int argc, char* argv[])
 	Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
 	Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
-	shader.setUniformBlockBinding("Matrices", 0);
-
 	// Load Scene Assets
 	// Camera
 }

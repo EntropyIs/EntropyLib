@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Graphics/Camera.h"
 #include "Graphics/FrameBuffer.h"
 #include "Graphics/Lighting.h"
 #include "Graphics/Material.h"
