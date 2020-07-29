@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		// Load OpenGL Window
-		Graphics::Window window("Asteroids Example Project.", 800, 600);
+		Graphics::Window window("Asteroids Example Project.", 1280, 720);
 		window.captureMouse();
 
 		// Load Shaders
