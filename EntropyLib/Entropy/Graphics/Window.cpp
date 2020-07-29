@@ -13,7 +13,7 @@ Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigne
 		GLWindow = glfwCreateWindow(Width, Height, title, NULL, NULL);
 		if (GLWindow == NULL)
 		{
-#ifdef DEBUG
+#ifdef _DEBUG
 			std::cout << "Failed to create GLFW Window." << std::endl;
 #endif // DEBUG
 			glfwTerminate();
@@ -122,7 +122,7 @@ void Entropy::Graphics::Window::initializeGLFW()
 	// Initialize and Configure GLFW
 	if (!glfwInit())
 	{
-#ifdef DEBUG
+#ifdef _DEBUG
 		std::cout << "Failed to initalize GLFW." << std::endl;
 #endif // DEBUG
 		throw std::exception("Failed to initialize GLFW.");
@@ -142,7 +142,7 @@ void Entropy::Graphics::Window::initializeGLEW()
 	GLenum error = glewInit();
 	if (error != GLEW_OK)
 	{
-#ifdef DEBUG
+#ifdef _DEBUG
 		std::cout << "Failed to initialize GLEW.\n" << glewGetErrorString(error);
 #endif // DEBUG
 		throw std::exception("Failed to initialize GLEW.");

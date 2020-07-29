@@ -1,4 +1,5 @@
 #include <Entropy/Graphics/Window.h>
+#include <Entropy/Graphics/Window.h>
 #include <Entropy/Graphics/Shader.h>
 #include <Entropy/Graphics/Camera.h>
 
@@ -34,7 +35,10 @@ int main(int argc, char* argv[])
 		skyboxTextures.push_back("Assets/GalaxyBottom.png");
 		skyboxTextures.push_back("Assets/GalaxyFront.png");
 		skyboxTextures.push_back("Assets/GalaxyBack.png");
-		Entropy::Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(skyboxTextures);
+		Graphics::Texture skyboxTexture = Entropy::Graphics::LoadTexture::LoadCubeMap(skyboxTextures);
+
+		Graphics::Model planet("Assets/planet.obj");
+		Graphics::Model asteroid("Assets/rock.obj");
 
 		// Setup Camera (Position, Up, Yaw, Pitch);
 		Entropy::Camera camera(Math::Vec3(0.0f, 0.0f, -5.0f), Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -57,6 +61,8 @@ int main(int argc, char* argv[])
 		// Window & Framebuffer Data
 		window.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
+		// Asteroids
+
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
 
@@ -67,6 +73,13 @@ int main(int argc, char* argv[])
 			{
 				if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) == true) // If Escape Key Pressed, Close Scene
 					window.setShouldClose(true);
+
+				
+				if (window.MouseDelta.MoveTrigger) // Handle Mouse Movement Event
+				{
+					camera.updateRotation(window.MouseDelta.XOffset, window.MouseDelta.YOffset);
+					window.MouseDelta.MoveTrigger = false;
+				}
 			}
 
 			// Render
@@ -75,13 +88,23 @@ int main(int argc, char* argv[])
 				window.bind();
 				window.clear();
 
+				// Render Planet
+				model = Math::Translate(0.0f, -3.0f, 0.0f) * Math::Scale(4.0f);
+				shader.use();
+				shader.setMat4("model", model);
+				planet.Draw(shader);
+
 				// Render Skybox Last
-				skybox.Draw(skyboxShader, view, projection);
+				//skybox.Draw(skyboxShader, view, projection);
 			}
 
 			// Update
 			{
 				window.processEvents();
+
+				// Process View Changes
+				view = camera.getViewMatrix();
+				matrices.setSubData(sizeof(Math::Mat4), sizeof(Math::Mat4), view.Data);
 			}
 		}
 	}

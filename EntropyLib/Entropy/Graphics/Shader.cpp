@@ -53,7 +53,7 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 	catch (std::ifstream::failure e)
 	{
 		std::string errString = "Shader file, " + std::string(path) + ", not succefully read.";
-#ifdef DEBUG
+#ifdef _DEBUG
 		std::cout << errString << std::endl;
 #endif // DEBUG
 		throw std::exception(errString.c_str());
