@@ -123,6 +123,9 @@
     <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Graphics\UniformBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Type\Array.h">
       <Filter>Header Files\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\UniformBuffer.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

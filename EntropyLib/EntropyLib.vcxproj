@@ -25,6 +25,7 @@
     <ClCompile Include="Entropy\Graphics\Model\Image.cpp" />
     <ClCompile Include="Entropy\Graphics\Model\WavefrontObj.cpp" />
     <ClCompile Include="Entropy\Graphics\Shader.cpp" />
+    <ClCompile Include="Entropy\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Entropy\Graphics\Window.cpp" />
     <ClCompile Include="Entropy\Math\Mat2.cpp" />
     <ClCompile Include="Entropy\Math\Mat3.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Entropy\Graphics\Model\Image.h" />
     <ClInclude Include="Entropy\Graphics\Model\WavefrontObj.h" />
     <ClInclude Include="Entropy\Graphics\Shader.h" />
+    <ClInclude Include="Entropy\Graphics\UniformBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />

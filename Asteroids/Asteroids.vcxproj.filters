@@ -13,10 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{a2a1d3db-57cb-4bb6-8c5c-95a2a6aa8e0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Sandbox\vBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Sandbox\vCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Sandbox\fCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Sandbox\fLighting.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
