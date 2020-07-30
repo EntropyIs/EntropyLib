@@ -61,17 +61,11 @@
     <Filter Include="Source Files\Graphics\ModelProcessing">
       <UniqueIdentifier>{499c8ec3-f94b-47cf-833c-6bb14123c495}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Type">
+      <UniqueIdentifier>{a3f98326-f589-487c-b75a-e83ad9af78aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Timing</Filter>
-    </ClCompile>
-    <ClCompile Include="Converters.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="GLCamera.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\DebugTools\Profiling</Filter>
     </ClCompile>
@@ -120,17 +114,23 @@
     <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Graphics\Camera.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Graphics\UniformBuffer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Math\Converters.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Timing\Clock.cpp">
+      <Filter>Source Files\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\Graphics\InstanceBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clock.h">
-      <Filter>Header Files\Timing</Filter>
-    </ClInclude>
-    <ClInclude Include="Converters.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="GLCamera.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\DebugTools\Profiling</Filter>
     </ClInclude>
@@ -186,6 +186,24 @@
       <Filter>Header Files\Graphics\ModelProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Type\Array.h">
+      <Filter>Header Files\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\UniformBuffer.h">
+      <Filter>Header Files\Graphics\ObjectHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\Camera.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Math\Converters.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Timing\Clock.h">
+      <Filter>Header Files\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\InstanceBuffer.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

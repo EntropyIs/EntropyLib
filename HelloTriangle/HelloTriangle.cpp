@@ -31,13 +31,7 @@ int main(int argc, char* argv[])
 		Entropy::Graphics::Mesh triangle(vertices, indices, Entropy::Graphics::Materials::WhitePlastic);
 
 		// Load Shader
-		std::vector<const char*> shaderPaths;
-		shaderPaths.push_back("vShader.glsl");
-		shaderPaths.push_back("fShader.glsl");
-		std::vector<unsigned int> shaderTypes;
-		shaderTypes.push_back(GL_VERTEX_SHADER);
-		shaderTypes.push_back(GL_FRAGMENT_SHADER);
-		Entropy::Graphics::Shader shader(shaderPaths, shaderTypes);
+		Entropy::Graphics::Shader shader("vShader.glsl", "fShader.glsl");
 
 		// Render Loop
 		while (!window.getShouldClose())

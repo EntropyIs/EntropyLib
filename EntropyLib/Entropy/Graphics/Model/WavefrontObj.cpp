@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <exception>
+#include <iostream>
 
 Entropy::Graphics::WavefrontObj::ObjectData::ObjectData(std::string objectName) : objectName(objectName)
 {
@@ -18,7 +19,7 @@ void Entropy::Graphics::WavefrontObj::pharseVertexPosition(std::vector<std::stri
 		objects[index].vertexPositions.push_back(Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3])));
 	else if (lineData.size() == 4) // Vec3 Position Data.
 		objects[index].vertexPositions.push_back(Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3])));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Vertex Data." << std::endl;
 #endif // DEBUG
@@ -30,7 +31,7 @@ void Entropy::Graphics::WavefrontObj::pharseTextureCoord(std::vector<std::string
 		objects[index].vertexTextureCoords.push_back(Math::Vec2(std::stof(lineData[1]), std::stof(lineData[2])));
 	else if (lineData.size() == 3) // Vec2 Texture Coord Data
 		objects[index].vertexTextureCoords.push_back(Math::Vec2(std::stof(lineData[1]), std::stof(lineData[2])));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Texture Coords Data." << std::endl;
 #endif // DEBUG
@@ -40,7 +41,7 @@ void Entropy::Graphics::WavefrontObj::pharseNormal(std::vector<std::string> line
 {
 	if (lineData.size() == 4) // Vec3 Normal Data
 		objects[index].vertexNormals.push_back(Math::normalize(Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]))));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Normal Data." << std::endl;
 #endif // DEBUG
@@ -116,7 +117,7 @@ void Entropy::Graphics::WavefrontObj::pharseColorAmbient(std::vector<std::string
 {
 	if (lineData.size() == 4) // Vec3 Color Data
 		materials[index].Ambient = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Ambient Color Data." << std::endl;
 #endif // DEBUG
@@ -126,7 +127,7 @@ void Entropy::Graphics::WavefrontObj::pharseColorDiffuse(std::vector<std::string
 {
 	if (lineData.size() == 4) // Vec3 Color Data
 		materials[index].Diffuse = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Diffuse Color Data." << std::endl;
 #endif // DEBUG
@@ -136,7 +137,7 @@ void Entropy::Graphics::WavefrontObj::pharseColorSpecular(std::vector<std::strin
 {
 	if (lineData.size() == 4) // Vec3 Color Data
 		materials[index].Specular = Math::Vec3(std::stof(lineData[1]), std::stof(lineData[2]), std::stof(lineData[3]));
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Specular Color Data." << std::endl;
 #endif // DEBUG
@@ -146,7 +147,7 @@ void Entropy::Graphics::WavefrontObj::pharseShininess(std::vector<std::string> l
 {
 	if (lineData.size() == 2) // Shinyness Data
 		materials[index].Shininess = std::stof(lineData[1]);
-#ifdef DEBUG
+#ifdef _DEBUG
 	else
 		std::cout << "Error Reading Shininess Data." << std::endl;
 #endif // DEBUG

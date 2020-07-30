@@ -8,9 +8,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "..\..\..\stb_image.h"
 
+#include <iostream>
+
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadBitmap(std::string path)
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading Bitmap: " << path << std::endl;
 #endif // DEBUG
 
@@ -47,7 +49,7 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadBitmap(std::string 
 		buffer.erase(buffer.begin(), it);
 	}
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 	return result;
@@ -70,7 +72,7 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadJPEG(std::string pa
 	// generate image from loaded data
 	Image result;
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 	return result;
@@ -78,6 +80,9 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadJPEG(std::string pa
 
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadGif(std::string path)
 {
+#ifdef _DEBUG
+	std::cout << "Loading Bitmap: " << path << std::endl;
+#endif // DEBUG
 	// load file into buffer
 	std::ifstream file;
 	file.open(path, std::ios::binary);
@@ -93,7 +98,7 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadGif(std::string pat
 	// generate image from loaded data
 	Image result;
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 	return result;
@@ -101,6 +106,9 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadGif(std::string pat
 
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadTiff(std::string path)
 {
+#ifdef _DEBUG
+	std::cout << "Loading Bitmap: " << path << std::endl;
+#endif // DEBUG
 	// load file into buffer
 	std::ifstream file;
 	file.open(path, std::ios::binary);
@@ -116,7 +124,7 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadTiff(std::string pa
 	// generate image from loaded data
 	Image result;
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 	return result;
@@ -124,6 +132,9 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadTiff(std::string pa
 
 Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadPNG(std::string path)
 {
+#ifdef _DEBUG
+	std::cout << "Loading Bitmap: " << path << std::endl;
+#endif // DEBUG
 	// load file into buffer
 	std::ifstream file;
 	file.open(path, std::ios::binary);
@@ -139,7 +150,7 @@ Entropy::Graphics::Image Entropy::Graphics::LoadTexture::LoadPNG(std::string pat
 	// generate image from loaded data
 	Image result;
 	
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Loading successful: width:" << result.width << "px, height:" << result.height << "px" << std::endl;
 #endif // DEBUG	
 	return result;
@@ -186,6 +197,9 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromFile(std::str
 
 Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std::string path, std::string type)
 {
+#ifdef _DEBUG
+	std::cout << "Loading Image: " << path << std::endl;
+#endif // DEBUG
 	int width, height, nrChannels;
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 
@@ -201,23 +215,33 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	stbi_image_free(data);
 
+#ifdef _DEBUG
+	std::cout << "Loading successful: width:" << width << "px, height:" << height << "px" << std::endl << std::endl;
+#endif // DEBUG	
+
 	return Texture(id, type);
 }
 
 Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadCubeMap(std::vector<std::string> paths)
 {
+#ifdef _DEBUG
+	std::cout << "Loading Cube Map:" << std::endl;
+#endif // DEBUG
 	unsigned int id;
 	glGenTextures(1, &id);
 
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < paths.size(); i++)
 	{
-		
 		unsigned char* data = stbi_load(paths[i].c_str(), &width, &height, &nrChannels, 0);
 
 		// Load Image into Texture.
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
+
+#ifdef _DEBUG
+		std::cout << "Loading " << paths[i] << " successful: width:" << width << "px, height:" << height << "px" << std::endl;
+#endif // DEBUG	
 	}
 
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -225,6 +249,10 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadCubeMap(std::vect
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+#ifdef _DEBUG
+	std::cout << std::endl;
+#endif // DEBUG	
 
 	return Texture(id, "texture_cubemap");
 }

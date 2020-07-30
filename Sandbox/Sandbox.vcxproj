@@ -152,10 +152,12 @@
     <None Include="fDepthTest.glsl" />
     <None Include="fFramebuffer.glsl" />
     <None Include="fLighting.glsl" />
-    <None Include="fStencilTest.glsl" />
+    <None Include="fNormalShader.glsl" />
+    <None Include="gNormalShader.glsl" />
+    <None Include="vBaseShader.glsl" />
     <None Include="vCubeMap.glsl" />
     <None Include="vFramebuffer.glsl" />
-    <None Include="vLighting.glsl" />
+    <None Include="vNormalShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

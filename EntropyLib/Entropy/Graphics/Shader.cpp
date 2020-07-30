@@ -53,22 +53,23 @@ unsigned int Entropy::Graphics::Shader::compile(const char* path, unsigned int t
 	catch (std::ifstream::failure e)
 	{
 		std::string errString = "Shader file, " + std::string(path) + ", not succefully read.";
-#ifdef DEBUG
+#ifdef _DEBUG
 		std::cout << errString << std::endl;
 #endif // DEBUG
 		throw std::exception(errString.c_str());
 	}
 }
 
-Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vector<unsigned int> shaderType)
+Entropy::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath)
 {
 	try
 	{
 		// Compile Shaders
-		assert(shaderPath.size() == shaderType.size());
 		std::vector<unsigned int> compilations;
-		for (unsigned int i = 0; i < shaderPath.size(); i++)
-			compilations.push_back(compile(shaderPath[i], shaderType[i]));
+		compilations.push_back(compile(vertexShaderPath, GL_VERTEX_SHADER));
+		compilations.push_back(compile(fragmentShaderPath, GL_FRAGMENT_SHADER));
+		if(geometaryShaderPath != nullptr)
+			compilations.push_back(compile(geometaryShaderPath, GL_GEOMETRY_SHADER));
 
 		// Construct Program
 		ID = glCreateProgram();
@@ -88,6 +89,16 @@ Entropy::Graphics::Shader::Shader(std::vector<const char*> shaderPath, std::vect
 			glDeleteShader(ID);
 
 			std::string errString = "Error linking shader program.\n";
+			errString.append(vertexShaderPath);
+			errString.append(", ");
+			errString.append(fragmentShaderPath);
+			if (geometaryShaderPath != nullptr)
+			{
+				errString.append(", ");
+				errString.append(geometaryShaderPath);
+			}
+			errString.append(".\n");
+			errString.append(errorLog);
 			throw std::exception(errString.c_str());
 		}
 
@@ -196,4 +207,14 @@ void Entropy::Graphics::Shader::setSpotLight(unsigned int index, const SpotLight
 	setVec3(std::string("spotLights[").append(std::to_string(index)).append("].specular").c_str(), v0.Specular);
 
 	setBool(std::string("spotLights[").append(std::to_string(index)).append("].use").c_str(), true);
+}
+
+void Entropy::Graphics::Shader::setUniformBlockBinding(const char* name, unsigned int v0) const
+{
+	glUniformBlockBinding(ID, getUniformBlockIndex(name), v0);
+}
+
+unsigned int Entropy::Graphics::Shader::getUniformBlockIndex(const char* name) const
+{
+	return glGetUniformBlockIndex(ID, name);
 }

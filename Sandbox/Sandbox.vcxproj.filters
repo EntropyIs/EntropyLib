@@ -18,16 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vLighting.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
     <None Include="fLighting.glsl">
       <Filter>Shader Files</Filter>
     </None>
     <None Include="fDepthTest.glsl">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="fStencilTest.glsl">
       <Filter>Shader Files</Filter>
     </None>
     <None Include="vFramebuffer.glsl">
@@ -40,6 +34,18 @@
       <Filter>Shader Files</Filter>
     </None>
     <None Include="vCubeMap.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="vNormalShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="gNormalShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fNormalShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

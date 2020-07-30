@@ -23,7 +23,7 @@ namespace Entropy
 
 			unsigned int compile(const char* path, unsigned int type);
 		public:
-			Shader(std::vector<const char*> shaderPath, std::vector<unsigned int> shaderType);
+			Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath = nullptr);
 			void use() const;
 
 			void setBool(const char* name, bool v0) const;
@@ -43,6 +43,10 @@ namespace Entropy
 			void setDirectionalLight(const DirectionalLight& v0) const;
 			void setPointLight(unsigned int index, const PointLight& v0) const;
 			void setSpotLight(unsigned int index, const SpotLight& v0) const;
+
+			void setUniformBlockBinding(const char* name, unsigned int v0) const;
+			
+			unsigned int getUniformBlockIndex(const char* name) const;
 		};
 	}
 }
