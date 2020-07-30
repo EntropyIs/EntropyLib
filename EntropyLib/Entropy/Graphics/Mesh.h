@@ -25,10 +25,9 @@ namespace Entropy
 			Math::Vec3 Position;
 			Math::Vec3 Normal;
 			Math::Vec2 TexCoord;
-			Math::Mat4 ModelMatrix;
 
-			Vertex(Math::Vec3 position, Math::Vec3 normal = Math::Vec3(), Math::Vec2 texCoord = Math::Vec2()) : Position(position), Normal(normal), TexCoord(texCoord), ModelMatrix() {};
-			Vertex(float x, float y, float z, float i = 0.0f, float j = 0.0f, float k = 0.0f, float tX = 0.0f, float tY = 0.0f) : Position(x, y, z), Normal(i, j, k), TexCoord(tX, tY), ModelMatrix() {};
+			Vertex(Math::Vec3 position, Math::Vec3 normal = Math::Vec3(), Math::Vec2 texCoord = Math::Vec2()) : Position(position), Normal(normal), TexCoord(texCoord) {};
+			Vertex(float x, float y, float z, float i = 0.0f, float j = 0.0f, float k = 0.0f, float tX = 0.0f, float tY = 0.0f) : Position(x, y, z), Normal(i, j, k), TexCoord(tX, tY) {};
 		};
 
 		class Mesh
@@ -40,8 +39,11 @@ namespace Entropy
 
 		public:
 			__declspec(dllexport) Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
+
 			void __declspec(dllexport) Draw(Shader& shader);
 			void __declspec(dllexport) DrawInstanced(Shader& shader, unsigned int count);
+
+			void __declspec(dllexport) setupInstancedMatrix();
 		private:
 			unsigned int VAO, VBO, EBO;
 			

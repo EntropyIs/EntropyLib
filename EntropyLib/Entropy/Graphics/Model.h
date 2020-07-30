@@ -21,6 +21,9 @@ namespace Entropy
 		public:
 			__declspec(dllexport) Model(const char* path);
 			__declspec(dllexport) Model(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
+
+			void __declspec(dllexport) setupInstancedMatrix();
+
 			void __declspec(dllexport) Draw(Shader& shader);
 			void __declspec(dllexport) DrawInstanced(Shader& shader, unsigned int count);
 		};

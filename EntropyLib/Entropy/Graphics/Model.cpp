@@ -16,6 +16,12 @@ Entropy::Graphics::Model::Model(std::vector<Vertex> vertices, std::vector<unsign
 	meshes.push_back(Mesh(vertices, indices, material));
 }
 
+void Entropy::Graphics::Model::setupInstancedMatrix()
+{
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].setupInstancedMatrix();
+}
+
 void Entropy::Graphics::Model::Draw(Shader& shader)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)

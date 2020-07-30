@@ -83,6 +83,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(projectdir)..\EntropyLib\;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdir)..\$(intdir);$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,6 +141,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
