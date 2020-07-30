@@ -169,7 +169,7 @@ namespace Entropy
 
 			Mouse MouseDelta;
 
-			Window(const char* title, unsigned int width = 800, unsigned int height = 600, bool depthTest = true, bool stencilTest = false, bool faceCulling = false);
+			Window(const char* title, unsigned int width = 800, unsigned int height = 600, unsigned int numSamples = 4, bool depthTest = true, bool stencilTest = false, bool faceCulling = false);
 
 			void captureMouse();
 			
@@ -188,7 +188,7 @@ namespace Entropy
 			void enableFaceCulling(bool value = true);
 
 		private:
-			void initializeGLFW();
+			void initializeGLFW(unsigned int numSamples);
 			void initializeGLEW();
 
 			static void framebuffer_size_callback(GLFWwindow* glWindow, int width, int height);

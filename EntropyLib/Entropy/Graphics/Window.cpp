@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f), depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
+Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigned int height, unsigned int numSamples, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), MouseDelta(width / 2.0f, height / 2.0f), MouseSensitivity(0.1f), depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
 {
 	// Initialize GLFW
 	try
 	{
-		initializeGLFW();
+		initializeGLFW(numSamples);
 
 		// Initialize OpenGL Window
 		GLWindow = glfwCreateWindow(Width, Height, title, NULL, NULL);
@@ -27,8 +27,8 @@ Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigne
 		// Initialize GLEW
 		initializeGLEW();
 
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
+		bind();
+		glEnable(GL_MULTISAMPLE);
 	}
 	catch (std::exception e)
 	{
@@ -117,7 +117,7 @@ void Entropy::Graphics::Window::bind()
 		glDisable(GL_CULL_FACE);
 }
 
-void Entropy::Graphics::Window::initializeGLFW()
+void Entropy::Graphics::Window::initializeGLFW(unsigned int numSamples)
 {
 	// Initialize and Configure GLFW
 	if (!glfwInit())
@@ -134,6 +134,7 @@ void Entropy::Graphics::Window::initializeGLFW()
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+	glfwWindowHint(GLFW_SAMPLES, numSamples);
 }
 
 void Entropy::Graphics::Window::initializeGLEW()
