@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Entropy\Graphics\Camera.cpp" />
     <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="Entropy\Graphics\InstanceBuffer.cpp" />
     <ClCompile Include="Entropy\Graphics\Mesh.cpp" />
     <ClCompile Include="Entropy\Graphics\Model.cpp" />
     <ClCompile Include="Entropy\Graphics\Model\Image.cpp" />
@@ -43,6 +44,7 @@
   <ItemGroup>
     <ClInclude Include="Entropy\Graphics\Camera.h" />
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h" />
+    <ClInclude Include="Entropy\Graphics\InstanceBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Lighting.h" />
     <ClInclude Include="Entropy\Graphics\Material.h" />
     <ClInclude Include="Entropy\Graphics\Mesh.h" />

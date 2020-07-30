@@ -47,6 +47,39 @@ void Entropy::Graphics::Mesh::Draw(Shader& shader)
 	glBindVertexArray(0);
 }
 
+void Entropy::Graphics::Mesh::DrawInstanced(Shader& shader, unsigned int count)
+{
+	shader.use();
+	// Set material
+	shader.setMaterial(material);
+
+	// Assign textures
+	unsigned int diffuseNr = 0;
+	unsigned int specularNr = 0;
+
+	for (unsigned int i = 0; i < material.Textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, material.Textures[i].ID);
+
+		std::string number;
+		std::string name = material.Textures[i].Type;
+		if (name == "texture_diffuse")
+			number = std::to_string(diffuseNr++);
+		else if (name == "texture_specular")
+			number = std::to_string(specularNr++);
+		shader.setInt(("material." + name + "[" + number + "]").c_str(), i);
+	}
+
+	shader.setInt("material.diffuseNr", diffuseNr);
+	shader.setInt("material.specularNr", specularNr);
+
+	// draw mesh
+	glBindVertexArray(VAO);
+	glDrawElementsInstanced(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0, count);
+	glBindVertexArray(0);
+}
+
 void Entropy::Graphics::Mesh::setupMesh()
 {
 	glGenVertexArrays(1, &VAO);
@@ -70,6 +103,21 @@ void Entropy::Graphics::Mesh::setupMesh()
 	// vertex texture coords
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoord));
+	// modelMatrix
+	size_t vec4Size = sizeof(Math::Vec4);
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * vec4Size, (void*)0);
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * vec4Size, (void*)(1 * vec4Size));
+	glEnableVertexAttribArray(5);
+	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * vec4Size, (void*)(2 * vec4Size));
+	glEnableVertexAttribArray(6);
+	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 4 * vec4Size, (void*)(3 * vec4Size));
+
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribDivisor(4, 1);
+	glVertexAttribDivisor(5, 1);
+	glVertexAttribDivisor(6, 1);
 
 	glBindVertexArray(0);
 }

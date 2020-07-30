@@ -149,6 +149,7 @@
     <None Include="fLighting.glsl" />
     <None Include="vBaseShader.glsl" />
     <None Include="vCubeMap.glsl" />
+    <None Include="vInstancedShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

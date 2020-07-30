@@ -126,6 +126,9 @@
     <ClCompile Include="Entropy\Timing\Clock.cpp">
       <Filter>Source Files\Timing</Filter>
     </ClCompile>
+    <ClCompile Include="Entropy\Graphics\InstanceBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Profiler.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Timing\Clock.h">
       <Filter>Header Files\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\Graphics\InstanceBuffer.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

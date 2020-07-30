@@ -5,6 +5,7 @@
 
 #include <Entropy/Graphics/UniformBuffer.h>
 #include <Entropy/Graphics/Model.h>
+#include <Entropy/Graphics/InstanceBuffer.h>
 
 #include <Entropy/Math/Transform3D.h>
 #include <Entropy/Math/Converters.h>
@@ -26,9 +27,11 @@ int main(int argc, char* argv[])
 
 		// Load Shaders
 		Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
+		Graphics::Shader instanceShader("vInstancedShader.glsl", "fLighting.glsl");
 		Graphics::Shader skyboxShader("vCubeMap.glsl", "fCubeMap.glsl");
 
 		shader.setUniformBlockBinding("Matrices", 0);
+		instanceShader.setUniformBlockBinding("Matrices", 0);
 
 		// Load Scene Assets
 		std::vector<std::string> skyboxTextures;
@@ -97,6 +100,8 @@ int main(int argc, char* argv[])
 		}
 
 		float fieldRot = 0.0f;
+
+		Graphics::InstanceBuffer(asteroidCount, sizeof(Math::Mat4), &asteroidModelMatrices[0]);
 
 		// Skybox
 		Graphics::SkyboxMesh skybox(skyboxTexture);
@@ -182,7 +187,13 @@ int main(int argc, char* argv[])
 
 			// Render Asteroids
 			Math::Mat4 alteration = Math::RotateY(fieldRot);
-			shader.setMat4("alteration", alteration); // Designed to rotate field about planet (y - axis)
+			/*
+			instanceShader.use();
+			instanceShader.setMat4("alteration", alteration); // Designed to rotate field about planet (y - axis)
+			asteroid.DrawInstanced(instanceShader, asteroidCount);
+			*/
+			shader.use();
+			shader.setMat4("alteration", alteration);
 			for (unsigned int i = 0; i < asteroidCount; i++)
 			{
 				shader.setMat4("model", asteroidModelMatrices[i]);

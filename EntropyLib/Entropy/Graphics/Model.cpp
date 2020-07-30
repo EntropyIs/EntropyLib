@@ -21,3 +21,9 @@ void Entropy::Graphics::Model::Draw(Shader& shader)
 	for (unsigned int i = 0; i < meshes.size(); i++)
 		meshes[i].Draw(shader);
 }
+
+void Entropy::Graphics::Model::DrawInstanced(Shader& shader, unsigned int count)
+{
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].DrawInstanced(shader, count);
+}
