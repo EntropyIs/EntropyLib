@@ -29,6 +29,7 @@ Entropy::Graphics::Window::Window(const char* title, unsigned int width, unsigne
 
 		bind();
 		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_FRAMEBUFFER_SRGB);
 	}
 	catch (std::exception e)
 	{
