@@ -25,6 +25,8 @@ namespace Entropy
 		public:
 			unsigned int ColorBuffer;
 
+			unsigned int Width, Height;
+
 			FrameBuffer(unsigned int width, unsigned int height, bool depthTest = true, bool stencilTest = false, bool faceCulling = false);
 			~FrameBuffer();
 

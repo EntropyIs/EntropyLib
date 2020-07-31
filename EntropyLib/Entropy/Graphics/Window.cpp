@@ -101,6 +101,8 @@ void Entropy::Graphics::Window::enableFaceCulling(bool value)
 
 void Entropy::Graphics::Window::bind()
 {
+	glViewport(0, 0, Width, Height);
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	if (depthTest)
 		glEnable(GL_DEPTH_TEST);
@@ -154,7 +156,6 @@ void Entropy::Graphics::Window::initializeGLEW()
 void Entropy::Graphics::Window::framebuffer_size_callback(GLFWwindow* glWindow, int width, int height)
 {
 	Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glWindow));
-	glViewport(0, 0, width, height);
 	window->Width = width;
 	window->Height = height;
 }

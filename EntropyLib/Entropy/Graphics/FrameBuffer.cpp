@@ -1,6 +1,6 @@
 #include "FrameBuffer.h"
 
-Entropy::Graphics::FrameBuffer::FrameBuffer(unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
+Entropy::Graphics::FrameBuffer::FrameBuffer(unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
 {
 	glGenFramebuffers(1, &fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -30,6 +30,7 @@ Entropy::Graphics::FrameBuffer::~FrameBuffer()
 
 void Entropy::Graphics::FrameBuffer::bind()
 {
+	glViewport(0, 0, Width, Height); // set viewport size
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 	if (depthTest)
 		glEnable(GL_DEPTH_TEST);

@@ -18,8 +18,13 @@ int main(int argc, char* argv[])
 {
 	try
 	{
+		unsigned int windowWidth = 1280;
+		unsigned int windowHeight = 720;
+		unsigned int targetWidth = 64;
+		unsigned int targetHeight = 64;
+
 		// Initalize Window
-		Entropy::Graphics::Window window("My OpenGL Window", 1280, 720);
+		Entropy::Graphics::Window window("My OpenGL Window", windowWidth, windowHeight);
 		window.captureMouse();
 
 		// Load Shader
@@ -36,7 +41,7 @@ int main(int argc, char* argv[])
 		screenShader.setInt("screenTexture", 0);
 
 		// Setup Camera
-		Entropy::Camera camera(Entropy::Math::Vec3(0.0f, 0.0f, -5.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Entropy::Camera camera(Entropy::Math::Vec3(0.0f, 5.0f, -10.0f), Entropy::Math::Vec3(0.0f, 1.0f, 0.0f), 90.0f, -30.0f);
 
 		// Offset Vectors
 		Entropy::Math::Vec4 backpackPos[] = {
@@ -141,7 +146,7 @@ int main(int argc, char* argv[])
 		float orbitAngle = 0.0f;
 
 		//setup framebuffers
-		Entropy::Graphics::FrameBuffer frameBuffer(window.Width, window.Height, true, false, false);
+		Entropy::Graphics::FrameBuffer frameBuffer(targetWidth, targetHeight, true, false, false);
 		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		// Setup uniform blocks

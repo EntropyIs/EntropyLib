@@ -14,7 +14,8 @@ namespace Entropy
 		bool gameFlag;
 
 	public:
-		GameState(const char* stateName = "GameState", bool renderFlag = false, bool gameFlag = false) : stateName(stateName), renderFlag(renderFlag), gameFlag(gameFlag) {};
+		GameState(const char* stateName = "GameState", bool renderFlag = true, bool gameFlag = true) : stateName(stateName), renderFlag(renderFlag), gameFlag(gameFlag) {};
+		virtual ~GameState() {};
 
 		void addConnection(GameState* gamestate);
 
