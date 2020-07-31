@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Entropy\GameState.cpp" />
     <ClCompile Include="Entropy\Graphics\Camera.cpp" />
     <ClCompile Include="Entropy\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Entropy\Graphics\InstanceBuffer.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
+    <ClInclude Include="Entropy\GameState.h" />
     <ClInclude Include="Entropy\Math\Converters.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />

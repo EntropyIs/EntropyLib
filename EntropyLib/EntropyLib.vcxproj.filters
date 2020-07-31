@@ -64,6 +64,9 @@
     <Filter Include="Header Files\Type">
       <UniqueIdentifier>{a3f98326-f589-487c-b75a-e83ad9af78aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\StateEngine">
+      <UniqueIdentifier>{9d4d87aa-4dbb-4ce1-8ca7-6af9e96b5a51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Profiler.cpp">
@@ -127,6 +130,9 @@
       <Filter>Source Files\Timing</Filter>
     </ClCompile>
     <ClCompile Include="Entropy\Graphics\InstanceBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entropy\GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -205,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Entropy\Graphics\InstanceBuffer.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entropy\GameState.h">
+      <Filter>Header Files\StateEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
