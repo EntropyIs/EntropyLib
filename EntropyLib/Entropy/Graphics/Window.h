@@ -159,6 +159,13 @@ namespace Entropy
 			bool depthTest;
 			bool stencilTest;
 			bool faceCulling;
+			bool targetRatioSet;
+
+			float targetRatio;
+
+			unsigned int tWidth, tHeight;
+			unsigned int vpWidth, vpHeight;
+			unsigned int vpX, vpY;
 
 			Math::Vec4 clearColor;
 
@@ -183,6 +190,8 @@ namespace Entropy
 			void setClearColor(float red, float green, float blue, float alpha);
 			void setShouldClose(bool value);
 
+			void setResolution(unsigned int targetWidth, unsigned int targetHeight);
+
 			void enableDepthTest(bool value = true);
 			void enableStencilTest(bool value = true);
 			void enableFaceCulling(bool value = true);
@@ -190,6 +199,8 @@ namespace Entropy
 		private:
 			void initializeGLFW(unsigned int numSamples);
 			void initializeGLEW();
+
+			void calulateViewport();
 
 			static void framebuffer_size_callback(GLFWwindow* glWindow, int width, int height);
 			static void mouse_movement_callback(GLFWwindow* glWindow, double xPos, double yPos);

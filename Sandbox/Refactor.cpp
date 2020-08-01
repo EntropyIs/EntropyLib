@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
 		// Initalize Window
 		Entropy::Graphics::Window window("My OpenGL Window", windowWidth, windowHeight);
 		window.captureMouse();
+		window.setResolution(targetWidth, targetHeight);
 
 		// Load Shader
 		Entropy::Graphics::Shader shader("vBaseShader.glsl", "fLighting.glsl");
@@ -200,7 +201,7 @@ int main(int argc, char* argv[])
 
 			// Render Pass 2;
 			window.bind();
-			window.setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			window.setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			window.clear();
 
 			// Render Screen Quad
