@@ -106,8 +106,8 @@ Entropy::Math::Mat4 Entropy::Math::Ortho(float left, float right, float top, flo
 	return Mat4(
 		2.0f / (right - left), 0.0f, 0.0f, 0.0f,
 		0.0f, 2.0f / (top - bottom), 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f / (far - near), 0.0f,
-		(right + left) / (right - left), (top + bottom) / (top - bottom), near / (far - near), 1.0f
+		0.0f, 0.0f, -2.0f / (far - near), 0.0f,
+		-((right + left) / (right - left)), -((top + bottom) / (top - bottom)), -((far + near) / (far - near)), 1.0f
 	);
 }
 

@@ -1,9 +1,11 @@
 #include "GameState.h"
 
-void Entropy::GameState::addConnection(GameState* gamestate)
+Entropy::GameState::GameState(const char* stateName, unsigned int numConnections, bool renderFlag, bool gameFlag) : stateName(stateName), renderFlag(renderFlag), gameFlag(gameFlag)
 {
-	for (int i = 0; i < connectedStates.size(); i++)
-		if (connectedStates[i] == gamestate)
-			return;
-	connectedStates.push_back(gamestate);
+	connectedStates = new GameState * [numConnections];
+}
+
+void Entropy::GameState::addConnection(unsigned int index, GameState* gamestate)
+{
+	connectedStates[index] = gamestate;
 }

@@ -43,6 +43,7 @@
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entropy\GameState.h" />
     <ClInclude Include="Entropy\Graphics\Camera.h" />
     <ClInclude Include="Entropy\Graphics\FrameBuffer.h" />
     <ClInclude Include="Entropy\Graphics\InstanceBuffer.h" />
@@ -55,7 +56,6 @@
     <ClInclude Include="Entropy\Graphics\Shader.h" />
     <ClInclude Include="Entropy\Graphics\UniformBuffer.h" />
     <ClInclude Include="Entropy\Graphics\Window.h" />
-    <ClInclude Include="Entropy\GameState.h" />
     <ClInclude Include="Entropy\Math\Converters.h" />
     <ClInclude Include="Entropy\Math\Mat2.h" />
     <ClInclude Include="Entropy\Math\Mat3.h" />

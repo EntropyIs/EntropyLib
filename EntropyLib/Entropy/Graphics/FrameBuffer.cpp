@@ -1,5 +1,8 @@
 #include "FrameBuffer.h"
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 Entropy::Graphics::FrameBuffer::FrameBuffer(unsigned int width, unsigned int height, bool depthTest, bool stencilTest, bool faceCulling) : Width(width), Height(height), depthTest(depthTest), stencilTest(stencilTest), faceCulling(faceCulling)
 {
 	glGenFramebuffers(1, &fbo);
@@ -8,8 +11,8 @@ Entropy::Graphics::FrameBuffer::FrameBuffer(unsigned int width, unsigned int hei
 	glGenTextures(1, &ColorBuffer);
 	glBindTexture(GL_TEXTURE_2D, ColorBuffer);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // TODO Switch to enable enterpolation???
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ColorBuffer, 0);
 
 	glGenRenderbuffers(1, &rbo);

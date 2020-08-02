@@ -3,9 +3,6 @@
 #include "Model/Image.h"
 #include "../Math/Vec4.h"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 namespace Entropy
 {
 	namespace Graphics
