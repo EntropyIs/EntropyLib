@@ -195,44 +195,59 @@ Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromFile(std::str
 	return Texture(id, type);
 }
 
-Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std::string path, std::string type)
+Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadFromImageFile(std::string path, std::string type, bool interpolate)
 {
 #ifdef _DEBUG
 	std::cout << "Loading Image: " << path << std::endl;
 #endif // DEBUG
 	int width, height, nrChannels;
+
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
-
-	unsigned int id;
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	// Load Image into Texture.
-	if (type == "texture_diffuse")
+	if (data)
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	}
-	else if (type == "sprite_sheet")
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		unsigned int format = GL_SRGB;
+		if (nrChannels == 1)
+			format = GL_RED;
+		else if (nrChannels == 3)
+			format = GL_RGB;
+		else if (nrChannels == 4)
+			format = GL_RGBA;
+
+		unsigned int id;
+		glGenTextures(1, &id);
+		glBindTexture(GL_TEXTURE_2D, id);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+
+		if (interpolate)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		}
+
+		stbi_image_free(data);
+
+#ifdef _DEBUG
+		std::cout << "Loading successful: width:" << width << "px, height:" << height << "px" << std::endl << std::endl;
+#endif // DEBUG	
+
+		return Texture(id, type);
 	}
 	else
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+		std::string errStr = "Image failed to load, " + path;
+		throw std::exception(errStr.c_str());
 	}
-	stbi_image_free(data);
-
-#ifdef _DEBUG
-	std::cout << "Loading successful: width:" << width << "px, height:" << height << "px" << std::endl << std::endl;
-#endif // DEBUG	
-
-	return Texture(id, type);
 }
 
 Entropy::Graphics::Texture Entropy::Graphics::LoadTexture::LoadCubeMap(std::vector<std::string> paths)
